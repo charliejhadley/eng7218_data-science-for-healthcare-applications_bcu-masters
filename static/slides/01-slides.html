@@ -32,9 +32,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Title
+]
+.subtitle[
 ## Subtitle
+]
+.author[
 ### <large>Author Name</large>
+]
 
 ---
 
@@ -179,7 +185,7 @@ runif(5)
 ```
 
 ```
-## [1] 0.6031355 0.5695131 0.2381534 0.9344525 0.1947252
+## [1] 0.5558676 0.7555312 0.6996704 0.2797673 0.2422173
 ```
 --
 
@@ -189,7 +195,7 @@ rnorm(5)
 ```
 
 ```
-## [1]  1.00804613  0.35288024 -0.17102374  1.01680751  0.07311153
+## [1]  0.2619125 -0.7513759 -1.0525665 -0.2005230  0.2888899
 ```
 --
 
@@ -199,7 +205,7 @@ rbinom(5, 1, 0.5)
 ```
 
 ```
-## [1] 0 0 1 0 1
+## [1] 1 1 1 1 0
 ```
 --
 
@@ -209,7 +215,7 @@ rcauchy(5)
 ```
 
 ```
-## [1]  0.005894122  1.689578712  1.176994377  0.580218931 -1.177479086
+## [1] -0.13989170 -1.01928132 -0.44727216 -0.65755153  0.04020647
 ```
 
 ---
@@ -251,8 +257,8 @@ leaflet() %&gt;%
   setView(6.1435, 46.2210, zoom = 17)
 ```
 
-<div id="htmlwidget-66408a87e4339b36c079" style="width:720px;height:288px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-66408a87e4339b36c079">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[46.221,6.1435],17,[]]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b545b298253eb2e1d187" style="width:720px;height:288px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b545b298253eb2e1d187">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[46.221,6.1435],17,[]]},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -392,8 +398,8 @@ DT::datatable(head(mtcars, 10),
   fillContainer = FALSE, options = list(pageLength = 4))
 ```
 
-<div id="htmlwidget-9f2d4389e0b2a6020d7f" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9f2d4389e0b2a6020d7f">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2],[6,6,4,6,8,6,8,4,4,6],[160,160,108,258,360,225,360,146.7,140.8,167.6],[110,110,93,110,175,105,245,62,95,123],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3],[0,0,1,1,0,1,0,1,1,1],[1,1,1,0,0,0,0,0,0,0],[4,4,4,3,3,3,3,4,4,4],[4,4,1,1,2,1,4,2,2,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-12a295267bda2f62fc3c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-12a295267bda2f62fc3c">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2],[6,6,4,6,8,6,8,4,4,6],[160,160,108,258,360,225,360,146.7,140.8,167.6],[110,110,93,110,175,105,245,62,95,123],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3],[0,0,1,1,0,1,0,1,1,1],[1,1,1,0,0,0,0,0,0,0],[4,4,4,3,3,3,3,4,4,4],[4,4,1,1,2,1,4,2,2,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 See the [DT package documentation](https://rstudio.github.io/DT/) for the
 additional options.
@@ -421,15 +427,13 @@ background-size: contain
 class: inverse iheid-red center middle with-logo logo-iheid_BW
 
 Made with `{iheiddown}`, the R-package for IHEID publications
-(Hollway, 2021).
+.
 
 ---
 
 # References
 
-Hollway, J. (2021). _iheiddown: A package for writing IHEID documents
-in RMarkdown_. R package version 0.8.0. URL:
-[https://github.com/jhollway/iheiddown](https://github.com/jhollway/iheiddown).
+NULL
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -480,6 +484,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

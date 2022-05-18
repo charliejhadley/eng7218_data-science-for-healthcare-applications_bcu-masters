@@ -2,7 +2,7 @@
 widget: hero
 headless: true
 weight: 10
-title: A great new course
+title: "BCU MSc Module: Data Science for Healthcare Applications"
 hero_media: coursedown.png
 cta:
   label: '**View the Syllabus**'
@@ -24,6 +24,6 @@ advanced:
   css_class: fullscreen
 ---
 
-*MINT123*
+*ENG7218*
 
-Describe your course in a few words here.
+Describe your course in a few words here. Lots of words

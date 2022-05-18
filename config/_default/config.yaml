@@ -4,9 +4,9 @@ theme: "starter-hugo-academic"
 # Hugo Documentation: https://gohugo.io/getting-started/configuration/#all-configuration-settings
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
-title: Course Name # Website name
+title: "ENG7218: BCU MSc Module"
 baseurl: 'https://course-site.netlify.app/' # Website URL
-copyright: '© {2021} Bernhard Bieri' # Footer text, e.g. '© {year} Me'
+copyright: '© {2022} Charlie Hadley' # Footer text, e.g. '© {year} Me'
 
 ############################
 ## LANGUAGE

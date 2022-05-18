@@ -25,11 +25,11 @@ twitter: ''
 author: Bernhard Bieri
 
 instructor:
-  name: Bernhard Bieri
-  email: bernhard.bieri[at]graduateinstitute.ch
+  name: Charlie Hadley
+  email: charlotte.hadley[at]bcu.ac.uk
   url: "https://www.bernhardbieri.com"
-  twitter: bieri_bernhard
-  github: BBieri
+  twitter: charliejhadley
+  github: charliejhadley
   office: "Somewhere in MDP"
   contact_policy: >-
     List the contact policy of the course here.
@@ -99,7 +99,7 @@ main_menu:
 
 # Localization
 
-date_format: 'Jan 2, 2006'
+date_format: '2 Jan, 2006'
 time_format: '3:04 PM'
 address_format: en-us
 
