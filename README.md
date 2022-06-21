@@ -39,6 +39,8 @@ customised {blogdown} template. I’m very grateful to [Bernhard
 Bieri](https://orcid.org/0000-0001-5943-9059) for taking the time to
 build this template.
 
+The colour scheme used was generated from <http://colormind.io/>
+
 ## Andrew Heiss’ courses
 
 [Andrew Heiss](https://orcid.org/0000-0002-3948-3914) has been using

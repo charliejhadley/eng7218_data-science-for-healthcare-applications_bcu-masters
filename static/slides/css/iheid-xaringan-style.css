@@ -22,8 +22,8 @@
 /* .remark-code, .remark-inline-code { font-family: 'Source Code Pro'; } */
 /* .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; } */
 .remark-code, .remark-inline-code { font-family: 'Fira Code'; }
-/* .remark-code, .remark-inline-code { 
-	font-family: 'Inconsolata', 'Lucida Console', Monaco, monospace; 
+/* .remark-code, .remark-inline-code {
+	font-family: 'Inconsolata', 'Lucida Console', Monaco, monospace;
 	color: #13294B
 	} */
 
@@ -173,7 +173,7 @@ div.remark-slide-container h3 {
 	position: inherit;
 }
 
-/* Okay, now let's add a progress bar https://github.com/yihui/xaringan/wiki/Progressbar */ 
+/* Okay, now let's add a progress bar https://github.com/yihui/xaringan/wiki/Progressbar */
 
 .remark-slide-number .progress-bar-container {
   position: absolute;
@@ -222,7 +222,7 @@ div.remark-slide-container .fullscale p {
   padding-right: 50px;
   padding-bottom: 25px;
 }
-/* 
+/*
 To specify the margin of the first title h1
 */
 .remark-slide-content > h1:first-of-type {
@@ -255,7 +255,7 @@ pre {
 }
 
 /*************************
-  Custom classes 
+  Custom classes
 **************************/
 
 .pull-left-2 {
@@ -358,9 +358,9 @@ it from other content slides */
 }
 
 /* link colour */
-a { 
-    color: #0148A4; 
-} 
+a {
+    color: #0148A4;
+}
 
 .columns-2 {
   -webkit-columns: 2;
@@ -390,15 +390,15 @@ a {
     clear: both;
 }
 
-.wordwrap { 
-   white-space: pre-wrap;      /* CSS3 */   
-   white-space: -moz-pre-wrap; /* Firefox */   
-   white-space: -o-pre-wrap;   /* Opera 7 */    
+.wordwrap {
+   white-space: pre-wrap;      /* CSS3 */
+   white-space: -moz-pre-wrap; /* Firefox */
+   white-space: -o-pre-wrap;   /* Opera 7 */
    word-wrap: break-word;      /* IE */
 }
 
 /* Progressive slide controls from https://www.garrickadenbuie.com/blog/better-progressive-xaringan/?panelset2=slides3&panelset=slides */
-.highlight-last-item > ul > li, 
+.highlight-last-item > ul > li,
 .highlight-last-item > ol > li {
   opacity: 0.5;
 }
@@ -470,10 +470,10 @@ slides > slide {
 
 
 
- 
+
  /* inline code background */
  .remark-inline-code {
-   /* until the link between code and mathjax 
+   /* until the link between code and mathjax
    is broken, we need to use transparent */
   background: transparent; /* #F5F5F5; /* lighter */
   /* background: #e7e8e2; /* darker */
@@ -486,7 +486,7 @@ slides > slide {
 /******************
  * Coloured content boxes
  ****************/
-.content-box { 
+.content-box {
     box-sizing: border-box;
     background-color: #e2e2e2;
 }
@@ -523,7 +523,7 @@ slides > slide {
 .content-box-purple .remark-inline-code,
 .content-box-orange .remark-inline-code,
 .content-box-red .remark-inline-code,
-.content-box-yellow .remark-inline-code { 
+.content-box-yellow .remark-inline-code {
   background: none;
 }
 
@@ -553,7 +553,7 @@ slides > slide {
   height: 230px;
   margin: 10px;
   }
-  
+
 .squareon img {
   border-radius: 50%;
   border-style: solid;
@@ -600,15 +600,15 @@ slides > slide {
 .rotate-left {
     -webkit-transform: rotate(-2deg);
     -moz-transform: rotate(-2deg);
-    transform: rotate(-2deg); 
+    transform: rotate(-2deg);
 }
 .rotate-right {
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg);
-    transform: rotate(2deg);     
+    transform: rotate(2deg);
 }
 
-/********** 
+/**********
  * Image stuff
  ************/
 .polaroid img {
@@ -623,7 +623,7 @@ slides > slide {
     -moz-box-shadow: 5px 5px 5px #aaa;
     -webkit-box-shadow: 5px 5px 5px #aaa;
     box-shadow: 5px 5px 5px #aaa;
-    border-radius: 2px;  
+    border-radius: 2px;
 }
 .half-image img {
   width: 50%;
@@ -687,7 +687,7 @@ slides > slide {
 /*
 }
 */
- 
+
 /* H1 fonts  */
 .title-slide h1 {
   color: #ffffff;

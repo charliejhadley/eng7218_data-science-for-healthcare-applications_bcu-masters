@@ -27,3 +27,7 @@ options(
 
 # fix Hugo version
 options(blogdown.hugo.version = "0.89.4")
+
+.website_colours <- list(website_dark_blue = "#2E516C", website_light_blue = "#34A2B0",
+  website_off_white = "#FEFAD6", website_green = "#ADA454", website_red = "#CB324F"
+)

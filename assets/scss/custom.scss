@@ -1,4 +1,31 @@
 /*************************************************
+ *  Charlie's customisations
+ **************************************************/
+
+// Change home section
+.home-section.fullscreen {
+  min-height: calc(10vh - 70px);
+}
+@include media-breakpoint-down(md) {
+  .home-section.fullscreen {
+    min-height: calc(10vh - 50px);
+  }
+}
+.no-navbar .home-section.fullscreen {
+  min-height: 10vh;
+}
+
+.no-navbar .home-section.fullscreen {
+  min-height: 10vh;
+}
+
+.home-section-bg .bg-image {
+  background-image:none;
+  background-color: #34A2B0;
+}
+
+
+/*************************************************
  *  Dark themed components
  **************************************************/
 
@@ -30,7 +57,7 @@ $spc-04dp: #272c37;
 
 // Set dark version of navbar (iheid red)
 .dark .navbar {
-  background-color: #E20C20;
+  background-color: #CB324F;
 }
 // Set dark version of home backgrounds (dark). Uneven Sections
 .dark .home-section {
@@ -48,15 +75,15 @@ $spc-04dp: #272c37;
 }
 
 .dark .navbar-collapse {
-    background-color: #E20C20;
+    background-color: #CB324F;
 }
 
 .dark .dropdown-item {
-    background-color: #E20C20 !important;
+    background-color: #CB324F !important;
 }
 
 .dark .dropdown-menu {
-    background-color: #E20C20 !important;
+    background-color: #CB324F !important;
 }
 
 .dark .outline {
@@ -76,7 +103,7 @@ $spc-04dp: #272c37;
 }
 
 a:hover, a:focus {
-    color: #E20C20;
+    color: #CB324F;
 }
 // Resize the hero image
 .hero-media {

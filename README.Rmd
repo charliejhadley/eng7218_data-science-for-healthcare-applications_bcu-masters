@@ -35,6 +35,8 @@ The R community is rich, vibrant and extremely awesome. In my own learning of R 
 
 [This courses uses the excellent {coursedown} package](https://github.com/BBieri/coursedown) - which is a (highly) customised {blogdown} template. I'm very grateful to [Bernhard Bieri](https://orcid.org/0000-0001-5943-9059) for taking the time to build this template.
 
+The colour scheme used was generated from http://colormind.io/
+
 ## Andrew Heiss' courses
 
 [Andrew Heiss](https://orcid.org/0000-0002-3948-3914) has been using {blogdown} to build awesome course websites for over half a decade. His courses are brilliant both [from a technical point of view](https://www.andrewheiss.com/blog/2020/01/10/makefile-subdirectory-zips/) and pedagogical approach. Andrew's work is also partyl the inspiration for the {coursedown} package.

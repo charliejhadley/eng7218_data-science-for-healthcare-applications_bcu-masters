@@ -6,7 +6,7 @@
 # Appearance: Switch themes and fonts here.
 
 theme: iheid_light
-day_night: true
+day_night: false
 font: iheid_fonts
 font_size: M
 
@@ -15,22 +15,22 @@ font_size: M
 site_type: course
 local_business_type: ''
 org_name: ''
-description: 'An IHEID course template for blogdown.'
+description: 'ENG7218: MSc module on Data Science for Healthcare Applications'
 twitter: ''
 
 # Contact (edit or remove options as required)
 # Note the first part of this section mainly collects the metadata to fill out
 # the outline.md widget.
 
-author: Bernhard Bieri
+author: Charlie Hadley
 
 instructor:
   name: Charlie Hadley
-  email: charlotte.hadley[at]bcu.ac.uk
-  url: "https://www.bernhardbieri.com"
+  email: charlotte.hadley@bcu.ac.uk
+  url: "https://www.visibledata.co.uk/about.html"
   twitter: charliejhadley
   github: charliejhadley
-  office: "Somewhere in MDP"
+  office: "BCU"
   contact_policy: >-
     List the contact policy of the course here.
   appointment_url: https://calendly.com
@@ -43,7 +43,6 @@ course:
   location: "MDP P2-S1"
   dates: "February 15–June 15, 2022"
   github: "bbieri/somecourse" # Course repo
-  slack: "https://slack.com"
 
 # Note: these are the original blogdown parameters. Don't uncomment them unless
 # you know what you're doing.
@@ -94,7 +93,7 @@ main_menu:
   show_logo: true
   show_language: false
   show_day_night: true
-  show_search: true
+  show_search: false
   highlight_active_link: true
 
 # Localization

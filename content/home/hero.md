@@ -26,4 +26,4 @@ advanced:
 
 *ENG7218*
 
-Describe your course in a few words here. Lots of words
+This website
