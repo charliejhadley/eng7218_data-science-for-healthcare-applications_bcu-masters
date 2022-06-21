@@ -31,18 +31,15 @@ instructor:
   twitter: charliejhadley
   github: charliejhadley
   office: "BCU"
-  contact_policy: >-
-    List the contact policy of the course here.
-  appointment_url: https://calendly.com
 
 course:
-  number: "MINT 123"
-  semester: "Spring 2022"
-  days: "Any day"
-  time: "Any time"
-  location: "MDP P2-S1"
-  dates: "February 15–June 15, 2022"
-  github: "bbieri/somecourse" # Course repo
+  number: "ENG 7218"
+  semester: "Fall 2022"
+  days: "Monday"
+  time: "TBC"
+  location: "TBC"
+  dates: "September 19 – December 11, 2022"
+  github: "charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters" # Course repo
 
 # Note: these are the original blogdown parameters. Don't uncomment them unless
 # you know what you're doing.

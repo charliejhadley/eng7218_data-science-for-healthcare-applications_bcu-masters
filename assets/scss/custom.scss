@@ -19,9 +19,13 @@
   min-height: 10vh;
 }
 
-.home-section-bg .bg-image {
-  background-image:none;
+.home-section-bg.bg-image {
+  background-position: center;
+  background-image:none !important;
   background-color: #34A2B0;
+  filter: brightness(1) !important;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -57,7 +61,7 @@ $spc-04dp: #272c37;
 
 // Set dark version of navbar (iheid red)
 .dark .navbar {
-  background-color: #CB324F;
+  background-color: #2E516C;
 }
 // Set dark version of home backgrounds (dark). Uneven Sections
 .dark .home-section {
@@ -75,15 +79,15 @@ $spc-04dp: #272c37;
 }
 
 .dark .navbar-collapse {
-    background-color: #CB324F;
+    background-color: #2E516C;
 }
 
 .dark .dropdown-item {
-    background-color: #CB324F !important;
+    background-color: #2E516C !important;
 }
 
 .dark .dropdown-menu {
-    background-color: #CB324F !important;
+    background-color: #2E516C !important;
 }
 
 .dark .outline {

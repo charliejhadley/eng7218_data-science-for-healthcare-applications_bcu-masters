@@ -26,4 +26,4 @@ advanced:
 
 *ENG7218*
 
-This website
+This website contains the full syllabus, lecture slides and workshop activities for the 2022 edition of the ENG7218 Module.

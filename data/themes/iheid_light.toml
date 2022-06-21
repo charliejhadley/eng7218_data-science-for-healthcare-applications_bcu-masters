@@ -2,10 +2,11 @@
 name = "iheid_light"
 
 # Primary
-primary = "#E20C20"
+primary = "#2E516C"
 
 # Menu
-menu_primary = "#E20C20" # IHEID red
+# Original primary: #E20C20
+menu_primary = "#2E516C" # IHEID red
 menu_text = "#F3F7F0"
 menu_text_active = "#F3F7F0"
 menu_title = "#F3F7F0"
@@ -19,10 +20,10 @@ dark_background = ""
 dark_home_section_odd = ""
 dark_home_section_even = ""
 
-link = "#E20C20"
+link = "#CB324F"
 link_hover = "#4C5454"
 
 [dark]
-  link = "#E20C20"
+  link = "#2E516C"
   link_hover = "#F3F7F0"
 # Changes will only preview after rerunning hugo server.
