@@ -2,12 +2,12 @@
 header:
   caption: ""
   image: ""
-title: Schedule
+title: Timetable
 type: page
 view: 2
 ---
 
-You can <a href="/useful-files/2022_course-timetable.xlsx" download>a copy of the module schedule</a>. The schedule has been colour coded to help you understand which parts of the course connect with the [different parts of the coursework assessment](../assessment).
+You can <a href="/useful-files/2022_course-timetable.xlsx" download>a copy of the module timetable</a>. The timetable has been colour coded to help you understand which parts of the course connect with the [different parts of the coursework assessment](../assessment).
 
 - <span style='color:#34A2B0'>Part A) Open health data and anonymisation</span>
 

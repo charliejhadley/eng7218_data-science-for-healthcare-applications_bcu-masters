@@ -5,8 +5,8 @@ weight: 10
 title: "BCU MSc Module: Data Science for Healthcare Applications"
 # hero_media: coursedown.png
 cta:
-  label: '**View the Syllabus**'
-  url: https://www.graduateinstitute.ch/courses
+  label: '**View the course timetable**'
+  url: timetable
 # cta_alt:
 #   label: Join Slack
 #   url: https://slack.com

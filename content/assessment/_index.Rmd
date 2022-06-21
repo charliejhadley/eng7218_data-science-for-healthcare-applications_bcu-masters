@@ -9,7 +9,7 @@ view: 2
 
 This module is 100% assessed with coursework that must be submitted <b>before 12:00 on Friday, 13 January 2023</b>. 
 
-You will find it useful to compare this page with the [colour coded course schedule](../schedule).
+You will find it useful to compare this page with the [colour coded course timetable](../timetable).
 
 ```{r, message=FALSE, echo=FALSE}
 library(tidyverse)
