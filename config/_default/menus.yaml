@@ -4,18 +4,18 @@
 #   The weight parameter defines the order that the links will appear in.
 
 main:
-  - name: Syllabus
-    url: 'syllabus' # Insert the URL to your PDF syllabus here
+  - name: Schedule
+    url: 'schedule' # Insert the URL to your PDF syllabus here
     weight: 1
   - name: Classes # Delete me if you don't need me.
     url: 'post'
     weight: 2
-  - name: Resources # Delete me if you don't need me.
-    url: 'courses/resources/'
-    weight: 3
   # - name: User Guide # Delete me if you don't need me.
   #   url: 'courses/userguide/'
   #   weight: 4
   - name: Assessment # Delete me if you don't need me.
     url: 'assessment'
-    weight: 5
+    weight: 3
+  - name: Resources # Delete me if you don't need me.
+    url: 'resources'
+    weight: 4

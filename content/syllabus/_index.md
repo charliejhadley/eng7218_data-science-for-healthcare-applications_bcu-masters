@@ -11,27 +11,37 @@ You can download <a href="/useful-files/ENG7218 module description.docx" downloa
 
 ### Module assessment
 
-This module is 100% assessed through coursework submitted at the end of the course. Please refer to the [dedicated page about the course assessment](../assessment).
+This module is [100% assessed through coursework submitted at the end of the course](../assessment).
 
 ### Overall course aims
 
-There are 
+The official module description has fairly complicated learning objectives. These are simplified goals for what you should be able to do by the end of the course:
 
-- Understand the importance and complexities of data anonymisation
+- Explain the importance and complexities of data anonymisation
 
-- Understand the role and applications of "algorithms" in data science
+- Explain the role and applications of "algorithms" in data science
 
 - Use case studies to demonstrate:
 
-  - where data has been deanonymised and why this is dangerous
+  - where data has been deanonymised and why this is dangerous.
+  
+  - where the development of an algorithm has included bias that disadvantages (or materially harms) groups/individuals.
+  
+  - where the application of algorithms has been applied in such a way that it disadvantages (or materially harms) groups/individuals.
+  
+- Demonstrate the ability to use R code to read, clean and wrangle datasets
 
-### Module description
+- Design data visualisations with R and {ggplot2} that tell a story.
+
+- Create reports using RMarkdown that include text and charts.
+
+### (Official) Module description
 
 This module will provide you the knowledge and understanding of data science principles and approaches for healthcare applications to allow you to develop health data science skills and abilities for improving healthcare. You will develop the core skills and expertise needed for healthcare applications in the field of data analytics, including the use of the popular and powerful data analysis language and environment R. 
 
 This module will also introduce you to the concepts and practicalities of programming in R. You will learn to explore, visualise, and analyse health data to understand data science principles, investigate patterns, model outcomes, and make predictions for medical applications. 
 
-### Learning outcomes
+### (Official) Learning outcomes
 
 - Demonstrate a systematic understanding of the principles and approaches in data science to be used in healthcare.
 

@@ -3,16 +3,16 @@ widget: hero
 headless: true
 weight: 10
 title: "BCU MSc Module: Data Science for Healthcare Applications"
-hero_media: coursedown.png
+# hero_media: coursedown.png
 cta:
   label: '**View the Syllabus**'
   url: https://www.graduateinstitute.ch/courses
-cta_alt:
-  label: Join Slack
-  url: https://slack.com
+# cta_alt:
+#   label: Join Slack
+#   url: https://slack.com
 cta_note:
   label: >-
-    Last updated: 2021-12-29
+    Last updated: 2022-06-21
 design:
   background:
     image: mdp.jpg

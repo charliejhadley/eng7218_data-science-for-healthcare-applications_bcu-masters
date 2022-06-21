@@ -1,0 +1,82 @@
+---
+header:
+  caption: ""
+  image: ""
+title: Assessment
+type: page
+view: 2
+---
+
+This module is 100% assessed with coursework that must be submitted <b>before 12:00 on Friday, 13 January 2023</b>. 
+
+You will find it useful to compare this page with the [colour coded course schedule](../schedule).
+
+```{r, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(gt)
+
+
+tibble(
+  assessment_category = c("Part A) Open health data and anonymisation",
+                          "Part B) Algorithms and health data",
+                          "Part C) Analyse and visualize results from a health data survey",
+                          "Part D) Going further with programming"),
+  category_description = c(
+    "<p>The written sections of the coursework will require you to discuss the importance of open health datasets in healthcare applications, and the importance of data anonymisation.</p>
+  <p>We will cover several case studies where data was successfully deanonymised. You must explain some of these case studies in the assessment.</p>
+  <p>The code portion of the coursework will require you to work with a survey dataset. You will need to clean, wrangle and visualise the survey data.</p>",
+  "<p>The written sections of the coursework will require you to discuss the roles of <em>fairness, accountability, and transparency</em> in algorithm development and application.</p>
+  <p>We will cover several case studies about algorithm \"fairness\" and applications. You must explain some of these case studies in the assessment.</p>
+  <p>We will also discuss several statistical/data science topics: hypothesis testing, supervised vs unsupervised learning and regression. This content is <b>not included in the coursework</b>.</p>
+  <p>The code portion of the coursework <b>does not include any material from this section</b>.</p>",
+  "<p>The written section of the coursework for this section must be written in RMarkdown. All other written sections are to be answered in Word documents</p>
+  <p>You will be supplied a dataset from a specific publication for the asssessment.</p>
+  <p>The code portion of the assessment wil require you to clean, wrangle and visualise data from a healthcare survey.</p>",
+  "<p>This section is <b>not assessed in the written or coding section of the coursework</b></p>
+  <p>These sections are important because they will help you understand how to apply your knowledge in the next phase of your career - or how to solve problems outside of carefully designed assessment criteria.</p>"
+  )
+) %>% 
+  gt() %>% 
+  fmt_markdown(columns = everything()) %>% 
+  opt_css(
+    css = "
+    p {
+      line-height: 1.6;
+    }
+    "
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_text(color = .website_colours$website_light_blue)
+    ),
+    locations = cells_body(rows = str_detect(assessment_category, "Part A"),
+                           columns = 1)
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_text(color = .website_colours$website_red)
+    ),
+    locations = cells_body(rows = str_detect(assessment_category, "Part B"),
+                           columns = 1)
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_text(color = .website_colours$website_green)
+    ),
+    locations = cells_body(rows = str_detect(assessment_category, "Part C"),
+                           columns = 1)
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_text(color = .website_colours$website_dark_blue)
+    ),
+    locations = cells_body(rows = str_detect(assessment_category, "Part D"),
+                           columns = 1)
+  ) %>% 
+  cols_width(
+    assessment_category ~ px(250),
+    # category_description ~ px(50)
+  ) %>% 
+  tab_options(column_labels.hidden = TRUE)
+
+```

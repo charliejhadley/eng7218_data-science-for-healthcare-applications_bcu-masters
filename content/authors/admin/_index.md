@@ -1,36 +1,33 @@
 ---
 # Display name
-title: Bernhard Bieri
+title: Charlotte Joey Hadley
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position/tagline
-role: Master's Student in International Economics
+role: Visiting Lecturer at BCU
 
 # Organizations/Affiliations to show in About widget
 organizations:
-- name: Graduate Institute of International and Development Studies Geneva
-  url: https://www.graduateinstitute.ch/Homepage
+- name: Visible Data Ltd
+  url: https://www.visibledata.co.uk
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include applied microeconomics, development economics and statistical computing.
+bio: FOOOOP
 
 # Interests to show in About widget
 interests:
-- Applied Microeconomics
-- Development Economics
-- Microeconometrics
+- Reproducible research methods
+- Data visualisation
+- Biomineralisation
 
 # Education to show in About widget
 education:
   courses:
-  - course: MA in International Economics
-    institution: Graduate Institute of International and Development Studies Geneva
-    year: Ongoing
-  - course: BSc in Economics
-    institution: HEC Lausanne, University of Lausanne
-    year: 2020
+  - course: MPhys & BSc in Physics
+    institution: University of Leeds
+    year: 2010
 
 # Social/Academic Networking
 # For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
@@ -39,16 +36,16 @@ education:
 social:
 - icon: twitter
   icon_pack: fab
-  link: https://twitter.com/bieri_bernhard
+  link: https://twitter.com/charliejhadley
 - icon: orcid  # Alternatively, use `google-scholar` icon from `ai` icon pack
   icon_pack: ai
-  link: https://orcid.org/0000-0001-5943-9059
+  link: https://orcid.org/0000-0002-3039-6849
 - icon: github
   icon_pack: fab
-  link: https://github.com/BBieri
+  link: https://github.com/charliejhadley
 - icon: linkedin
   icon_pack: fab
-  link: https://www.linkedin.com/in/bernhard-bieri/
+  link: https://www.linkedin.com/in/charliejhadley/
 
 # Link to a PDF of your resume/CV.
 # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`,
@@ -64,11 +61,10 @@ email: ""
 highlight_name: false
 ---
 
-Hi and welcome to Coursedown! The main purpose of this template is to facilitate
-the creation and deployment of course websites for R-based courses at the
-Graduate Institute of Geneva. Feel free to open up an issue
-[here](https://github.com/BBieri/coursedown/issues) if you experience a bug
-or want to suggest a feature. PRs are also welcome!
+Hello folks!
 
+I'm a Visiting Lecturer at BCU. Most of my time is spent as an independent data science consultant and trainer. My company website provides a [full overview of my research and career history](https://www.visibledata.co.uk/about.html).
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
+My background is in solid state physics and biomineralisation. I briefly worked at University of Birmingham where I published on the precipitation of magnetic nanoparticles and the characterisation of hydroxyapatite substrates. Between 2012 and 2015 I worked as a senior consultant at Wolfram Research. I piloted and launched the [Interactive Data Network](https://idn.it.ox.ac.uk) at University of Oxford between 2015 and 2019.
+
+<!-- {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/resume.pdf" "newtab" >}}resumé{{< /staticref >}}. -->

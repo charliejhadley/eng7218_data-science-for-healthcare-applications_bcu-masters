@@ -1,0 +1,90 @@
+---
+header:
+  caption: ""
+  image: ""
+title: Schedule
+type: page
+view: 2
+---
+
+You can <a href="/useful-files/2022_course-timetable.xlsx" download>a copy of the module schedule</a>. The schedule has been colour coded to help you understand which parts of the course connect with the [different parts of the coursework assessment](../assessment).
+
+- <span style='color:#34A2B0'>Part A) Open health data and anonymisation</span>
+
+- <span style='color:#CB324F'>Part B) Algorithms and health data</span>
+
+- <span style='color:#ADA454'>Part C) Analyse and visualize results from a health data survey</span>
+
+- <span style='color:#2E516C'>Part D) Going further with programming</span>
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readxl)
+library(gt)
+library(janitor)
+library(here)
+library(lubridate)
+
+course_schedule <- read_excel(here("static", "useful-files", "2022_course-timetable.xlsx"),
+                              sheet = "data sheet") %>% 
+  clean_names()
+
+course_schedule %>% 
+  select(week_no_teaching_week, date, session, outline, assessment_super_category) %>% 
+  mutate(date = as_date(date)) %>% 
+  mutate(week_no_teaching_week = str_glue("Week {parse_number(week_no_teaching_week)}")) %>% 
+  group_by(week_no_teaching_week) %>% 
+  gt() %>% 
+  text_transform(
+    locations = cells_body(columns = c(session)),
+    fn = function(x){
+      
+      case_when(
+        x == "Lecture" ~ '<i class="fas fa-chalkboard-teacher"></i>',
+        x == "Workshop" ~ '<i class="fas fa-laptop-code"></i>',
+        TRUE ~ "thing"
+      )
+      
+    }
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_fill(color = .website_colours$website_light_blue),
+      cell_text(color = "white")
+    ),
+    locations = cells_body(rows = assessment_super_category == "Part A")
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_fill(color = .website_colours$website_red),
+      cell_text(color = "white")
+    ),
+    locations = cells_body(rows = assessment_super_category == "Part B")
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_fill(color = .website_colours$website_green),
+      cell_text(color = "white")
+    ),
+    locations = cells_body(rows = assessment_super_category == "Part C")
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_fill(color = .website_colours$website_dark_blue),
+      cell_text(color = "white")
+    ),
+    locations = cells_body(rows = assessment_super_category == "Part D")
+  ) %>% 
+  cols_hide(assessment_super_category) %>% 
+  cols_width(
+    date ~ px(130),
+    session ~ px(50)
+  ) %>% 
+  cols_align(
+    columns = session,
+    "center"
+  ) %>% 
+  tab_options(column_labels.hidden = TRUE)
+
+```

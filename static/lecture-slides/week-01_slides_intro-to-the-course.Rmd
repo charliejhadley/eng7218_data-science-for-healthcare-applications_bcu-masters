@@ -1,0 +1,100 @@
+---
+title: "Week 1: Introduction to the course (and R)"
+subtitle: ""
+author: "<large>Charlie Hadley</large>"
+# institute: "<small>Graduate Institute Geneva</small>" # uncomment to include
+# date: "`r format(Sys.Date(), '%A, %e %B, %Y')`" # uncomment to include
+output:
+  xaringan::moon_reader:
+    css: 
+      - "default"
+      - "css/iheid-xaringan-style.css" # You need to change this file path to css/...
+      - "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      - "ninjutsu"
+    chakra: "https://remarkjs.com/downloads/remark-latest.min.js"
+    # if you want to work offline, run the following command...
+    # xaringan::summon_remark()
+    # ...and then comment out lines 10-13 and uncomment lines 14-15:
+    # lib_dir: libs
+    # chakra: libs/remark-latest.min.js # For offline
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      beforeInit: "js/macros.js"
+      countIncrementalSlides: false
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>`
+---
+class: center, middle
+
+```{r setup, include=FALSE}
+# don't mind this code chunk, it just sets up a few things for the rest
+# it doesn't appear, because the include argument above is FALSE...
+options(htmltools.dir.version = FALSE, servr.daemon = TRUE)
+knitr::opts_chunk$set(cache=TRUE, autodep = TRUE, fig.retina = 3, message = FALSE, warning = FALSE)
+```
+
+```{r, load_refs, include=FALSE, cache=FALSE}
+# Initializes the bibliography
+library(RefManageR)
+BibOptions(check.entries = FALSE,
+           bib.style = "authoryear", # Bibliography style
+           max.names = 3, # Max author names displayed in bibliography
+           sorting = "nyt", #Name, year, title sorting
+           cite.style = "authoryear", # citation style
+           style = "markdown",
+           hyperlink = FALSE,
+           dashed = FALSE)
+myBib <- ReadBib("bib/myBibClass1.bib", check = FALSE)
+# Note: don't forget to clear the knitr cache to account for changes in the
+# bibliography.
+```
+
+
+# Section Header
+
+## ... we're going to talk about R
+
+---
+
+# New slide
+
+We'll actually put some content here.
+
+This slide template has been modified such that I can fit a LOT more content than the defaults for {xaringan}. Which could be dangerous.
+
+Let's add some code
+
+```{r, eval=TRUE}
+library(tidyverse)
+ggplot() +
+  theme_gray()
+```
+
+---
+
+# Slide with split
+
+.pull-left[
+On the left
+]
+
+.pull-right[
+On your right.
+]
+
+---
+class: middle, inverse, iheid-red
+
+## You can colour the background and add images using straightforward markdown syntax
+
+.center[
+.polaroid[![](https://graduateinstitute.ch/sites/default/files/styles/medium/public/2019-01/James%20Hollway.jpg?itok=1Yw0keum)]
+
+James Hollway (Instructor)
+]
+

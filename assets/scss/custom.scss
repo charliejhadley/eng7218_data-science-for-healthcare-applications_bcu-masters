@@ -2,6 +2,14 @@
  *  Charlie's customisations
  **************************************************/
 
+
+// Cara's strong hack
+/* Make the strong tag render as bold in firefox (works in Chrome without this) */
+// strong {
+//  font-weight: 600;
+//  }
+//
+
 // Change home section
 .home-section.fullscreen {
   min-height: calc(10vh - 70px);
