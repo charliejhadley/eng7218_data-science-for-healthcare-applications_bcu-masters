@@ -1,0 +1,9 @@
+---
+title: "Week 1: End of week materials"
+view: 2
+---
+
+This page will contain the end state of the etherpads and any follow up material that was promised
+
+# Etherpad: Lecture Slides
+

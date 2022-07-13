@@ -3,10 +3,9 @@
   <head>
     <title>Week 1: Introduction to the course (and R)</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Charlie Hadley" />
+    <meta name="author" content="Charlotte Hadley" />
     <script src="week-01_slides_intro-to-the-course_files/header-attrs/header-attrs.js"></script>
     <link href="week-01_slides_intro-to-the-course_files/remark-css/default.css" rel="stylesheet" />
-    <link href="week-01_slides_intro-to-the-course_files/remark-css/ninjutsu.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/iheid-xaringan-style.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" type="text/css" />
   </head>
@@ -18,21 +17,391 @@ class: center, middle, inverse, title-slide
 # Week 1: Introduction to the course (and R)
 ]
 .author[
-### <large>Charlie Hadley</large>
+### <large>Charlotte Hadley</large>
 ]
+
+---
+
+
+
+
+
+
+- Getting to know me
+
+- Getting to know you
+
+- Introducing the goals of the course
+
+- Ensuring you understand the assessment criteria
 
 ---
 
 class: center, middle
 
+# Getting to know me
+
+---
+
+# Charlotte Hadley
+
+Please call me Charlotte or Charlie. My pronouns are she/her.
+
+--
+
+I don't have a doctorate so it's inaccurate to call me "Dr Hadley" or "Professor Hadley".
+
+--
+
+If you absolutely must call be by a title your only option is "Miss Hadley".
+
+---
+
+# What do I do?
+
+I'm currently a full-time independent data science consultant and trainer through [Visible Data Ltd](https://www.visibledata.co.uk/about.html).
+
+--
+
+## Academic background
+
+- 2015-2019: I worked at University of Oxford as a Research Support Officer and built the [Interactive Data Network](https://idn.it.ox.ac.uk/).
+
+- 2010-2012: I began but ultimately quit a PhD in biomineralisation.
+
+- 2006-2010: MPhys and BSc in physics from University of Leeds with a focus on biophysics
+
+--
+
+## Industry background
+
+- 2016-2022: I've been consulting and delivering training in industry both in-person and via LinkedIn Learning..
+
+- 2012-2015: I was a senior consultant at Wolfram Research
+
+---
+
+class: center, middle
+
+# Getting to know you
+
+---
+
+# Can you tell me a little bit about yourselves?
+
+- Your name
+
+- Your pronouns
+
+- Where you're from
+
+- What have you studied before this Masters?
+
+???
+
+The first in take has only 6 students, so this works for now but might not be scalable.
+
+---
+
+# Introducing Etherpad
+
+We're going to use "Etherpads" during lectures and workshops so I can ask you questions and share code.
+
+Here's the link for today's pad: [bit.ly/eng7218_week-1_lecture-slides](https://bit.ly/eng7218_week-1_lecture-slides)
+
+---
+
+class: center, middle
+
+# How does this course work?
+
+---
+
+# Course Structure
+
+We have 11 weeks of teaching and each week has:
+
+- an 2 hour lecture
+
+  - In the lectures I will introduce topics and theory
+  
+  - Two hours is too long for most people to pay 100% attention.&lt;br&gt;
+  I'll insert breaks and experiment with other ways to break up the lecures.
 
 
+- an 2 hour workshop
+
+  - These workshops are **crucial** for you to do well in the workshops.
+  
+  - The workshops will mix together guided and exploratory work.
+
+---
+
+# Laptops
+
+This is a practical data science course - please think of the whole course as a lab.
+
+Please **bring your laptop to every lecture and workshop**.
+
+If this isn't practical for you **please** speak to me&lt;sup&gt;1&lt;/sup&gt; and I will find a solution.
+
+&lt;hr&gt;
+
+In today's workshop I will take you through all of the steps necessary to setup your machine to use R.
+
+.footnote[
+[1] See next slide!
+]
+
+---
+
+# Asking questions
+
+&gt; If you have a question during the lectures or workshops **please ask the question** when they come tlo mind.
+&gt;
+&gt; There's no such thing as a 'pointless question' - particularly as in this course you'll be learning data science and using **four** different programming languages.
+
+--
+
+If you want to ask me questions outside of our sessions please email me **charlotte.hadley@bcu.ac.uk**.
+
+---
+
+# Course materials and websites
+
+I'd like to ask you **not** to read ahead in the lecture slides or workshops. This is because there are some exercises I'd like you to try in week `N` that are solved for you in week `N + 1`.
+
+As with all BCU modules you can find the lecture notes on Moodle.
+
+However! 
+
+This course has a dedicated website ([eng7218.netlify.app](https://eng7218.netlify.app/)) that contains more materials than the Moodle page.
+
+---
+
+# Course assessment
+
+This module is 100% assessed with coursework that must be submitted **before 12:00 on Friday, 13 January 2023**.
+
+Part of the coursework will require you to learn to use R and RMarkdown.
+
+&gt; I want to talk about the *goals* of this course before giving more details about how the assessment will work.
+
+---
+
+class: center, middle
+
+# Understanding the goals of this course
+
+## So you know how to succeed
+
+---
+
+# Course goals
 
 
+.pull-left[
+I want you to succeed in this course.
+]
 
-# Section Header
+.pull-left[
+I want you to succeed **after** this course in your career and/or research.
+]
 
-## ... we're going to talk about R
+---
+
+# How to succeed in this course:
+
+I want to break down each of these in turn:
+
+- Feel confident in lectures
+
+- Feel confident in workshops
+
+- Feel confident in designing (and reading) data visualisations
+
+- Feel confident in the assessment
+
+---
+
+## Feel confident in lectures
+
+For you to feel confident in the lectures I want you to:
+
+- Ask questions if you feel lost or don't understand something.
+
+- Understand **why** something is being taught in the context of the module goals.
+  
+---
+
+## Module goals
+  
+- &lt;span style='opacity:1'&gt;Demonstrate a systematic understanding of the principles and approaches in data science to be used in healthcare.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Critically appraise the key considerations for using healthcare data including ethics, information governance and security issues relevant to health data science.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Apply knowledge of the R language to read and wrangle healthcare datasets into the R environment for analysis.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analysis.&lt;/span&gt;
+
+---
+
+## Module goals
+  
+- &lt;span style='opacity:0.1'&gt;Demonstrate a systematic understanding of the principles and approaches in data science to be used in healthcare.&lt;/span&gt;
+
+- &lt;span style='opacity:1'&gt;Critically appraise the key considerations for using healthcare data including ethics, information governance and security issues relevant to health data science.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Apply knowledge of the R language to read and wrangle healthcare datasets into the R environment for analysis.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analysis.&lt;/span&gt;
+
+---
+
+## Module goals
+  
+- &lt;span style='opacity:0.1'&gt;Demonstrate a systematic understanding of the principles and approaches in data science to be used in healthcare.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Critically appraise the key considerations for using healthcare data including ethics, information governance and security issues relevant to health data science.&lt;/span&gt;
+
+- &lt;span style='opacity:1'&gt;Apply knowledge of the R language to read and wrangle healthcare datasets into the R environment for analysis.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analysis.&lt;/span&gt;
+
+---
+
+## Module goals
+  
+- &lt;span style='opacity:0.1'&gt;Demonstrate a systematic understanding of the principles and approaches in data science to be used in healthcare.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Critically appraise the key considerations for using healthcare data including ethics, information governance and security issues relevant to health data science.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Apply knowledge of the R language to read and wrangle healthcare datasets into the R environment for analysis.&lt;/span&gt;
+
+- &lt;span style='opacity:1'&gt;Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analysis.&lt;/span&gt;
+
+---
+
+## Feel confident in workshops
+
+The workshops will run a little differently to the lectures.
+
+As we progress through the weeks we'll move away from you completing very specific tasks to more open eneded goals.
+
+&lt;br&gt;
+
+- Ask questions if you feel lost or don't understand something.
+
+- Become confident in figuring out why your code doesn't work and problem solving it.
+
+- Become confident in exploring new ideas, particularly different ways to explore and visualise data.
+
+---
+
+## Feel confident in reading and designing data visualisations
+
+Week 4 is meant to be when we focus on data visualisation.
+
+However, we will start using data visualisations right from the beginning of the course.
+
+&lt;a href='https://doi.org/10.1145/3025453.3025912' target='_blank'&gt;&lt;img src='images/datasaurus-dozen.gif'/&gt;&lt;/a&gt;
+
+---
+class: middle, inverse, center
+
+# Feeling confident in the assessment
+
+---
+
+## How the assessment is designed
+
+There are two very different components to the assessment:
+
+- the written component which requires you to explain concepts and critically analyse case studies.
+
+  - You will use Microsoft Word (or your word processor of choice) for this part of the assessment.
+
+- the coding component which requires you to write code to read, wrangle and visualise survey data.
+
+  - You will use R and RMarkdown for this part of the assessment.
+
+---
+
+## How the assessment is designed
+
+There are 3 different sections in the assessment:
+
+| Section | Type of assessment |
+| :-- | :-- |
+| Part A) Open health data and anonymisation  | Written component |
+| Part B) Algorithms and health data | Written component |
+| Part C) Analyse and visualize results from a health data survey | Coding component |
+
+The [module website provides more details about these sections](https://eng7218.netlify.app/assessment/).
+
+The [colour coded timetable](https://eng7218.netlify.app/timetable/) demonstrates which lectures and workshops will help you with each section.
+
+---
+
+## Written component of the assessment
+
+You will need to use *case studies* to demonstrate your understanding of concepts introduced in the lectures.
+
+The course websites' [case studies section](https://eng7218.netlify.app/resources/case-studies/) includes all the case studies we will cover in the course. 
+
+You are also strongly encouraged to research your own case studies.
+
+---
+
+## Coding component of the assessment
+
+You will be making use of a tool called RMarkdown to answer the last part of the courswork
+
+&gt; Part C) Analyse and visualize results from a health data survey
+
+RMarkdown allows you to write reports, presentations and even entire websites&lt;sup&gt;1&lt;/sup&gt; It's a very powerful tool that is widely used in industry and academia.
+
+The thing that's powerful about it is that you can include (and run) R code in your documents.
+
+.footnote[
+[1] These slides and the entire module website is written with RMarkdown documents.
+]
+
+---
+
+## Coding component of the assessment
+
+In the very first workshop I will thoroughly introduce you to R and RMarkdown.
+
+In every subsequent workshop we will use RMarkdown.
+
+You should have sufficient practice and expertise to answer the coding component of the coursework.
+
+I will check in with you all about your confidence with the assessment in Week 8.
+
+---
+
+# How to succeed in this course:
+
+Now I've covered these in more detail - do you have any questions?
+
+- Feel confident in lectures
+
+- Feel confident in workshops
+
+- Feel confident in designing (and reading) data visualisations
+
+- Feel confident in the assessment
+
+---
+class: middle, inverse, center
+
+# Palate cleanser
+
+Check out one of my favourite data visualisations ever:
+
+# [bit.ly/3QISech](https://bit.ly/3QISech)
+
 
 ---
 
@@ -66,9 +435,9 @@ On your right.
 ]
 
 ---
-class: middle, inverse, iheid-red
+class: middle, inverse
 
-## You can colour the background and add images using straightforward markdown syntax
+# Hi
 
 .center[
 .polaroid[![](https://graduateinstitute.ch/sites/default/files/styles/medium/public/2019-01/James%20Hollway.jpg?itok=1Yw0keum)]

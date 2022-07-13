@@ -5,7 +5,7 @@ linktitle: Case studies
 menu:
   example:
     parent: Learning resources
-    weight: 1
+    weight: 1R Ma
 title: Case studies
 toc: true
 type: book

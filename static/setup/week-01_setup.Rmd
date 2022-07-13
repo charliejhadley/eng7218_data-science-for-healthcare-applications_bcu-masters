@@ -1,0 +1,61 @@
+---
+title: "Week 1 Setup"
+view: 2
+---
+
+To setup this week's material you will need to do the following.
+
+# Etherpad: Lecture Slides
+
+Navigate to [https://pad.riseup.net/p/eng7218_week-1_lecture](https://pad.riseup.net/p/eng7218_week-1_lecture) and add this to the etherpad
+
+````{verbatim}
+
+
+
+
+
+
+==============================================================================
+GETTING TO KNOW YOU
+==============================================================================
+
+
+====
+HAVE YOU EVER WRITTEN CODE BEFORE?
+
+
+
+
+
+====
+WHICH LANGUAGES HAVE YOU WRITTEN IN?
+
+
+
+
+
+====
+HAVE YOU MADE DATA VISUALISATIONS BEFORE?
+
+
+
+
+
+====
+WHAT TOOLS HAVE YOU USED TO BUILD DATAVIZ?
+
+
+
+
+
+
+====
+WHAT DOES "DATA SCIENCE MEAN TO YOU"?
+````
+
+
+
+
+
+

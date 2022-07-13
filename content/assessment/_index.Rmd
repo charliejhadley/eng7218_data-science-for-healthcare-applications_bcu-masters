@@ -27,7 +27,7 @@ tibble(
   <p>The code portion of the coursework will require you to work with a survey dataset. You will need to clean, wrangle and visualise the survey data.</p>",
   "<p>The written sections of the coursework will require you to discuss the roles of <em>fairness, accountability, and transparency</em> in algorithm development and application.</p>
   <p>We will cover several case studies about algorithm \"fairness\" and applications. You must explain some of these case studies in the assessment.</p>
-  <p>We will also discuss several statistical/data science topics: hypothesis testing, supervised vs unsupervised learning and regression. This content is <b>not included in the coursework</b>.</p>
+  <p>We will also discuss several statistical/data science topics: hypothesis testing, supervised vs unsupervised learning and regression. <b>You will not need to perform any statistical modelling or testing in the coursework</b>.</p>
   <p>The code portion of the coursework <b>does not include any material from this section</b>.</p>",
   "<p>The written section of the coursework for this section must be written in RMarkdown. All other written sections are to be answered in Word documents</p>
   <p>You will be supplied a dataset from a specific publication for the asssessment.</p>

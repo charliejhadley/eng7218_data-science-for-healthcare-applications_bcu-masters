@@ -7,22 +7,11 @@ featured: false
 draft: false
 # Order the posts
 weight: 1
-
-# Featured image
-# To use, add an image named `featured.jpg/png` to your page's folder.
-# Placement options: 1 = Full column width, 2 = Out-set, 3 = Screen-width
-# Focal point options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
 image:
   placement: 2
   caption: 'Image credit: [**Shitota Yuri on Unsplash**](https://unsplash.com/photos/p0hDztR46cw)'
   focal_point: ""
   preview_only: true
-
-# Projects (optional).
-#   Associate this post with one or more of your projects.
-#   Simply enter your project's folder or file name without extension.
-#   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
-#   Otherwise, set `projects = []`.
 projects: []
 
 # Set a link to the corresponding lab here.
@@ -35,6 +24,37 @@ links:
   icon_pack: fas
   name: Workshop
   url: /workshops/week-01_workshop_intro-to-the-course.html
+- icon: cog
+  icon_pack: fas
+  name: Setup
+  url: /setup/week-01_setup.html
+- icon: book-open
+  icon_pack: fas
+  name: End of week materials
+  url: /end-of-week-materials/week-01_end-of-week-materials.html
 ---
 
-This week we'll introduce you to the course. We can additional content here and it'll appear.
+This week we'll introduce you to the course. We can add additional content here and it'll appear.
+
+Charlie's setup
+
+
+week-01_lecture-slides_etherpad-setup.md
+
+
+- icon: cog
+  icon_pack: fas
+  name: Setup lecture
+  url: /setup-etherpad/week-01_lecture-slides_etherpad-setup.md
+- icon: cog
+  icon_pack: fas
+  name: Setup workshop
+  url: /setup-etherpad/week-01_lecture-slides_etherpad-setup.md
+- icon: cog
+  icon_pack: fas
+  name: End workshop
+  url: /setup-etherpad/week-01_lecture-slides_etherpad-setup.md
+- icon: cog
+  icon_pack: fas
+  name: End lecture
+  url: /setup-etherpad/week-01_lecture-slides_etherpad-setup.md
