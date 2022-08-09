@@ -78,7 +78,7 @@ I don't have a doctorate so it's inaccurate to call me "Dr Hadley" or "Professor
 
 --
 
-If you absolutely must call be by a title your only option is "Miss Hadley".
+If you absolutely must call be by a title your only option is "Miss Hadley" but I'd really prefer you didn't.
 
 ---
 
@@ -151,14 +151,18 @@ We have 11 weeks of teaching and each week has:
   - In the lectures I will introduce topics and theory
   
   - Two hours is too long for most people to pay 100% attention.<br>
-  I'll insert breaks and experiment with other ways to break up the lecures.
+  I'll insert breaks and experiment with other ways to break up the lectures.
 
 
 - an 2 hour workshop
 
-  - These workshops are **crucial** for you to do well in the workshops.
+  - These workshops are **crucial**<sup>1</sup> for you to do well in the workshops.
   
   - The workshops will mix together guided and exploratory work.
+
+.footnote[
+[1] Of course, the real world means that 100% attendance is an unrealistic expectation. **Please** do get in touch with me if you miss workshops or lectures and I'll help as much as I can.
+]
 
 ---
 
@@ -172,7 +176,7 @@ If this isn't practical for you **please** speak to me<sup>1</sup> and I will fi
 
 <hr>
 
-In today's workshop I will take you through all of the steps necessary to setup your machine to use R.
+In today's workshop I will take you through all of the steps necessary to setup your machine to use R and RStudio.
 
 .footnote[
 [1] See next slide!
@@ -182,9 +186,13 @@ In today's workshop I will take you through all of the steps necessary to setup 
 
 # Asking questions
 
-> If you have a question during the lectures or workshops **please ask the question** when they come tlo mind.
+> If you have a question during the lectures or workshops **please ask the question** when you think of them.
 >
-> There's no such thing as a 'pointless question' - particularly as in this course you'll be learning data science and using **four** different programming languages.
+> There's no such thing as a 'pointless question' - particularly as in this course you'll be learning data science and using **3+** different programming languages<sup>1</sup>.
+
+.footnote[
+[1] You'll be learning R. But in order to use RMarkdown you will also need to use Markdown and YAML. You'll also likely end up using a little bit of HTML and CSS.
+]
 
 --
 
@@ -192,9 +200,11 @@ If you want to ask me questions outside of our sessions please email me **charlo
 
 ---
 
-# Course materials and websites
+# Course materials and website
 
-I'd like to ask you **not** to read ahead in the lecture slides or workshops. This is because there are some exercises I'd like you to try in week `N` that are solved for you in week `N + 1`.
+I'd like to ask you **not** to read ahead in the lecture slides or workshops. 
+
+> This is because there are some exercises I'd like you to try in week `N` that are solved for you in week `N+1`.
 
 As with all BCU modules you can find the lecture notes on Moodle.
 
@@ -267,7 +277,7 @@ For you to feel confident in the lectures I want you to:
 
 - <span style='opacity:0.1'>Apply knowledge of the R language to read and wrangle healthcare datasets into the R environment for analysis.</span>
 
-- <span style='opacity:0.1'>Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analysis.</span>
+- <span style='opacity:0.1'>Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analyses.</span>
 
 ---
 
@@ -279,7 +289,7 @@ For you to feel confident in the lectures I want you to:
 
 - <span style='opacity:0.1'>Apply knowledge of the R language to read and wrangle healthcare datasets into the R environment for analysis.</span>
 
-- <span style='opacity:0.1'>Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analysis.</span>
+- <span style='opacity:0.1'>Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analyses.</span>
 
 ---
 
@@ -291,7 +301,7 @@ For you to feel confident in the lectures I want you to:
 
 - <span style='opacity:1'>Apply knowledge of the R language to read and wrangle healthcare datasets into the R environment for analysis.</span>
 
-- <span style='opacity:0.1'>Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analysis.</span>
+- <span style='opacity:0.1'>Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analyses.</span>
 
 ---
 
@@ -303,7 +313,7 @@ For you to feel confident in the lectures I want you to:
 
 - <span style='opacity:0.1'>Apply knowledge of the R language to read and wrangle healthcare datasets into the R environment for analysis.</span>
 
-- <span style='opacity:1'>Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analysis.</span>
+- <span style='opacity:1'>Design data visualisations and tables with the R language to communicate properties of datasets and the conclusions of data analyses.</span>
 
 ---
 
@@ -372,9 +382,9 @@ The [colour coded timetable](https://eng7218.netlify.app/timetable/) demonstrate
 
 You will need to use *case studies* to demonstrate your understanding of concepts introduced in the lectures.
 
-The course websites' [case studies section](https://eng7218.netlify.app/resources/case-studies/) includes all the case studies we will cover in the course. 
+The course website's [case studies section](https://eng7218.netlify.app/resources/case-studies/) includes all the case studies we will cover in the course. 
 
-You are also strongly encouraged to research your own case studies.
+You are also strongly encouraged to research your own case studies (and please share them with the cohort!).
 
 ---
 
@@ -384,7 +394,7 @@ You will be making use of a tool called RMarkdown to answer the last part of the
 
 > Part C) Analyse and visualize results from a health data survey
 
-RMarkdown allows you to write reports, presentations and even entire websites<sup>1</sup> It's a very powerful tool that is widely used in industry and academia.
+RMarkdown allows you to write reports, presentations and even entire websites<sup>1</sup>. It's a very powerful tool that is widely used in industry and academia.
 
 The thing that's powerful about it is that you can include (and run) R code in your documents.
 
@@ -403,6 +413,10 @@ In every subsequent workshop we will use RMarkdown.
 You should have sufficient practice and expertise to answer the coding component of the coursework.
 
 I will check in with you all about your confidence with the assessment in Week 8.
+
+<hr>
+
+There is also a [template GitHub repository that you can use for structuring your assessment](https://github.com/charliejhadley/eng7218_2022_example-coursework).
 
 ---
 
@@ -427,43 +441,245 @@ Check out one of my favourite data visualisations ever:
 
 # [bit.ly/3QISech](https://bit.ly/3QISech)
 
+---
+
+# How to succeed after this course:
+
+Now I've covered these in more detail - do you have any questions?
+
+- Understand there are data science careers in both academia and industry
+
+- Practice reproducible research from now onwards
+
+- Appreciate and make use of open data standards where possible
+
+- Protect people by protecting data
+
+- Require Fairness, Accountability and Transparency for algorithms
+
+---
+class: middle, inverse, center
+
+# Data Science Careers
+
+## What do you folks want to do in the future?
+
+---
+class: inverse
+
+# What do we mean by data science?
+
+There's lots of discourse about the difference between "data science jobs" and "data analysis jobs" but most of this is gate keeping.
+
+For our purposes:
+
+> <span style='color:black'>We successfully do data science when we write reproducible code that reads and analyses code in such a way that we can others stories about the data.</span>
+>
+> <span style='color:black'>Data science might involve statistics, but it does not necessarily require it.</span>
+
+<br>
+
+> <span style='color:black'>Reproducible code means that other people can run the code we write on their machines.</span>
+
 
 ---
 
-# New slide
+## Academic careers using data science
 
-We'll actually put some content here.
+Researchers across **all divisions and departments** use data science:
 
-This slide template has been modified such that I can fit a LOT more content than the defaults for {xaringan}. Which could be dangerous.
+- [Visualising close reading in poetry (and elsewhere)](https://nms.kcl.ac.uk:8443/poemvis/index.html)
 
-Let's add some code
+- [Deciphering lost languages](https://towardsdatascience.com/decode-a-lost-language-by-code-e140e8f6acf6)
 
-```{r, eval=TRUE}
-library(tidyverse)
-ggplot() +
-  theme_gray()
-```
+- Crowd sourced projects on Zooniverse, 
+
+  + [Transcribing weather data from logbooks](https://www.zooniverse.org/projects/p-teleti/weather-rescue-at-sea).
+  
+  + [Classifying baby noises to explore language development](https://www.zooniverse.org/projects/laac-lscp/maturity-of-baby-sounds)
+
+<hr>
+
+Of course, data science is being used prolifically in the collection and analysis of healthcare data. 
+
+---
+
+## Traditional academic research job route
+
+1. PhD.
+
+  - In the UK these are usually funded for 3 years, but funding *might* be extendable
+
+2. Several "post doc" positions.
+
+  - "Post doc" positions [are difficult to define](https://doi.org/10.1038/d41586-020-03191-7) but are almost always fixed term contracts for 2-3 years.
+
+3. Lecturer positions
+
+  - Permanent jobs
+  - These might be anywhere from 100% research to 100% teaching
+
+> However there are too many PhD vacancies with too few research positions.
+>
+> [doi.org/10.1038/d41586-019-03439-x](doi.org/10.1038/d41586-019-03439-x)
 
 ---
 
-# Slide with split
+## Non-traditional academic research route
 
-.pull-left[
-On the left
-]
+There are many non-traditional routes into academia.
 
-.pull-right[
-On your right.
+--
+
+<hr>
+
+Research Software Engineering (RSE) is an excellent non-traditional route for folks with a data science background.
+
+The RSE community is responsible for designing, building and maintaining the code/software that underpins academic research
+
+> This is important because code/software is not traditionally celebrated or considered in the academic publishing industry
+
+
+The [Society of Research Software Engineering](https://society-rse.org/) provides resources and career opportunities.
+
+<hr>
+
+There are **many** folks in academic research positions that do not have PhD and/or post docs.
+
+---
+
+## Data science careers in industry
+
+I highly recommend the [Build a Career in Data Science book](https://www.manning.com/books/build-a-career-in-data-science) by Emily Robinson and Jacqueline Nolis. Both these authors are part of the R community.
+
+- A lot of the advice from the book is available in a [blogpost from Emily Robinson](https://hookedondata.org/advice-for-applying-to-data-science-jobs/).
+
+I also recommend this [great thread from Jesse Mostipak](https://twitter.com/kierisi/status/946437433796808704?s=20&t=7LW17E6n5t-uQyrcGKBZfw) from RStudio (and previously Kaggle).
+
+<hr>
+
+There's lots of other great advice out there.
+
+---
+
+class: inverse, middle, center
+
+# Practice reproducible <strike>research</strike> code from now onwards
+
+---
+
+## Assume all code you write might be useful for someone else
+
+I've mentioned *reproducibile code* several times and described it as code that other people can use.
+
+It's actually quite difficult to make code reproducible half-way through a project - **always start with best practices**.
+
+## ... reproducible code makes for an awesome portfolio
+
+In week 2's lecture I'm going to introduce GitHub and recommend you use it as a portfolio for future job applications.
+
+> You do **not** need to use GitHub in the assessment for this module.
+
+---
+
+class: inverse, middle, center
+
+# Appreciate and make use of open data standards where possible
+
+---
+
+# Open Data is good for everyone
+
+We'll talk a lot about Open Data in Week 2. 
+
+I want to encourage you to consider using open data standards **where possible** as it can benefit:
+
+- You.
+
+> 25.36% (± 1.07%) higher citation impact [for articles linking to a data repository]
+> 
+> [10.1371/journal.pone.0230416](https://doi.org/10.1371/journal.pone.0230416)
+
+- Other researchers
+
+- Society
+
+---
+
+# Protect people by protecting data
+
+We'll be looking at data anonymisation in lots of detail in Week 6's lecture.
+
+Whenever we're working with data about people (or groups) we **must** keep in mind protecting their identities.
+
+> Privacy itself is valuable.
+>
+> We need to protect individuals and groups from harm that could result from private data is published.
+>
+> There are legal requirements for data protection, including GDPR in the UK.
+
+In Week 2 when I talk about Open Data I will also mention minimum requirements for privacy.
+
+---
+
+<h1 style='font-size:35px'> Require Fairness, Accountability and Transparency for algorithms</h1>
+
+In Week 7 we will look at the ethics in algorithms which requires us to consider 3 different concepts:
+
+<br>
+
+- Fairness: Is the *training data* behind the data fair (does it look at what we think it looks at)?.
+
+--
+
+- Accountability: What are the impacts and secondary consequences of applying an algorithm?
+
+--
+
+- Transparency: Understanding of how algorithms are used in decision making.
+
+<hr>
+
+> If you help develop an algorithm you're intrinsically connected with how that algorithm is applied.<sup>1</sup>
+
+.footnote[
+[1] For clarity, I'm not saying that you are **responsible** for how the algorithm is applied. By ensuring documented fairness in algorithm development this will aide in the future accountability and transparency of the algorithm.
 ]
 
 ---
-class: middle, inverse
 
-# Hi
+# How to succeed after this course:
 
-.center[
-.polaroid[![](https://graduateinstitute.ch/sites/default/files/styles/medium/public/2019-01/James%20Hollway.jpg?itok=1Yw0keum)]
+Now I've covered these in more detail - do you have any questions?
 
-James Hollway (Instructor)
-]
+- Understand there are data science careers in both academia and industry
+
+- Practice reproducible research from now onwards
+
+- Appreciate and make use of open data standards where possible
+
+- Protect people by protecting data
+
+- Require Fairness, Accountability and Transparency for algorithms
+
+---
+
+class: inverse, middle, center
+
+# Why are we learning R?
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
 
