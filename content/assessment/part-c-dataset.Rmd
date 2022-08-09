@@ -1,0 +1,19 @@
+---
+date: "2019-05-05T00:00:00+01:00"
+draft: false
+linktitle: Part C) Dataset
+menu:
+  example:
+    parent: Overview
+    weight: 1
+title: Part C) Dataset
+toc: false
+type: book
+weight: 1
+---
+
+Part C of the assessment requires you to use RMarkdown to analyse and visualise a survey dataset. The data comes from the paper, ["The importance of urban natural areas and urban ecosystem services during the COVID-19 pandemic" by Nelson Grima et al](https://doi.org/10.1371/journal.pone.0243344). You can find all assets from this paper in this [Figshare collection](https://figshare.com/collections/The_importance_of_urban_natural_areas_and_urban_ecosystem_services_during_the_COVID-19_pandemic/5243706). Please do read the paper in preparation to answer the assessment questions in Part C.
+
+- The dataset itself is available from this DOI - [doi.org/10.1371/journal.pone.0243344.s001](https://doi.org/10.1371/journal.pone.0243344.s001).
+
+- The survey questions can be found here - [doi.org/10.1371/journal.pone.0243344.s002](https://doi.org/10.1371/journal.pone.0243344.s002)

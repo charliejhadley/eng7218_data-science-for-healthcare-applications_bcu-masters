@@ -1,0 +1,19 @@
+---
+date: "2019-05-05T00:00:00+01:00"
+draft: false
+linktitle: Assessment Structure
+menu:
+  example:
+    parent: Overview
+    weight: 2
+title: Assessment Structure
+toc: false
+type: book
+weight: 2
+---
+
+As detailed in the assessment information document, you will be answering Part A and B in an MS Word document and Part C in an RMarkdown document.
+
+To ensure that you understand the correct format for the assessment [you may use this GitHub repository as a template](https://github.com/charliejhadley/eng7218_2022_example-coursework) by clicking the green "Use this template" button.
+
+![](images/paste-5D4D4B88.png)
