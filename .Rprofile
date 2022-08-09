@@ -22,7 +22,7 @@ options(
   # with new_post(). Pretty neat!
   blogdown.author = "Bernhard Bieri",
   blogdown.ext = ".Rmarkdown",
-  blogdown.subdir = "post"
+  blogdown.subdir = "posts"
 )
 
 # fix Hugo version
