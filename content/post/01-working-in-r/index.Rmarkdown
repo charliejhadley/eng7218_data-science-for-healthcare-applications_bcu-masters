@@ -45,10 +45,10 @@ links:
 ---
 
 ```{r}
-curve(x6/2, from = 1, to = 3)
+curve(x^2, from = 1, to = 3)
 ```
 
-
+Another change!
 
 ## Readings
 

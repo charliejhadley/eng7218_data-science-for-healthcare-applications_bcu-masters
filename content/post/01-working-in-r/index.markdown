@@ -1,7 +1,7 @@
 ---
 title: 'Week 1'
 subtitle: 'Intro to the course'
-summary: Nathan’s Hot-Dog Eating Contest
+summary: Getting to know you and the course
 date: "2018-04-09T00:00:00Z"
 featured: false
 draft: false
@@ -44,8 +44,16 @@ links:
   url: /end-of-week-materials/week-01_end-of-week-materials.html
 ---
 
-## Readings
 
+```r
+curve(x^2, from = 1, to = 3)
+```
+
+<img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+
+Another change!
+
+## Readings
 
 - R for Data Science, Workflow: Basics Chapter: http://r4ds.had.co.nz/workflow-basics.html
 
