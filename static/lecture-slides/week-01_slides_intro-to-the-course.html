@@ -6,6 +6,7 @@
     <meta name="author" content="Charlotte Hadley" />
     <script src="week-01_slides_intro-to-the-course_files/header-attrs/header-attrs.js"></script>
     <link href="week-01_slides_intro-to-the-course_files/remark-css/default.css" rel="stylesheet" />
+    <script src="week-01_slides_intro-to-the-course_files/xaringanExtra-progressBar/progress-bar.js"></script>
     <link rel="stylesheet" href="css/iheid-xaringan-style.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" type="text/css" />
   </head>
@@ -23,6 +24,28 @@ class: center, middle, inverse, title-slide
 ---
 
 
+
+
+<style>.xe__progress-bar__container {
+  top:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 5px;
+  background-color: #e10020;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
 
 
 
@@ -643,11 +666,414 @@ class: inverse, middle, center
 
 # Why are we learning R?
 
+&lt;h2 style='color:white'&gt;... why are we learning a programming language at all? &lt;/h2&gt;
+
 ---
 
+# Firstly - what's your starting point?
+
+Let's answer some of the questions in the etherpad: [pad.riseup.net/p/eng7218_week-1_lecture](https://pad.riseup.net/p/eng7218_week-1_lecture)
+
+---
+
+## Programming vs GUI
+
+You might expect me to bash all GUI based tools at the point, but there are incredibly powerful tools out there.
+
+.pull-left[
+&lt;img src='images/excel-logo.webp'/&gt;
+]
+
+---
+
+## Programming vs GUI
+
+You might expect me to bash all GUI based tools at the point, but there are incredibly powerful tools out there.
+
+.pull-left[
+In fact, **Excel** now has a new way to program with Excel formulae
+
+&lt;img src='images/excel-lambda.jpg'/&gt;
+
+[microsoft.com/en-us/research/blog/lambda-the-ultimatae-excel-worksheet-function/](https://www.microsoft.com/en-us/research/blog/lambda-the-ultimatae-excel-worksheet-function/)
+]
+
+---
+
+## Programming vs GUI
+
+You might expect me to bash all GUI based tools at the point, but there are incredibly powerful tools out there.
+
+.pull-left[
+&lt;img src='images/excel-logo.webp'/&gt;
+]
+
+.pull-right[
+Tableau has patented UX and a query language for building complex dashboards.
+
+&lt;img src='images/tableau-screenshot.png' height='250px'/&gt;
+
+[University of Oxford admissions dashboard](https://public.tableau.com/app/profile/sdma.oxford.university/viz/UniversityofOxford-AdmissionsStatistics2021UKNationandRegion/UKNationandRegion)
+
+]
+
+---
+
+## Programming vs GUI
+
+Most tools that provide a 100% GUI are used for
+
+- Data analysis without modelling
+
+- Business intelligence (BI)
+
+- Dashboard design and development
+
+&lt;hr&gt;
+
+.pull-left[
+It is difficult to design fully UX-led tools for anything we might term "machine learning".
+
+AWS and platforms like it market tools like SageMaker with glossy diagrams like this... **but there's always coding behind them**.
+
+[This includes using R &amp; RMarkdown through the RStudio interface](https://aws.amazon.com/blogs/aws/announcing-fully-managed-rstudio-on-amazon-sagemaker-for-data-scientists/).
+
+]
+
+.pull-right[
+&lt;img src='images/aws-sagemaker-marketing.png'/&gt;
+]
+
+---
+
+## Benefits of programming over GUI
+
+- If you're writing code **you can theoretically do anything**.
+
+  - The ratio of code you can re-use and new code you need to write depends on the task.
+  
+  - In the R universe we're lucky to have a vast range of *packages*.
+
+---
+
+## Benefits of programming over GUI
+
+- &lt;span style='opacity:0.1'&gt;If you're writing code **you can theoretically do anything**.&lt;/span&gt;
+
+- Using code you can *programmatically* do things:
+
+  - Import multiple data files
+  
+  - Run **many** different models with different parameters
+  
+  - Generate a report for every single patient
+
+---
+
+## Benefits of programming over GUI
+
+- &lt;span style='opacity:0.1'&gt;If you're writing code **you can theoretically do anything**.&lt;/span&gt;
+
+- &lt;span style='opacity:0.1'&gt;Using code you can *programmatically* do things&lt;/span&gt;
+
+- You can write tests to ensure the reproducibility of your code
+
+---
+
+## Excel vs code: Reinhart &amp; Ragoff
+
+.pull-left[
+This is a screenshot of an [Excel workbook by Reinhart and Ragoff](http://doi.org/10.3386/w15639) which was used in 2010 to conclude
+
+&gt; countries with a debt-to-GDP ratio of 90% or higher see average growth of -0.1%
+
+However, this was based on a faulty formula in cell M51
+
+```verbatim
+=AVERAGE(L30:L44)
+```
+
+Instead of 
+
+```verbatim
+=AVERAGE(L30:L49)
+```
+
+]
+
+.pull-right[
+&lt;img src='images/reinhart-and-ragoff_excel-error.png'/&gt;
+]
+
+---
+
+## Excel vs code: Reinhart &amp; Ragoff
+
+.pull-left[
+By fixing this error the conclusion changed from:
+
+&gt; countries with a debt-to-GDP ratio of 90% or higher see average growth of -0.1%
+
+To a completely different story:
+
+&gt; countries with a debt-to-GDP ratio of 90% or higher see average growth of 2.2%
+
+]
+
+.pull-right[
+&lt;img src='images/reinhart-and-ragoff_excel-error.png'/&gt;
+]
+
+---
+
+## Excel vs code: Reinhart &amp; Ragoff
+
+.pull-left[
+If we translated this into code we could guarantee that all rows were included.
+
+&gt; This is not to say code is free of errors!
+
+But code gives us more ways to replicate, reproduce and test our analyses.
+
+]
+
+.pull-right[
+&lt;img src='images/reinhart-and-ragoff_excel-error.png'/&gt;
+]
+
+---
+
+class: inverse, middle, center
+
+# Why are we learning R?
+
+&lt;h2 style='color:white'&gt;... why this specific language? &lt;/h2&gt;
+
+---
+
+## Why are there so many languages?
+
+There are easily 100s of "programming languages" in use today.
+
+To make any kind of sense of them we need to start splitting them into categories.
+
+&lt;hr&gt;
+
+.pull-left[
+**Markup Languages**
+
+`HTML` is the most commonly used markup language - it's used to describe a web page.
+
+You then use the `CSS` language to style the HTML page.
+
+We'll use another markup language - `Markdown`.
+
+&gt; Add these to your CV as markup languages! I'll talk more about CVs at the end of the course
 
 
+]
 
+.pull-right[
+**Programming Languages**
+
+&gt; We need to go deeper
+]
+
+---
+
+## Why are there so many languages?
+
+.pull-left[
+**Machine Language**
+
+The lowest level languages. There is no abstraction.
+
+**Assembly language**
+
+Architecture-specific language with minimal abstraction.
+
+&gt; This is completely outside of scope for us.
+
+]
+
+.pull-right[
+**Programming Languages**
+
+&gt; We need to go higher
+]
+
+---
+
+## Why are there so many languages?
+
+.pull-left[
+**Compiled Languages**
+
+C, C++, C# are among the most widely used compiled languages.
+
+In modern times we consider these "low-level" languages, but people have opinions about this.
+
+Code is written and then compiled directly to machine code - it therefore runs quickly.
+
+&gt; Sometimes R code is [re-written in C++ with `{Rcpp}` for efficiency](https://adv-r.hadley.nz/rcpp.html).
+
+]
+
+.pull-right[
+
+**Interpreted Languages**
+
+&gt; There's an explosion of choice in this space!
+&gt;
+&gt; Some interpreted languages are software specific, eg VBA. 
+
+]
+
+---
+
+## Why are there so many languages?
+
+.pull-left[
+**Scripting Languages**
+
+Most people today use scripting language to mean
+
+- JavaScript
+
+- Python
+
+- R
+
+But there are **many** other examples and **zero** strict definition of what is meant by a scripting language.
+
+&gt; We can choose to think of these as languages that are good for doing data science.
+
+]
+
+.pull-right[
+
+**Every Other Language**
+
+&gt; Folks are sometimes dismissive of scripting languages. Let them. We'll do fun and important stuff with them.
+
+]
+
+---
+
+## R vs Python
+
+You'll sometimes hear
+
+&gt; R is a language for statistical analysis and data visualisation, it's not a general purpose language.
+
+- R is a fully featured scripting language used by millions of people every day.
+
+- R has multiple solutions for making it available on a server.
+
+- R is [widely used in production](https://putrinprod.com/) 
+
+- R is deeply integrated into [AWS](https://aws.amazon.com/marketplace/pp/prodview-7teeyaeyiwm22#:~:text=RStudio%20Connect%20on%20AWS%20comes,and%20running%20in%20no%20time!), [Azure](https://www.rstudio.com/azure-ml/), [Google Cloud](https://cloud.google.com/architecture/running-rstudio-server-on-a-cloud-dataproc-cluster) and other Cloud-based infrastructure.
+
+- R is deeply integrated into BI tools like Tablea and PowerBI
+
+---
+
+## R vs Python (Healthcare)
+
+- R has a very strong presence in the bioinformatics community thanks to [bioconductor.org](https://www.bioconductor.org/)
+
+- There is a very active R community in the NHS - [nhsrcommunity.com/](https://nhsrcommunity.com/)
+
+- R users have used {shiny} to build several widely used tools for studying COVID-19 data
+
+&lt;center&gt;
+&lt;a href='https://shiny.rstudio.com/gallery/covid19-tracker.html'&gt;&lt;img src='images/shiny-app_covid-tracker.jpg' height='400px'/&gt;&lt;/a&gt;
+&lt;/center&gt;
+
+---
+
+## R vs Python (ease of learning)
+
+.pull-left[
+
+In general, there are fewer "computer science" things you'll need to learn to pick up R and run.
+
+This is particularly true thanks to the `tidyverse` ecosystem of packages.
+
+The R community also has a very healthy collection of free to read (open source) books, eg
+
+- [R for Data Science](https://r4ds.had.co.nz/)
+
+- [R for Health Data Science](https://argoshare.is.ed.ac.uk/healthyr_book/)
+
+- [Text Mining with R](https://www.tidytextmining.com/)
+
+- [Tidy Modelling with R](https://www.tmwr.org/)
+
+]
+
+.pull-right[
+&lt;img src='images/hex-sticker_tidyverse.png' height='400px'/&gt;
+]
+
+---
+
+## R vs Python (data visualisation)
+
+.pull-left[
+
+The `{ggplot2}` package is an incredibly easy to learn tool for building rich and beautiful static charts. It also has [100+ extensions](https://exts.ggplot2.tidyverse.org/gallery/).
+
+In the Python world there are several competing and non-compatible visualisation packages.
+
+&lt;br&gt;
+
+Through [htmlwidgets.org](https://www.htmlwidgets.org/showcase_leaflet.html) it's also possible to create interactive charts, maps and tables without learning JavaScript.
+
+]
+
+.pull-right[
+&lt;center&gt;
+&lt;img src='images/hex-sticker_ggplot2.png' height='400px'/&gt;
+&lt;/center&gt;
+]
+
+---
+
+## R vs Python (community)
+
+.pull-left[
+The R community is very friendly and welcoming to new users
+
+- [R Forwards](https://forwards.github.io/community/) is dedicated to elevating voices often missing in other programming communities.
+
+- Twitter is often the best place to join in the community via the `#rstats` hashtag.
+
+- [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) is a social data project in R that's an awesome excuse to experiment and get involved
+
+]
+
+.pull-right[
+&lt;img src='images/forwards.svg'/&gt;
+]
+
+---
+
+## It's actually R + Python
+
+.pull-left[
+
+It's unfair to put these two tools in competition.
+
+There are lots of folks using both R and Python interchangeably and positively.
+
+- The [{reticulate}](reticulated_python.png) package provides tools for interopability between Python and R.
+
+]
+
+.pull-right[
+&lt;img src='images/reticulated_python.png'/&gt;
+]
 
 
 
@@ -666,8 +1092,7 @@ class: inverse, middle, center
 "ratio": "16:9",
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false,
-"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>`"
+"countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

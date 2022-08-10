@@ -27,7 +27,7 @@
 	color: #13294B
 	} */
 
-body { font-family: 'Atkinson Hyperlegible' 'Lato' }
+body { font-family: 'Lato' }
 
 .small{font-size: 80%}
 
@@ -172,26 +172,11 @@ div.remark-slide-container h3 {
 /* Slide numbering */
 
 .remark-slide-number {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
+	font-size: 10pt;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  opacity: 1; /* default: 0.5 */
 	color: #522D80;
-	position: inherit;
-}
-
-/* Okay, now let's add a progress bar https://github.com/yihui/xaringan/wiki/Progressbar */
-
-.remark-slide-number .progress-bar-container {
-  position: absolute;
-  bottom: 0;
-  height: 4px;
-  display: block;
-  left: 0;
-  right: 0;
-}
-
-.remark-slide-number .progress-bar {
-  height: 100%;
-  background-color: red;
 }
 
 /* Let's play with .inverse and a new class, .fullscale, a little more */
@@ -301,9 +286,29 @@ pre {
   bottom: 50px;
 }
 
+/*
 .inverse .remark-slide-number {
   display: none;
 }
+
+.segue .remark-slide-number {
+  display: none;
+}
+
+.segue-yellow .remark-slide-number {
+  display: none;
+}
+
+.segue-red .remark-slide-number {
+  display: none;
+}
+
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+*/
 
 /* background colour classes */
 .iheid-red {
@@ -326,9 +331,7 @@ pre {
   color: #ffffff;
   text-shadow: 0 0 20px #333;
 }
-.segue .remark-slide-number {
-  display: none;
-}
+
 
 .segue-red {
   text-align:center;
@@ -336,9 +339,6 @@ pre {
   background-color: #e64626;
   color: #ffffff;
   text-shadow: 0 0 20px #333;
-}
-.segue-red .remark-slide-number {
-  display: none;
 }
 
 .segue-yellow {
@@ -348,9 +348,7 @@ pre {
   color: #424242;
   text-shadow: 0 0 2px #333;
 }
-.segue-yellow .remark-slide-number {
-  display: none;
-}
+
 
 /* example slide with background colour to distinguish
 it from other content slides */
@@ -727,10 +725,7 @@ slides > slide {
   vertical-align: middle;
 }
 
-/* Remove slide count */
-.title-slide .remark-slide-number {
-  display: none;
-}
+
 
 /* IHEID blockquote */
 blockquote, .blockquote {
