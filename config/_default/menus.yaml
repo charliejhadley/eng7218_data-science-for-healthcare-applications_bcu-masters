@@ -8,7 +8,7 @@ main:
     url: 'timetable' # Insert the URL to your PDF syllabus here
     weight: 1
   - name: Classes # Delete me if you don't need me.
-    url: 'posts'
+    url: 'post'
     weight: 2
   # - name: User Guide # Delete me if you don't need me.
   #   url: 'courses/userguide/'
