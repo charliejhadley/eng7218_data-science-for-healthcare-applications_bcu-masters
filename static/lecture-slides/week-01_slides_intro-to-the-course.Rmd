@@ -8,8 +8,10 @@ output:
   xaringan::moon_reader:
     css: 
       - "default"
+      - "ninjutsu"
       - "css/iheid-xaringan-style.css" # You need to change this file path to css/...
       - "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      - "assets/ninpo.css"
     chakra: "https://remarkjs.com/downloads/remark-latest.min.js"
     # if you want to work offline, run the following command...
     # xaringan::summon_remark()
@@ -23,6 +25,8 @@ output:
       beforeInit: "js/macros.js"
       countIncrementalSlides: false
 ---
+
+class: split-two, with-thick-border border-black
 
 ```{r setup, include=FALSE}
 # don't mind this code chunk, it just sets up a few things for the rest
@@ -52,13 +56,26 @@ myBib <- ReadBib("bib/myBibClass1.bib", check = FALSE)
 # bibliography.
 ```
 
-- Getting to know me
+.column.bg-main1[.content[
+  .split-three[
+ .row[.content[
+ # 1. Getting to know me
+ ]]
+  .row[.content[
+ # 2. Getting to know you
+ ]]
+   .row[.content[
+ # 3. Understanding the goals of the course
+ ]]
+ ]
+]]
 
-- Getting to know you
+.column.bg-main1[.content.center.vmiddle[
+  # 4. Why are we learning R?
+]]
 
-- Introducing the goals of the course
-
-- Ensuring you understand the assessment criteria
+???
+Define the layout and for sequence hide the appropriate cell.
 
 ---
 
