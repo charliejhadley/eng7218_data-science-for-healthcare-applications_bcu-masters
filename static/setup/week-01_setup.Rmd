@@ -17,7 +17,7 @@ Navigate to [https://pad.riseup.net/p/eng7218_week-1_lecture](https://pad.riseup
 
 
 ==============================================================================
-GETTING TO KNOW YOU
+GETTING TO KNOW YOU (CODING SECTION!)
 ==============================================================================
 
 
@@ -48,10 +48,6 @@ WHAT TOOLS HAVE YOU USED TO BUILD DATAVIZ?
 
 
 
-
-
-====
-WHAT DOES "DATA SCIENCE MEAN TO YOU"?
 ````
 
 
