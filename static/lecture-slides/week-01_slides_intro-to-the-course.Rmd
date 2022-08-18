@@ -9,7 +9,7 @@ output:
     css: 
       - "default"
       - "ninjutsu"
-      - "css/iheid-xaringan-style.css" # You need to change this file path to css/...
+      - "css/lecture-styles.css" # You need to change this file path to css/...
       - "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
       - "assets/ninpo.css"
     chakra: "https://remarkjs.com/downloads/remark-latest.min.js"
@@ -35,25 +35,27 @@ options(htmltools.dir.version = FALSE, servr.daemon = TRUE)
 knitr::opts_chunk$set(cache=TRUE, autodep = TRUE, fig.retina = 3, message = FALSE, warning = FALSE)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, cache=FALSE}
 xaringanExtra::use_progress_bar(color = "#e10020", location = "top", height = "5px")
-```
 
-
-```{r, load_refs, include=FALSE, cache=FALSE, eval=FALSE}
-# Initializes the bibliography
+# thanks to https://github.com/jvcasillas/xaringan_bib
+source(here::here("static", "xaringan-bib.R"))
 library(RefManageR)
-BibOptions(check.entries = FALSE,
-           bib.style = "authoryear", # Bibliography style
-           max.names = 3, # Max author names displayed in bibliography
-           sorting = "nyt", #Name, year, title sorting
-           cite.style = "authoryear", # citation style
-           style = "markdown",
-           hyperlink = FALSE,
-           dashed = FALSE)
-myBib <- ReadBib("bib/myBibClass1.bib", check = FALSE)
-# Note: don't forget to clear the knitr cache to account for changes in the
-# bibliography.
+BibOptions(check.entries = FALSE, 
+           bib.style = "numeric", 
+           cite.style = "numeric", 
+           max.names = 0,
+           dashed = TRUE)
+bib <- ReadBib(here::here("static", "bibtex-file.bib"))
+citet_charlie <- function(tag) {
+  RefManageR::Citet(bib,
+                    tag,
+                    .opts = list(
+                      bib.style = "numeric",
+                      cite.style = "numeric",
+                      max.names = 1
+                    ))
+}
 ```
 
 .column.bg-main1[.content[
@@ -74,8 +76,6 @@ myBib <- ReadBib("bib/myBibClass1.bib", check = FALSE)
   # 4. Why are we learning R?
 ]]
 
-???
-Define the layout and for sequence hide the appropriate cell.
 
 ---
 
@@ -802,7 +802,7 @@ AWS and platforms like it market tools like SageMaker with glossy diagrams like 
 ## Excel vs code: Reinhart & Ragoff
 
 .pull-left[
-This is a screenshot of an [Excel workbook by Reinhart and Ragoff](http://doi.org/10.3386/w15639) which was used in 2010 to conclude
+This is a screenshot of an Excel workbook by Reinhart and Ragoff (`r citet_charlie("reinhart_growth_2010")`)  which was used in 2010 to conclude
 
 > countries with a debt-to-GDP ratio of 90% or higher see average growth of -0.1%
 
@@ -822,6 +822,8 @@ Instead of
 
 .pull-right[
 <img src='images/reinhart-and-ragoff_excel-error.png'/>
+
+`r citet_charlie("king_how_2013")`
 ]
 
 ---
@@ -1094,7 +1096,17 @@ There are lots of folks using both R and Python interchangeably and positively.
 <img src='images/reticulated_python.png'/>
 ]
 
+---
 
+# References Page 1
+
+.references[
+
+```{r, results='asis', echo=FALSE, warning=FALSE, cache=FALSE}
+print_bib_rmd(bib, start = 1, stop = 10)
+```
+
+]
 
 
 

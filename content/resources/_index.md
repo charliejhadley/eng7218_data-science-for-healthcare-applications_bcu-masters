@@ -7,8 +7,6 @@ menu:
   example:
     name: Overview
     weight: 1
-#summary: An example collection of additional resources borrowed from Alison
-#  Hill's template.
 title: Overview
 toc: true
 # Do not modify the type

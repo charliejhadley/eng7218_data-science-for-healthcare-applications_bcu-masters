@@ -51,7 +51,7 @@ curve(x^2, from = 1, to = 3)
 
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
-Another change!
+Another change! More
 
 ## Readings
 

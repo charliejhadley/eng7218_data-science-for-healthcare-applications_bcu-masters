@@ -1,0 +1,63 @@
+---
+title: "Week 6: Data Anonymisation"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+output:
+  xaringan::moon_reader:
+    css: 
+      - "default"
+      - "ninjutsu"
+      - "css/lecture-styles.css" # You need to change this file path to css/...
+      - "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      - "assets/ninpo.css"
+    chakra: "https://remarkjs.com/downloads/remark-latest.min.js"
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      beforeInit: "js/macros.js"
+      countIncrementalSlides: false
+---
+
+class: split-two, with-thick-border border-black
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE, servr.daemon = TRUE)
+knitr::opts_chunk$set(cache=TRUE, autodep = TRUE, fig.retina = 3, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(gt)
+```
+
+```{r, echo=FALSE, cache=FALSE}
+xaringanExtra::use_progress_bar(color = "#e10020", location = "top", height = "5px")
+
+# thanks to https://github.com/jvcasillas/xaringan_bib
+source(here::here("static", "xaringan-bib.R"))
+library(RefManageR)
+BibOptions(check.entries = FALSE, 
+           bib.style = "numeric", 
+           cite.style = "numeric", 
+           max.names = 1,
+           dashed = TRUE)
+bib <- ReadBib(here::here("static", "bibtex-file.bib"))
+citet_charlie <- function(tag) {
+  RefManageR::Citet(bib,
+                    tag,
+                    .opts = list(
+                      bib.style = "numeric",
+                      cite.style = "numeric",
+                      max.names = 1
+                    ))
+}
+```
+
+---
+
+# DPA Act & Health Data Notes
+
+I covered some of this in Week 2. 
+
+The ICO has a good page about health data https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/right-of-access/health-data/#healthdata7 and DPA Part 7 Section 205 gives explicit definitions of what consitutes health data.
+
+
+

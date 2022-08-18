@@ -1,439 +1,1767 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Title</title>
+    <title>Week 2: Healthcare Data: Open Data &amp; Reproducibility</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Author Name" />
+    <meta name="author" content="Charlotte Hadley" />
     <script src="week-02_slides_reproducibility_files/header-attrs/header-attrs.js"></script>
     <link href="week-02_slides_reproducibility_files/remark-css/default.css" rel="stylesheet" />
     <link href="week-02_slides_reproducibility_files/remark-css/ninjutsu.css" rel="stylesheet" />
-    <script src="week-02_slides_reproducibility_files/htmlwidgets/htmlwidgets.js"></script>
-    <script src="week-02_slides_reproducibility_files/jquery/jquery-3.6.0.min.js"></script>
-    <link href="week-02_slides_reproducibility_files/leaflet/leaflet.css" rel="stylesheet" />
-    <script src="week-02_slides_reproducibility_files/leaflet/leaflet.js"></script>
-    <link href="week-02_slides_reproducibility_files/leafletfix/leafletfix.css" rel="stylesheet" />
-    <script src="week-02_slides_reproducibility_files/proj4/proj4.min.js"></script>
-    <script src="week-02_slides_reproducibility_files/Proj4Leaflet/proj4leaflet.js"></script>
-    <link href="week-02_slides_reproducibility_files/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
-    <script src="week-02_slides_reproducibility_files/leaflet-binding/leaflet.js"></script>
-    <script src="week-02_slides_reproducibility_files/kePrint/kePrint.js"></script>
-    <link href="week-02_slides_reproducibility_files/lightable/lightable.css" rel="stylesheet" />
-    <link href="week-02_slides_reproducibility_files/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
-    <script src="week-02_slides_reproducibility_files/datatables-binding/datatables.js"></script>
-    <link href="week-02_slides_reproducibility_files/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="week-02_slides_reproducibility_files/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
-    <script src="week-02_slides_reproducibility_files/dt-core/js/jquery.dataTables.min.js"></script>
-    <link href="week-02_slides_reproducibility_files/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
-    <script src="week-02_slides_reproducibility_files/crosstalk/js/crosstalk.min.js"></script>
-    <link rel="stylesheet" href="css/iheid-xaringan-style.css" type="text/css" />
+    <script src="week-02_slides_reproducibility_files/xaringanExtra-progressBar/progress-bar.js"></script>
+    <script src="week-02_slides_reproducibility_files/twitter-widget/widgets.js"></script>
+    <link rel="stylesheet" href="css/lecture-styles.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/ninpo.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
 .title[
-# Title
-]
-.subtitle[
-## Subtitle
+# Week 2: Healthcare Data: Open Data &amp; Reproducibility
 ]
 .author[
-### <large>Author Name</large>
+### <large>Charlotte Hadley</large>
 ]
 
 ---
 
-class: center, middle
 
-# With this template, it is very easy to build good looking slides
-
-## and you can centre everything for title/section/other slides
+class: split-two, with-thick-border border-black
 
 
 
+<style>.xe__progress-bar__container {
+  top:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 5px;
+  background-color: #e10020;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
 
+
+.column.bg-main1[.content[
+  .split-three[
+ .row[.content[
+ # 1. There's a reproducibility crisis
+ ]]
+  .row[.content[
+ # 2. Everything you can do to help reproducibility
+ ]]
+   .row[.content[
+ # 3. Understanding Open Access and Open Data
+ ]]
+ ]
+]]
+
+.column.bg-main1[.content.center.vmiddle[
+  # 4. Acknowledging legal and funder requirements affecting reproduciblity
+]]
 
 ---
-class: middle, inverse, iheid-red
 
-## You can colour the background and add images using straightforward markdown syntax
+class: inverse, center, middle
 
-.center[
-.polaroid[![](https://graduateinstitute.ch/sites/default/files/styles/medium/public/2019-01/James%20Hollway.jpg?itok=1Yw0keum)]
+# "There's a reproducibility crisis in academia"
 
-James Hollway (Instructor)
-]
+Have you heard this before?
 
 ---
-## You can also pull images (or text) to the left or right to build columns
+
+# There is a reproduciblity crisis in academia
+
+Back in 2005 a ground breaking paper by John Ioannidis [4] exposed an unsettling truth
+
+&lt;center&gt;
+&lt;img src='images/ioannidis-2005_most-published-research-findings-are-false.jpg' height='500px'/&gt;
+&lt;/center&gt;
+
+---
+
+# There's still a crisis almost two decades later
+
+Despite lots being written about the crisis... it's still here. And with the rise of 
+
+&gt; *"machine learning can solve anything!"* 
+
+... the crisis is evolving and getting more complicated, as reported by Douglas Heaven [6].
+
+&lt;a href='https://www.technologyreview.com/2021/07/30/1030329/machine-learning-ai-failed-covid-hospital-diagnosis-pandemic/'&gt;&lt;img src='images/hundreds-of-covid-ai-tools.jpg' height='300px'/&gt;&lt;/a&gt;
+
+---
+
+# Reproducibility vs Replicability
+
+Quite a lot of the time you'll see these two words used interchangeably - but they have specific meanings. The American Statistical Association (ASA) provides useful advice from Broman, et al. [7].
+
+--
 
 .pull-left[
-.polaroid[![](https://graduateinstitute.ch/sites/default/files/styles/medium/public/2019-01/James%20Hollway.jpg?itok=1Yw0keum)]
 
-James Hollway (Instructor)
+&gt; Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
 ]
 
 .pull-right[
-I can add paragraphs of extra information...
-
-or a bullet list...
-
-- one
-- two
-- three
-
-or a numbered list...
-
-1. one
-1. two
-4. three
+&gt; Your module assessment must be reproducible - I must be able to run the code after it's submitted. 
 ]
 
 ---
-class: split-four, center
 
-# Present your team by slicing the slide up with ninjutsu!
+# Reproducibility
 
-.column[.pull-down[![:scale 75%](https://www.seekpng.com/png/detail/143-1435868_headshot-silhouette-person-placeholder.png)
+&gt; Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
 
-*Prof. Smith*
+Reproducibility is something to think about from the start of a research project:
 
-Principal Investigator
+- Plan to record and document all *processes* in data collection, wrangling and analysis
 
-]]
-.column[.pull-down[![:scale 75%](https://www.seekpng.com/png/detail/143-1435868_headshot-silhouette-person-placeholder.png)
+- While performing the research keep track of all the things you do - particularly with data!
 
-*Dr. Jones*
+- When writing up your research ensure that all necessary materials to reproduce your findings are made available.
 
-Doctoral Research Assistant
-
-]]
-.column[.pull-down[![:scale 75%](https://www.seekpng.com/png/detail/143-1435868_headshot-silhouette-person-placeholder.png)
-
-*Ms. Dupont*
-
-Research Assistant
-
-]]
-
-.column[.pull-down[![:scale 75%](https://www.seekpng.com/png/detail/143-1435868_headshot-silhouette-person-placeholder.png)
-
-*Mr. Dupond*
-
-Research Assistant
-
-]]
+&gt; Later in this lecture and the workshop we'll look at specific advice for achieving this.
 
 ---
-## You can build a step-by-step reveal
 
---
+# Replicability
 
-By using double dashes `--` to separate lines of text or code,
-we can build a slide up gradually.
---
+&gt; Replicability: This is the act of repeating an entire study, **independently of the original investigator** without the use of original data (but generally using the same methods)
 
-For example here is some more text...
---
+This is a slightly harder topic to conceptualise and much of the lack of replicability comes from what we call "questionable research practices" (QRPs)
 
-Or here is an example of some math...
-
-$$ X = \sum_i^n x_i $$
-
---
-
-Or here is a quick plot built (and cached) when the Rmarkdown document is run:
-
-
-```r
-plot(iris)
-```
-
-&lt;img src="week-02_slides_reproducibility_files/figure-html/unnamed-chunk-1-1.png" width="504" /&gt;
+&gt; ... these misbehaviours lie somewhere on a continuum between scientific fraud, bias, and simple carelessness, so their direct inclusion in the “falsification” category is debatable, although their negative impact on research can be dramatic
+&gt;
+&gt; Fanelli [12]
 
 ---
+
+# Questionable Research Practices
+
+There are lots of different ways to summarise common QRPs but I quite like this table from 2012 by John, et al. [8].
+
+<div id="txqcunmvtb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#txqcunmvtb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#txqcunmvtb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#txqcunmvtb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#txqcunmvtb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#txqcunmvtb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#txqcunmvtb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#txqcunmvtb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#txqcunmvtb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#txqcunmvtb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#txqcunmvtb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#txqcunmvtb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#txqcunmvtb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#txqcunmvtb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#txqcunmvtb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#txqcunmvtb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#txqcunmvtb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#txqcunmvtb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_left {
+  text-align: left;
+}
+
+#txqcunmvtb .gt_center {
+  text-align: center;
+}
+
+#txqcunmvtb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#txqcunmvtb .gt_font_normal {
+  font-weight: normal;
+}
+
+#txqcunmvtb .gt_font_bold {
+  font-weight: bold;
+}
+
+#txqcunmvtb .gt_font_italic {
+  font-style: italic;
+}
+
+#txqcunmvtb .gt_super {
+  font-size: 65%;
+}
+
+#txqcunmvtb .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#txqcunmvtb .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#txqcunmvtb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#txqcunmvtb .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#txqcunmvtb .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#txqcunmvtb .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Questionable Research Practice</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Self-admission rate&lt;br&gt;(Amongst 2,000 pysychologists)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">In a paper, failing to report all of a study’s dependent measures</td>
+<td class="gt_row gt_right">63.4%</td></tr>
+    <tr><td class="gt_row gt_left">Deciding whether to collect more data after looking to see whether the results were significant</td>
+<td class="gt_row gt_right">55.9%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, selectively reporting studies that “worked”</td>
+<td class="gt_row gt_right">45.8%</td></tr>
+    <tr><td class="gt_row gt_left">Deciding whether to exclude data after looking at the impact of doing so on the results</td>
+<td class="gt_row gt_right">38.2%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, failing to report all of a study’s conditions</td>
+<td class="gt_row gt_right">27.7%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, reporting an unexpected finding as having been predicted from the start</td>
+<td class="gt_row gt_right">27.0%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, “rounding off” a p value (e.g., reporting that a p value of .054 is less than .05)</td>
+<td class="gt_row gt_right">22.0%</td></tr>
+    <tr><td class="gt_row gt_left">Stopping collecting data earlier than planned because one found the result that one had been looking for</td>
+<td class="gt_row gt_right">15.6%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, claiming that results are unaffected by demographic variables (e.g., gender) when one is actually unsure (or knows that they do)</td>
+<td class="gt_row gt_right">3.0%</td></tr>
+    <tr><td class="gt_row gt_left">Falsifying data</td>
+<td class="gt_row gt_right">0.6%</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+
+---
+
+# Questionable Research Practices and P-hacking
+
+The majority of these QRPs can be categorised as "P-hacking" or more fully, hacking the P-value.
+
+<div id="tdepqlkbmm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#tdepqlkbmm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tdepqlkbmm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tdepqlkbmm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tdepqlkbmm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tdepqlkbmm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tdepqlkbmm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tdepqlkbmm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tdepqlkbmm .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tdepqlkbmm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tdepqlkbmm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tdepqlkbmm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tdepqlkbmm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tdepqlkbmm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tdepqlkbmm .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tdepqlkbmm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tdepqlkbmm .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tdepqlkbmm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_left {
+  text-align: left;
+}
+
+#tdepqlkbmm .gt_center {
+  text-align: center;
+}
+
+#tdepqlkbmm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tdepqlkbmm .gt_font_normal {
+  font-weight: normal;
+}
+
+#tdepqlkbmm .gt_font_bold {
+  font-weight: bold;
+}
+
+#tdepqlkbmm .gt_font_italic {
+  font-style: italic;
+}
+
+#tdepqlkbmm .gt_super {
+  font-size: 65%;
+}
+
+#tdepqlkbmm .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#tdepqlkbmm .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#tdepqlkbmm .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tdepqlkbmm .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#tdepqlkbmm .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#tdepqlkbmm .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Questionable Research Practice</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Self-admission rate&lt;br&gt;(Amongst 2,000 pysychologists)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">In a paper, failing to report all of a study’s dependent measures</td>
+<td class="gt_row gt_right">63.4%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">Deciding whether to collect more data after looking to see whether the results were significant</td>
+<td class="gt_row gt_right" style="color: #FF0000;">55.9%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">In a paper, selectively reporting studies that “worked”</td>
+<td class="gt_row gt_right" style="color: #FF0000;">45.8%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">Deciding whether to exclude data after looking at the impact of doing so on the results</td>
+<td class="gt_row gt_right" style="color: #FF0000;">38.2%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, failing to report all of a study’s conditions</td>
+<td class="gt_row gt_right">27.7%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">In a paper, reporting an unexpected finding as having been predicted from the start</td>
+<td class="gt_row gt_right" style="color: #FF0000;">27.0%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">In a paper, “rounding off” a p value (e.g., reporting that a p value of .054 is less than .05)</td>
+<td class="gt_row gt_right" style="color: #FF0000;">22.0%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">Stopping collecting data earlier than planned because one found the result that one had been looking for</td>
+<td class="gt_row gt_right" style="color: #FF0000;">15.6%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, claiming that results are unaffected by demographic variables (e.g., gender) when one is actually unsure (or knows that they do)</td>
+<td class="gt_row gt_right">3.0%</td></tr>
+    <tr><td class="gt_row gt_left">Falsifying data</td>
+<td class="gt_row gt_right">0.6%</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+
+---
+
+# What is the p-value?
+
+We're going to talk about p-values **A LOT** in week 10. For now I wanted to borrow a slide from [Lucy D'Agostino McGowan](https://orcid.org/0000-0001-7297-9359)'s talk which is [well explained in this Twitter thread](https://twitter.com/LucyStats/status/1519314859258789890?s=20&amp;t=nXMSyN2NWsEj5Ns5a4Gd2Q).
+
+&lt;center&gt;
+&lt;img src='images/p-values_lucy-mcgowan-slide.jpeg' height='500px'/&gt;
+&lt;center&gt;
+
+---
+
+# How folks treat the p-value
+
+.pull-left[
+
+In some situations "p-values" are considered infallible evidence of an effect or the conclusion of a study.
+
+There are lots of different p-value thresholds, but the most common in healthcare data science is 0.05
+
+Researchers who find their study results in values *just above* 0.05 will explore ways to get the value below 0.05
+
+&gt; That's p-value hacking.
+
+]
+
+.pull-right[
+&lt;img src='images/p-values_xkcd_p-value-scale.png' height='500px'/&gt;
+&lt;a href='https://xkcd.com/1478/'&gt;https://xkcd.com/1478/&lt;/a&gt;
+]
+
+---
+
+# P-hacking
+
+In 2019 Aschwanden [9] published an article in Wired.com titled ["We're All 'P-Hacking' Now"](https://www.wired.com/story/were-all-p-hacking-now/) which I highly recommend reading.
+
+It highlights an excellent study by Simmons, et al. [10] that was able to use p-value hacking to make two increasingly absurd conclusions:
+
+&gt; Study 1: Listening to a children's song ("Hot Potato" by *The Wiggles*) makes people **feel** older.
+&gt;
+&gt; Study 2: Listening to a song about old age ("When I'm Sixty-Four" by *The Beatles*) makes people **actually** younger.
+
+... I really like this paper because it makes very clear recommendations to researchers and reviewers.
+
+---
+
+class: inverse, center, middle
+
+# Have you ever read an academic paper?
+
+## [doi.org/10.1177/0956797611417632](https://doi.org/10.1177/0956797611417632)
+
+---
+
+# Reading papers is a skill
+
+Always expect to read a paper **multiple** times and make notes.
+
+We can kind of neatly split papers into two different types:
+
+.pull-left[
+
+[Clinical trials like](https://doi.org/:10.1136/bmjopen-2020-044369) this one from Hu, et al. [11] 
+
+&lt;img src='images/screenshot_medical-study.jpg'/&gt;
+
+]
+
+
+.pull-right[
+
+In some clinical trials the abstract includes **a lot of structured information** - it depends on the publisher.
+
+Some journals like BMJ Open even include study strengths and weaknesses.
+
+Read these papers in this order:
+
+- Abstract
+
+- Tables and/or figures
+
+- Conclusions
+
+- Introduction
+
+]
+
+---
+
+# Reading papers is a skill
+
+.pull-left[
+
+But **most** papers [look this one](https://doi.org/10.1177/0956797611417632) from Simmons, et al. [10] 
+
+&lt;img src='images/screenshot_non-medical-study.jpg'/&gt;
+
+]
+
+.pull-right[
+
+In fact, not all medical trials have such nice to read abstracts.
+
+But the reading order is the same:
+
+- Abstract
+
+- Tables and/or figures
+
+- Conclusions
+
+- Introduction
+
+]
+
+---
+
 class: highlight-last-item
 
-## Add progressive lists
+# Reading papers is a skill
 
-Adding the class `highlight-last-item` allows you to highlight the last element
-of a progressive list.
-
-- First item
+- On your first pass of a paper you are trying to understand if the paper is relevant and provides substantial information and/or evidence for your needs.
 
 --
 
-- Second item
+- Often it will take another 1 or 2 passes to understand the **results** of the paper.
 
 --
 
--  For more options, see the `iheid-xaringan-style.css` file and search for
-"progressive slides". This feature was based on [this great article](https://www.garrickadenbuie.com/blog/better-progressive-xaringan/?panelset2=r-markdown3&amp;panelset=r-markdown&amp;panelset1=slides2).
+- It usually takes even more effort to understand the **methods** of the paper
 
----
-class: show-only-last-code-result
+   - Methodology information is often provided in "supplementary materials"
+   
+   - But unfortunately a good portion of the time you won't find sufficient information to fully understand the methodology because of **poor reproducibility**.
 
-## Progressive code
-
-Adding the class `show-only-last-code-result` allows you to render only the last
-code result.
-
-
-```r
-runif(5)
-```
-
-```
-## [1] 0.81915786 0.16420476 0.05425744 0.71173981 0.35019894
-```
 --
 
-
-```r
-rnorm(5)
-```
-
-```
-## [1] -2.4896745 -0.8949000  0.4532482 -1.4254828 -1.4591523
-```
---
-
-
-```r
-rbinom(5, 1, 0.5)
-```
-
-```
-## [1] 0 1 0 0 1
-```
---
-
-
-```r
-rcauchy(5)
-```
-
-```
-## [1]  0.02200536  5.09226669 -0.74140264  1.63123599  1.07607704
-```
-
----
-class: center, middle
-## Or you can highlight which section of your presentation you are up to...
-
-.pull-1[.circleoff[![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/NYCS-bull-trans-1.svg/1024px-NYCS-bull-trans-1.svg.png)]]
-.pull-1[.circleon[![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/NYCS-bull-trans-2.svg/1200px-NYCS-bull-trans-2.svg.png)]]
-.pull-1[.circleoff[![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/NYCS-bull-trans-3.svg/1200px-NYCS-bull-trans-3.svg.png)]]
-
----
-class: left, middle
-
-.blockquote[You can add unquotable quotes
-
-~ Some person]
-
----
-class: with-logo logo-iheid
-
-## Add a logo to your presentation 
-
-.pull-left[Adding a nice looking logo to your presentation is easy. Simply 
-define the `with-logo` class alongside the class of the logo itself 
-(`logo-iheid` in this case) on every slide you want the logo to appear.
-
-See [the presentation vignette](https://github.com/jhollway/iheiddown) for a
-list of the included logos.]
+&gt; Learning about replicability and reproducibility now will help you in understanding the existing literature **and** prepare you to succeed in a research career later on.
 
 ---
 
-## Add Maps
+class: highlight-last-item
 
+# Reading papers is a skill
 
-```r
-library(leaflet)
-leaflet() %&gt;%
-  addTiles() %&gt;%
-  setView(6.1435, 46.2210, zoom = 17)
-```
+If you decide to go into a research career you'll likely be reading 10+ papers a week.
 
-<div id="htmlwidget-32916d58c958c7fe6aa1" style="width:720px;height:288px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-32916d58c958c7fe6aa1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[46.221,6.1435],17,[]]},"evals":[],"jsHooks":[]}</script>
+I'd highly recommend investing in learning speed reading early in your career. 
 
----
+There's lots of [very interesting] eye tracking and neurological research into how we read and evidenced methodologies for speed reading that are nicely summarised by Clifton, et al. [13]
 
-## Add some tables !
+&lt;hr&gt;
 
-With the addition of the excellent [`{xaringan_columns}`](https://github.com/emilyriederer/xaringan_columns) macros by Emily
-Riederer, you can create nice looking multicolumn tables using clean markdown code.
+.pull-left[
+BCU gives you free access to LinkedIn Learning.
 
-![:col_header Header 1, Header 2, Header 3, Header 4, Header 5]
-![:col_list You can add rows with bulletted lists, item2, item3, hello, more content]
-![:col_list item4, item5, Or normal chunks of text (see below), la la la, tra la la]
-![:col_row 
-    More text,
-    More text,
-    .,
-    More text,
-    More text
+Go to [linkedin.com/learning-login/](https://www.linkedin.com/learning-login/) and login with your BCU email address.
+]
+
+.pull-right[
+&lt;img src='images/li-course_speed-reading.jpg' width='100%'/&gt;
 ]
 
 ---
 
-## More tables; kable and kableExtra packages
-.pull-left[Kable: great features for displaying simple tables!
+class: inverse, center, middle
 
-```r
-knitr::kable(head(mtcars[1:4], 5), format = 'html')
-```
+# ... let's get back to p-hacking
 
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; mpg &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; cyl &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; disp &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; hp &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Mazda RX4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Mazda RX4 Wag &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Datsun 710 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 22.8 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 108 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 93 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Hornet 4 Drive &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Hornet Sportabout &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 18.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 360 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 175 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+---
 
-See [the knitr documentation](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html)
-for additional options.
-]
+# Fighting p-hacking with pre-registration
 
-.pull-right[Want to get fancier? Use kableExtra!
+So far I've been speaking about the academic literature at large.
 
-```r
-head(mtcars[1:4], 3) %&gt;% 
-  kableExtra::kbl()%&gt;%
-  kableExtra::kable_material(c("hover", "striped", "condensed"), full_width = F)
-```
+But let's look specifically at clinical trials.
 
-&lt;table class=" lightable-material lightable-striped lightable-hover" style='font-family: "Source Sans Pro", helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; mpg &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; cyl &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; disp &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; hp &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Mazda RX4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Mazda RX4 Wag &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 160 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 110 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Datsun 710 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 22.8 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 108 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 93 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&gt; All clinical trials began after July 1st 2005 are explicitly required to be **registered**&lt;sup&gt;1&lt;/sup&gt; in order to be published in [**all biomedical journals**](https://www.icmje.org/about-icmje/) overseen by the International Committee of Medical Journal Editors (ICMJE)  [14].
+&gt;
+&gt; This is independent of the country in which the trial took place. 
 
-See [the kableExtra documentation](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
-for additional options.
+.footnote[
+[1] Frustratingly in the clinical trials community we use the phrase "registration" but everyone else says "pre-registration".
 ]
 
 ---
 
-## Interactive tables; DT package
+# National Institutes of Health (NIH) and registration
+
+From a cursory search for clinical trial registration information you might come to the conclusion that the advice is only appropriate for studies in the US.
+
+&gt; That is not true.
+
+In 2008 the World Medical Association [15] updated the *Declaration of Helsinki – Ethical Principles for Medical Research Involving Human Subjects* to include a paragraph about registration.
+
+&gt; 19\. Every clinical trial must be registered in a publicly accessible database before
+recruitment of the first subject.
+
+---
+
+# International advice on clinical trials
+
+The NIH provides a really useful tool for comparing the clinical research regulations from several countries:
+
+https://clinregs.niaid.nih.gov/country/united-kingdom
+
+---
+
+# UK trial registration
+
+Despite these "requirements" violations are still common as detailed in Bradley, et al. [16].
+
+However, the UK has announced new infrastructure requiring 100% clinical trial registration via a collaboration between the Human Research Authority and [the ISRCTN registry](https://www.isrctn.com/) which is detailed by Bruckner [17].
+
+---
+
+# Registration to "Reduce waste"
+
+For unexplainable reasons there is a lot written about registration of trials "reducing research waste" as it helps reduce duplication of studies.
+
+While there are elements of truth to this, the big takeaway is pre-registration helps prevent Questionable Research Practices.
+
+&gt; In fact it's the reason why GSK reached a $2.5million settlement in 2004
+
+---
+
+# GlaxoSmithKline &amp; Clinical Trial Registration
+
+GSK chose to settle a civil case instead of engaging in an expensive legal battle over "repeated and persistent fraud" concerning the use of paroxetine in treating depression in adolescents.
+
+As detailed by Dyer [18]:
+
+- Two studies showed no benefit to using paroxetine when compared with placebo.
+
+- Three studies found evidence for an increase in suicidal thoughts and behaviour.
+
+Internal company documents confirmed the suppression of these results:
+
+&gt; “it would be commercially unacceptable to include a statement that efficacy had not been demonstrated, as this would undermine the profile of paroxetine.”
+&gt;
+&gt; Spurgeon [19]
+
+---
+
+# Pre-registration for all studies
+
+There's a growing body of researchers both actually doing pre-registration and calling for it in all disciplines - particularly those that intersect with healthcare.
+
+- Simmons, et al. [10] have been running [aspredicted.org](https://aspredicted.org/) since 2015 to help authors to create pre-registration reports.
+
+- The [Centre for Open Science](https://www.cos.io) encourages pre-registration on OSF and has in the past run a [Preregistration Challenge with a monetary prize](https://osf.io/x5w7h/wiki/06%20LeaderBoard/?hsCtaTracking=2f25be73-35de-4b95-93e8-4f08acc42332%7Cf2024186-54bb-4626-baab-1785d2f9d71a).
+
+- I highly recommend reading Nosek, et al. [20] which gives a great overview of pre-registration and walk through multiple example of how it works in practice. 
+&gt; At the moment there's nothing binding you to pre-register non-clinical trials but this topic is simmering away in the background
+
+---
+
+# Prediction markets and replication studies
+
+&gt; In prediction markets, investors make predictions of future events by buying shares in the outcome of the event and the market price indicates what the crowd thinks the probability of the event is.
+&gt;
+&gt; [Harvard Press Release](https://www.seas.harvard.edu/news/2015/11/markets-science)
+
+--
+
+This was first applied to predicting replicability of research results in 2015 by Dreber, et al. [1].
+
+There is now evidence for these markets being a reliable estimate of predictability Camerer, et al. [2].
+
+&gt; Prof. Anna Dreber gives an excellent 40minute overview of replication prediction markets here - https://youtu.be/a5rFDKB1aZc?t=1036
+
+---
+
+# A final word on replicability studies
+
+Most (if not all) of studies about replicability are deeply technical and rely on statistical methods we don't have time to cover in this course.
+
+This includes the foundational paper "Why Most Published Research Findings Are False" by Ioannidis [4].
+
+&gt; Your assessment does not require you to understand or replicate any of the methodologies behind replicability studies.
+
+---
+
+# Reproducibility
+
+Let's get back to the ASA reproducibility recommendations from Broman, et al. [7].
+
+&gt; Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
+In order for reproducibility to be *possible* we need the original data to be accessible - we need **Open Data**.
+
+---
+
+class: middle, center, inverse
+
+# Open Data
+
+---
+
+# Most papers don't provide their data
+
+More often than papers simply **do not provide** the data that they:
+
+- Use to create charts and tables
+
+- Use to perform statistical tests
+
+- Use to generate their conclusions
+
+&gt; These papers are the antithesis of reproducible.
+
+---
+
+# "Data available on request"
+
+It's common to see the phrase "data available on request" but that's frequently meaningless:
+
+&gt; "Data requests to authors are successful in 27–59% of cases, whereas the request is ignored in 14–41% cases"
+&gt;
+&gt; Tedersoo, et al. [23]
+
+Even in cases where data is returned it's often insufficient for reproducibility, Roche, et al. [30]:
+
+- "Data" might actually be screenshots of charts stored in an Excel workbook
+
+- "Data" might be stored in other "non-machine-readable" formats like PDF or images
+
+- "Data" might only be provided in the post analysis form
+
+---
+
+# Researchers have confusing opinions
+
+In one of the earliest, biggest and most cited studies in data sharing from 2011 by Tenopir, et al. [24] surveyed 1,329 scientists found that
+
+&gt; "Most respondents (at least 60% across disciplines) agree that lack of access to data generated by other researchers or institutions is a major impediment to progress in science."
+
+... but
+
+&gt; "A majority of all respondents indicate they are not willing to place all of their data in central repositories with no restrictions"
+
+These findings have been replicated again, and again.
+
+---
+
+# Open Data helps everyone
+
+.pull-left[
+
+**Researchers**
+
+- Open Data helps reproduce previous studies
+
+- Open Data means researchers can do **new** studies, including meta analyses.
+
+&lt;hr&gt;
+
+- Open Data gives an additional way researchers can be cited
+
+- There is clear evidence Open Data is linked with higher citation rates, eg Colavizza, et al. [25].
+
+
+]
+
+--
+
+.pull-right[
+
+**Society**
+
+- The coordinated global COVID-19 response benefited significantly from Open Data portals  [26].
+
+- Reducing energy consumption of buildings based in occupancy from public datasets Roth, et al. [27].
+
+- Emergency planning via use of the Behavioral Risk Factor Surveillance System (BRFSS)  [28]
+
+
+]
+
+.small[
+&gt; You can find *some* healthcare specific examples on the course website [eng7218.netlify.app/resources/open-data](https://eng7218.netlify.app/resources/open-data). Please do research your own - and consider sharing them with the group.
+]
+
+---
+
+# Open Data vs Big Data
+
+Big Data is great. It's the driver behind the Internet of Things and much of modern healthcare technology. But in most circumstances it is **not** Open Data.
+
+&lt;a href='http://opendefinition.org/'&gt;&lt;img src='images/screenshot_open-definition.jpg' height='400px'/&gt;&lt;/a&gt;
+
+Screenshot of  [29]
+
+---
+
+# Open Data short definition
+
+Let's minimise these definitions:
+
+&gt; Open data must be..
+
+- Legally open. The data must be subject to an open data license
+
+- Technically open.
+
+  - Data files must be machine-readable and non-proprietary, which often means *plain text*.
+  
+  - Accessible from a public server without password protection
+
+&gt; Open data must be open to humans and computers.
+
+---
+
+# Open Data licenses
+
+In most cases the [Creative Commons' "Choose a license tool"](https://creativecommons.org/choose/) is the best and easiest choice if you have a **dataset** you want to make into Open Data.
+
+- The CC0 license is the most permissive license.
+
+There are special Open Data licenses used by Governmental/Charity organisations designed to waive liability for use, eg the [Open Government License](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) from the UK Government [32] 
+
+&gt; In general it's best to use data licenses for data and software licenses for software.
+
+---
+
+# Open Data examples
+
+There are **SO MANY** different sources (or publishers) of Open Data, for a good sample checkout the [Open Data Essentials page from the World Bank [34]](http://opendatatoolkit.worldbank.org/en/essentials.html).
+
+.center[
+&lt;img src='images/screenshot_open-data-essentials.jpg' height='450px'/&gt;
+]
+
+---
+
+# Open Data and Health Data
+
+Open Data is awesome. But if we're responsible for data that can identify individuals or groups we have a [legal] duty of care to protect that data.
+
+In the UK we have the [Data Protection Act](https://www.legislation.gov.uk/ukpga/2018/12/contents/enacted) (legislation.gov.uk [36]) which is the UK's implementation of the General Data Protection Regulation (GDPR).
+
+&gt; In week 6 we will discuss GDPR and the Data Protection Act in the context of anonmyising data. 
+&gt; 
+&gt; This isn't a course in the law school so we won't go *hard* into the definitions. But there are some things we need to discuss.
+
+---
+
+# Open Data and Health Data
+
+In the DPA (legislation.gov.uk [36]) there are 6 different types of sensitive data - I'm highlighting the ones that cover data that you might reasonably collect and consider "health data".
+
+.small[
+- (a) the processing of personal data revealing racial or ethnic origin, .de-emphasis[political opinions, religious or philosophical beliefs or trade union membership;]
+
+- (b) the processing of genetic data for the purpose of uniquely identifying an individual;
+
+- (c) the processing of biometric data for the purpose of uniquely identifying an individual;
+
+- (d) the processing of data concerning health;
+
+- (e) the processing of data concerning an individual’s sex life or sexual orientation;
+
+- .de-emphasis[(f) the processing of personal data as to [commission or alleged commission of an offence]]
+]
+
+&gt; There's some recursion, so let's pull out the definitions of "health data" from Part 7 Section 205 and list everything together
+
+---
+
+# Open Data and Health Data
+
+Part 7 Section 205 defines the following
+
+.small[
+- **“biometric data”** means personal data resulting from specific technical processing relating to the physical, physiological or behavioural characteristics of an individual, which allows or confirms the unique identification of that individual, such as facial images or dactyloscopic data;
+
+- **“data concerning health”** means personal data relating to the physical or mental health of an individual, including the provision of health care services, which reveals information about his or her health status;
+
+- **“genetic data”** means personal data relating to the inherited or acquired genetic characteristics of an individual which gives unique information about the physiology or the health of that individual and which results, in particular, from an analysis of a biological sample from the individual in question;
+]
+
+But we should also still include:
+
+.small[
+- (a) the processing of personal data revealing racial or ethnic origin,
+
+- (e) the processing of data concerning an individual’s sex life or sexual orientation;
+]
+
+---
+
+# Open Data and Health Data
+
+There's more [reader friendly documentation about health data and DPA 2018](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/right-of-access/health-data/#healthdata7) from the Information Commissioner's Office [37].
+
+We'll talk about this more later.
+
+---
+
+# How do we create Open Data?
+
+
+
+---
+.pull-left[
+- Protected characteristics
+]
+
+.pull-right[
+- age
+- gender reassignment
+- being pregnant or on maternity leave
+- disability
+- race including colour, nationality, ethnic or national origin
+- sex
+- sexual orientation
+]
+
+---
+
+# Open Data outside of academia
+
+There are SO many Open Data portals!
+
+
+
+---
+
+# Dragons (TO BE ADDED!)
+
+---
+
+# Open Access
+
+
+
+
+---
+
+# How to cite 
+
+---
+
+# Aside: Press Releases really suck
+
+Earlier I linked to a [Harvard Press Release about prediction markets for replicability](https://www.seas.harvard.edu/news/2015/11/markets-science).
+
+It's a perfect example of why University press releases often suck.
+
+- The article does not give the title of the paper
+
+- The article does not give the link to the paper
+
+
+
+---
+
+# Aside: Difficulty citing white papers
+
+The Turing Report by \noopsortborzyskowskivon
+Borzyskowski, et al. [5] I mentioned earlier is a great example of adding a non-traditional publication to Zotero.
+
+1. Use "Report" as type
+
+1. Manually add names
+
+1. Infer the date of the report from the URL `turing.ac.uk/.../2021-06/...pdf`
+
+1. Add "Accessed field"
+
+1. Add URL
+
+1. Add Institute
+
+
+---
+
+# Why are we learning all of this now?
 
 
 ```r
-library(DT)
-DT::datatable(head(mtcars, 10),
-  fillContainer = FALSE, options = list(pageLength = 4))
+tweetrmd::tweet_embed("https://twitter.com/charliejhadley/status/1559534088838647808?s=20&amp;t=M0f0BvpbqLiKpDxBHiJy7w")
 ```
 
-<div id="htmlwidget-6f181bd2a5360b279ac8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6f181bd2a5360b279ac8">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2],[6,6,4,6,8,6,8,4,4,6],[160,160,108,258,360,225,360,146.7,140.8,167.6],[110,110,93,110,175,105,245,62,95,123],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92],[2.62,2.875,2.32,3.215,3.44,3.46,3.57,3.19,3.15,3.44],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3],[0,0,1,1,0,1,0,1,1,1],[1,1,1,0,0,0,0,0,0,0],[4,4,4,3,3,3,3,4,4,4],[4,4,1,1,2,1,4,2,2,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<blockquote class="twitter-tweet" data-width="550" data-lang="en" data-dnt="true" data-theme="light"><p lang="en" dir="ltr">When did you as a student/academic researcher first learn about reproducible research methods?<a href="https://twitter.com/hashtag/reproducibleresearch?src=hash&amp;ref_src=twsrc%5Etfw">#reproducibleresearch</a> <a href="https://twitter.com/hashtag/reproducibility?src=hash&amp;ref_src=twsrc%5Etfw">#reproducibility</a><br><br>(More polls on this below, sorry they don’t have a “show results option”)</p>&mdash; Charlotte (@charliejhadley) <a href="https://twitter.com/charliejhadley/status/1559534088838647808?ref_src=twsrc%5Etfw">August 16, 2022</a></blockquote>
 
-See the [DT package documentation](https://rstudio.github.io/DT/) for the
-additional options.
-
----
-class: animate__animated, animate__slideInRight
-
-## Add slide transitions to  your slides
-
-Simply add the class `animate__animated` and the class corresponding to the
-desired animation such as `animate__slideInRight`, et voilà!
-
-For a complete list of the available animations and further options, visit
-[animate.style](https://animate.style/).
-
-.center[![Animation GIF](https://i.giphy.com/media/Oo6GWyiWEDgtO/giphy.webp)]
-
----
-background-image: url(https://media1.giphy.com/media/xT0BKiK5sOCVdBUhiM/giphy.gif)
-background-size: contain
-
-# And finally, you can add gifs!
-
----
-class: inverse iheid-red center middle with-logo logo-iheid_BW
-
-Made with `{iheiddown}`, the R-package for IHEID publications
-.
 
 ---
 
-# References
+# ASSESSMENT STUFF
 
-NULL
+•	What is “health data”? 
+•	Why is it important to government, industry and academia that health datasets are made available?
+•	What are some of the benefits to individuals and groups in making health datasets open?
+
+
+---
+
+# References Page 1
+
+.references[
+
+[1] _CDC - BRFSS Annual Survey Data_. https://www.cdc.gov/brfss/annual\_ data/annual\_ data.htm. Aug. 2021.
+
+[2] _DATA in the Time of COVID-19_. Nov. 2020.
+
+[3] _Recommendations for the Conduct, Reporting, Editing, and Publication of Scholarly Work in Medical Journals (ICMJE)_.
+https://www.icmje.org/icmje-recommendations.pdf. 2022.
+
+[4] _The Open Definition - Open Definition - Defining Open in Open Data, Open Content and Open Knowledge_.
+http://opendefinition.org/. Aug. 2022.
+
+[5] I. \noopsortborzyskowskivon Borzyskowski et al. _Data Science and AI in the Age of COVID-19_. Tech. rep. The Alan Turing
+Institute, Jun. 2021, pp. 1-13.
+
+[6] C. Aschwanden. "We're All 'P-Hacking' Now". In: _Wired_ (Nov. 2019).
+
+[7] D. J. Bem. "Feeling the Future: Experimental Evidence for Anomalous Retroactive Influences on Cognition and Affect". In:
+_Journal of Personality and Social Psychology_ 100.3 (2011), pp. 407-425. ISSN: 1939-1315. DOI: 10.1037/a0021524.
+
+[8] S. H. Bradley et al. "Automatic Registration for UK Trials". In: _BMJ_ 376 (Jan. 2022), p. o41. ISSN: 1756-1833. DOI:
+10.1136/bmj.o41.
+
+[9] K. Broman et al. _Recommendations to Funding Agencies for Supporting Reproducible Research_. Tech. rep. American
+Statistial Association, Jan. 2017, pp. 1-4.
+
+[10] T. Bruckner. _UK Launches New System to Achieve 100% Clinical Trial Registration (Updated)_.
+https://www.transparimed.org/single-post/uk-clinical-trial-registration. Oct. 2021.
+
+]
+
+---
+
+# References Page 2
+
+.references[
+
+[1] C. F. Camerer et al. "Evaluating the Replicability of Social Science Experiments in Nature and Science between 2010 and
+2015". In: _Nature Human Behaviour_ 2.9 (Sep. 2018), pp. 637-644. ISSN: 2397-3374. DOI: 10.1038/s41562-018-0399-z.
+
+[2] C. Clifton et al. "Eye Movements in Reading and Information Processing: Keith Rayner's 40year Legacy". In: _Journal of
+Memory and Language_ 86 (Jan. 2016), pp. 1-19. ISSN: 0749-596X. DOI: 10.1016/j.jml.2015.07.004.
+
+[3] G. Colavizza et al. "The Citation Advantage of Linking Publications to Research Data". In: _PLOS ONE_ 15.4 (Apr. 2020), p.
+e0230416. ISSN: 1932-6203. DOI: 10.1371/journal.pone.0230416.
+
+[4] W. Douglas Heaven. _Hundreds of AI Tools Have Been Built to Catch Covid. None of Them Helped._
+https://www.technologyreview.com/2021/07/30/1030329/machine-learning-ai-failed-covid-hospital-diagnosis-pandemic/. Jul. 2021.
+
+[5] A. Dreber et al. "Using Prediction Markets to Estimate the Reproducibility of Scientific Research". In: _Proceedings of
+the National Academy of Sciences_ 112.50 (Dec. 2015), pp. 15343-15347. DOI: 10.1073/pnas.1516179112.
+
+[6] O. Dyer. "GlaxoSmithKline Faces US Lawsuit over Concealment of Trial Results". In: _BMJ : British Medical Journal_
+328.7453 (Jun. 2004), p. 1395. ISSN: 0959-8138.
+
+[7] D. Fanelli. "How Many Scientists Fabricate and Falsify Research? A Systematic Review and Meta-Analysis of Survey Data".
+In: _PLOS ONE_ 4.5 (May. 2009), p. e5738. ISSN: 1932-6203. DOI: 10.1371/journal.pone.0005738.
+
+[8] Y. Hu et al. "Factors Influencing Self-Care Behaviours of Patients with Type 2 Diabetes in China Based on the Health
+Belief Model: A Cross-Sectional Study". In: _BMJ Open_ 12.8 (Aug. 2022), p. e044369. ISSN: 2044-6055, 2044-6055. DOI:
+10.1136/bmjopen-2020-044369.
+
+[9] Information Commissioner's Office. _Health Data_.
+https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/right-of-access/health-data/.
+Jan. 2021.
+
+[10] J. P. A. Ioannidis. "Why Most Published Research Findings Are False". In: _PLoS Medicine_ 2.8 (Aug. 2005), p. e124. ISSN:
+1549-1676. DOI: 10.1371/journal.pmed.0020124.
+
+]
+
+---
+
+# References Page 3
+
+.references[
+
+[1] L. K. John et al. "Measuring the Prevalence of Questionable Research Practices With Incentives for Truth Telling". In:
+_Psychological Science_ 23.5 (May. 2012), pp. 524-532. ISSN: 0956-7976, 1467-9280. DOI: 10.1177/0956797611430953.
+
+[2] R. King. _How to Avoid Making an Excel Mistake like Rogoff and Reinhart_.
+https://qz.com/75119/how-to-avoid-making-an-excel-mistake-like-rogoff-and-reinhart/. Apr. 2013.
+
+[3] legislation.gov.uk. _Data Protection Act 2018_. https://www.legislation.gov.uk/ukpga/2018/12/contents/enacted. 2022.
+
+[4] B. A. Nosek et al. "The Preregistration Revolution". In: _Proceedings of the National Academy of Sciences_ 115.11 (Mar.
+2018), pp. 2600-2606. DOI: 10.1073/pnas.1708274114.
+
+[5] C. M. Reinhart et al. "Growth in a Time of Debt". In: _American Economic Review_ 100.2 (May. 2010), pp. 573-578. ISSN:
+0002-8282. DOI: 10.1257/aer.100.2.573.
+
+[6] D. G. Roche et al. "Public Data Archiving in Ecology and Evolution: How Well Are We Doing?" In: _PLOS Biology_ 13.11 (Nov.
+2015), p. e1002295. ISSN: 1545-7885. DOI: 10.1371/journal.pbio.1002295.
+
+[7] J. Roth et al. "Examining the Feasibility of Using Open Data to Benchmark Building Energy Usage in Cities: A Data Science
+and Policy Perspective". In: _Energy Policy_ 139 (Apr. 2020), p. 111327. ISSN: 0301-4215. DOI: 10.1016/j.enpol.2020.111327.
+
+[8] J. P. Simmons et al. "False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting
+Anything as Significant". In: _Psychological Science_ 22.11 (Nov. 2011), pp. 1359-1366. ISSN: 0956-7976. DOI:
+10.1177/0956797611417632.
+
+[9] D. Spurgeon. "GlaxoSmithKline Staff Told Not to Publicise Ineffectiveness of Its Drug". In: _BMJ : British Medical
+Journal_ 328.7437 (Feb. 2004), p. 422. ISSN: 0959-8138.
+
+[10] L. Tedersoo et al. "Data Sharing Practices and Data Availability upon Request Differ across Scientific Disciplines". In:
+_Scientific Data_ 8.1 (Jul. 2021), p. 192. ISSN: 2052-4463. DOI: 10.1038/s41597-021-00981-0.
+
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -442,8 +1770,7 @@ NULL
 "ratio": "16:9",
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false,
-"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>`"
+"countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));

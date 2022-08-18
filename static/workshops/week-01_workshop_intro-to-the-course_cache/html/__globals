@@ -1,0 +1,15 @@
+unnamed-chunk-1	::
+unnamed-chunk-2	install.packages
+unnamed-chunk-3	library
+unnamed-chunk-4	::
+unnamed-chunk-5	rep
+unnamed-chunk-6	islands
+unnamed-chunk-7	islands
+unnamed-chunk-8	^
+unnamed-chunk-9	for	vector
+unnamed-chunk-10	condition	if
+unnamed-chunk-11	$	iris
+unnamed-chunk-12	iris
+unnamed-chunk-13	==	$	iris	Species	subset	which
+unnamed-chunk-14	==	filter	iris	library	Species
+unnamed-chunk-15	setwd

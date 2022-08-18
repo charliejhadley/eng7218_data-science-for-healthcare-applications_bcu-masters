@@ -1,326 +1,840 @@
 ---
-title: "Title"
-subtitle: "Subtitle"
-author: "<large>Author Name</large>"
-# institute: "<small>Graduate Institute Geneva</small>" # uncomment to include
-# date: "`r format(Sys.Date(), '%A, %e %B, %Y')`" # uncomment to include
+title: "Week 2: Healthcare Data: Open Data & Reproducibility"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
 output:
   xaringan::moon_reader:
     css: 
       - "default"
-      - "css/iheid-xaringan-style.css" # You need to change this file path to css/...
-      - "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
       - "ninjutsu"
+      - "css/lecture-styles.css" # You need to change this file path to css/...
+      - "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      - "assets/ninpo.css"
     chakra: "https://remarkjs.com/downloads/remark-latest.min.js"
-    # if you want to work offline, run the following command...
-    # xaringan::summon_remark()
-    # ...and then comment out lines 10-13 and uncomment lines 14-15:
-    # lib_dir: libs
-    # chakra: libs/remark-latest.min.js # For offline
     nature:
       ratio: '16:9'
       highlightStyle: github
       highlightLines: true
       beforeInit: "js/macros.js"
       countIncrementalSlides: false
-      slideNumberFormat: |
-        <div class="progress-bar-container">
-          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
-          </div>
-        </div>`
 ---
-class: center, middle
 
-# With this template, it is very easy to build good looking slides
-
-## and you can centre everything for title/section/other slides
+class: split-two, with-thick-border border-black
 
 ```{r setup, include=FALSE}
-# don't mind this code chunk, it just sets up a few things for the rest
-# it doesn't appear, because the include argument above is FALSE...
 options(htmltools.dir.version = FALSE, servr.daemon = TRUE)
 knitr::opts_chunk$set(cache=TRUE, autodep = TRUE, fig.retina = 3, message = FALSE, warning = FALSE)
-old <- ggplot2::theme_set(iheiddown::theme_iheid())
+library(tidyverse)
+library(gt)
 ```
 
-```{r, load_refs, include=FALSE, cache=FALSE}
-# Initializes the bibliography
+```{r, echo=FALSE, cache=FALSE}
+xaringanExtra::use_progress_bar(color = "#e10020", location = "top", height = "5px")
+
+# thanks to https://github.com/jvcasillas/xaringan_bib
+source(here::here("static", "xaringan-bib.R"))
 library(RefManageR)
-BibOptions(check.entries = FALSE,
-           bib.style = "authoryear", # Bibliography style
-           max.names = 3, # Max author names displayed in bibliography
-           sorting = "nyt", #Name, year, title sorting
-           cite.style = "authoryear", # citation style
-           style = "markdown",
-           hyperlink = FALSE,
-           dashed = FALSE)
-myBib <- ReadBib("bib/myBibClass1.bib", check = FALSE)
-# Note: don't forget to clear the knitr cache to account for changes in the
-# bibliography.
+BibOptions(check.entries = FALSE, 
+           bib.style = "numeric", 
+           cite.style = "numeric", 
+           max.names = 0,
+           dashed = TRUE)
+bib <- ReadBib(here::here("static", "bibtex-file.bib"))
+citet_charlie <- function(tag) {
+  RefManageR::Citet(bib,
+                    tag,
+                    .opts = list(
+                      bib.style = "numeric",
+                      cite.style = "numeric",
+                      max.names = 1
+                    ))
+}
 ```
 
+
+.column.bg-main1[.content[
+  .split-three[
+ .row[.content[
+ # 1. There's a reproducibility crisis
+ ]]
+  .row[.content[
+ # 2. Everything you can do to help reproducibility
+ ]]
+   .row[.content[
+ # 3. Understanding Open Access and Open Data
+ ]]
+ ]
+]]
+
+.column.bg-main1[.content.center.vmiddle[
+  # 4. Acknowledging legal and funder requirements affecting reproduciblity
+]]
+
 ---
-class: middle, inverse, iheid-red
 
-## You can colour the background and add images using straightforward markdown syntax
+class: inverse, center, middle
 
-.center[
-.polaroid[![](https://graduateinstitute.ch/sites/default/files/styles/medium/public/2019-01/James%20Hollway.jpg?itok=1Yw0keum)]
+# "There's a reproducibility crisis in academia"
 
-James Hollway (Instructor)
-]
+Have you heard this before?
 
 ---
-## You can also pull images (or text) to the left or right to build columns
+
+# There is a reproduciblity crisis in academia
+
+Back in 2005 a ground breaking paper by John `r citet_charlie("ioannidis_why_2005")` exposed an unsettling truth
+
+<center>
+<img src='images/ioannidis-2005_most-published-research-findings-are-false.jpg' height='500px'/>
+</center>
+
+---
+
+# There's still a crisis almost two decades later
+
+Despite lots being written about the crisis... it's still here. And with the rise of 
+
+> *"machine learning can solve anything!"* 
+
+... the crisis is evolving and getting more complicated, as reported by `r citet_charlie("douglas_heaven_hundreds_2021")`.
+
+<a href='https://www.technologyreview.com/2021/07/30/1030329/machine-learning-ai-failed-covid-hospital-diagnosis-pandemic/'><img src='images/hundreds-of-covid-ai-tools.jpg' height='300px'/></a>
+
+---
+
+# Reproducibility vs Replicability
+
+Quite a lot of the time you'll see these two words used interchangeably - but they have specific meanings. The American Statistical Association (ASA) provides useful advice from `r citet_charlie("broman_recommendations_2017")`.
+
+--
 
 .pull-left[
-.polaroid[![](https://graduateinstitute.ch/sites/default/files/styles/medium/public/2019-01/James%20Hollway.jpg?itok=1Yw0keum)]
 
-James Hollway (Instructor)
+> Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
 ]
 
 .pull-right[
-I can add paragraphs of extra information...
-
-or a bullet list...
-
-- one
-- two
-- three
-
-or a numbered list...
-
-1. one
-1. two
-4. three
+> Your module assessment must be reproducible - I must be able to run the code after it's submitted. 
 ]
 
 ---
-class: split-four, center
 
-# Present your team by slicing the slide up with ninjutsu!
+# Reproducibility
 
-.column[.pull-down[![:scale 75%](https://www.seekpng.com/png/detail/143-1435868_headshot-silhouette-person-placeholder.png)
+> Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
 
-*Prof. Smith*
+Reproducibility is something to think about from the start of a research project:
 
-Principal Investigator
+- Plan to record and document all *processes* in data collection, wrangling and analysis
 
-]]
-.column[.pull-down[![:scale 75%](https://www.seekpng.com/png/detail/143-1435868_headshot-silhouette-person-placeholder.png)
+- While performing the research keep track of all the things you do - particularly with data!
 
-*Dr. Jones*
+- When writing up your research ensure that all necessary materials to reproduce your findings are made available.
 
-Doctoral Research Assistant
-
-]]
-.column[.pull-down[![:scale 75%](https://www.seekpng.com/png/detail/143-1435868_headshot-silhouette-person-placeholder.png)
-
-*Ms. Dupont*
-
-Research Assistant
-
-]]
-
-.column[.pull-down[![:scale 75%](https://www.seekpng.com/png/detail/143-1435868_headshot-silhouette-person-placeholder.png)
-
-*Mr. Dupond*
-
-Research Assistant
-
-]]
+> Later in this lecture and the workshop we'll look at specific advice for achieving this.
 
 ---
-## You can build a step-by-step reveal
 
---
+# Replicability
 
-By using double dashes `--` to separate lines of text or code,
-we can build a slide up gradually.
---
+> Replicability: This is the act of repeating an entire study, **independently of the original investigator** without the use of original data (but generally using the same methods)
 
-For example here is some more text...
---
+This is a slightly harder topic to conceptualise and much of the lack of replicability comes from what we call "questionable research practices" (QRPs)
 
-Or here is an example of some math...
+> ... these misbehaviours lie somewhere on a continuum between scientific fraud, bias, and simple carelessness, so their direct inclusion in the “falsification” category is debatable, although their negative impact on research can be dramatic
+>
+> `r citet_charlie("fanelli_how_2009")`
 
-$$ X = \sum_i^n x_i $$
+---
 
---
+# Questionable Research Practices
 
-Or here is a quick plot built (and cached) when the Rmarkdown document is run:
+There are lots of different ways to summarise common QRPs but I quite like this table from 2012 by `r citet_charlie("john_measuring_2012")`.
 
-```{r, fig.height=4}
-plot(iris)
+```{r, echo=FALSE}
+tibble::tribble(
+                                                                                                                                            ~qrp, ~`self_admission_rate`,
+                                                                             "In a paper, failing to report all of a study’s dependent measures",                   63.4,
+                                               "Deciding whether to collect more data after looking to see whether the results were significant",                   55.9,
+                                                                                     "In a paper, failing to report all of a study’s conditions",                   27.7,
+                                      "Stopping collecting data earlier than planned because one found the result that one had been looking for",                   15.6,
+                                                "In a paper, “rounding off” a p value (e.g., reporting that a p value of .054 is less than .05)",                     22,
+                                                                                       "In a paper, selectively reporting studies that “worked”",                   45.8,
+                                                       "Deciding whether to exclude data after looking at the impact of doing so on the results",                   38.2,
+                                                           "In a paper, reporting an unexpected finding as having been predicted from the start",                     27,
+  "In a paper, claiming that results are unaffected by demographic variables (e.g., gender) when one is actually unsure (or knows that they do)",                      3,
+                                                                                                                               "Falsifying data",                    0.6
+  ) %>% 
+  arrange(desc(self_admission_rate)) %>% 
+  gt() %>% 
+  cols_label(qrp = "Questionable Research Practice",
+                 self_admission_rate = "Self-admission rate<br>(Amongst 2,000 pysychologists)") %>% 
+  fmt_percent(columns = self_admission_rate,
+              scale_values = FALSE,
+              decimals = 1)
+
 ```
 
 ---
+
+# Questionable Research Practices and P-hacking
+
+The majority of these QRPs can be categorised as "P-hacking" or more fully, hacking the P-value.
+
+```{r, echo=FALSE}
+tibble::tribble(
+                                                                                                                                            ~qrp, ~`self_admission_rate`, ~p_hacking,
+                                                                             "In a paper, failing to report all of a study’s dependent measures",                   63.4,         NA,
+                                               "Deciding whether to collect more data after looking to see whether the results were significant",                   55.9,       TRUE,
+                                                                                     "In a paper, failing to report all of a study’s conditions",                   27.7,         NA,
+                                      "Stopping collecting data earlier than planned because one found the result that one had been looking for",                   15.6,       TRUE,
+                                                "In a paper, “rounding off” a p value (e.g., reporting that a p value of .054 is less than .05)",                     22,       TRUE,
+                                                                                       "In a paper, selectively reporting studies that “worked”",                   45.8,       TRUE,
+                                                       "Deciding whether to exclude data after looking at the impact of doing so on the results",                   38.2,       TRUE,
+                                                           "In a paper, reporting an unexpected finding as having been predicted from the start",                     27,       TRUE,
+  "In a paper, claiming that results are unaffected by demographic variables (e.g., gender) when one is actually unsure (or knows that they do)",                      3,         NA,
+                                                                                                                               "Falsifying data",                    0.6,         NA
+  ) %>% 
+  arrange(desc(self_admission_rate)) %>%
+  gt() %>%
+  cols_label(qrp = "Questionable Research Practice",
+             self_admission_rate = "Self-admission rate<br>(Amongst 2,000 pysychologists)") %>%
+  fmt_percent(columns = self_admission_rate,
+              scale_values = FALSE,
+              decimals = 1) %>%
+  tab_style(style = cell_text(color = "red"),
+            locations = list(cells_body(
+              columns = everything(),
+              rows = p_hacking  == TRUE
+            ))) %>% 
+  cols_hide(p_hacking)
+```
+
+---
+
+# What is the p-value?
+
+We're going to talk about p-values **A LOT** in week 10. For now I wanted to borrow a slide from [Lucy D'Agostino McGowan](https://orcid.org/0000-0001-7297-9359)'s talk which is [well explained in this Twitter thread](https://twitter.com/LucyStats/status/1519314859258789890?s=20&t=nXMSyN2NWsEj5Ns5a4Gd2Q).
+
+<center>
+<img src='images/p-values_lucy-mcgowan-slide.jpeg' height='500px'/>
+<center>
+
+---
+
+# How folks treat the p-value
+
+.pull-left[
+
+In some situations "p-values" are considered infallible evidence of an effect or the conclusion of a study.
+
+There are lots of different p-value thresholds, but the most common in healthcare data science is 0.05
+
+Researchers who find their study results in values *just above* 0.05 will explore ways to get the value below 0.05
+
+> That's p-value hacking.
+
+]
+
+.pull-right[
+<img src='images/p-values_xkcd_p-value-scale.png' height='500px'/>
+<a href='https://xkcd.com/1478/'>https://xkcd.com/1478/</a>
+]
+
+---
+
+# P-hacking
+
+In 2019 `r citet_charlie("aschwanden_were_2019")` published an article in Wired.com titled ["We're All 'P-Hacking' Now"](https://www.wired.com/story/were-all-p-hacking-now/) which I highly recommend reading.
+
+It highlights an excellent study by `r citet_charlie("simmons_false-positive_2011")` that was able to use p-value hacking to make two increasingly absurd conclusions:
+
+> Study 1: Listening to a children's song ("Hot Potato" by *The Wiggles*) makes people **feel** older.
+>
+> Study 2: Listening to a song about old age ("When I'm Sixty-Four" by *The Beatles*) makes people **actually** younger.
+
+... I really like this paper because it makes very clear recommendations to researchers and reviewers.
+
+---
+
+class: inverse, center, middle
+
+# Have you ever read an academic paper?
+
+## [doi.org/10.1177/0956797611417632](https://doi.org/10.1177/0956797611417632)
+
+---
+
+# Reading papers is a skill
+
+Always expect to read a paper **multiple** times and make notes.
+
+We can kind of neatly split papers into two different types:
+
+.pull-left[
+
+[Clinical trials like](https://doi.org/:10.1136/bmjopen-2020-044369) this one from `r citet_charlie("hu_factors_2022")` 
+
+<img src='images/screenshot_medical-study.jpg'/>
+
+]
+
+
+.pull-right[
+
+In some clinical trials the abstract includes **a lot of structured information** - it depends on the publisher.
+
+Some journals like BMJ Open even include study strengths and weaknesses.
+
+Read these papers in this order:
+
+- Abstract
+
+- Tables and/or figures
+
+- Conclusions
+
+- Introduction
+
+]
+
+---
+
+# Reading papers is a skill
+
+.pull-left[
+
+But **most** papers [look this one](https://doi.org/10.1177/0956797611417632) from `r citet_charlie("simmons_false-positive_2011")` 
+
+<img src='images/screenshot_non-medical-study.jpg'/>
+
+]
+
+.pull-right[
+
+In fact, not all medical trials have such nice to read abstracts.
+
+But the reading order is the same:
+
+- Abstract
+
+- Tables and/or figures
+
+- Conclusions
+
+- Introduction
+
+]
+
+---
+
 class: highlight-last-item
 
-## Add progressive lists
+# Reading papers is a skill
 
-Adding the class `highlight-last-item` allows you to highlight the last element
-of a progressive list.
-
-- First item
+- On your first pass of a paper you are trying to understand if the paper is relevant and provides substantial information and/or evidence for your needs.
 
 --
 
-- Second item
+- Often it will take another 1 or 2 passes to understand the **results** of the paper.
 
 --
 
--  For more options, see the `iheid-xaringan-style.css` file and search for
-"progressive slides". This feature was based on [this great article](https://www.garrickadenbuie.com/blog/better-progressive-xaringan/?panelset2=r-markdown3&panelset=r-markdown&panelset1=slides2).
+- It usually takes even more effort to understand the **methods** of the paper
 
----
-class: show-only-last-code-result
+   - Methodology information is often provided in "supplementary materials"
+   
+   - But unfortunately a good portion of the time you won't find sufficient information to fully understand the methodology because of **poor reproducibility**.
 
-## Progressive code
-
-Adding the class `show-only-last-code-result` allows you to render only the last
-code result.
-
-```{r}
-runif(5)
-```
 --
 
-```{r}
-rnorm(5)
-```
---
-
-```{r}
-rbinom(5, 1, 0.5)
-```
---
-
-```{r}
-rcauchy(5)
-```
-
----
-class: center, middle
-## Or you can highlight which section of your presentation you are up to...
-
-.pull-1[.circleoff[![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/NYCS-bull-trans-1.svg/1024px-NYCS-bull-trans-1.svg.png)]]
-.pull-1[.circleon[![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/NYCS-bull-trans-2.svg/1200px-NYCS-bull-trans-2.svg.png)]]
-.pull-1[.circleoff[![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/NYCS-bull-trans-3.svg/1200px-NYCS-bull-trans-3.svg.png)]]
-
----
-class: left, middle
-
-.blockquote[You can add unquotable quotes
-
-~ Some person]
-
----
-class: with-logo logo-iheid
-
-## Add a logo to your presentation 
-
-.pull-left[Adding a nice looking logo to your presentation is easy. Simply 
-define the `with-logo` class alongside the class of the logo itself 
-(`logo-iheid` in this case) on every slide you want the logo to appear.
-
-See [the presentation vignette](https://github.com/jhollway/iheiddown) for a
-list of the included logos.]
+> Learning about replicability and reproducibility now will help you in understanding the existing literature **and** prepare you to succeed in a research career later on.
 
 ---
 
-## Add Maps
+class: highlight-last-item
 
-```{r, fig.height=4, fig.width=10, fig.align='center', echo=TRUE}
-library(leaflet)
-leaflet() %>%
-  addTiles() %>%
-  setView(6.1435, 46.2210, zoom = 17)
-```
+# Reading papers is a skill
 
----
+If you decide to go into a research career you'll likely be reading 10+ papers a week.
 
-## Add some tables !
+I'd highly recommend investing in learning speed reading early in your career. 
 
-With the addition of the excellent [`{xaringan_columns}`](https://github.com/emilyriederer/xaringan_columns) macros by Emily
-Riederer, you can create nice looking multicolumn tables using clean markdown code.
+There's lots of [very interesting] eye tracking and neurological research into how we read and evidenced methodologies for speed reading that are nicely summarised by `r citet_charlie("clifton_eye_2016")`
 
-![:col_header Header 1, Header 2, Header 3, Header 4, Header 5]
-![:col_list You can add rows with bulletted lists, item2, item3, hello, more content]
-![:col_list item4, item5, Or normal chunks of text (see below), la la la, tra la la]
-![:col_row 
-    More text,
-    More text,
-    .,
-    More text,
-    More text
+<hr>
+
+.pull-left[
+BCU gives you free access to LinkedIn Learning.
+
+Go to [linkedin.com/learning-login/](https://www.linkedin.com/learning-login/) and login with your BCU email address.
+]
+
+.pull-right[
+<img src='images/li-course_speed-reading.jpg' width='100%'/>
 ]
 
 ---
 
-## More tables; kable and kableExtra packages
-.pull-left[Kable: great features for displaying simple tables!
-```{r, fig.height = 4, fig.width=10, echo=TRUE}
-knitr::kable(head(mtcars[1:4], 5), format = 'html')
-```
+class: inverse, center, middle
 
-See [the knitr documentation](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html)
-for additional options.
+# ... let's get back to p-hacking
+
+---
+
+# Fighting p-hacking with pre-registration
+
+So far I've been speaking about the academic literature at large.
+
+But let's look specifically at clinical trials.
+
+> All clinical trials began after July 1st 2005 are explicitly required to be **registered**<sup>1</sup> in order to be published in [**all biomedical journals**](https://www.icmje.org/about-icmje/) overseen by the International Committee of Medical Journal Editors (ICMJE) `r citet_charlie("noauthor_recommendations_2022")`.
+>
+> This is independent of the country in which the trial took place. 
+
+.footnote[
+[1] Frustratingly in the clinical trials community we use the phrase "registration" but everyone else says "pre-registration".
 ]
 
-.pull-right[Want to get fancier? Use kableExtra!
-```{r, fig.height = 2, fig.width=2, echo=TRUE}
-head(mtcars[1:4], 3) %>% 
-  kableExtra::kbl()%>%
-  kableExtra::kable_material(c("hover", "striped", "condensed"), full_width = F)
-```
+---
 
-See [the kableExtra documentation](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
-for additional options.
+# National Institutes of Health (NIH) and registration
+
+From a cursory search for clinical trial registration information you might come to the conclusion that the advice is only appropriate for studies in the US.
+
+> That is not true.
+
+In 2008 the `r citet_charlie("world_medical_association_declaration_2013")` updated the *Declaration of Helsinki – Ethical Principles for Medical Research Involving Human Subjects* to include a paragraph about registration.
+
+> 19\. Every clinical trial must be registered in a publicly accessible database before
+recruitment of the first subject.
+
+---
+
+# International advice on clinical trials
+
+The NIH provides a really useful tool for comparing the clinical research regulations from several countries:
+
+https://clinregs.niaid.nih.gov/country/united-kingdom
+
+---
+
+# UK trial registration
+
+Despite these "requirements" violations are still common as detailed in `r citet_charlie("bradley_automatic_2022-1")`.
+
+However, the UK has announced new infrastructure requiring 100% clinical trial registration via a collaboration between the Human Research Authority and [the ISRCTN registry](https://www.isrctn.com/) which is detailed by `r citet_charlie("bruckner_uk_2021")`.
+
+---
+
+# Registration to "Reduce waste"
+
+For unexplainable reasons there is a lot written about registration of trials "reducing research waste" as it helps reduce duplication of studies.
+
+While there are elements of truth to this, the big takeaway is pre-registration helps prevent Questionable Research Practices.
+
+> In fact it's the reason why GSK reached a $2.5million settlement in 2004
+
+---
+
+# GlaxoSmithKline & Clinical Trial Registration
+
+GSK chose to settle a civil case instead of engaging in an expensive legal battle over "repeated and persistent fraud" concerning the use of paroxetine in treating depression in adolescents.
+
+As detailed by `r citet_charlie("dyer_glaxosmithkline_2004")`:
+
+- Two studies showed no benefit to using paroxetine when compared with placebo.
+
+- Three studies found evidence for an increase in suicidal thoughts and behaviour.
+
+Internal company documents confirmed the suppression of these results:
+
+> “it would be commercially unacceptable to include a statement that efficacy had not been demonstrated, as this would undermine the profile of paroxetine.”
+>
+> `r citet_charlie("spurgeon_glaxosmithkline_2004")`
+
+---
+
+# Pre-registration for all studies
+
+There's a growing body of researchers both actually doing pre-registration and calling for it in all disciplines - particularly those that intersect with healthcare.
+
+- `r citet_charlie("simmons_false-positive_2011")` have been running [aspredicted.org](https://aspredicted.org/) since 2015 to help authors to create pre-registration reports.
+
+- The [Centre for Open Science](https://www.cos.io) encourages pre-registration on OSF and has in the past run a [Preregistration Challenge with a monetary prize](https://osf.io/x5w7h/wiki/06%20LeaderBoard/?hsCtaTracking=2f25be73-35de-4b95-93e8-4f08acc42332%7Cf2024186-54bb-4626-baab-1785d2f9d71a).
+
+- I highly recommend reading `r citet_charlie("nosek_preregistration_2018")` which gives a great overview of pre-registration and walk through multiple example of how it works in practice. 
+> At the moment there's nothing binding you to pre-register non-clinical trials but this topic is simmering away in the background
+
+---
+
+# Prediction markets and replication studies
+
+> In prediction markets, investors make predictions of future events by buying shares in the outcome of the event and the market price indicates what the crowd thinks the probability of the event is.
+>
+> [Harvard Press Release](https://www.seas.harvard.edu/news/2015/11/markets-science)
+
+--
+
+This was first applied to predicting replicability of research results in 2015 by `r citet_charlie("dreber_using_2015")`.
+
+There is now evidence for these markets being a reliable estimate of predictability `r citet_charlie("camerer_evaluating_2018")`.
+
+> Prof. Anna Dreber gives an excellent 40minute overview of replication prediction markets here - https://youtu.be/a5rFDKB1aZc?t=1036
+
+---
+
+# A final word on replicability studies
+
+Most (if not all) of studies about replicability are deeply technical and rely on statistical methods we don't have time to cover in this course.
+
+This includes the foundational paper "Why Most Published Research Findings Are False" by `r citet_charlie("ioannidis_why_2005")`.
+
+> Your assessment does not require you to understand or replicate any of the methodologies behind replicability studies.
+
+---
+
+# Reproducibility
+
+Let's get back to the ASA reproducibility recommendations from `r citet_charlie("broman_recommendations_2017")`.
+
+> Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
+In order for reproducibility to be *possible* we need the original data to be accessible - we need **Open Data**.
+
+---
+
+class: middle, center, inverse
+
+# Open Data
+
+---
+
+# Most papers don't provide their data
+
+More often than papers simply **do not provide** the data that they:
+
+- Use to create charts and tables
+
+- Use to perform statistical tests
+
+- Use to generate their conclusions
+
+> These papers are the antithesis of reproducible.
+
+---
+
+# "Data available on request"
+
+It's common to see the phrase "data available on request" but that's frequently meaningless:
+
+> "Data requests to authors are successful in 27–59% of cases, whereas the request is ignored in 14–41% cases"
+>
+> `r citet_charlie("tedersoo_data_2021")`
+
+Even in cases where data is returned it's often insufficient for reproducibility, `r citet_charlie("roche_public_2015")`:
+
+- "Data" might actually be screenshots of charts stored in an Excel workbook
+
+- "Data" might be stored in other "non-machine-readable" formats like PDF or images
+
+- "Data" might only be provided in the post analysis form
+
+---
+
+# Researchers have confusing opinions
+
+In one of the earliest, biggest and most cited studies in data sharing from 2011 by `r citet_charlie("tenopir_data_2011")` surveyed 1,329 scientists found that
+
+> "Most respondents (at least 60% across disciplines) agree that lack of access to data generated by other researchers or institutions is a major impediment to progress in science."
+
+... but
+
+> "A majority of all respondents indicate they are not willing to place all of their data in central repositories with no restrictions"
+
+These findings have been replicated again, and again.
+
+---
+
+# Open Data helps everyone
+
+.pull-left[
+
+**Researchers**
+
+- Open Data helps reproduce previous studies
+
+- Open Data means researchers can do **new** studies, including meta analyses.
+
+<hr>
+
+- Open Data gives an additional way researchers can be cited
+
+- There is clear evidence Open Data is linked with higher citation rates, eg `r citet_charlie("colavizza_citation_2020")`.
+
+
+]
+
+--
+
+.pull-right[
+
+**Society**
+
+- The coordinated global COVID-19 response benefited significantly from Open Data portals `r citet_charlie("noauthor_data_2020")`.
+
+- Reducing energy consumption of buildings based in occupancy from public datasets `r citet_charlie("roth_examining_2020")`.
+
+- Emergency planning via use of the Behavioral Risk Factor Surveillance System (BRFSS) `r citet_charlie("noauthor_cdc_2021")`
+
+
+]
+
+.small[
+> You can find *some* healthcare specific examples on the course website [eng7218.netlify.app/resources/open-data](https://eng7218.netlify.app/resources/open-data). Please do research your own - and consider sharing them with the group.
 ]
 
 ---
 
-## Interactive tables; DT package
+# Open Data vs Big Data
 
-```{r, fig.height = 4, fig.width=10, echo=TRUE}
-library(DT)
-DT::datatable(head(mtcars, 10),
-  fillContainer = FALSE, options = list(pageLength = 4))
+Big Data is great. It's the driver behind the Internet of Things and much of modern healthcare technology. But in most circumstances it is **not** Open Data.
+
+<a href='http://opendefinition.org/'><img src='images/screenshot_open-definition.jpg' height='400px'/></a>
+
+Screenshot of `r citet_charlie("noauthor_open_2022")`
+
+---
+
+# Open Data short definition
+
+Let's minimise these definitions:
+
+> Open data must be..
+
+- Legally open. The data must be subject to an open data license
+
+- Technically open.
+
+  - Data files must be machine-readable and non-proprietary, which often means *plain text*.
+  
+  - Accessible from a public server without password protection
+
+> Open data must be open to humans and computers.
+
+---
+
+# Open Data licenses
+
+In most cases the [Creative Commons' "Choose a license tool"](https://creativecommons.org/choose/) is the best and easiest choice if you have a **dataset** you want to make into Open Data.
+
+- The CC0 license is the most permissive license.
+
+There are special Open Data licenses used by Governmental/Charity organisations designed to waive liability for use, eg the [Open Government License](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) from the `r citet_charlie("uk_government_open_2022")` 
+
+> In general it's best to use data licenses for data and software licenses for software.
+
+---
+
+# Open Data examples
+
+There are **SO MANY** different sources (or publishers) of Open Data, for a good sample checkout the [Open Data Essentials page from the `r citet_charlie("world_bank_open_2021")`](http://opendatatoolkit.worldbank.org/en/essentials.html).
+
+.center[
+<img src='images/screenshot_open-data-essentials.jpg' height='450px'/>
+]
+
+---
+
+# Open Data and Health Data
+
+Open Data is awesome. But if we're responsible for data that can identify individuals or groups we have a [legal] duty of care to protect that data.
+
+In the UK we have the [Data Protection Act](https://www.legislation.gov.uk/ukpga/2018/12/contents/enacted) (`r citet_charlie("legislationgovuk_data_2022")`) which is the UK's implementation of the General Data Protection Regulation (GDPR).
+
+> In week 6 we will discuss GDPR and the Data Protection Act in the context of anonmyising data. 
+> 
+> This isn't a course in the law school so we won't go *hard* into the definitions. But there are some things we need to discuss.
+
+---
+
+# Open Data and Health Data
+
+In the DPA (`r citet_charlie("legislationgovuk_data_2022")`) there are 6 different types of sensitive data - I'm highlighting the ones that cover data that you might reasonably collect and consider "health data".
+
+.small[
+- (a) the processing of personal data revealing racial or ethnic origin, .de-emphasis[political opinions, religious or philosophical beliefs or trade union membership;]
+
+- (b) the processing of genetic data for the purpose of uniquely identifying an individual;
+
+- (c) the processing of biometric data for the purpose of uniquely identifying an individual;
+
+- (d) the processing of data concerning health;
+
+- (e) the processing of data concerning an individual’s sex life or sexual orientation;
+
+- .de-emphasis[(f) the processing of personal data as to [commission or alleged commission of an offence]]
+]
+
+> There's some recursion, so let's pull out the definitions of "health data" from Part 7 Section 205 and list everything together
+
+---
+
+# Open Data and Health Data
+
+Part 7 Section 205 defines the following
+
+.small[
+- **“biometric data”** means personal data resulting from specific technical processing relating to the physical, physiological or behavioural characteristics of an individual, which allows or confirms the unique identification of that individual, such as facial images or dactyloscopic data;
+
+- **“data concerning health”** means personal data relating to the physical or mental health of an individual, including the provision of health care services, which reveals information about his or her health status;
+
+- **“genetic data”** means personal data relating to the inherited or acquired genetic characteristics of an individual which gives unique information about the physiology or the health of that individual and which results, in particular, from an analysis of a biological sample from the individual in question;
+]
+
+But we should also still include:
+
+.small[
+- (a) the processing of personal data revealing racial or ethnic origin,
+
+- (e) the processing of data concerning an individual’s sex life or sexual orientation;
+]
+
+---
+
+# Open Data and Health Data
+
+There's more [reader friendly documentation about health data and DPA 2018](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/right-of-access/health-data/#healthdata7) from the `r citet_charlie("information_commissioners_office_health_2021")`.
+
+We'll talk about this more later.
+
+---
+
+# How do we create Open Data?
+
+
+
+---
+.pull-left[
+- Protected characteristics
+]
+
+.pull-right[
+- age
+- gender reassignment
+- being pregnant or on maternity leave
+- disability
+- race including colour, nationality, ethnic or national origin
+- sex
+- sexual orientation
+]
+
+---
+
+# Open Data outside of academia
+
+There are SO many Open Data portals!
+
+
+
+---
+
+# Dragons (TO BE ADDED!)
+
+---
+
+# Open Access
+
+
+
+
+---
+
+# How to cite 
+
+---
+
+# Aside: Press Releases really suck
+
+Earlier I linked to a [Harvard Press Release about prediction markets for replicability](https://www.seas.harvard.edu/news/2015/11/markets-science).
+
+It's a perfect example of why University press releases often suck.
+
+- The article does not give the title of the paper
+
+- The article does not give the link to the paper
+
+
+
+---
+
+# Aside: Difficulty citing white papers
+
+The Turing Report by `r citet_charlie("von_borzyskowski_data_2021")` I mentioned earlier is a great example of adding a non-traditional publication to Zotero.
+
+1. Use "Report" as type
+
+1. Manually add names
+
+1. Infer the date of the report from the URL `turing.ac.uk/.../2021-06/...pdf`
+
+1. Add "Accessed field"
+
+1. Add URL
+
+1. Add Institute
+
+
+---
+
+# Why are we learning all of this now?
+
+```{r}
+tweetrmd::tweet_embed("https://twitter.com/charliejhadley/status/1559534088838647808?s=20&t=M0f0BvpbqLiKpDxBHiJy7w")
 ```
 
-See the [DT package documentation](https://rstudio.github.io/DT/) for the
-additional options.
-
 ---
-class: animate__animated, animate__slideInRight
 
-## Add slide transitions to  your slides
+# ASSESSMENT STUFF
 
-Simply add the class `animate__animated` and the class corresponding to the
-desired animation such as `animate__slideInRight`, et voilà!
+•	What is “health data”? 
+•	Why is it important to government, industry and academia that health datasets are made available?
+•	What are some of the benefits to individuals and groups in making health datasets open?
 
-For a complete list of the available animations and further options, visit
-[animate.style](https://animate.style/).
-
-.center[![Animation GIF](https://i.giphy.com/media/Oo6GWyiWEDgtO/giphy.webp)]
-
----
-background-image: url(https://media1.giphy.com/media/xT0BKiK5sOCVdBUhiM/giphy.gif)
-background-size: contain
-
-# And finally, you can add gifs!
-
----
-class: inverse iheid-red center middle with-logo logo-iheid_BW
-
-Made with `{iheiddown}`, the R-package for IHEID publications
-`r Cite(myBib, "iheiddown")`.
 
 ---
 
-# References
+# References Page 1
 
-```{r refs, echo=FALSE, results="asis"}
-RefManageR::PrintBibliography(myBib)
+.references[
+
+```{r, results='asis', echo=FALSE, warning=FALSE, cache=FALSE}
+print_bib_rmd(bib, start = 1, stop = 10)
 ```
+
+]
+
+---
+
+# References Page 2
+
+.references[
+
+```{r, results='asis', echo=FALSE, warning=FALSE, cache=FALSE}
+print_bib_rmd(bib, start = 11, stop = 20)
+```
+
+]
+
+---
+
+# References Page 3
+
+.references[
+
+```{r, results='asis', echo=FALSE, warning=FALSE, cache=FALSE}
+print_bib_rmd(bib, start = 21, stop = 30)
+```
+
+]
