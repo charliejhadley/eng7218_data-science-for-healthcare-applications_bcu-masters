@@ -1,5 +1,5 @@
 .remark-slide-number::before {
-  content: "Lecture 👩‍🏫";
+  content: "Workshop 📓";
 }
 
 .task-slide-count {
@@ -13,6 +13,7 @@
   top: 25%;
 }
 
+
 .references{
   font-size: 70%
 }
@@ -20,6 +21,13 @@
 .de-emphasis {
   opacity: 0.5;
 }
+
+.remark-code, .remark-inline-code { font-family: 'Source Code Pro'; }
+.remark-code, .remark-inline-code {
+	font-family: Monaco;
+	color: #e10020
+	}
+
 
 /* Below is pretty much the CSS from the {coursedown} package
 

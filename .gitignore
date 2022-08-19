@@ -9,3 +9,5 @@ Thumbs.db
 # And some folders
 /public/
 /resources/
+.Rdata
+.httr-oauth

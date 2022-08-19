@@ -13,6 +13,21 @@
   top: 25%;
 }
 
+
+.references{
+  font-size: 70%
+}
+
+.de-emphasis {
+  opacity: 0.5;
+}
+
+.remark-code, .remark-inline-code { font-family: 'Source Code Pro'; }
+.remark-code, .remark-inline-code {
+	font-family: Monaco;
+	color: #36506A
+	}
+
 /* Below is pretty much the CSS from the {coursedown} package
 
 /* Let's load some fonts */
@@ -35,14 +50,6 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css');
 
 /* Generic stuff */
-
-/* .remark-code, .remark-inline-code { font-family: 'Source Code Pro'; } */
-/* .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; } */
-.remark-code, .remark-inline-code { font-family: 'Fira Code'; }
-/* .remark-code, .remark-inline-code {
-	font-family: 'Inconsolata', 'Lucida Console', Monaco, monospace;
-	color: #13294B
-	} */
 
 body { font-family: 'Lato' }
 

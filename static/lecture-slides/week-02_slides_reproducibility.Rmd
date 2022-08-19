@@ -707,84 +707,320 @@ But we should also still include:
 
 There's more [reader friendly documentation about health data and DPA 2018](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/right-of-access/health-data/#healthdata7) from the `r citet_charlie("information_commissioners_office_health_2021")`.
 
-We'll talk about this more later.
+> We'll talk about this more later.
 
 ---
 
-# How do we create Open Data?
+# Open Data mandates and UKRI
 
+UKRI is responsible for the 6 UK research councils who fund most university-based research in the UK.
 
+--
+
+Some research councils have their own "data sharing policies", but others depend on the "common principles on on research data" from `r citet_charlie("ukri_ukri_2022")`.
+
+> Publicly funded research data are a public good and produced in the public interest. They should be made openly available with as few restrictions as possible in a timely and responsible manner.
 
 ---
+
+# Open Data mandates and UKRI
+
+.small[
+- .de-emphasis[Arts and Humanities Research Council (`r citet_charlie("ahrc_ahrc_2022")`): Relies on the `r citet_charlie("ukri_ukri_2022")` common principles].
+
+- Biotechnology and Biological Sciences Research Council (`r citet_charlie("bbsrc_bbsrc_2022")`): "BBSRC expects that all data (with accompanying metadata) should be
+shared in a timely fashion as soon as it is verified".
+
+- Engineering and Physical Sciences Research Council (`r citet_charlie("epsrc_esprc_2022")`): Has the most explicit data policy, including a requirement for DOI.
+
+- Economic and Social Research Council (`r citet_charlie("esrc_esrc_2022")`): Explicit requirement that "data **will** be made available [...] as Open Data".
+
+- Medical Research Council (MRC): There's an "expectation" from `r citet_charlie("mrc_mrc_2022")` that data must be made open, they helpfully provide [lots of advice about patient and population data](https://www.ukri.org/wp-content/uploads/2021/08/MRC-0208212-MRC-policy-and-guidance-on-sharing-of-research-data-from-population-and-patient-studies-Word-version-v01.02.pdf). 
+
+- Natural Environment Research Council (`r citet_charlie("nerc_nerc_2022")`): Flubs it by saying all research "must include a
+statement on how the supporting data and any other relevant research materials can be accessed"
+
+- .de-emphasis[Science and Technologies Facilities Council (`r citet_charlie("stfc_stfc_2021")`)": "STFC expects that published data should be made publicly available within six months of publication unless justified otherwise"]
+]
+
+---
+
+# Understanding the whole process
+
 .pull-left[
-- Protected characteristics
+1. Submit a Data Management Plan (DMP) to a funder, including a data sharing plan
+
+1. Pre-register your research (often simultaneously with step 1)
+
+1. Reserve a DOI to store your research data at a data repository
+
+1. Do the research
+
+  - Keep raw data pristine. Do not modify your raw data.
+  
+  - Keep track of how you wrangle the data (much easier when you write R code!)
+  
+  - Craft an anonymised, shareable version of your datasets described in your DMP.
+]
+
+--
+
+.pull-right[
+1. Write up the study
+
+1. Choose a journal to submit to
+
+  - That's an entire process in of itself!
+  
+1. Make the data deposit public when your research is made public
+
+  - Applying an embargo can help automate this process
+  
+<hr>
+
+You might want to create follow up studies or new studies where you add to the existing data deposit.
+
+This works nicely thanks to DOI versioning!
+]
+
+---
+
+# Understanding the whole process (more!)
+
+.pull-left[
+
+I tweeted asking for advice about things I missed
+
+```{r, echo=FALSE}
+tweetrmd::tweet_embed("https://twitter.com/charliejhadley/status/1560579213559619586?s=20&t=cAGJy0MsQfRLdDrP0QE20w")
+```
+
 ]
 
 .pull-right[
-- age
-- gender reassignment
-- being pregnant or on maternity leave
-- disability
-- race including colour, nationality, ethnic or national origin
-- sex
-- sexual orientation
+
+- Meta data records including data dictionaries are really useful tools for studies. These can be deposited into data repositories and linked to in your articles.
+
+- I haven't mentioned ethics forms and consent forms. These are very important. Refer to your Research Support teams for help in designing these documents.
+
 ]
 
 ---
 
-# Open Data outside of academia
+# ... what about the code?
 
-There are SO many Open Data portals!
-
-
+So far I've only spoken about the data element of reproducibility, we'll get onto the code in the workshop.
 
 ---
 
-# Dragons (TO BE ADDED!)
+# Digital Object Identifiers (DOI)
+
+.pull-left[
+
+DOI are extremely important to ensure research availability into the future. Academic journal links are fragile and could change at any time:
+
+> <a href='https://sciencedirect.com/science/article/<br>pii/S2665927122000879'>sciencedirect.com/science/article/<br>pii/S2665927122000879</a>
+
+]
+
+.pull-right[
+
+DOI are **persistent and extremely long-term** identifiers that look like this:
+
+> 10.1016/j.crfs.2022.05.015
+
+The is then responsible for directing you to the resource by creating a URL like this:
+
+> doi.org/10.1016/j.crfs.2022.05.015
+
+]
 
 ---
 
-# Open Access
+# DOI for more than just publications
 
+Initially DOI were only issued by academic publishers to resolve journal articles.
 
+Data Repositories started issuing DOI so we could resolve links to data, code and more.
 
+.pull-left[
+
+**Specialist Data Repositories**
+
+Sometimes you **need** a repository with specialist features, eg:
+
+- Genome sequences
+
+- Protein sequences
+
+- Climate data
+
+`r citet_charlie("nature_data_2022")` [provides an excellent overview of these tools](https://www.nature.com/sdata/policies/repositories).
+
+]
+
+--
+
+.pull-right[
+
+**General Purpose Repositories**
+
+These tools all have slighty different advantages and disadvantages
+
+- Figshare
+
+- Open Science Framework
+
+- Zenodo
+
+]
 
 ---
 
-# How to cite 
+# Identifiers for researchers?
+
+DOI are great for resolving our research outputs, what about uniquely identifying researchers?
+
+Researchers often share the same names or change their names throughout their career.
+
+--
+
+.pull-left[
+
+The **only** open researcher identifier is ORCID.
+
+Thankfully - it also works really well! 
+
+It keeps track of all publications and deposits on data repositories.
+
+Here's mine: https://orcid.org/0000-0002-3039-6849
+
+]
+
+.pull-right[
+<img src='images/orcid-ids.png'/>
+]
+> I want you to register for an ORCID now so you can use it for everything - including in your CV
 
 ---
 
-# Aside: Press Releases really suck
+# Exercise: Setup a Collection on Figshare
 
-Earlier I linked to a [Harvard Press Release about prediction markets for replicability](https://www.seas.harvard.edu/news/2015/11/markets-science).
+Everything we've spoken about has been very theoretical. I want you to go through the steps of creating a collection on Figshare.
 
-It's a perfect example of why University press releases often suck.
+> We're creating a Collection because it can contain multiple Figshare items. At the beginning of your research you likely don't know exactly how many data files you'll end up with.
 
-- The article does not give the title of the paper
+.pull-left[
+- Sign up for Figshare with your ORCID
 
-- The article does not give the link to the paper
+- Go to "My data" in Figshare
 
+- Go to "Collections"
 
+- Create a Collection
+
+- Reserve a DOI
+]
+
+.pull-right[
+- Go to "My data"
+
+- Add a new item
+
+- Reserve a DOI
+
+- Go to your collection and add this data item.
+]
 
 ---
 
-# Aside: Difficulty citing white papers
+# We need to talk about Open Access
 
-The Turing Report by `r citet_charlie("von_borzyskowski_data_2021")` I mentioned earlier is a great example of adding a non-traditional publication to Zotero.
+It used to be extremely hard to access the research that UKRI funds - despite it being funded by public money. The Open Access movement began in the 90s and is ever growing.
 
-1. Use "Report" as type
+It's now a requirement of `r citet_charlie("ukri_ukri_2022-1")` funding that
 
-1. Manually add names
+> the final Version of Record or the Author’s Accepted Manuscript must be free to view
+and download via an online publication platform, publishers’ website, or institutional or
+subject repository within a maximum of 12 months of publication 
 
-1. Infer the date of the report from the URL `turing.ac.uk/.../2021-06/...pdf`
+... however, this often means that someone is paying an Article Processing Charge (APC).
 
-1. Add "Accessed field"
+---
 
-1. Add URL
+# Different routes to Open Access
 
-1. Add Institute
+.pull-left[
 
+**Someone pays an APC**
+
+APCs can be split between publishers and authors in different ways.
+
+UKRI is usually responsible for paying the author's portion of the bill.
+
+- Gold Open Access: All articles in a journal are Open Access.
+
+- Hyrbrid Open Access: Specific articles in a journal are made Open Access through APCs. Journals receive money through both subscriptions and APCs.
+
+]
+
+
+.pull-right[
+**No APC is paid**
+
+The most important category here is **Green Open Access**.
+
+In Green Open Access the author self-archives their article in a publicly available repository.
+
+**This gets complicated**.
+
+- Some publishers require that only pre-prints are self-archived
+
+- Some publishers allow post-print publishing.
+
+If you're interested read `r citet_charlie("gadd_what_2019-1")`.
+
+]
+
+---
+
+class: inverse, middle, center
+
+# Negative Results
+
+---
+
+# Positive Publication Bias
+
+There is a significant and very clear bias to researchers publishing "positive results" (`r citet_charlie("mlinaric_dealing_2017")`) - which you can even see in article titles.
+
+.pull-left[
+
+This poses significant issues in the literature.
+
+- It's really useful to know X doesn't work! It means others don't need to repeat the result.
+
+- Negative effects can be under reported, as per the GSK lawsuit in 2004.
+
+- A lack of negative results introduces bias to meta-analyses.
+
+]
+
+.pull-right[
+
+The `r citet_charlie("mrc_mrc_2022")` Open Research Data policy explicitly requires both positive and negative results of studies be published within 24 months of the trial end.
+
+]
+
+---
+
+# Publishing negative results
+
+This is an open problem. 
+
+There was a push for new negative result journals in the early 2010s but several of these folded, [including the Journal of Negative Results in Biomedicine](https://jnrbm.biomedcentral.com/) The remaining journals have very low impact factors as they are published by smaller publishers.
+
+In general the journals with the highest impact factors are getting better at publishing negative results.
 
 ---
 
@@ -796,11 +1032,25 @@ tweetrmd::tweet_embed("https://twitter.com/charliejhadley/status/155953408883864
 
 ---
 
-# ASSESSMENT STUFF
+class: split-two, with-thick-border border-black
 
-•	What is “health data”? 
-•	Why is it important to government, industry and academia that health datasets are made available?
-•	What are some of the benefits to individuals and groups in making health datasets open?
+.column.bg-main1[.content[
+  .split-three[
+ .row[.content[
+ # 1. There's a reproducibility crisis
+ ]]
+  .row[.content[
+ # 2. Everything you can do to help reproducibility
+ ]]
+   .row[.content[
+ # 3. Understanding Open Access and Open Data
+ ]]
+ ]
+]]
+
+.column.bg-main1[.content.center.vmiddle[
+  # 4. Acknowledging legal and funder requirements affecting reproduciblity
+]]
 
 
 ---
@@ -835,6 +1085,30 @@ print_bib_rmd(bib, start = 11, stop = 20)
 
 ```{r, results='asis', echo=FALSE, warning=FALSE, cache=FALSE}
 print_bib_rmd(bib, start = 21, stop = 30)
+```
+
+]
+
+---
+
+# References Page 4
+
+.references[
+
+```{r, results='asis', echo=FALSE, warning=FALSE, cache=FALSE}
+print_bib_rmd(bib, start = 31, stop = 40)
+```
+
+]
+
+---
+
+# References Page 5
+
+.references[
+
+```{r, results='asis', echo=FALSE, warning=FALSE, cache=FALSE}
+print_bib_rmd(bib, start = 41, stop = 50)
 ```
 
 ]
