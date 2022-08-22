@@ -1,5 +1,5 @@
 ---
-title: "Week 6: Data Anonymisation"
+title: "Week 8: Machine learning vs everything else"
 subtitle: ""
 author: "<large>Charlotte Hadley</large>"
 output:
@@ -53,11 +53,16 @@ citet_charlie <- function(tag) {
 
 ---
 
-# DPA Act & Health Data Notes
+# Resources
 
-I covered some of this in Week 2. 
+Really good tweet on what type of analysis you're doing
 
-The ICO has a good page about health data https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/right-of-access/health-data/#healthdata7 and DPA Part 7 Section 205 gives explicit definitions of what consitutes health data.
+https://twitter.com/patilindrajeets/status/1560623112726532097?s=20&t=R7sTe6UMH6gmpgr7zz5HEQ
 
-
+- Description
+- Explanatory
+- Inferential
+- Predictive
+- Causal
+- Mechanistic
 

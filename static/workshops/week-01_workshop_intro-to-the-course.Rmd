@@ -32,6 +32,25 @@ knitr::opts_chunk$set(cache=TRUE, autodep = TRUE, fig.retina = 3, message = FALS
 
 ```{r, echo=FALSE}
 xaringanExtra::use_progress_bar(color = "#36506A", location = "top", height = "5px")
+
+# thanks to https://github.com/jvcasillas/xaringan_bib
+source(here::here("static", "xaringan-bib.R"))
+library(RefManageR)
+BibOptions(check.entries = FALSE, 
+           bib.style = "numeric", 
+           cite.style = "numeric", 
+           max.names = 0,
+           dashed = TRUE)
+bib <- ReadBib(here::here("static", "bibtex-file.bib"))
+citet_charlie <- function(tag) {
+  RefManageR::Citet(bib,
+                    tag,
+                    .opts = list(
+                      bib.style = "numeric",
+                      cite.style = "numeric",
+                      max.names = 1
+                    ))
+}
 ```
 
 

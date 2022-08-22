@@ -497,7 +497,306 @@ class: inverse, center, middle
 
 ---
 
-# 
+# Referencing is part of research (and the assessment)
+
+Managing your references is an unavoidable part of doing research and is part of the assessment.
+
+.pull-left[
+
+There are several reference management tools available.
+
+- EndNote is widely taught however it's close source, expensive and [in my own personal opinion] rubbish.
+
+- Mendeley is much better but it's closed source has limited shared library functionality.
+
+- Zotero is open source, has good shared library functionality and has lots of extensions.
+
+]
+
+.pull-right[
+&lt;img src='images/zotero-logo.webp'/&gt;
+
+&gt; I'm going to teach you how to use Zotero. But choose which software works for you!
+]
+
+---
+
+# Setting up Zotero
+
+1. Create a free account at [zotero.org/](https://www.zotero.org/)
+
+1. Download the software from [zotero.org/](https://www.zotero.org/)
+
+1. Install the software and login to your Zotero account
+
+
+---
+
+# Improving Zotero with Better Bibtex for Zotero
+
+We're going to install the "Better Bibtex" addin which improves how Zotero generates bibtex files.
+
+&gt; BibTeX is an extremely useful and very widely used tool for storing, managing and typsetting references
+&gt;
+&gt; It was originally designed to work with LaTeX which we're purposefully avoiding.
+
+---
+
+# Improving Zotero with Better Bibtex for Zotero
+
+The instructions for installing Better Bibtex.
+
+.pull-left[
+1. Download the tool from [https://github.com/retorquere/zotero-better-bibtex/releases](https://github.com/retorquere/zotero-better-bibtex/releases)
+
+]
+
+.pull-right[
+&lt;img src='images/screenshot_better-bibtex-download.jpg'/&gt;
+]
+
+---
+
+# Improving Zotero with Better Bibtex for Zotero
+
+The instructions for installing Better Bibtex.
+
+.pull-left[
+1\. Download the tool from [https://github.com/retorquere/zotero-better-bibtex/releases](https://github.com/retorquere/zotero-better-bibtex/releases)
+
+2\. Open Zotero and select
+
+`Tools &gt; Add-ons`
+
+3\. In the popup click on the ⚙️ item and select "Install Add-on From File..."
+
+4\. Select the `.xpi` file you just downloaded
+
+5\. Restart Zotero
+
+]
+
+.pull-right[
+&lt;img src='images/screenshot_better-bibtex-install-addin.jpg'/&gt;
+]
+
+---
+
+# Web browser plug-in
+
+.pull-left[
+
+One of the best things about Zotero is how easy it is to add resources to your collection directly from the web browser.
+
+Please install the plugin for your browser of choice
+
+[zotero.org/download/connectors](https://www.zotero.org/download/connectors)
+]
+
+.pull-right[
+
+&lt;img src='images/screenshot_zotero-connectors.jpg'/&gt;
+
+]
+
+---
+
+# Adding a paper to Zotero
+
+I'd like you to add the "Why Most Published Research Findings are False" paper to your Zotero collection.
+
+&gt; You need your browser and Zotero open simultaneously. 
+
+.pull-left[
+
+1. Visit [doi.org/10.1371/journal.pmed.0020124](https://doi.org/10.1371/journal.pmed.0020124)
+
+1. Click on the Zotero plugin icon and click "Done"
+
+1. Go over to Zotero and you'll see the paper has been added!
+
+]
+
+.pull-right[
+&lt;center&gt;
+&lt;img src='images/screenshot_zotero-plugin-most-findings-are-false.jpg' height='400px'/&gt;
+&lt;/center&gt;
+]
+
+---
+
+# Using Zotero
+
+.pull-left[
+You can now use Zotero to organise your papers, web pages and reports. All of the things you need to **cite and reference**.
+
+- Zotero includes a PDF viewer where you can annotate and highlight PDFs.
+
+- You can organise things via folders.
+
+- Tags are another useful tool for organising research
+]
+
+.pull-right[
+&lt;img src='images/screenshot_zotero-collection-example.jpg'/&gt;
+]
+
+---
+
+# Connecting this to an RStudio project
+
+Our goal is to setup a workflow where we can synchronise our Zotero library with an RStudio project so that we can write a report and add references as we grow our library.
+
+We installed Better BibTeX because it allows us to automate this process.
+
+&gt; You'll need to do this for each project you want to connect to your Zotero collection.
+
+---
+
+# Sync Zotero with an RStudio Project
+
+.pull-left[
+1. Add an .Rmd document to your RStudio project called something like `Report.Rmd`.
+
+- The YAML header is looking for a BibTeX file called `references.bib` which we've not created yet
+
+- We've added a "References" header before the references.
+]
+
+.pull-right[
+
+```default
+---
+title: "Example report"
+output: 
+  pagedown::html_paged:
+    toc: false
+knit: pagedown::chrome_print
+bibliography: references.bib
+---
+
+
+# References
+
+::: {#refs}
+:::
+```
+
+]
+
+---
+
+# Sync Zotero with an RStudio Project
+
+.pull-left[
+1. Add an .Rmd document to your RStudio project called something like `Report.Rmd`.
+
+1. Open Zotero and go to `File &gt; Export library`
+
+  - Set the format as Better BibTeX
+
+  - Select "Keep updated"
+
+1. Save the file into your RStudio project and call it `references.bib` 
+
+
+]
+
+.pull-right[
+&lt;img src='images/screenshot_zotero-export-popup.jpg'/&gt;
+]
+
+
+---
+
+# Sync Zotero with an RStudio Project
+
+.pull-left[
+1. Add an .Rmd document to your RStudio project called something like `Report.Rmd`.
+
+1. Open Zotero and go to `File &gt; Export library`
+
+  - Set the format as Better BibTeX
+
+  - Select "Keep updated"
+
+1. Save the file into your RStudio project and call it `references.bib`
+
+1. Open Zotero preferences and go to the BetterBibTeX section
+
+- Choose the "Automatic Export" tab
+
+- Set "Automatic export" to "On Change"
+
+
+]
+
+.pull-right[
+&lt;img src='images/screenshot_zotero_automatic-export-on-change.jpg'/&gt;
+]
+
+---
+
+# Sync Zotero with an RStudio Project
+
+.pull-left[
+1. Add an .Rmd document to your RStudio project called something like `Report.Rmd`.
+
+1. Open Zotero and go to `File &gt; Export library`
+
+1. Save the file into your RStudio project and call it `references.bib` 
+
+1. Save the file into your RStudio project and call it `references.bib`
+
+1. Open Zotero preferences and go to the BetterBibTeX section
+
+1. In your .Rmd file cite the paper we added using the citation key... and knit the document!
+
+
+]
+
+.pull-right[
+
+```default
+---
+title: "Example report"
+output: 
+  pagedown::html_paged:
+    toc: false
+knit: pagedown::chrome_print
+bibliography: references.bib
+---
+
+Ah, yes the @ioannidis_why_2005 paper.
+
+# References
+
+::: {#refs}
+:::
+
+```
+
+]
+
+---
+
+# Zotero citation keys
+
+.pull-left[
+Zotero automatically generate citation keys for you.
+
+I strongly against editing these yourself - they're best as machine-readable data instead of human-readable data.
+
+
+]
+
+.pull-right[
+&lt;img src='images/screenshot_zotero-citation-key.jpg'/&gt;
+]
+
+---
+
+# Challenge
 
 ---
 
@@ -524,7 +823,7 @@ It's a perfect example of why University press releases often suck.
 # Aside: Difficulty citing white papers
 
 The Turing Report by \noopsortborzyskowskivon
-Borzyskowski, et al. [31] I mentioned earlier is a great example of adding a non-traditional publication to Zotero.
+Borzyskowski, et al. [1] I mentioned earlier is a great example of adding a non-traditional publication to Zotero.
 
 1. Use "Report" as type
 
