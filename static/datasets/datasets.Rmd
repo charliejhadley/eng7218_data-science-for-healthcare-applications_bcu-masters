@@ -1,0 +1,68 @@
+---
+output: bookdown::html_document2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+# Global Burden of Disease (GBD) study
+
+Register for this tool here. I've downloaded an example series of data
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(here)
+
+disease_burden_raw <- read_csv(here("static", "datasets", "data-example_global-burden-of-disease", "data-example_global-burden-of-disease.csv"))
+
+disease_burden_raw %>% 
+  count(location_name)
+```
+
+# Gapminder
+
+It's the gapminder dataset!
+
+# Western Collaborative Group Study
+
+> "Explore the relationship between systolic blood pressire (sbp) and personality types (personality_2L), accounting for potential confounders like weight (weight)"
+> R for Health Data Science, Ewn Harrison and Riinu Pius page 173
+
+- Used for regression
+
+```{r}
+finalfit::wcgs %>% 
+  as_tibble()
+```
+
+# Survival from Malignant Melanoma
+
+> "Association between tumour ulceration and death from melanoma"
+> R for Health Data Science, Ewn Harrison and Riinu Pius page 194
+
+Data is numerically coded, needs to be converted to meaningful factor levels. Used for cox-model
+
+```{r}
+boot::melanoma
+```
+
+# colon_s data
+
+> "association between cancer obstructing the bowel and 5-year survival, accounting for other patient and disease characteristics"
+> R for Health Data Science, Ewn Harrison and Riinu Pius page 194
+
+- Used for missing data identification
+
+```{r}
+finalfit::colon_s %>% 
+  as_tibble()
+```
+
+
+

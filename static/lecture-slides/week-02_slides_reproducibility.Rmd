@@ -934,6 +934,18 @@ Everything we've spoken about has been very theoretical. I want you to go throug
 
 ---
 
+# Figshare for talks and more
+
+Figshare is very much a general purpose repository.
+
+If you create something you want to make available for the future the best thing you can do is get a DOI.
+
+- Consider using Figshare for presentations
+
+- Consider using Figshare for posters
+
+---
+
 # We need to talk about Open Access
 
 It used to be extremely hard to access the research that UKRI funds - despite it being funded by public money. The Open Access movement began in the 90s and is ever growing.

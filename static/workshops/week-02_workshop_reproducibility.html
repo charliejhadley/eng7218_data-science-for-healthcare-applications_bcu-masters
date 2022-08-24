@@ -491,6 +491,16 @@ In real-world projects you would use two additional features: branches and pull 
 
 ---
 
+# Connecting Figshare &amp; Github
+
+GitHub is an awesome place for code to *live*.
+
+It's a **bad** choice for preserving code for the future.
+
+Fortunately, it's simple to connect your Figshare account with GitHub which gives you a fairly reproducible coding workflow.
+
+---
+
 class: inverse, center, middle
 
 # Reproducible referencing
@@ -798,44 +808,101 @@ I strongly against editing these yourself - they're best as machine-readable dat
 
 # Challenge
 
----
+.pull-left[
 
-XXXXXXXXXX DRAGONS XXXXXXXXXXXXX
+1. Find a paper from a journal
 
-# How to cite 
+1. Add it to Zotero with the browser plug-in
 
----
+1. Cite the new paper in your RMarkdown document
 
-# Aside: Press Releases really suck
+1. Knit the .Rmd file together and see the new item in your references
 
-Earlier I linked to a [Harvard Press Release about prediction markets for replicability](https://www.seas.harvard.edu/news/2015/11/markets-science).
+]
 
-It's a perfect example of why University press releases often suck.
+.pull-right[
 
-- The article does not give the title of the paper
+&gt; You might want to look at the last few slides of [Week 2's lecture slides](https://eng7218.netlify.app/lecture-slides/week-02_slides_reproducibility.html) which contain at least 40 references.
 
-- The article does not give the link to the paper
-
-
+]
 
 ---
 
-# Aside: Difficulty citing white papers
+# Zotero and MS Word
 
-The Turing Report by \noopsortborzyskowskivon
-Borzyskowski, et al. [1] I mentioned earlier is a great example of adding a non-traditional publication to Zotero.
+Good news! Zotero should automatically install a add-in for citing your collection within MS Word.
 
-1. Use "Report" as type
+.pull-left[
+1. Open MS Word and look for a Zotero tab. If it's **not** there continue with these instructions.
 
-1. Manually add names
+1. Open Zotero preferences and go to `Cite &gt; Word Processors`
 
-1. Infer the date of the report from the URL `turing.ac.uk/.../2021-06/...pdf`
+1. Click "Re-install Microsoft Word Add-in
 
-1. Add "Accessed field"
+1. Restart Zotero and MS Word
+]
 
-1. Add URL
+.pull-right[
+There are [really good instructions on how to use this add-in](https://www.zotero.org/support/word_processor_plugin_usage) on the Zotero website.
+]
 
-1. Add Institute
+---
+
+# Adding things that aren't papers to Zotero
+
+It's really easy to use Zotero with papers that have DOI.
+
+But if you want to cite a website or white paper you might want to add this manually to your collection.
+
+- Ensure that all items have a date. 
+
+  - Often webpages/reports don't have dates, but check the URL just in case `turing.ac.uk/.../2021-06/...pdf`
+  
+  - If no date is available go for the current year
+  
+- If no authors are listed then use the name of the website or institution
+
+- Add an "accessed date"
+
+---
+
+# Shared Zotero collection
+
+I've created a shared Zotero collection for this semester - https://www.zotero.org/groups/4758381/eng7218-shared-2022/library.
+
+Let's discuss how we might use this collection as a class.
+
+---
+
+# What reproducibility skills have we learned?
+
+- You need an ORCID! Get one and use it everywhere.
+
+- Use Figshare to reserve DOI for research outputs before you start
+
+  - It'll make it easier to write your research up!
+  
+- Use Figshare to store your talks, posters and anything else you want to make available for the future
+
+- Use GitHub for version controlling your code
+
+  - Keep sensitive data off GitHub with the .gitignore file
+
+- Connect your Figshare and GitHub repos to make your code citable and avaialble for the future
+
+- Use Zotero for storing and managing all your references
+
+- Use the Better BibTeX add-in to keep your `.bib` file up to date in an RStudio project.
+
+---
+
+# Advanced topics (for the end)
+
+To completely ensure the reproducibility of R code projects you would need to ensure that future users have access to the **exact** same packages as you used.
+
+The best solution for this is to use the `{renv}` package.
+
+I've personally avoided it for projects recently because I haven't worked on code that I need others to replicate into the future. If you're writing research software then please do consider using it. There's [good documentation](https://rstudio.github.io/renv/articles/renv.html) for it.
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
