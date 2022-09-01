@@ -28,6 +28,11 @@
 	color: #36506A
 	}
 
+.footnote{
+  font-size: 60%;
+  width: 100%;
+}
+
 /* Below is pretty much the CSS from the {coursedown} package
 
 /* Let's load some fonts */
@@ -72,8 +77,6 @@ color: #3B7A57;
 .grViz {
   margin-left:auto; margin-right:auto; display:block;
 }
-
-.footnote{font-size: 50%;}
 
 .caption {
   text-align: center;

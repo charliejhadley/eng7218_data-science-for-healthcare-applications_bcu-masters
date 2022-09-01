@@ -86,6 +86,10 @@ class: inverse, center, middle
 
 - A collection of packages for all stages of the data science workflow.
 
+&lt;center&gt;
+&lt;img src='images/r4ds_data-science-workflow.png'/&gt;
+&lt;/center&gt;
+
 ]
 
 --
@@ -96,18 +100,361 @@ class: inverse, center, middle
 
 Some people&lt;sup&gt;1&lt;/sup&gt; would describe the tidyverse as being an alternative to using base R.
 
-It's not. The tidyverse is useful approach to working with data that has a large ecosystem of tools. We'll use it to move quickly.
+It's not. 
+
+The tidyverse is a useful approach to working with data that has a large ecosystem of tools. We'll use it to move quickly.
+
+&gt; After we've been using the tidyverse for a while I'll come back to this subject and provide further context.
 ]
+
+
+
+
+.footnote[
+[1] [Matloff [1]](https://github.com/matloff/TidyverseSkeptic)
+]
+
+---
+
+background-color: #def3f7
+
+# 📝 Task: Create a week-3 project
+&lt;p style='color:purple;margin-top:10px'&gt;SLIDE 1 OF 1&lt;/p&gt;
+
+1. Create a new RStudio project called something like `week-3`.
+
+---
+
+# Installing and working with the tidyverse
+
+To install the tidyverse collection of packages you need to run this code in the console.
+
+
+```r
+install.packages("tidyverse")
+```
+
+The tidyverse packages are split into two groups:
+
+.pull-left[
+
+- Core tidyverse packages which are loaded with this code
+
+
+```r
+library(tidyverse)
+```
+
+]
+
+.pull-right[
+
+- "Specialised" packages that need to be explicitly loaded, like `{readxl}` for importing data from Excel files.
+
+
+```r
+library(tidyverse)
+library(readxl)
+```
+
+
+]
+
+---
+
+# Updating the tidyverse
+
+In terms of real-world usage, keeping the tidyverse up to date is identical to keeping any R package up to date.
+
+Thee
+
+- When installing a *new* package the console might prompt you to update to new versions of packages
 
 &lt;center&gt;
-&lt;img src='images/r4ds_data-science-workflow.png'/&gt;
-&lt;/center&gt;
+&lt;img src='images/week-3/pkg-install-needs-updates.jpg' width='600px'/&gt;
+&lt;center&gt;
 
-.small[
-.foonote[
-[1] Matloff [1]
+---
+
+# Updating the tidyverse
+
+In terms of real-world usage, keeping the tidyverse up to date is identical to keeping any R package up to date.
+
+There are 3 different ways you might discover you should update a package.
+
+- When installing a *new* package the console might prompt you to update to new versions of packages.
+
+- When installing a *new* package the install fails due to an old package.
+
+- You hear about an exciting new update to a package.
+
+&lt;hr&gt;
+
+There is a `tidyverse::tidyverse_update()` function but in practice I think it's very rarely used.
+
+---
+
+class: highlight-last-item
+
+# Datasets we'll be using today
+
+We're going to be using at least 3 different datasets today:
+
+- The Global Burden of Disease study from Global Health Data Exchange [2].
+
+The Global Burden of Disease study is an extremely useful and rich dataset for understanding global (and comparative) health challenges.
+
+There's an [excellent interactive tool for downloading data from the survey](https://vizhub.healthdata.org/gbd-results/) - but you do need to register for a free account to use it.
+
+---
+
+class: highlight-last-item
+
+We're going to be using at least 3 different datasets today:
+
+- The Global Burden of Disease study from the Global Health Data Exchange [2].
+
+- The `msleep` dataset from within the `{ggplot2}` package
+
+.pull-left[
+
+
+Lots (and lots) of R packages have datasets built into them, usually to demonstrate how to use functions inside the package.
+
+The `msleep` dataset has data about mammalian sleep cycles from Savage, et al. [3]
+
 ]
+
+.pull-right[
+
+```r
+glimpse(msleep)
+```
+
+```
+## Rows: 83
+## Columns: 11
+## $ name         &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Greater short-tailed shrew", "Cow", "Three-toed sloth", "Northern f…
+## $ genus        &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bos", "Bradypus", "Callorhinus", "Calomys", "Canis", "Capreolus",…
+## $ vore         &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi", "carni", NA, "carni", "herbi", "herbi", "herbi", "omni", "he…
+## $ order        &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorpha", "Artiodactyla", "Pilosa", "Carnivora", "Rodentia", "Carnivo…
+## $ conservation &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", NA, "domesticated", "lc", "lc", "domesticated", "lc", "domestica…
+## $ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, 3.0, 5.3, 9.4, 10.0, 12.5, 10.3, 8.3, 9.1, 17.4, 5.3, 18.0, 3…
+## $ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6, 0.8, 0.7, 1.5, 2.2, 2.0, 1.4, 3.1, 0.5, 4.9, NA, 3.9, 0.6, 0…
+## $ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833333, NA, 0.3333333, NA, NA, 0.2166667, NA, 0.1166667, NA, NA,…
+## $ awake        &lt;dbl&gt; 11.90, 7.00, 9.60, 9.10, 20.00, 9.60, 15.30, 17.00, 13.90, 21.00, 18.70, 14.60, 14.00, 11.50, 13.70, 15.70, 14.9…
+## $ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07000, 0.09820, 0.11500, 0.00550, NA, 0.00640, 0.00100, 0.00660…
+## $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490, 0.045, 14.000, 14.800, 33.500, 0.728, 4.750, 0.420, 0.060, …
+```
+
 ]
+
+---
+
+class: highlight-last-item
+
+We're going to be using at least 3 different datasets today:
+
+- The Global Burden of Disease study from the Global Health Data Exchange [2].
+
+- The `msleep` dataset from within the `{ggplot2}` package
+
+- The `gapminder` dataset from the `{gapminder}` package
+
+.pull-left[
+
+In 2006 Hans Rosling [4] gave [an incredible TED talk where he introduced animated bubble charts](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen?language=en) as a tool to tell stories about global development.
+
+Hans Rosling also founded the Gapminder Foundation to promote sustainable global development.
+
+The `{gapminder}` package contains a subset of their data.
+]
+
+.pull-right[
+
+&lt;a href='https://r-graph-gallery.com/271-ggplot2-animated-gif-chart-with-gganimate.html'&gt;&lt;img src='images/week-3/gapminder-bubble-chart.png'/&gt;&lt;/a&gt;
+
+]
+
+---
+
+background-color: #def3f7
+
+# 📝 Task: Get the GBD dataset
+
+&lt;p style='color:purple;margin-top:10px'&gt;SLIDE 1 OF 2&lt;/p&gt;
+
+1. Add a sub-folder to your project called `data`
+
+1. Inside of the `data` folder add a script called `obtain-data.R`
+
+1. Add this code
+
+
+```r
+download.file("https://raw.githubusercontent.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/main/static/datasets/data-example_global-burden-of-disease/data-example_global-burden-of-disease.csv",
+              destfile = "data/global-burden-of-disease-data.csv")
+```
+
+5\. Run the code
+
+---
+
+background-color: #def3f7
+
+# 📝 Task: Get the GBD dataset
+
+&lt;p style='color:purple;margin-top:10px'&gt;SLIDE 2 OF 2&lt;/p&gt;
+
+1. Add a new `.Rmd` document called something like `intro-to-tidyverse.Rmd`
+
+1. Use this document to follow along with examples, make notes and run code.
+
+&gt; We're going to move between topics quite a bit today. This won't be a very neat document, and that's okay.
+
+---
+
+# Reading data into R
+
+The `{readr}` package provides excellent tools for reading *rectangular* data from *plain-text* files like `.csv` and `.tsv` files.
+
+We need to think about creating reproducible file paths. The easiest way to do so is as follows:
+
+1. Add a code chunk to your `.Rmd`
+
+1. Choose a name for the dataset you're importing, it's recommended to use `raw` or something similar to denote this is your data pre-wrangling.
+
+    
+    ```default
+    disease_burden_raw &lt;- 
+    ```
+
+---
+
+.de-emphasis[
+The `{readr}` package provides excellent tools for reading *rectangular* data from *plain-text* files like `.csv` and `.tsv` files.
+
+We need to think about creating reproducible file paths. The easiest way to do so is as follows:
+
+1\. Add a code chunk to your `.Rmd`
+
+2\. Choose a name for the dataset you're importing, it's recommended to use `raw` or something similar to denote this is your data pre-wrangling.
+
+
+```default
+disease_burden_raw &lt;- 
+```
+]
+
+3\. Call the appropriate function from `{readr}` for your data, add `""` in the 1st argument
+
+   
+   ```r
+   disease_burden_raw &lt;- read_csv("")
+   ```
+
+4\. Press `TAB` with your cursor inside the quotation marks to bring up an interactive file tree and select your file.
+
+---
+
+XXX !!!!!! DRAGONS!!!!!! XXXX
+
+# Things need to do
+
+## Data Wrangling
+
+- Read in datafiles
+
+- Understand difference between data.frame and tibble
+
+- Use count(msleep, vore)
+  
+  - Use this to introduce %&gt;% and |&gt;
+
+- Introduce filter() and select()
+
+  - Tidy select functions
+  
+- Introduce group_by()
+
+  - In msleep calculate mean sleep by vore
+  
+  - In {gapminder} calculate mean life expectancy per continent
+  
+  - In GDB calculate total injury deaths per year when selecting by "World Bank" region
+  
+    - This is quite involved! There are 3 metrics.
+  
+    - Requires str_detect() for world bank
+
+- Use tibble() and tribble() to make fake datasets
+
+  - Used to create a survey dataset for rowwise(starts_with("pain_level"), ~mean(.x)))
+    
+- Talk about mutate() usually working with columns
+
+  - across() allows us to work across multiple columns
+  
+  - rowwise() allows us to perform row-wise calculations
+    
+    (using the tribble dataset)
+  
+  
+
+## Data visualisation for understanding data
+
+- Show datasaurus and gapminder again
+
+- Make a scatter plot
+
+  - msleep dataset
+  
+  - 
+  
+- Make a bar chart
+  
+  - msleep dataset, explain we will cover FACTORS
+  
+  - geom_bar() vs geom_col()
+
+  
+## Exercises
+
+Offer 3 different c
+
+
+- Timeline chart: with GBD data
+
+  - This takes a bunch of wrangling AND data visualisation code
+  
+
+```r
+gbd_raw %&gt;% 
+  filter(str_detect(location_name, "Region"),
+         metric_name == "Percent",
+         cause_name != "All causes",
+         measure_name == "Deaths") %&gt;% 
+  arrange(year,
+          location_name) %&gt;% 
+  select(year,
+         location_name,
+         cause_name,
+         val,
+         everything()) %&gt;% 
+  ggplot() +
+  aes(x = year,
+      y = val,
+      color = cause_name) +
+  geom_line() +
+  facet_wrap(~location_name) +
+  scale_color_viridis_d(labels = function(x) str_wrap(x, width = 20)) +
+  scale_y_continuous(limits = c(0, 1),
+                     labels = scales::label_percent()) +
+  theme_bw(base_size = 14) +
+  theme(strip.text.y = element_text(angle = 0))
+```
+
+
 
 ---
 
@@ -115,8 +462,18 @@ It's not. The tidyverse is useful approach to working with data that has a large
 
 .references[
 
-[1] N. Matloff. _Teaching R in a Kinder, Gentler, More Effective Manner:_. https://github.com/matloff/TidyverseSkeptic.
-Aug. 2022.
+[1] N. Matloff. _Teaching R in a Kinder, Gentler, More Effective Manner:_.
+https://github.com/matloff/TidyverseSkeptic. Aug. 2022.
+
+[2] Global Health Data Exchange. _Global Burden of Disease Dataset Explorer_.
+https://vizhub.healthdata.org/gbd-results. 2022.
+
+[3] V. M. Savage et al. "A Quantitative, Theoretical Framework for Understanding Mammalian Sleep".
+In: _Proceedings of the National Academy of Sciences_ 104.3 (Jan. 2007), pp. 1051-1056. DOI:
+10.1073/pnas.0610080104.
+
+[4] Hans Rosling. _The Best Stats You've Ever Seen [Video]_. https://www.ted.com/talks/hans\_
+rosling\_ the\_ best\_ stats\_ you\_ ve\_ ever\_ seen?language=en. Feb. 2006.
 
 ]
 

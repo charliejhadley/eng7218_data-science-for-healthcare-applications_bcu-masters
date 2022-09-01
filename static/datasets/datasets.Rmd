@@ -64,5 +64,15 @@ finalfit::colon_s %>%
   as_tibble()
 ```
 
+# A hypothesis is a liability
+
+doi.org/10.1186/s13059-020-02133-w
+
+```{r}
+read_table(here::here("static", "datasets", "GorillaExperiment/data9b_m.txt"))
+```
+
+
+
 
 

@@ -358,6 +358,10 @@ However, we will start using data visualisations right from the beginning of the
 
 <a href='https://doi.org/10.1145/3025453.3025912' target='_blank'><img src='images/datasaurus-dozen.gif'/></a>
 
+.footnote[
+Data visualisation produced by `r citet_charlie("matejka_same_2017-1")`.
+]
+
 ---
 class: middle, inverse, center
 
