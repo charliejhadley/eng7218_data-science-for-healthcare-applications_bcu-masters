@@ -1,0 +1,37 @@
+---
+title: "Week 10 Workshop: Hypothesis Testing & Alternatives"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/workshop-styles.scss"
+    slide-number: "c/t"
+bibliography: "../bibtex-file.bib"
+csl: "../nature.csl"
+cache: true
+---
+
+## Topics for today
+
+```{r}
+library(tidyverse)
+library(gt)
+library(readxl)
+library(janitor)
+library(haven)
+```
+
+-----------
+
+XXX DRAGONS XXXX
+
+- We could use {gtsummary} for some exercises?
+
+
+-----------
+
+### References
+
+::: {#refs}
+:::
+

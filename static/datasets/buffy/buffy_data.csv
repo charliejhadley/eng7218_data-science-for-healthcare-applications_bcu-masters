@@ -1,0 +1,145 @@
+no overall,season,no in season,title,director,writer,air_date,views_mil,imdb_rating,votes,plot,runtime,deathcount,neilsen rating,vox ep rank
+1,1,1,Welcome to the Hellmouth,Charles Martin Smith,Joss Whedon,3/10/1997,4.59,8,4548,arc,44,2,3.4,111
+2,1,2,The Harvest,John T. Kretchmer,Joss Whedon,3/10/1997,4.59,7.8,3952,arc,46,8,3.4,99
+3,1,3,Witch,Stephen Cragg,Dana Reston,3/17/1997,4.63,7.7,3940,motw,46,0,3.2,77
+4,1,4,Teacher's Pet,Bruce Seth Green,David Greenwalt,3/24/1997,2.98,6.9,3800,motw,46,5,2,132
+5,1,5,Never Kill a Boy on the First Date,David Semel,Rob Des Hotel & Dean Batali,3/31/1997,4.09,7.4,3611,arc,45,7,2.8,115
+6,1,6,The Pack,Bruce Seth Green,Matt Kiene & Joe Reinkemeyer,4/7/1997,3.42,7.4,3770,motw,45,3,2.4,73
+7,1,7,Angel,Scott Brazil,David Greenwalt,4/14/1997,3.39,8.5,3918,arc,45,6,2.3,39
+8,1,8,"I, Robot... You, Jane",Stephen Posey,Ashley Gable�& Thomas A. Swyden,4/28/1997,2.47,6.7,3629,motw,45,4,2.3,142
+9,1,9,The Puppet Show,Ellen S. Pressman,Rob Des Hotel & Dean Batali,5/5/1997,2.56,7.7,3666,motw,45,4,1.9,113
+10,1,10,Nightmares,Bruce Seth Green,Joss Whedon,5/12/1997,3.47,8.2,3614,motw,45,1,2.4,112
+11,1,11,"Out of Mind, Out of Sight",Reza Badiyi,Joss Whedon,5/19/1997,3.36,7.7,3491,motw,45,0,2.4,80
+12,1,12,Prophecy Girl,Joss Whedon,Joss Whedon,6/2/1997,3.97,8.8,3882,arc,46,11,2.8,37
+13,2,1,When She Was Bad,Joss Whedon,Joss Whedon,9/15/1997,4.37,8.1,3550,arc,46,6,3.1,89
+14,2,2,Some Assembly Required,Bruce Seth Green,Ty King,9/22/1997,4.42,7,3315,motw,45,2,3.2,118
+15,2,3,School Hard,John T. Kretchmer,Joss Whedon ,9/29/1997,4.86,8.8,3754,arc,45,9,3.4,40
+16,2,4,Inca Mummy Girl,Ellen S. Pressman,Matt Kiene & Joe Reinkemeyer,10/6/1997,4.7,7.2,3360,motw,45,4,3.2,140
+17,2,5,Reptile Boy,David Greenwalt,David Greenwalt,10/13/1997,4.77,7.1,3304,motw,44,4,3.5,135
+18,2,6,Halloween,Bruce Seth Green,Carl Ellsworth,10/27/1997,5.88,8.9,4050,motw,45,2,3.7,46
+19,2,7,Lie to Me,Joss Whedon,Joss Whedon,11/3/1997,4.98,8.3,3461,arc,45,5,3.4,28
+20,2,8,The Dark Age,Bruce Seth Green,Dean Batali & Rob Des Hotel,11/10/1997,5.59,7.8,3197,arc,45,4,3.7,81
+21,2,9,What's My Line (Part 1),David Solomon,Howard Gordon�&�Marti Noxon,11/17/1997,5.04,8.2,3286,arc,45,3,3.5,55
+22,2,10,What's My Line (Part 2),David Semel,Marti Noxon,11/24/1997,5.41,8.5,3338,arc,45,4,3.9,54
+23,2,11,Ted,Bruce Seth Green,David Greenwalt & Joss Whedon,12/8/1997,6.09,7.6,3385,motw,45,4,3.9,72
+24,2,12,Bad Eggs,David Greenwalt,Marti Noxon,1/12/1998,6.48,6.6,3262,motw,45,7,4.1,136
+25,2,13,Surprise,Michael Lange,Marti Noxon,1/19/1998,7.59,8.6,3516,arc,45,4,4.4,16
+26,2,14,Innocence,Joss Whedon,Joss Whedon,1/20/1998,7.94,9.2,4003,arc,45,4,5.2,6
+27,2,15,Phases,Bruce Seth Green,Rob Des Hotel & Dean Batali,1/27/1998,7.31,8.1,3181,motw,45,1,na,87
+28,2,16,"Bewitched, Bothered and Bewildered",James A. Contner,Marti Noxon,2/10/1998,6.77,8.8,3840,motw,45,2,na,68
+29,2,17,Passion,Michael Gershman,Ty King,2/24/1998,6.14,9.4,4335,arc,45,4,na,12
+30,2,18,Killed by Death,Deran Sarafian,Rob Des Hotel & Dean Batali,3/3/1998,6.08,7.5,3224,motw,44,3,na,134
+31,2,19,I Only Have Eyes for You,"James Whitmore, Jr.",Marti Noxon,4/28/1998,5.06,8.4,3623,motw,45,3,na,45
+32,2,20,Go Fish,David Semel,David Fury�& Elin Hampton,5/5/1998,5.13,6.7,3260,motw,43,2,na,139
+33,2,21,Becoming (Part 1),Joss Whedon,Joss Whedon,5/12/1998,5.3,9.1,3801,arc,45,11,3.8,14
+34,2,22,Becoming (Part 2),Joss Whedon,Joss Whedon,5/19/1998,6.37,9.5,4554,arc,45,4,4.2,4
+35,3,1,Anne,Joss Whedon,Joss Whedon,9/29/1998,7.06,7.9,3492,motw,45,6,na,56
+36,3,2,Dead Man's Party,"James Whitmore, Jr.",Marti Noxon,10/6/1998,6.2,7.5,3136,motw,45,7,4.3,47
+37,3,3,"Faith, Hope & Trick",James A. Contner,David Greenwalt,10/13/1998,5.46,8.2,3300,arc,45,9,na,50
+38,3,4,Beauty and the Beasts,"James Whitmore, Jr.",Marti Noxon,10/20/1998,6.2,7.6,3113,motw,45,4,na,119
+39,3,5,Homecoming,David Greenwalt,David Greenwalt,11/3/1998,6.53,8.1,3084,arc,45,4,na,43
+40,3,6,Band Candy,Michael Lange,Jane Espenson,11/10/1998,6.35,8.7,3601,motw,45,6,na,21
+41,3,7,Revelations,James A. Contner,Douglas Petrie,11/17/1998,6.46,8.2,3147,arc,45,4,na,75
+42,3,8,Lovers Walk,David Semel,Dan Vebber,11/24/1998,6,8.8,3830,arc,45,5,na,24
+43,3,9,The Wish,David Greenwalt,Marti Noxon,12/8/1998,6.32,9.2,4097,motw,45,15,na,10
+44,3,10,Amends,Joss Whedon,Joss Whedon,12/15/1998,6.85,8.4,3375,arc,46,2,na,100
+45,3,11,Gingerbread,"James Whitmore, Jr.",Thania St. John�& Jane Espenson,1/12/1999,6.42,7.1,3122,motw,45,3,na,86
+46,3,12,Helpless,James A. Contner,David Fury,1/19/1999,7,8.4,3215,motw,45,4,na,71
+47,3,13,The Zeppo,"James Whitmore, Jr.",Dan Vebber,1/26/1999,5.93,8.7,3850,motw,45,10,na,34
+48,3,14,Bad Girls,Michael Lange,Douglas Petrie,2/9/1999,6.09,8.3,3202,arc,45,13,na,26
+49,3,15,Consequences,Michael Gershman,Marti Noxon,2/16/1999,5.93,8.3,3046,arc,45,3,na,27
+50,3,16,Doppelgangland,Joss Whedon,Joss Whedon,2/23/1999,6.5,9.2,4026,motw,45,6,na,13
+51,3,17,Enemies,David Grossman,Douglas Petrie,3/16/1999,5.94,8.7,3155,arc,45,1,na,44
+52,3,18,Earshot,Regis Kimble,Jane Espenson,9/21/1999,5.08,8.8,3392,motw,45,2,na,36
+53,3,19,Choices,James A. Contner,David Fury,5/4/1999,5.04,8.2,3013,arc,44,8,na,98
+54,3,20,The Prom,David Solomon,Marti Noxon,5/11/1999,5.22,8.8,3363,arc,45,6,na,22
+55,3,21,Graduation Day (Part 1),Joss Whedon,Joss Whedon,5/18/1999,5.13,9,3454,arc,45,3,na,8
+56,3,22,Graduation Day (Part 2),Joss Whedon,Joss Whedon,7/13/1999,6.53,9.2,3652,arc,45,26,na,9
+57,4,1,The Freshman,Joss Whedon,Joss Whedon,10/5/1999,6.79,7.8,3114,motw,45,4,na,95
+58,4,2,Living Conditions,David Grossman,Marti Noxon,10/12/1999,5.64,7.6,3119,motw,43,0,na,122
+59,4,3,The Harsh Light of Day,James A. Contner,Jane Espenson,10/19/1999,5.09,8,2962,arc,45,0,na,70
+60,4,4,"Fear, Itself",Tucker Gates,David Fury,10/26/1999,5.98,8.5,3270,motw,43,2,na,23
+61,4,5,Beer Bad,David Solomon,Tracey Forbes,11/2/1999,5.11,6.1,3421,motw,44,3,na,144
+62,4,6,Wild at Heart,David Grossman,Marti Noxon,11/9/1999,6.51,8,2997,motw,44,2,na,114
+63,4,7,The Initiative,James A. Contner,Douglas Petrie,11/16/1999,5.65,8,2519,arc,45,1,na,116
+64,4,8,Pangs,Michael Lange,Jane Espenson,11/23/1999,5.9,8.1,3112,motw,45,6,na,67
+65,4,9,Something Blue,Nick Marck,Tracey Forbes,11/30/1999,5.42,9,2606,motw,45,2,na,19
+66,4,10,Hush,Joss Whedon,Joss Whedon,12/14/1999,5.97,9.7,7185,motw,45,6,na,3
+67,4,11,Doomed,James A. Contner,Marti Noxon & David Fury & Jane Espenson,1/18/2000,5.35,7.7,2867,arc,45,4,na,102
+68,4,12,A New Man,Michael Gershman,Jane Espenson,1/25/2000,6.02,8.3,2976,motw,45,0,na,66
+69,4,13,The I in Team,James A. Contner,David Fury,2/8/2000,4.83,7.3,2629,arc,45,4,na,129
+70,4,14,Goodbye Iowa,David Solomon,Marti Noxon,2/15/2000,4.85,6.9,2703,arc,44,3,na,128
+71,4,15,This Year's Girl,Michael Gershman,Douglas Petrie,2/22/2000,5.75,8.5,3071,arc,44,4,na,38
+72,4,16,Who Are You,Joss Whedon,Joss Whedon,2/29/2000,4.9,9,3330,arc,45,5,na,18
+73,4,17,Superstar,David Grossman,Jane Espenson,4/4/2000,4.11,7,3259,motw,45,9,na,30
+74,4,18,Where the Wild Things Are,David Solomon,Tracey Forbes,4/25/2000,3.85,6.6,3123,motw,45,2,na,143
+75,4,19,New Moon Rising,James A. Contner,Marti Noxon,5/2/2000,4.02,8.3,2882,arc,45,1,na,49
+76,4,20,The Yoko Factor,David Grossman,Douglas Petrie,5/9/2000,4.55,8.1,2844,arc,45,1,na,96
+77,4,21,Primeval,James A. Contner,David Fury,5/16/2000,4.85,8.4,2917,arc,44,13,na,52
+78,4,22,Restless,Joss Whedon,Joss Whedon,5/23/2000,4.5,8.8,4054,arc,45,0,na,7
+79,5,1,Buffy vs. Dracula,David Solomon,Marti Noxon,9/26/2000,5.83,7.7,3020,motw,44,4,na,74
+80,5,2,Real Me,David Grossman,David Fury,10/3/2000,6.17,7.3,2492,arc,44,5,na,101
+81,5,3,The Replacement,James A. Contner,Jane Espenson,10/10/2000,5.34,8.1,2743,motw,45,1,na,41
+82,5,4,Out of My Mind,David Grossman,Rebecca Rand Kirshner,10/17/2000,5.1,7.6,2543,motw,45,4,na,108
+83,5,5,No Place Like Home,David Solomon,Douglas Petrie,10/24/2000,6.41,8.1,2469,arc,45,4,na,83
+84,5,6,Family,Joss Whedon,Joss Whedon,11/7/2000,6.19,8,2672,arc,45,3,na,79
+85,5,7,Fool for Love,Nick Marck,Douglas Petrie,11/14/2000,5.66,9.1,3483,arc,45,5,na,20
+86,5,8,Shadow,Dan Attias,David Fury,11/21/2000,4.83,7.3,2321,arc,44,2,na,93
+87,5,9,Listening to Fear,David Solomon,Rebecca Rand Kirshner,11/28/2000,5.48,6.9,2405,motw,44,9,na,109
+88,5,10,Into the Woods,Marti Noxon,Marti Noxon,12/19/2000,4.85,7.3,2555,arc,45,7,na,133
+89,5,11,Triangle,Christopher Hibler,Jane Espenson,1/9/2001,4.85,7.6,2529,motw,45,1,na,92
+90,5,12,Checkpoint,Nick Marck,Douglas Petrie & Jane Espenson,1/23/2001,5.01,8.4,2617,arc,45,1,na,42
+91,5,13,Blood Ties,Michael Gershman,Steven S. DeKnight,2/6/2001,4.89,8.3,2553,arc,46,8,na,51
+92,5,14,Crush,Dan Attias,David Fury,2/13/2001,4.9,8.6,2717,arc,45,8,na,48
+93,5,15,I Was Made to Love You,James A. Contner,Jane Espenson,2/20/2001,5.11,7.3,2487,motw,44,2,na,33
+94,5,16,The Body,Joss Whedon,Joss Whedon,2/27/2001,5.97,9.7,6394,arc,45,1,na,2
+95,5,17,Forever,Marti Noxon,Marti Noxon,4/17/2001,4.29,8.2,2686,arc,45,2,na,29
+96,5,18,Intervention,Michael Gershman,Jane Espenson,4/24/2001,4.73,8.7,2717,arc,45,4,na,31
+97,5,19,Tough Love,David Grossman,Rebecca Rand Kirshner,5/1/2001,4.59,8,2380,arc,45,0,na,85
+98,5,20,Spiral,James A. Contner,Steven S. DeKnight,5/8/2001,5.11,8.1,2438,arc,45,12,na,63
+99,5,21,The Weight of the World,David Solomon,Douglas Petrie,5/15/2001,4.76,7.9,2366,arc,45,0,na,58
+100,5,22,The Gift,Joss Whedon,Joss Whedon,5/22/2001,5.22,9.5,4391,arc,45,7,na,5
+101,6,1,Bargaining (Part 1),David Grossman,Marti Noxon,10/2/2001,7.65,8.1,2568,arc,44,4,na,57
+102,6,2,Bargaining (Part 2),David Grossman,David Fury,10/2/2001,7.65,8.2,2457,arc,44,7,na,59
+103,6,3,After Life,David Solomon,Jane Espenson,10/9/2001,5.58,7.8,2215,arc,44,1,na,32
+104,6,4,Flooded,Douglas Petrie,Jane Espenson & Douglas Petrie,10/16/2001,6.03,7.2,2116,motw,44,1,na,105
+105,6,5,Life Serial,Nick Marck,David Fury & Jane Espenson,10/23/2001,5.68,7.8,2255,motw,44,3,na,84
+106,6,6,All the Way,David Solomon,Steven S. DeKnight,10/30/2001,5.23,7.1,2218,motw,44,10,na,131
+107,6,7,"Once More, with Feeling",Joss Whedon,Joss Whedon,11/6/2001,5.44,9.7,9675,motw,51,5,na,1
+108,6,8,Tabula Rasa,David Grossman,Rebecca Rand Kirshner,11/13/2001,5.4,9.2,3554,arc,44,6,na,11
+109,6,9,Smashed,Turi Meyer,Drew Z. Greenberg,11/20/2001,5,7.9,2446,arc,44,0,na,124
+110,6,10,Wrecked,David Solomon,Marti Noxon,11/27/2001,5.57,7.6,2308,arc,44,1,na,127
+111,6,11,Gone,David Fury,David Fury,1/8/2002,5.16,7.7,2183,motw,44,0,na,137
+112,6,12,Doublemeat Palace,Nick Marck,Jane Espenson,1/29/2002,5.57,6.6,2432,motw,44,3,na,141
+113,6,13,Dead Things,James A. Contner,Steven S. DeKnight,2/5/2002,5.21,7.4,2176,arc,44,4,na,60
+114,6,14,Older and Far Away,Michael Gershman,Drew Z. Greenberg,2/12/2002,5.01,7.5,2124,motw,44,1,na,120
+115,6,15,As You Were,Douglas Petrie,Douglas Petrie,2/26/2002,4.7,6.6,2331,motw,44,4,na,117
+116,6,16,Hell's Bells,David Solomon,Rebecca Rand Kirshner,3/5/2002,5.61,7.7,2417,motw,44,1,na,106
+117,6,17,Normal Again,Rick Rosenthal,Diego Gutierrez,3/12/2002,5.01,8.3,2944,motw,44,1,na,94
+118,6,18,Entropy,James A. Contner,Drew Z. Greenberg,4/30/2002,4.53,7.8,2135,arc,44,2,na,104
+119,6,19,Seeing Red,Michael Gershman,Steven S. DeKnight,5/7/2002,4.06,8.4,2640,arc,44,4,na,82
+120,6,20,Villains,David Solomon,Marti Noxon,5/14/2002,4.96,8.7,2681,arc,43,2,na,88
+121,6,21,Two to Go,Bill L. Norton,Douglas Petrie,5/21/2002,5.31,8.6,2540,arc,44,1,na,103
+122,6,22,Grave,James A. Contner,David Fury,5/21/2002,5.31,8.8,2912,arc,44,10,na,53
+123,7,1,Lessons,David Solomon,Joss Whedon,9/24/2002,4.99,7.6,2197,motw,42,5,na,97
+124,7,2,Beneath You,Nick Marck,Douglas Petrie,10/1/2002,4.97,7.8,2302,motw,43,2,na,69
+125,7,3,"Same Time, Same Place",James A. Contner,Jane Espenson,10/8/2002,4.9,7.9,2161,motw,43,2,na,64
+126,7,4,Help,Rick Rosenthal,Rebecca Rand Kirshner,10/15/2002,5.04,7.7,2181,motw,43,3,na,90
+127,7,5,Selfless,David Solomon,Drew Goddard,10/22/2002,5.02,8.7,2730,motw,43,10,na,25
+128,7,6,Him,Michael Gershman,Drew Z. Greenberg,11/5/2002,4.65,7.1,2410,motw,43,1,na,107
+129,7,7,Conversations with Dead People,Nick Marck,Jane Espenson & Drew Goddard,11/12/2002,4.83,8.9,3157,arc,43,3,na,15
+130,7,8,Sleeper,Alan J. Levi,David Fury�& Jane Espenson,11/19/2002,5.03,7.7,2091,arc,43,6,na,125
+131,7,9,Never Leave Me,David Solomon,Drew Goddard,11/26/2002,4.83,7.8,2007,arc,42,10,na,121
+132,7,10,Bring on the Night,David Grossman,Marti Noxon�& Douglas Petrie,12/17/2002,4.79,7.7,2020,arc,43,1,na,130
+133,7,11,Showtime,Michael Grossman,David Fury,1/7/2003,4.08,7.9,2136,arc,43,8,na,76
+134,7,12,Potential,James A. Contner,Rebecca Rand Kirshner,1/21/2003,3.61,7.6,2007,arc,43,5,na,65
+135,7,13,The Killer in Me,David Solomon,Drew Z. Greenberg,2/4/2003,3.5,7.2,2121,arc,43,1,na,110
+136,7,14,First Date,David Grossman,Jane Espenson,2/11/2003,4.24,7.4,2003,motw,43,7,na,123
+137,7,15,Get It Done,Douglas Petrie,Douglas Petrie,2/18/2003,3.43,7.5,1978,arc,43,2,na,126
+138,7,16,Storyteller,Marita Grabiak,Jane Espenson,2/25/2003,3.6,8.2,2486,motw,43,3,na,35
+139,7,17,Lies My Parents Told Me,David Fury,David Fury & Drew Goddard,3/25/2003,3.44,8.8,2810,arc,43,4,na,78
+140,7,18,Dirty Girls,Michael Gershman,Drew Goddard,4/15/2003,3.31,8.6,2195,arc,43,3,na,91
+141,7,19,Empty Places,James A. Contner,Drew Z. Greenberg,4/29/2003,3.6,7.6,2082,arc,43,0,na,138
+142,7,20,Touched,David Solomon,Rebecca Rand Kirshner,5/6/2003,4.02,8.5,2477,arc,43,5,na,61
+143,7,21,End of Days,Marita Grabiak,Douglas Petrie & Jane Espenson,5/13/2003,4.06,8.6,2479,arc,43,7,na,62
+144,7,22,Chosen,Joss Whedon,Joss Whedon,5/20/2003,4.87,9.3,4303,arc,44,300,na,17

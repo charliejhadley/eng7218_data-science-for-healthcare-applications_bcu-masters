@@ -1,0 +1,15 @@
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+gt
+RefManageR
+readxl
+janitor
+haven
+tidytext

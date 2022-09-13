@@ -1,0 +1,2003 @@
+---
+title: "Week 5: Surveys"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/lecture-styles.scss"
+    slide-number: "c/t"
+bibliography: "../bibtex-file.bib"
+csl: "../nature.csl"
+cache: true
+echo: true
+---
+
+## Topics for today
+
+```{r}
+library(tidyverse)
+library(gt)
+library(readxl)
+library(here)
+library(janitor)
+library(haven)
+```
+
+This week we’re going to be discussing surveys and wrangling survey data in R.
+
+The goals for the lecture section of today is as follows:
+
+1. Identify what makes effective surveys
+
+1. Correctly identify if data is “long” or “wide”
+
+1. Understand how to use the {tidyr} pivot functions for moving between “wide” and “long” data
+
+1. Understand how to use the tidyverse for common data wrangling tasks when working with survey data
+
+We’ll likely continue some of the lecture material into the workshop.
+
+-----------
+
+## Surveys are an indispensible part of healthcare
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+There are lots of absolute quantitative measures in healthcare [datascience]
+
+- Patient wait times
+
+- Morbidity
+
+- Biological samples
+
+- Physiological health measurements
+
+- Device-based measurements
+
+- Anthropometric measurements
+
+- Sensory measurements
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%" .fragment}
+
+But these measures on **there own** are often meaningless…
+
+- … for understanding patient experiences
+
+- … for tracking patient outcomes
+
+- … for medical trials
+
+- … for designing medical devices
+
+We need to understand these measures in context of the patient/device/intervention.
+
+:::
+
+::::
+
+-----------
+
+## Surveys are an indispensible part of healthcare
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+Surveys might be the sole measurement we take in a study.
+
+NHS patient experience surveys
+
+“The importance of urban natural areas and urban ecosystem services during the COVID-19 pandemic”[@grima_importance_2020].
+
+How successful do medical technology companies rate their devices[@eatock_exploratory_2009]?
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src='images/week-05/screenshot_sucess-bar-chart.jpg'/>
+
+Source: Eatock, et al.[@@eatock_exploratory_2009]
+
+:::
+
+::::
+
+-----------
+
+## Surveys are an indispensible part of healthcare
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+Surveys might be the sole measurement we take in a study.
+
+NHS patient experience surveys
+
+“The importance of urban natural areas and urban ecosystem services during the COVID-19 pandemic”[@grima_importance_2020].
+
+How successful do medical technology companies rate their devices[@eatock_exploratory_2009]?
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+Surveys might instead provide additional context for other measurements that we take.
+
+- Diet studies might take biological samples but require food surveys
+
+- Mental health studies might track physiological measurements as well as psychological surveys
+
+:::
+
+::::
+
+-----------
+
+## Designing effective surveys is hard
+
+We don’t have enough time to go deep into how to design an effective survey - that’s probably an entire undergraduate course in its own right.
+
+<br>
+
+> So why are we looking at surveys?
+
+-----------
+
+## Designing effective surveys is hard
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+There are some specific topics in designing surveys I want to cover.
+
+<br>
+
+These “tips” are geared towards designing surveys where you can easily analyse the data after running the survey.
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+**However**. These tips do not ensure an effective survey.
+
+In an effective survey:
+
+- There is an overall goal for the survey.
+
+- Each question is asking what you think it’s asking.
+
+- Questions are unbiased and are not leading.
+
+<br>
+
+The best way to test the effectiveness of your survey is pretesting[@presser_methods_2004]
+
+:::
+
+::::
+
+
+-----------
+
+## Designing effective surveys is hard
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+Getting survey data into R for analysis requires many different data wrangling tasks/skills.
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+The `tidyverse` gets its name from the concept of “tidy data” defined by Hadley Wickham[@wickham_tidy_2014] back in 2014.
+
+:::
+
+::::
+
+<hr>
+
+We will use survey data as an introduction to this concept and will cover 4 types of wrangling:
+
+- Pivoting data between wide and long formats
+
+- Joining datasets [in the same way that SQL databases are joined]
+
+- Wrangling survey questions with multiple choices
+
+- Wrangling survey questions that capture multiple pieces of information
+
+-----------
+
+## Quantitative vs Qualitative measurements? {background-color="#23241F" .center .center-x}
+
+-----------
+
+## "Closed question" vs "Open question"? {background-color="#23241F" .center .center-x}
+
+Which is which?
+
+-----------
+
+## Surveys can capture all sorts of data
+
+:::: {.columns}
+
+::: {.column width="48%" .incremental}
+
+Quantitative measurements can be collected with closed-ended questions.
+
+- Do you own a fitness tracking device
+
+  - Yes / No
+
+- How often do you wear your tracking device
+
+  - Every day / Some days / A few days / Rarely
+
+- Since owning a tracking device do you feel like you know more about your activity?
+
+  - Strong agree / Agree / Neither agree nor disagree / Disagree / Strong disagree
+  
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%" .fragment}
+
+Qualitative measurements are collected using open-ended questions - or free-text fields.
+
+> If you were to recommend device X what would you tell someone?
+
+:::
+
+::::
+
+-----------
+
+# Surveys can capture all sorts of data
+
+Ideally we would always use closed-form questions to capture quantitative information. But unfortunately this isn’t always the case. Take this question from the 2019 British Election Survey[@fieldhouse_british_2019]:
+
+**Question text:** “Where do you get most of your information about politics or current affairs from?”
+
+**Question input type:** free-form text
+
+**Example responses:**
+
+- “Media- cross referencing and watching parliamentary debates”
+
+- “News, internet and conversation”
+
+- “t v . papers. radio.”
+
+- “news channels on tv”
+
+- “Television news, online, family, news on the radio.”
+
+- “Television news, newspapers.”
+
+-----------
+
+## What do you think about this question?
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+<img src='images/week-05/nhs-england_bitesize-questionnaire_whats-wrong-with-this.jpg'/>
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+
+This is a question from the NHS England’s bite-size guide to writing effective questionnaires[@nhs_england_writing_2018].
+
+:::
+
+::::
+
+-----------
+
+## Survey Mode {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Methods of survey data collection (I)
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+There are lots of different methods/modes for survey data collection:
+
+- Online (open/close)
+
+- Telephone
+
+- Mail
+
+- Face-to-face
+
+- Paper (observed)
+
+- Mixed-mode
+
+  - Same survey different modes
+
+  - Multi-phase survey with different modes
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+
+There is considerable evidence for mode of data collection affecting survey results[@gallup_why_2018]:
+
+Respondents answer questions differently by mode[@sanchez_tome_impact_2018]
+
+Respondent demographics vary by mode and survey topic
+
+> Inaccurate state-level polls forn the 2016 US elections are considered to have been strongly biased by an over-representation of college graduates[@aapor_evaluation_2016].
+
+:::
+
+::::
+
+-----------
+
+## Survey Size {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Survey Size
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+Many survey tools provide interactive calculators for estimating survey population requirements - surveymonkey.com/mp/sample-size-calculator.
+
+- These are reasonable targets for “survey studies” but for other studies refer to Serdar et al[@serdar_sample_2021].
+
+- For pre-test surveys a useful heuristic is to use sample at least 30 participants as per Perneger et al[@perneger_sample_2015]
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src='images/week-05/screenshot_survey-size.jpg'/>
+
+<img src='images/week-05/screenshot_survey-size-with-error.jpg'/>
+
+Source: Teller[@teller_sample_2014]
+
+:::
+
+::::
+
+----------
+
+## LIKERT Scales (I)
+
+In a LIKERT scale responses are given a score.
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+```{r, echo=FALSE, cache=TRUE}
+gt_likert_scale <- tribble(
+  ~response, ~response_score,
+  "Strong disagree", 1,
+  "Disagree", 2,
+  "Neutral", 3,
+  "Agree", 4,
+  "Strong agree", 5
+) %>% 
+  gt()
+gt_likert_scale
+```
+
+<br>
+
+```{r, echo=FALSE, cache=TRUE}
+gt_likert_data <- tribble(
+  ~question, ~response_score,
+  "Feel confident in {ggplot2}?", "Strong agree",
+  "Feel confident in {dplyr}?", "Neutral",
+  "Feel confident in {tidyr}?", "Disagree",
+  "Feel confident in {purrr}?", "Strong disagree"
+) %>% 
+  gt()
+gt_likert_data
+```
+
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%" .fragment}
+
+It is absolutely meaningless to take the mean of a LIKERT scale[@jamieson_likert_2004] - but people still do it.
+
+When you create your survey question you’re creating an **ordinal variable**
+
+:::
+
+::::
+
+----------
+
+## LIKERT Scales (II)
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+```{r, echo=FALSE, cache=TRUE}
+gt_likert_scale <- tribble(
+  ~response, ~response_score,
+  "Strong disagree", 1,
+  "Disagree", 2,
+  "Neutral", 3,
+  "Agree", 4,
+  "Strong agree", 5
+) %>% 
+  gt()
+gt_likert_scale
+```
+
+<br>
+
+```{r, echo=FALSE, cache=TRUE}
+gt_likert_data <- tribble(
+  ~question, ~response_score,
+  "Feel confident in {ggplot2}?", "Strong agree",
+  "Feel confident in {dplyr}?", "Neutral",
+  "Feel confident in {tidyr}?", "Disagree",
+  "Feel confident in {purrr}?", "Strong disagree"
+) %>% 
+  gt()
+gt_likert_data
+```
+
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+Our original question defines an ordinal variable - there’s an intrinsic order to the responses.
+
+```{r}
+cat("Strong disagree < Disagree ... < Strong agree")
+```
+
+When we convert the question to a LIKERT score we are then working with a **interval data**.
+
+> But is this accurate?
+>
+> Is the **distance** between “Strong disagree” and “Disagree” the same as that between “Neutral” and “Agree”?
+
+:::
+
+::::
+
+----------
+
+## LIKERT Scales (III)
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+```{r, echo=FALSE, cache=TRUE}
+gt_likert_scale <- tribble(
+  ~response, ~response_score,
+  "Strong disagree", 1,
+  "Disagree", 2,
+  "Neutral", 3,
+  "Agree", 4,
+  "Strong agree", 5
+) %>% 
+  gt()
+gt_likert_scale
+```
+
+<br>
+
+```{r, echo=FALSE, cache=TRUE}
+gt_likert_data <- tribble(
+  ~question, ~response_score,
+  "Feel confident in {ggplot2}?", "Strong agree",
+  "Feel confident in {dplyr}?", "Neutral",
+  "Feel confident in {tidyr}?", "Disagree",
+  "Feel confident in {purrr}?", "Strong disagree"
+) %>% 
+  gt()
+gt_likert_data
+```
+
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+If you want to compare answers across multiple LIKERT scales then there is some meaning to the “median” response.
+
+<br>
+
+You could perform factor analysis - which is well explained by Batterton and Hale[@batterton_likert_2017].
+
+<br>
+
+When designing your survey you could also directly ask respondents a question instead of trying to guess what “disagree” + “neutral” means.
+
+> Overall, do you feel confident with using the tidyverse?
+
+:::
+
+::::
+
+-----------
+
+## Missing data in surveys {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Missing data in surveys (I)
+
+When designing a survey we ideally want respondents to answer all questions.
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+However, research is clear[@surveymonkey_does_nodate] that drop off rate (or survey abandonment) is correlated with survey length.
+
+Although, this is strongly affected by:
+
+- survey mode
+
+- survey reward
+
+- are questions skippable?
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src='images/week-05/survey-dropoff-rate-chart.png'/>
+
+Source: SurveyMonkey[@surveymonkey_does_nodate]
+
+:::
+
+::::
+
+-----------
+
+## Missing data in surveys: MNAR
+
+There are three different kinds of missing data distribution:
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+- Missing Not at Random (MNAR)
+
+::: {.de-emphasis}
+
+- Missing at Random (MAR)
+
+- Missing Completely at Random (MCAR)
+
+:::
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+Missingness is related to what is missing.
+
+- Missingess of responses might be related to question order - respondents give up.
+
+- Missingness might be due to respondent’s feeling towards questions [eg extra-marital relations, triggering subjects]
+
+<br>
+
+Data that’s MNAR indicates a bias in your study design.
+
+However - it’s often difficult to determine if your data is indeed MNAR or not.
+
+:::
+
+::::
+
+-----------
+
+## Missing data in surveys: MAR
+
+There are three different kinds of missing data distribution:
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+::: {.de-emphasis}
+
+- Missing Not at Random (MNAR)
+
+:::
+
+- Missing at Random (MAR)
+
+::: {.de-emphasis}
+
+- Missing Completely at Random (MCAR)
+
+:::
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+Missingness is not random but can be accounted for by other variables/ We could call this “conditionally at random”.
+
+- Survey abandonment could be modelled by including information about question order.
+
+- Missingness might be due to known differences in demographics, for instance males are less likely to complete depression surveys.
+
+<br>
+
+Data that’s MAR provides us with a methodology for imputing missing values.
+
+:::
+
+::::
+
+-----------
+
+## Missing data in surveys: MCAR
+
+There are three different kinds of missing data distribution:
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+::: {.de-emphasis}
+
+- Missing Not at Random (MNAR)
+
+- Missing at Random (MAR)
+
+:::
+
+- Missing Completely at Random (MCAR)
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+Missingness is truly randomly distributed in the dataset. There are no hidden variables.
+
+In practice it is hard to verify MCAR over MNAR without specifically designing your study for randomness.
+
+- Randomly sampling a subset of questions for each partipant.
+
+Planned missingness designs[@rhemtulla_asymptotic_2016] depend on fairly advanced statistical methodologies.
+
+:::
+
+::::
+
+
+-----------
+
+## Survey tools {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Survey tools
+
+There’s a plethora of survey tools available.
+
+<br>
+
+Many of these tools provide free tiers but require subscriptions/licenses for wide scale use [and for GDPR compliance].
+
+<br>
+
+One thing that unifies all of these tools is that each one has it’s own unique data export format - irrespective of file format.
+
+> Let’s look at this first and then talk about file formats
+
+-----------
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+### Google Forms
+
+<img src='images/week-05/multichoice_question_google-form.png'/>
+
+:::
+
+::: {.column width="33%"}
+
+### Survey Monkey
+
+<img src='images/week-05/multichoice_question_survey-monkey.png'/>
+
+:::
+
+::: {.column width="33%"}
+
+### Qualtrics
+
+<img src='images/week-05/multichoice_question_qualtrics.png'/>
+
+:::
+
+::::
+
+-----------
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+### Google Forms
+
+<img src='images/week-05/multichoice_data_google-form.png'/>
+
+:::
+
+::: {.column width="33%"}
+
+### Survey Monkey
+
+<img src='images/week-05/multichoice_data_survey-monkey.png'/>
+
+:::
+
+::: {.column width="33%"}
+
+### Qualtrics
+
+<img src='images/week-05/multichoice_data_qualtrics.png'/>
+
+:::
+
+::::
+
+-----------
+
+## Survey tools/software
+
+Because there’s such a huge variety in data export format for survey data it’s important to train your general purpose data wrangling skills.
+
+<br>
+
+In the lecture we’ll look at several real-world datasets that require lots of complicated wrangling.
+
+<br>
+
+In the workshop you’ll look at simpler datasets and practice the same wrangling skills you’ll learn now.
+
+-----------
+
+## Survey file formats
+
+::: {.incremental}
+
+- Excel files: Almost all tools will provide .xlsx files. However, there’s a vast range of options in how the data is arranged - including a separate sheet for each question.
+
+  - We use the {readxl} package for reading in these files
+
+  - If data is encoded with cell colour you’ll need to use the more complex {tidyxl} package.
+
+<br>
+
+- .csv files: Most tools provide a .csv export, .csv files are an example of a “flat” or “plain text” file. They’re likely to be well formatted for reading into R.
+
+  - Flat files like .csv are read into R with the {readr} package
+
+<br>
+
+- SPSS files: SPSS is a popular tool for designing and analysing survey data, however it’s popularity is waning. These file formats contain richer information than .xslx or .csv
+
+- SAS files: SAS is in many ways similiar to SPSS.
+
+  - The {haven} package allows us to read and process both SPSS and SAS files.
+
+:::
+
+-----------
+
+## Survey datasets for today {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Survey datasets (I)
+
+We’ll be looking at 3 different datasets during this week:
+
+- Emerging Adulthood Measured at Multiple Institutions data set[@grahe_emerging_2018]
+
+  - This is the 2nd instance of a large scale survey across multiple institutions.
+
+  - Learn about the 1st instance (and how the study works) from Reifman and Grahe[@reifman_introduction_2016].
+
+  - The actual survey questionnaire is available here [osf.io/3zq5e](osf.io/3zq5e)
+
+  - The survey dataset is stored on OSF.com as a collection[@grahe_eammi2_2022]
+
+  - The actual survey data is available from [osf.io/download/c3pf6](osf.io/download/c3pf6) and can be downloaded via a URL.
+
+-----------
+
+## Survey datasets (II)
+
+We’ll be looking at 3 different datasets during this week:
+
+::: {.de-emphasis}
+
+- Emerging Adulthood Measured at Multiple Institutions data set[@grahe_emerging_2018]
+
+:::
+
+- Public Attitudes to Commercial Access to Health Data[@ipsos_mori_attitudes_2016]
+
+  - The Wellcome Trust commissioned Ipsos MORI to survey opinions on commercial access to health data
+
+  - The [study can be read here](file:///Users/charliejhadley/Github/eng7218_data-science-for-healthcare-applications_bcu-masters/static/lecture-slides/doi.org/10.6084/M9.FIGSHARE.5616448.V1)[@ipsos_mori_one-way_2017]
+
+  - The survey questions can be found at the end of the report[@ipsos_mori_one-way_2017].
+
+  - The dataset is openly available on the UK Data Service[@ipsos_mori_attitudes_2016] but requires you to have an account.
+
+-----------
+
+## Survey datasets (II)
+
+We’ll be looking at 3 different datasets during this week:
+
+::: {.de-emphasis}
+
+- Emerging Adulthood Measured at Multiple Institutions data set[@grahe_emerging_2018]
+
+- Public Attitudes to Commercial Access to Health Data[@ipsos_mori_attitudes_2016]
+
+:::
+
+- British Election Study 2019
+
+  - Since 1964 a post-election survey has been carried out to understand electoral motivations and the impact of political party campaigning.
+
+  - Data for all surveys is available from britishelectionstudy.com/data-objects/cross-sectional-data/
+
+  - The 2019 questionnaire and information on how it was rolled out is britishelectionstudy.com/data-object/2019-british-election-study-post-election-random-probability-survey/[@british_election_study_british_2019].
+
+  - The 2019 survey data is available from the UK Data Service[@fieldhouse_british_2019] but must be manually added to your UK Data Service account.
+
+-----------
+
+## Survey datasets (IV)
+
+We’ll be looking at 3 different datasets during this week:
+
+- Emerging Adulthood Measured at Multiple Institutions data set17
+
+- Public Attitudes to Commercial Access to Health Data20
+
+- British Election Study 2019
+
+-----------
+
+## `r emo::ji("memo")` Task: Setup our project {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 3</p>
+
+1. Create a new project called `eng7218-week-5_surveys`
+
+2. Add a subfolder called `data` to store the datasets.
+
+3. Create a separate `.Rmd` document for each of the studies:
+
+- `emerging-adulthood.Rmd`
+
+- `commercial-access-to-health-data.Rmd`
+
+- `british-election-study-2019.Rmd`
+
+-----------
+
+## `r emo::ji("memo")` Task: Obtain Emerging Adulthood data {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 2 OF 3</p>
+
+1\. Open the emerging-adulthood.Rmd file
+
+There are two important files from [https://osf.io/qtqpb/](https://osf.io/qtqpb/)[@grahe_eammi2_2022] that we need:
+
+  - The codebook
+
+  - The dataset
+
+2\. Add a code chunk to load the `{tidyverse}` and `{readxl}` packages.
+
+3\. Add this code chunk to your .Rmd to download these files
+
+-----------
+
+## `r emo::ji("memo")` Task: Read in Emerging Adulthood data {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 3 OF 3</p>
+
+When we read in datasets we should always assume they need cleaning, so let’s import these files with object names that indicate this.
+
+```{r}
+#| eval: false
+#| echo: true
+adulthood_raw_data <- read_excel("data/emerging-adulthood_data.xlsx")
+adulthood_raw_codebook <- read_excel("data/emerging-adulthood_codebook.xlsx")
+```
+
+```{r}
+#| eval: true
+#| echo: false
+adulthood_raw_data <- read_excel(here("static", "datasets", "emerging-adulthood", "emerging-adulthood_data.xlsx"))
+adulthood_raw_codebook <- read_excel(here("static", "datasets", "emerging-adulthood", "emerging-adulthood_codebook.xlsx"))
+```
+
+-----------
+
+## Messy column names (I)
+
+Most datafiles you’ll work with will have messy column names that are annoying to work with:
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+```{r}
+#| echo: true
+glimpse(adulthood_raw_codebook)
+```
+
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+```{r}
+#| echo: true
+adulthood_raw_codebook %>% 
+  select(`Question text`)
+```
+
+
+:::
+
+::::
+
+::: {.fragment}
+
+The easiest way to solve this is with the `clean_names()` function from the `{janitor}` package.
+
+:::
+
+-----------
+
+## Messy column names (II)
+
+But let’s understand how these two datasets relate to one another.
+
+<br>
+
+The `Variable Name` column of `adulthood_raw_codebook` contains the exact column names from `adulthood_raw_data`.
+
+<br>
+
+If we clean up the names of `adulthood_raw_data` these will no longer matchup. So in this instance let’s only clean the codebook column names:
+
+```{r}
+#| eval: false
+#| echo: true
+adulthood_raw_codebook <- read_excel("data/emerging-adulthood_codebook.xlsx") %>% 
+  clean_names()
+```
+
+```{r}
+#| eval: true
+#| echo: false
+adulthood_raw_codebook <- read_excel(here("static", "datasets", "emerging-adulthood", "emerging-adulthood_codebook.xlsx")) %>% 
+  clean_names()
+```
+
+-----------
+
+## IDEA Questions (I)
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
+Let’s take a look at the these questions from the survey. Could you suggest a way to find these questions in the codebook?
+
+:::
+
+::: {.column width="30%"}
+<img src='images/week-05/emerging-adulthood_idea-questions.png'/>
+:::
+
+::::
+
+```{r}
+#| echo: true
+adulthood_raw_codebook %>% 
+  filter(str_detect(question_text, "defining yourself"))
+```
+
+<br>
+
+```{r}
+idea_responses_raw <- adulthood_raw_data %>% 
+  select(ResponseId, starts_with("IDEA_"))
+idea_responses_raw
+```
+
+-----------
+
+## IDEA Questions (II)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Can you tell me what “4” means in this dataset?
+
+::: {.fragment}
+
+<br>
+
+The adulthood_raw_codebook tells us that “4” encodes “Strong agree”.
+
+<br>
+
+We now need a way to transform all of these columns at once - can you suggest one?
+
+<br>
+
+There are two methods I can think of:
+
+- One method we’ve already used in coding
+
+- One method we’ll be introducing today.
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+idea_responses_raw %>% 
+  head() %>% 
+  gt()
+```
+
+
+:::
+
+::::
+
+-----------
+
+## IDEA Questions (III)
+
+- Using `across()` to target multiple columns at once.
+
+```{r}
+#| eval: false
+idea_responses_raw %>% 
+  mutate(across(starts_with("IDEA_"),
+                ~case_when(.x == 1 ~ "Strong disagree",
+                           .x == 2 ~ "Disagree",
+                           .x == 3 ~ "Agree",
+                           .x == 4 ~ "Strong agree")))
+```
+
+
+- Using `pivot_longer()` to transform this from wide to long data.
+
+```{r}
+#| eval: false
+idea_responses_raw %>% 
+  pivot_longer(starts_with("IDEA_")) %>% 
+  mutate(value = case_when(value == 1 ~ "Strong disagree",
+                           value == 2 ~ "Disagree",
+                           value == 3 ~ "Agree",
+                           value == 4 ~ "Strong agree"))
+```
+
+
+> Using `pivot_longer()` has the added benefit of preparing the data for `{ggplot2}`.
+
+-----------
+
+## Wide vs long data (I)
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+In a **wide dataset** each variable is stored in a unique column.
+
+```{r}
+#| echo: false
+tibble::tribble(
+  ~Person, ~Age, ~Weight, ~Height,
+    "Bob",  32L,    168L,    180L,
+  "Alice",  24L,    150L,    175L,
+  "Steve",  64L,    144L,    165L
+  ) %>% 
+  gt()
+```
+
+<br>
+
+However, datasets might be *partially wide*. For instance, year is spread across multiple columns.
+
+```{r}
+#| echo: false
+tibble::tribble(
+  ~country,       ~"variable", ~`2000`, ~`2001`, ~`2002`,
+       "UK",   "Supermarkets",  202L,  206L,  230L,
+       "UK", "Shopping malls",   40L,   42L,   46L,
+       "US",   "Supermarkets",  305L,  360L,  380L,
+       "US", "Shopping malls",   80L,   90L,   98L
+  ) %>% 
+  gt()
+```
+
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%" .fragment}
+
+In a **long** dataset each row is a single observation.
+
+```{r}
+#| echo: false
+tibble::tribble(
+  ~Person, ~Variable, ~Value,
+    "Bob",     "Age",    32L,
+    "Bob",  "Weight",   168L,
+    "Bob",  "Height",   180L,
+  "Alice",     "Age",    24L
+) %>% 
+  gt()
+```
+
+<br>
+
+In the tidyverse **tidy data**[@wickham_tidy_2014] means long data.
+
+```{r}
+#| echo: false
+tibble::tribble(
+  ~country,       ~"variable", ~`2000`, ~`2001`, ~`2002`,
+       "UK",   "Supermarkets",  202L,  206L,  230L,
+       "UK", "Shopping malls",   40L,   42L,   46L,
+       "US",   "Supermarkets",  305L,  360L,  380L,
+       "US", "Shopping malls",   80L,   90L,   98L
+  ) %>% 
+  pivot_longer(starts_with("2"),
+               names_to = "year") %>% 
+  gt()
+```
+
+
+:::
+
+
+::::
+
+-----------
+
+## Wide vs long data (II)
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+The `{ggplot2}` package requires long data
+
+```{r}
+#| echo: false
+long_shops_data <- tibble::tribble(
+  ~country,       ~variable, ~`2000`, ~`2001`, ~`2002`,
+       "UK",   "Supermarkets",  202L,  206L,  230L,
+       "UK", "Shopping malls",   40L,   42L,   46L,
+       "US",   "Supermarkets",  305L,  360L,  380L,
+       "US", "Shopping malls",   80L,   90L,   98L
+  ) %>% 
+  pivot_longer(starts_with("2"),
+               names_to = "year")
+
+long_shops_data %>% 
+  gt()
+```
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+```{r}
+long_shops_data %>% 
+  filter(country == "UK") %>% 
+  ggplot(aes(x = year,
+             y = value,
+             group = variable,
+             color = variable)) +
+  geom_line()
+```
+
+
+:::
+
+::::
+
+-----------
+
+## pivot_wider() and pivot_longer()
+
+The `pivot_wider()` and `pivot_longer()` functions are for transforming data to long format and wide format, respectively.
+
+:::: {.columns}
+
+::: {.column width="48%"}
+```{r}
+#| eval: false
+tribble(
+  ~Person, ~Age, ~Weight, ~Height,
+    "Bob",  32L,    168L,    180L,
+  "Alice",  24L,    150L,    175L,
+  "Steve",  64L,    144L,    165L
+  ) %>% 
+  pivot_longer(cols = Age:Height) %>% 
+  gt()
+```
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+```{r}
+#| echo: false
+tribble(
+  ~Person, ~Age, ~Weight, ~Height,
+    "Bob",  32L,    168L,    180L,
+  "Alice",  24L,    150L,    175L,
+  "Steve",  64L,    144L,    165L
+  ) %>% 
+  pivot_longer(cols = Age:Height) %>% 
+  gt()
+```
+:::
+
+::::
+
+Note that we can use **any** of the [tidy selection functions](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html) to target our columns.
+
+> Pre 2020 there were `spread()` and `gather()`. These functions are still in `{tidyr}` but are considered superceded by the `pivot_*()` functions.
+
+-----------
+
+## IDEA Questions (IV)
+
+We can now transform our actual dataset into long format as follows:
+
+```{r}
+#| eval: false
+idea_responses_raw %>% 
+  pivot_longer(starts_with("IDEA_"))
+```
+
+The remaining step is to use the case_when() function [which is newly introduced here]
+
+```{r}
+idea_responses_long <- idea_responses_raw %>% 
+  pivot_longer(starts_with("IDEA_")) %>% 
+  mutate(value = case_when(value == 1 ~ "Strong disagree",
+                           value == 2 ~ "Disagree",
+                           value == 3 ~ "Agree",
+                           value == 4 ~ "Strong agree"))
+
+idea_responses_long %>% 
+  head() %>%
+  gt()
+```
+
+-----------
+
+## IDEA Questions (V)
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+We need to match up the question codes with the actual questions.
+
+<br>
+
+To achieve this we’re going to use a **mutating join**.
+
+::: {.fragment}
+
+It’s worthwhile mentioning this is a skill you would use in SQL.
+
+> If you’re comfortable doing this then you’ll be comfortable with basic SQL.
+
+:::
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src='images/week-05/left-join.gif'/>
+
+Source: https://www.garrickadenbuie.com/project/tidyexplain/
+
+:::
+
+::::
+
+-----------
+
+## IDEA Questions (VI)
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+```{r}
+idea_responses_long %>% 
+  head() %>% 
+  gt()
+```
+
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+Let’s extract the variable names and labels from the codebook.
+
+Note that the column names in these two datasets are **different**.
+
+```{r}
+idea_question_labels <- adulthood_raw_codebook %>% 
+  filter(str_detect(variable_name, "IDEA_")) %>% 
+  select(variable_name, question_text)
+
+idea_question_labels %>% 
+  gt()
+```
+
+
+:::
+
+::::
+
+-----------
+
+## IDEA Questions (VII)
+
+Because the column names are different we need to give left_join a little help:
+
+```{r}
+idea_responses_clean <- idea_responses_long %>% 
+  left_join(idea_question_labels,
+            by = c("name" = "variable_name"))
+
+idea_responses_clean %>% 
+  head() %>% 
+  gt()
+```
+
+> … so why did we do that all?! We can now use count() to tally responses per question_text and visualise the results.
+
+-----------
+
+## IDEA Questions (VIII)
+
+Finally we can visualise the responses…. right?!
+
+```{r}
+idea_responses_clean %>% 
+  count(question_text, value) %>% 
+  ggplot(aes(x = n,
+             y = question_text,
+             fill = value)) +
+  geom_col()
+```
+
+-----------
+
+## IDEA Questions (IX)
+
+We need to use fct_relevel() to set the canonical order of the factor:
+
+- Which part of the chart do we need to target to change the order of the fill colours?
+
+- Which part of the chart do we need to target to change the order of the legend?
+
+```{r}
+order_agree_responses <- c("Strong disagree", "Disagree", "Agree", "Strong agree")
+
+idea_responses_clean %>% 
+  count(question_text, value) %>% 
+  mutate(value = fct_relevel(value, order_agree_responses)) %>% 
+  ggplot(aes(x = n,
+             y = question_text,
+             fill = value)) +
+  geom_col()
+```
+
+-----------
+
+## IDEA Questions (X)
+
+```{r}
+order_agree_responses <- c("Strong disagree", "Disagree", "Agree", "Strong agree")
+
+idea_responses_clean %>% 
+  drop_na(value) %>% 
+  count(question_text, value) %>% 
+  mutate(value = fct_relevel(value, order_agree_responses)) %>% 
+  ggplot(aes(x = n,
+             y = question_text,
+             fill = value)) +
+  geom_col() +
+  scale_fill_discrete(direction = -1) +
+  guides(fill = guide_legend(reverse = TRUE))
+```
+
+-----------
+
+## `r emo::ji("book")` Exercise: Social media questions {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 1</p>
+
+Follow this same process to visualise the responses to the “Social media” questions in the same survey.
+
+> Let’s take 20mins for this
+
+Please note that I’ve not created this chart myself - I’ll run through the same process later during this week’s material.
+
+-----------
+
+## `r emo::ji("memo")` Task: Obtain Commercial Access to Health Data {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 2</p>
+
+1. Register for a FREE UK Data Service account - [beta.ukdataservice.ac.uk/myaccount/login](beta.ukdataservice.ac.uk/myaccount/login)
+
+1. Navigate to the access data page for the dataset - [beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8049](beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8049)
+
+1. Download the SPSS dataset
+
+> It’s very useful to learn how to deal with SPSS datasets now
+
+1. Unzip the dataset and add the folder to the data folder in your RStudio project
+
+-----------
+
+## `r emo::ji("memo")` Task: Obtain Commercial Access to Health Data {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 2 OF 2</p>
+
+1. Open up the `commercial-access-to-health-data.Rmd` RMarkdown document
+
+1. Load the `{haven}` and `{tidyverse}` package
+
+Read in the dataset (it has a really long file path!)
+
+```{r}
+#| eval: false
+commercial_health_data_raw <- read_spss("data/UKDA-8049-spss 2/spss/spss19/health_data_attitudes_spss_final.sav")
+```
+
+```{r}
+#| eval: true
+#| echo: false
+commercial_health_data_raw <- read_spss(here("static", "datasets", "commercial-access-to-health-data", "health_data_attitudes_spss_final.sav"))
+```
+
+-----------
+
+## Tibbles are great (I)
+
+We’ve seen before that tibbles are augmented data.frame - they can have additional attributes and print more prettily.
+
+<img src='images/week-05/screenshot_tibble-from-spss.png'/>
+
+-----------
+
+## Tibbles are great (II)
+
+
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+The {haven} package creates a special “labelled” column class which contains:
+
+- The question label
+
+- The question values
+
+- The question value labels
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+This is slightly confusing, but important:
+
+- singular “label” means the question text (or a shortened version of it).
+
+- plural “labels” means the question response label.
+
+:::
+
+::::
+
+<img src='images/week-05/screenshot_tibble-spss-label-column.png'/>
+
+-----------
+
+## Extracting the question label from {haven} output (I)
+
+We have two different ways to extract labels from {haven} output
+
+- Programming with purrr::attr_getter()
+
+```{r}
+#| eval: false
+commercial_health_data_raw %>% 
+  map_chr(attr_getter("label"))
+```
+
+- Using sjlabelled::get_label()
+
+```{r}
+#| eval: false
+sjlabelled::get_label(commercial_health_data_raw)
+```
+
+<hr>
+
+Unfortunately, the programming solution only works if all columns are labelled.
+
+<br>
+
+I’d recommend using the `{sjlabelled}` package exclusively for extracting question labels from SPSS. It does provide more tools but they’re not compatible with `{haven}` and also cause conflicts.
+
+-----------
+
+## Extracting the question label from {haven} output (II)
+
+The `sjlabelled::get_label()` function generates a named list. We can convert this into a tibble with `enframe()`
+
+```{r}
+commercial_health_data_qs_raw <- sjlabelled::get_label(commercial_health_data_raw) %>% 
+  enframe() %>% 
+  rename(question_text = value)
+commercial_health_data_qs_raw
+```
+
+> Can you help me write some code to remove the question label from the value column?
+
+-----------
+
+## Extracting the question label from {haven} output (II)
+
+This is one of many ways to tidy up this data:
+
+```{r}
+commercial_health_data_qs <- commercial_health_data_qs_raw %>% 
+  mutate(question_text = str_remove(question_text, toupper(name)),
+         question_text = str_remove(question_text, " - "),
+         question_text = str_remove(question_text, "MQ08A"))
+commercial_health_data_qs
+```
+
+-----------
+
+## Converting labelled columns to factors
+
+To convert all labelled columns to factors we can use across()
+
+```{r}
+commercial_health_data_factors <- commercial_health_data_raw %>% 
+  mutate(across(where(is.labelled), ~as_factor(.x)))
+commercial_health_data_factors
+```
+
+> Notice how we don’t have a respondent ID column?
+
+-----------
+
+## Add respondent ID
+
+The `row_number()` function gives us a neat way to add a respondent ID.
+
+However, it’s not necessarily that clever a solution in terms of anonymisation.
+
+```{r}
+commercial_health_data_clean <- commercial_health_data_factors %>% 
+  mutate(respondent_id = row_number()) %>% 
+  relocate(respondent_id)
+commercial_health_data_clean
+```
+
+-----------
+
+## Commercial Health Data Survey Q4 (I)
+
+I’d like you to extract the columns from the survey data that correspond
+
+<img src='images/week-05/screenshot_commercial-health-data-Q4.png'/>
+
+-----------
+
+## Commercial Health Data Survey Q4 (II)
+
+What do we need to do to this data so that we can tally responses and visualise it with `{ggplot2}`?
+
+```{r}
+#| echo: true
+#| eval: true
+commercial_health_data_clean %>% 
+  select(respondent_id, starts_with("mq04"))
+```
+
+-----------
+
+## Commercial Health Data Survey Q4 (III)
+
+Let’s make this chart:
+
+```{r}
+#| echo: false
+#| eval: true
+qs_value_of_data <- c("mq04_2" = "My health data currently has a value to society in that is can be used to help improve things for people other than me",
+     "mq04_1" = "My health data currently has financial value to others in that it can be used to save or make them money") %>% 
+  enframe() %>% 
+  rename(question_text = value)
+
+
+commercial_health_data_clean %>% 
+  select(respondent_id, starts_with("mq04")) %>% 
+  pivot_longer(starts_with("mq04")) %>% 
+  left_join(qs_value_of_data) %>% 
+  count(question_text, value) %>% 
+  mutate(value = fct_rev(value)) %>% 
+  ggplot(aes(x = n,
+             y = str_wrap(question_text, 20),
+             fill = value)) +
+  geom_col() +
+  guides(fill = guide_legend(reverse = TRUE))
+```
+
+-----------
+
+## How wide is too wide? {background-color="#23241F" .center .center-x}
+
+-----------
+
+```{r}
+#| eval: false
+tweetrmd::tweet_embed("https://twitter.com/charliejhadley/status/1522559488284413954?ref_src=twsrc%5Etfw")
+```
+
+-----------
+
+## Buffy ratings
+
+In what ways is this dataset wide?
+
+::: {.fragment}
+
+- Ratings are split across multiple columns
+
+- Should we include `vox ep rank` in ratings?!
+
+- In principle we could combine:
+  - votes
+  - views
+  - vox ep rank
+
+:::
+
+```{r}
+buffy_raw <- read_csv(here::here("static", "datasets", "buffy", "buffy_data.csv"))
+buffy_raw
+```
+
+-----------
+
+## Long enough for what you need
+
+Tidy data is a useful concept for wrangling, modelling and data visualisation[@wickham_tidy_2014].
+
+<br>
+
+But it’s not something to conform to religiously.
+
+<br>
+
+You might want to keep some width to your data to make it easy to quickly view.
+
+<br>
+
+Wide data might also be more appropriate if visualising your data with tables.
+
+-----------
+
+## Other forms of untidy data {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Multiple pieces of data in one cell
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+Sometimes a single column contains multiple variables.
+
+<br>
+
+This is often the case in poorly designed “where do you live?” questions:
+
+```{r}
+location_data <- tribble(
+  ~id, ~address,
+  1, "Las Vegas, USA",
+  2, "Bristol, UK",
+  3, "Kassala, Sudan"
+)
+location_data
+```
+
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%" .fragment}
+
+You might also ask respondents to “select all that apply”
+
+```{r}
+device_ownership <- tribble(
+  ~name, ~devices_owned,
+  "Charlie", "Smart TV, Cell phone",
+  "Mohammad", "Cell phone",
+  "Christina", "Smart TV, Games Console, Cell phone"
+)
+device_ownership
+```
+
+
+:::
+
+::::
+
+-----------
+
+## `r emo::ji("memo")` Task: Obtain British Election Survey Data {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 2</p>
+
+1. Register for a FREE British Election Survey Data account - [britishelectionstudy.com/wp-login.php?action=register](britishelectionstudy.com/wp-login.php?action=register)
+
+2. Navigate to the access data page for the dataset - [britishelectionstudy.com/data-object/2019-british-election-study-post-election-random-probability-survey/](britishelectionstudy.com/data-object/2019-british-election-study-post-election-random-probability-survey/)
+
+3. Download the SPSS dataset
+
+4. Unzip the dataset and add the folder to the data folder in your RStudio project
+
+-----------
+
+## `r emo::ji("memo")` Task: Obtain British Election Survey Data {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 2 OF 2</p>
+
+1. Setup the british-election-survey.Rmd for data wrangling
+
+2. Read in the SPSS file
+
+```{r}
+#| echo: false
+british_election_data_raw <- read_spss(here("static", "datasets", "british-election-study", "bes_rps_2019_1.1.1.sav"))
+british_election_data_raw
+```
+
+3. Use `{sjlabelled}` to extract the question text from the data
+
+4. Use `across()` convert labelled columns to factors.
+
+-----------
+
+## Where do people get their information from?
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+Can you extract the column(s) from the dataset corresponding to this question?
+
+> What can you tell me about this data and question?
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src='images/week-05/bes_k04.png'/>
+
+:::
+
+::::
+
+-----------
+
+## Where do people get their information from?
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+This is an open-ended question that’s going to be really messy to handle.
+
+<br>
+
+To properly analyse this we might need to use the {tidytext} package for text mining with a tidyverse approach.
+
+<br>
+
+But let’s see what we can do by pretending it’s multiple choice data and using
+
+`separate()` … ?
+
+`separate_rows()` … ?
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+```{r}
+british_election_data_raw %>% 
+  select(finalserialno, k04)
+```
+
+
+:::
+
+::::
+
+-----------
+
+### References
+
+::: {#refs}
+:::
+

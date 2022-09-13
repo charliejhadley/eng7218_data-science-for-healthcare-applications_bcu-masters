@@ -1,0 +1,14 @@
+ggplot2-slide-things	:::	as.list	c	library	set_names
+unnamed-chunk-2	%>%	~	gt	tribble
+unnamed-chunk-3	%>%	~	gt	tribble
+unnamed-chunk-4	gt_likert_scale
+unnamed-chunk-5	gt_likert_data
+unnamed-chunk-6	%>%	attitudes_access_health_data	drop_na	select	tenure
+unnamed-chunk-7	gt_likert_scale
+unnamed-chunk-8	gt_likert_data
+unnamed-chunk-9	%>%	british_election_study_spss	count	filter	k04	mutate	row_number	select	separate_rows	str_detect	str_trim
+unnamed-chunk-10	::	!=	%>%	~	across	aes	british_election_study_spss	bse_questions	contact_type	count	drop_na	everything	facet_wrap	filter	geom_col	ggplot	group_by	is.labelled	left_join	matches	mutate	n	name	perc	pivot_longer	political_party	scale_x_continuous	select	str_extract	str_remove	str_starts	str_trim	sum	ungroup	value	where
+unnamed-chunk-11	%>%	is.character	read_delim	select	where
+unnamed-chunk-12	%>%	attr_getter	enframe	get_label	library	map_chr	read_sav	View
+unnamed-chunk-13	%>%	attitudes_access_health_data	drop_na	select	tenure
+unnamed-chunk-14	%>%	attitudes_access_health_data	select	starts_with

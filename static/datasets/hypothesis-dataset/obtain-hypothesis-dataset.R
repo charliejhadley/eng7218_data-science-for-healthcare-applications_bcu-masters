@@ -13,5 +13,5 @@ data_hypothesis <- data_male %>%
   bind_rows(data_female)
 
 data_hypothesis %>%
-  write_csv(here::here("static", "datasets", "hypothesis-dataset/hypothesis-data.txt"))
+  write_csv(here::here("static", "datasets", "hypothesis-dataset/hypothesis-data.csv"))
 

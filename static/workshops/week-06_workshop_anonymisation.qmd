@@ -1,0 +1,36 @@
+---
+title: "Week 6 Workshop: Anonymisation"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/workshop-styles.scss"
+    slide-number: "c/t"
+bibliography: "../bibtex-file.bib"
+csl: "../nature.csl"
+cache: true
+---
+
+## Topics for today
+
+```{r}
+library(tidyverse)
+library(gt)
+library(readxl)
+library(janitor)
+library(haven)
+```
+
+-----------
+
+XXX DRAGONS XXXX
+
+- Will there be exercises?! I think I'll need to look up the PsyTeachR resources.
+
+-----------
+
+### References
+
+::: {#refs}
+:::
+

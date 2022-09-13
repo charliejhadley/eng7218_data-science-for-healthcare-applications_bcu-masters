@@ -1,0 +1,94 @@
+---
+title: "Week 5 Workshop: Healthcare Data - Surveys"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/workshop-styles.scss"
+    slide-number: "c/t"
+bibliography: "../bibtex-file.bib"
+csl: "../nature.csl"
+cache: true
+---
+
+## Topics for today
+
+```{r}
+library(tidyverse)
+library(gt)
+library(readxl)
+library(janitor)
+library(haven)
+```
+
+For today's workshop I'd like you to practice wrangling survey datasets.
+
+-----------
+
+You're going to work with the exact same dataset[@hadley_how_2022] collected from three different survey tools... but always the same question:
+
+<br>
+
+:::: {.columns .center}
+
+::: {.column width="33%"}
+#### Google Forms
+<img src='images/week-05/multichoice_question_google-form.png'/>
+:::
+::: {.column width="33%"}
+#### Survey Monkey
+<img src='images/week-05/multichoice_question_survey-monkey.png'/>
+
+:::
+
+::: {.column width="33%"}
+#### Qualtrics
+<img src='images/week-05/multichoice_question_qualtrics.png'/>
+:::
+
+::::
+
+-----------
+
+## Data downloads:
+
+- Google Forms .xlsx file: https://github.com/rfortherestofus/rforus_tidying-survey-data/raw/main/data/google-forms-data.xlsx
+
+- Survey Monkey .xlsx file: https://github.com/rfortherestofus/rforus_tidying-survey-data/raw/main/data/survey-monkey-data.xlsx
+
+- Qualtrics .xlsx file: https://github.com/rfortherestofus/rforus_tidying-survey-data/raw/main/data/qualtrics-data.xlsx
+
+----------
+
+## Target visualisation
+
+:::: {.columns}
+
+::: {.column width="50%" }
+
+I'd like you to create a chart like this.
+
+Note that it's the exact same chart for each dataset - so you might want to create a user-defined function for making it.
+
+:::
+
+::: {.column width="50%"}
+
+<img src='images/week-05/gg_multichoice.png'/>
+
+:::
+
+::::
+
+-----------
+
+### References
+
+::: {#refs}
+:::
+
+::: {.footnote}
+
+Please note that this blogpost includes code for solving these workshop challenges. I'd **strongly** reccommend that you don't look at the post before trying to solve the problems yourself.
+
+:::

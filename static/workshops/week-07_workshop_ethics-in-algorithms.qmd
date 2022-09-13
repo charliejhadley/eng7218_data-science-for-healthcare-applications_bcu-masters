@@ -1,0 +1,40 @@
+---
+title: "Week 7 Workshop: Anonymisation"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/workshop-styles.scss"
+    slide-number: "c/t"
+bibliography: "../bibtex-file.bib"
+csl: "../nature.csl"
+cache: true
+---
+
+## Topics for today
+
+```{r}
+library(tidyverse)
+library(gt)
+library(readxl)
+library(janitor)
+library(haven)
+```
+
+For today's workshop I'd like you to practice wrangling survey datasets.
+
+-----------
+
+XXX DRAGONS XXXX
+
+- We probably don't have good exercises for this.
+
+- We could catch up with other exercises?
+
+-----------
+
+### References
+
+::: {#refs}
+:::
+

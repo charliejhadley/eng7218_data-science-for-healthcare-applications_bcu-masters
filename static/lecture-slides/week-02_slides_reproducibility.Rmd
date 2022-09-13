@@ -623,6 +623,10 @@ Let's minimise these definitions:
 
 > Open data must be open to humans and computers.
 
+.footnote[
+Please note this definition of open data for your assessment.
+]
+
 ---
 
 # Open Data licenses

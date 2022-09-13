@@ -1,0 +1,39 @@
+---
+title: "Week 9 Workshop: Regressions and Correlations"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/workshop-styles.scss"
+    slide-number: "c/t"
+bibliography: "../bibtex-file.bib"
+csl: "../nature.csl"
+cache: true
+---
+
+## Topics for today
+
+```{r}
+library(tidyverse)
+library(gt)
+library(readxl)
+library(janitor)
+library(haven)
+```
+
+-----------
+
+XXX DRAGONS XXXX
+
+- During rstudio::conf(2022) there was a talk about tidyclust that uses the {tidymodels} framework.
+
+  - We could do an exercise on that?
+
+
+-----------
+
+### References
+
+::: {#refs}
+:::
+

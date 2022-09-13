@@ -1,5 +1,5 @@
 .remark-slide-number::before {
-  content: "Workshop 📓";
+  content: "Lecture 👩‍💻";
 }
 
 .task-slide-count {
@@ -31,6 +31,13 @@
 .footnote{
   font-size: 60%;
   width: 100%;
+}
+
+.big-note{
+  font-family: 'Open Sans', sans-serif;
+	color: #535353;
+	line-height: -10px;
+	font-size: 36px
 }
 
 /* Below is pretty much the CSS from the {coursedown} package

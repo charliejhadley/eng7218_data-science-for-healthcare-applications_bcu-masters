@@ -396,8 +396,11 @@ XXX !!!!!! DRAGONS!!!!!! XXXX
   
 ## Exercises
 
-Offer 3 different c
+Offer 3 different exercises:
 
+- "Hypothesis test dataset" https://raw.githubusercontent.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/main/static/datasets/hypothesis-dataset/hypothesis-data.txt
+
+- Tidy tuesday
 
 - Timeline chart: with GBD data
 

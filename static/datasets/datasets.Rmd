@@ -72,6 +72,108 @@ doi.org/10.1186/s13059-020-02133-w
 read_table(here::here("static", "datasets", "GorillaExperiment/data9b_m.txt"))
 ```
 
+# Survey datasets
+
+## British Election Study
+
+Found from https://twitter.com/PollsAndVotes/status/1566803528911298561?s=20&t=hL3RLFYrUfMSPr4w0kQ9sw
+
+THIS TAKES SOME EXPLAINING!
+
+I was initially linked to this page: https://www.britishelectionstudy.com/data-object/2019-british-election-study-post-election-random-probability-survey/ and I needed an account to download these files. Now. If instead we went to the UK Data Service http://doi.org/10.5255/UKDA-SN-8875-1 and click through to the UK Data Service catalogue page (https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8875) we can then register to download the dataset officially.
+
+Included in this download is a data dictionary stored in an .RTF file. Which is a mess and not nice.
+ 
+Directly from the Study website I downloaded these files:
+
+- SPSS file: .sav
+- Stata file: .dta
+- Questionnaire PDF
+- Explanatory Notes
+
+Both these files have coded column names. Each of these columns contain two pieces of information:
+
+- label which contains the question text
+- labels which contains the question response values
+
+```{r}
+library(haven)
+british_election_study_spss <- read_sav(here::here("static", "datasets", "british-election-study/bes_rps_2019_1.1.1.sav"))
+british_election_study_stata <- read_stata(here::here("static", "datasets", "british-election-study/bes_rps_2019_1.1.1.dta"))
+```
+
+Get survey questions:
+
+```{r}
+bse_questions <- british_election_study_spss %>%
+  map_chr(attr_getter("label")) %>%
+  enframe()
+```
+
+Convert labelled columns to factors:
+
+```{r}
+british_election_study_spss %>% 
+  select(1:10) %>% 
+  mutate(across(where(is.labelled), ~as_factor(.x)))
+```
+
+### Task
+
+```{r}
+qs_contact_type <- bse_questions %>% 
+  filter(str_starts(name, "k14_")) %>% 
+  mutate(political_party = str_extract(value, "by .*:"),
+         political_party = str_remove(political_party, "by "),
+         political_party = str_remove(political_party, ":")) %>% 
+  mutate(contact_type = str_remove(value, "Contacted .*:"),
+         contact_type = str_trim(contact_type)) %>% 
+  select(name, political_party, contact_type)
+
+qs_contact_type
+
+```
+
+
+```{r}
+bse_contacted_by_parties <- british_election_study_spss %>% 
+  select(matches("k14_[0-9]")) %>% 
+  mutate(across(where(is.labelled), ~as_factor(.x))) %>% 
+  pivot_longer(everything()) %>% 
+  left_join(qs_contact_type)
+
+bse_contacted_by_parties %>% 
+  count(political_party, contact_type, value) %>% 
+  drop_na(value) %>% 
+  filter(contact_type != "None") %>% 
+  group_by(political_party, contact_type) %>% 
+  mutate(perc = n / sum(n)) %>%
+  ungroup() %>% 
+  ggplot(aes(x = perc,
+             y = contact_type,
+             fill = value)) +
+  geom_col() +
+  facet_wrap(~ political_party) +
+  scale_x_continuous(labels = scales::label_percent())
+```
+
+```{r}
+british_election_study_spss %>% 
+  select(where(is.character))
+
+british_election_study_spss %>% 
+  select(k04) %>% 
+  filter(str_detect(k04, ",")) %>% 
+  mutate(respondent_id = row_number()) %>% 
+  separate_rows(k04, 
+                sep = ",") %>%
+  mutate(k04 = str_trim(k04)) %>% 
+  count(k04, sort = TRUE)
+
+
+bse_questions %>% 
+  filter(name == "k04")
+```
 
 
 
