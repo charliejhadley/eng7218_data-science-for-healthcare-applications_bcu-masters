@@ -10,6 +10,7 @@ bibliography: "../bibtex-file.bib"
 csl: "../nature.csl"
 cache: true
 echo: true
+freeze: true
 ---
 
 ## Topics for today
