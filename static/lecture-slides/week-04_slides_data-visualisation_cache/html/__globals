@@ -1,4 +1,0 @@
-unnamed-chunk-2	::	%>%	^	<	~	$	aes	bechdel	c	clean_test	coord_cartesian	coord_flip	count	date	domgross_2013	economics_long	element_blank	facet_wrap	fct_anon	fct_reorder	filter	geom_col	geom_histogram	geom_line	geom_point	geom_violin	ggplot	gss_cat	IQR	iris	labs	length	library	mag	marital	mtcars	mutate	n	nrow	Petal.Length	plot_layout	quakes	response	scale_x_continuous	scale_y_reverse	Sepal.Length	theme	theme_bw	tribble	unique	value	value01	variable	within_year_rank	year
-unnamed-chunk-3	%>%	aes	ggplot	msleep	sleep_rem	sleep_total	vore
-ggplot2-slide-things	:::	as.list	c	library	set_names
-unnamed-chunk-4	%>%	aes	geom_point	ggplot	msleep	sleep_rem	sleep_total	vore

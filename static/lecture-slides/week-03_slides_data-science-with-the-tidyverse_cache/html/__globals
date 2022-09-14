@@ -1,9 +1,0 @@
-unnamed-chunk-2	install.packages
-unnamed-chunk-3	library
-unnamed-chunk-4	library
-unnamed-chunk-5	glimpse	msleep
-unnamed-chunk-6	download.file
-unnamed-chunk-7	disease_burden_raw
-unnamed-chunk-8	read_csv
-unnamed-chunk-9	read_csv
-unnamed-chunk-10	::	!=	%>%	==	~	aes	arrange	c	cause_name	element_text	everything	facet_wrap	filter	gbd_raw	geom_line	ggplot	location_name	measure_name	metric_name	scale_color_viridis_d	scale_y_continuous	select	str_detect	str_wrap	theme	theme_bw	val	year
