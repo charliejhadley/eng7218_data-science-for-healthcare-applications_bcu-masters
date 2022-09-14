@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Week 2: Healthcare Data: Open Data &amp; Reproducibility</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Charlotte Hadley" />
+    <script src="week-02_slides_reproducibility_files/header-attrs/header-attrs.js"></script>
+    <link href="week-02_slides_reproducibility_files/remark-css/default.css" rel="stylesheet" />
+    <link href="week-02_slides_reproducibility_files/remark-css/ninjutsu.css" rel="stylesheet" />
+    <script src="week-02_slides_reproducibility_files/xaringanExtra-progressBar/progress-bar.js"></script>
+    <script src="week-02_slides_reproducibility_files/twitter-widget/widgets.js"></script>
+    <link rel="stylesheet" href="css/lecture-styles.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/ninpo.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Week 2: Healthcare Data: Open Data &amp; Reproducibility
+]
+.author[
+### <large>Charlotte Hadley</large>
+]
+
+---
+
+
+class: split-two, with-thick-border border-black
+
+
+
+<style>.xe__progress-bar__container {
+  top:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 5px;
+  background-color: #e10020;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+
+.column.bg-main1[.content[
+  .split-three[
+ .row[.content[
+ # 1. There's a reproducibility crisis
+ ]]
+  .row[.content[
+ # 2. Everything you can do to help reproducibility
+ ]]
+   .row[.content[
+ # 3. Understanding Open Access and Open Data
+ ]]
+ ]
+]]
+
+.column.bg-main1[.content.center.vmiddle[
+  # 4. Acknowledging legal and funder requirements affecting reproduciblity
+]]
+
+---
+
+class: inverse, center, middle
+
+# "There's a reproducibility crisis in academia"
+
+Have you heard this before?
+
+---
+
+# There is a reproduciblity crisis in academia
+
+Back in 2005 a ground breaking paper by John Ioannidis [1] exposed an unsettling truth
+
+&lt;center&gt;
+&lt;img src='images/ioannidis-2005_most-published-research-findings-are-false.jpg' height='500px'/&gt;
+&lt;/center&gt;
+
+---
+
+# There's still a crisis almost two decades later
+
+Despite lots being written about the crisis... it's still here. And with the rise of 
+
+&gt; *"machine learning can solve anything!"* 
+
+... the crisis is evolving and getting more complicated, as reported by Douglas Heaven [2].
+
+&lt;a href='https://www.technologyreview.com/2021/07/30/1030329/machine-learning-ai-failed-covid-hospital-diagnosis-pandemic/'&gt;&lt;img src='images/hundreds-of-covid-ai-tools.jpg' height='300px'/&gt;&lt;/a&gt;
+
+---
+
+# Reproducibility vs Replicability
+
+Quite a lot of the time you'll see these two words used interchangeably - but they have specific meanings. The American Statistical Association (ASA) provides useful advice from Broman, Çetinkaya-Rundel, Nussbaum, Paciorek, Peng, Turek, and Wickham [3].
+
+--
+
+.pull-left[
+
+&gt; Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
+]
+
+.pull-right[
+&gt; Your module assessment must be reproducible - I must be able to run the code after it's submitted. 
+]
+
+---
+
+# Reproducibility
+
+&gt; Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
+Reproducibility is something to think about from the start of a research project:
+
+- Plan to record and document all *processes* in data collection, wrangling and analysis
+
+- While performing the research keep track of all the things you do - particularly with data!
+
+- When writing up your research ensure that all necessary materials to reproduce your findings are made available.
+
+&gt; Later in this lecture and the workshop we'll look at specific advice for achieving this.
+
+---
+
+# Replicability
+
+&gt; Replicability: This is the act of repeating an entire study, **independently of the original investigator** without the use of original data (but generally using the same methods)
+
+This is a slightly harder topic to conceptualise and much of the lack of replicability comes from what we call "questionable research practices" (QRPs)
+
+&gt; ... these misbehaviours lie somewhere on a continuum between scientific fraud, bias, and simple carelessness, so their direct inclusion in the “falsification” category is debatable, although their negative impact on research can be dramatic
+&gt;
+&gt; Fanelli [4]
+
+---
+
+# Questionable Research Practices
+
+There are lots of different ways to summarise common QRPs but I quite like this table from 2012 by John, Loewenstein, and Prelec [5].
+
+<div id="txqcunmvtb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#txqcunmvtb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#txqcunmvtb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#txqcunmvtb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#txqcunmvtb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#txqcunmvtb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#txqcunmvtb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#txqcunmvtb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#txqcunmvtb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#txqcunmvtb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#txqcunmvtb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#txqcunmvtb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#txqcunmvtb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#txqcunmvtb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#txqcunmvtb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#txqcunmvtb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#txqcunmvtb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#txqcunmvtb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#txqcunmvtb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txqcunmvtb .gt_left {
+  text-align: left;
+}
+
+#txqcunmvtb .gt_center {
+  text-align: center;
+}
+
+#txqcunmvtb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#txqcunmvtb .gt_font_normal {
+  font-weight: normal;
+}
+
+#txqcunmvtb .gt_font_bold {
+  font-weight: bold;
+}
+
+#txqcunmvtb .gt_font_italic {
+  font-style: italic;
+}
+
+#txqcunmvtb .gt_super {
+  font-size: 65%;
+}
+
+#txqcunmvtb .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#txqcunmvtb .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#txqcunmvtb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#txqcunmvtb .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#txqcunmvtb .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#txqcunmvtb .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Questionable Research Practice</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Self-admission rate&lt;br&gt;(Amongst 2,000 pysychologists)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">In a paper, failing to report all of a study’s dependent measures</td>
+<td class="gt_row gt_right">63.4%</td></tr>
+    <tr><td class="gt_row gt_left">Deciding whether to collect more data after looking to see whether the results were significant</td>
+<td class="gt_row gt_right">55.9%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, selectively reporting studies that “worked”</td>
+<td class="gt_row gt_right">45.8%</td></tr>
+    <tr><td class="gt_row gt_left">Deciding whether to exclude data after looking at the impact of doing so on the results</td>
+<td class="gt_row gt_right">38.2%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, failing to report all of a study’s conditions</td>
+<td class="gt_row gt_right">27.7%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, reporting an unexpected finding as having been predicted from the start</td>
+<td class="gt_row gt_right">27.0%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, “rounding off” a p value (e.g., reporting that a p value of .054 is less than .05)</td>
+<td class="gt_row gt_right">22.0%</td></tr>
+    <tr><td class="gt_row gt_left">Stopping collecting data earlier than planned because one found the result that one had been looking for</td>
+<td class="gt_row gt_right">15.6%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, claiming that results are unaffected by demographic variables (e.g., gender) when one is actually unsure (or knows that they do)</td>
+<td class="gt_row gt_right">3.0%</td></tr>
+    <tr><td class="gt_row gt_left">Falsifying data</td>
+<td class="gt_row gt_right">0.6%</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+
+---
+
+# Questionable Research Practices and P-hacking
+
+The majority of these QRPs can be categorised as "P-hacking" or more fully, hacking the P-value.
+
+<div id="tdepqlkbmm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#tdepqlkbmm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tdepqlkbmm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tdepqlkbmm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tdepqlkbmm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tdepqlkbmm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tdepqlkbmm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tdepqlkbmm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tdepqlkbmm .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tdepqlkbmm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tdepqlkbmm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tdepqlkbmm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tdepqlkbmm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tdepqlkbmm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tdepqlkbmm .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tdepqlkbmm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tdepqlkbmm .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tdepqlkbmm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tdepqlkbmm .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdepqlkbmm .gt_left {
+  text-align: left;
+}
+
+#tdepqlkbmm .gt_center {
+  text-align: center;
+}
+
+#tdepqlkbmm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tdepqlkbmm .gt_font_normal {
+  font-weight: normal;
+}
+
+#tdepqlkbmm .gt_font_bold {
+  font-weight: bold;
+}
+
+#tdepqlkbmm .gt_font_italic {
+  font-style: italic;
+}
+
+#tdepqlkbmm .gt_super {
+  font-size: 65%;
+}
+
+#tdepqlkbmm .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#tdepqlkbmm .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#tdepqlkbmm .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tdepqlkbmm .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#tdepqlkbmm .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#tdepqlkbmm .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Questionable Research Practice</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Self-admission rate&lt;br&gt;(Amongst 2,000 pysychologists)</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">In a paper, failing to report all of a study’s dependent measures</td>
+<td class="gt_row gt_right">63.4%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">Deciding whether to collect more data after looking to see whether the results were significant</td>
+<td class="gt_row gt_right" style="color: #FF0000;">55.9%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">In a paper, selectively reporting studies that “worked”</td>
+<td class="gt_row gt_right" style="color: #FF0000;">45.8%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">Deciding whether to exclude data after looking at the impact of doing so on the results</td>
+<td class="gt_row gt_right" style="color: #FF0000;">38.2%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, failing to report all of a study’s conditions</td>
+<td class="gt_row gt_right">27.7%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">In a paper, reporting an unexpected finding as having been predicted from the start</td>
+<td class="gt_row gt_right" style="color: #FF0000;">27.0%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">In a paper, “rounding off” a p value (e.g., reporting that a p value of .054 is less than .05)</td>
+<td class="gt_row gt_right" style="color: #FF0000;">22.0%</td></tr>
+    <tr><td class="gt_row gt_left" style="color: #FF0000;">Stopping collecting data earlier than planned because one found the result that one had been looking for</td>
+<td class="gt_row gt_right" style="color: #FF0000;">15.6%</td></tr>
+    <tr><td class="gt_row gt_left">In a paper, claiming that results are unaffected by demographic variables (e.g., gender) when one is actually unsure (or knows that they do)</td>
+<td class="gt_row gt_right">3.0%</td></tr>
+    <tr><td class="gt_row gt_left">Falsifying data</td>
+<td class="gt_row gt_right">0.6%</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+
+---
+
+# What is the p-value?
+
+We're going to talk about p-values **A LOT** in week 10. For now I wanted to borrow a slide from [Lucy D'Agostino McGowan](https://orcid.org/0000-0001-7297-9359)'s talk which is [well explained in this Twitter thread](https://twitter.com/LucyStats/status/1519314859258789890?s=20&amp;t=nXMSyN2NWsEj5Ns5a4Gd2Q).
+
+&lt;center&gt;
+&lt;img src='images/p-values_lucy-mcgowan-slide.jpeg' height='500px'/&gt;
+&lt;center&gt;
+
+---
+
+# How folks treat the p-value
+
+.pull-left[
+
+In some situations "p-values" are considered infallible evidence of an effect or the conclusion of a study.
+
+There are lots of different p-value thresholds, but the most common in healthcare data science is 0.05
+
+Researchers who find their study results in values *just above* 0.05 will explore ways to get the value below 0.05
+
+&gt; That's p-value hacking.
+
+]
+
+.pull-right[
+&lt;img src='images/p-values_xkcd_p-value-scale.png' height='500px'/&gt;
+&lt;a href='https://xkcd.com/1478/'&gt;https://xkcd.com/1478/&lt;/a&gt;
+]
+
+---
+
+# P-hacking
+
+In 2019 Aschwanden [6] published an article in Wired.com titled ["We're All 'P-Hacking' Now"](https://www.wired.com/story/were-all-p-hacking-now/) which I highly recommend reading.
+
+It highlights an excellent study by Simmons, Nelson, and Simonsohn [7] that was able to use p-value hacking to make two increasingly absurd conclusions:
+
+&gt; Study 1: Listening to a children's song ("Hot Potato" by *The Wiggles*) makes people **feel** older.
+&gt;
+&gt; Study 2: Listening to a song about old age ("When I'm Sixty-Four" by *The Beatles*) makes people **actually** younger.
+
+... I really like this paper because it makes very clear recommendations to researchers and reviewers.
+
+---
+
+class: inverse, center, middle
+
+# Have you ever read an academic paper?
+
+## [doi.org/10.1177/0956797611417632](https://doi.org/10.1177/0956797611417632)
+
+---
+
+# Reading papers is a skill
+
+Always expect to read a paper **multiple** times and make notes.
+
+We can kind of neatly split papers into two different types:
+
+.pull-left[
+
+[Clinical trials like](https://doi.org/:10.1136/bmjopen-2020-044369) this one from Hu, Liu, Wu, and Fang [8] 
+
+&lt;img src='images/screenshot_medical-study.jpg'/&gt;
+
+]
+
+
+.pull-right[
+
+In some clinical trials the abstract includes **a lot of structured information** - it depends on the publisher.
+
+Some journals like BMJ Open even include study strengths and weaknesses.
+
+Read these papers in this order:
+
+- Abstract
+
+- Tables and/or figures
+
+- Conclusions
+
+- Introduction
+
+]
+
+---
+
+# Reading papers is a skill
+
+.pull-left[
+
+But **most** papers [look this one](https://doi.org/10.1177/0956797611417632) from Simmons, et al. [7] 
+
+&lt;img src='images/screenshot_non-medical-study.jpg'/&gt;
+
+]
+
+.pull-right[
+
+In fact, not all medical trials have such nice to read abstracts.
+
+But the reading order is the same:
+
+- Abstract
+
+- Tables and/or figures
+
+- Conclusions
+
+- Introduction
+
+]
+
+---
+
+class: highlight-last-item
+
+# Reading papers is a skill
+
+- On your first pass of a paper you are trying to understand if the paper is relevant and provides substantial information and/or evidence for your needs.
+
+--
+
+- Often it will take another 1 or 2 passes to understand the **results** of the paper.
+
+--
+
+- It usually takes even more effort to understand the **methods** of the paper
+
+   - Methodology information is often provided in "supplementary materials"
+   
+   - But unfortunately a good portion of the time you won't find sufficient information to fully understand the methodology because of **poor reproducibility**.
+
+--
+
+&gt; Learning about replicability and reproducibility now will help you in understanding the existing literature **and** prepare you to succeed in a research career later on.
+
+---
+
+class: highlight-last-item
+
+# Reading papers is a skill
+
+If you decide to go into a research career you'll likely be reading 10+ papers a week.
+
+I'd highly recommend investing in learning speed reading early in your career. 
+
+There's lots of [very interesting] eye tracking and neurological research into how we read and evidenced methodologies for speed reading that are nicely summarised by Clifton, Ferreira, Henderson, Inhoff, Liversedge, Reichle, and Schotter [9]
+
+&lt;hr&gt;
+
+.pull-left[
+BCU gives you free access to LinkedIn Learning.
+
+Go to [linkedin.com/learning-login/](https://www.linkedin.com/learning-login/) and login with your BCU email address.
+]
+
+.pull-right[
+&lt;img src='images/li-course_speed-reading.jpg' width='100%'/&gt;
+]
+
+---
+
+class: inverse, center, middle
+
+# ... let's get back to p-hacking
+
+---
+
+# Fighting p-hacking with pre-registration
+
+So far I've been speaking about the academic literature at large.
+
+But let's look specifically at clinical trials.
+
+&gt; All clinical trials began after July 1st 2005 are explicitly required to be **registered**&lt;sup&gt;1&lt;/sup&gt; in order to be published in [**all biomedical journals**](https://www.icmje.org/about-icmje/) overseen by the International Committee of Medical Journal Editors (ICMJE)  [10].
+&gt;
+&gt; This is independent of the country in which the trial took place. 
+
+.footnote[
+[1] Frustratingly in the clinical trials community we use the phrase "registration" but everyone else says "pre-registration".
+]
+
+---
+
+# National Institutes of Health (NIH) and registration
+
+From a cursory search for clinical trial registration information you might come to the conclusion that the advice is only appropriate for studies in the US.
+
+&gt; That is not true.
+
+In 2008 the World Medical Association [11] updated the *Declaration of Helsinki – Ethical Principles for Medical Research Involving Human Subjects* to include a paragraph about registration.
+
+&gt; 19\. Every clinical trial must be registered in a publicly accessible database before
+recruitment of the first subject.
+
+---
+
+# International advice on clinical trials
+
+The NIH provides a really useful tool for comparing the clinical research regulations from several countries:
+
+https://clinregs.niaid.nih.gov/country/united-kingdom
+
+---
+
+# UK trial registration
+
+Despite these "requirements" violations are still common as detailed in Bradley, Lloyd, and DeVito [12].
+
+However, the UK has announced new infrastructure requiring 100% clinical trial registration via a collaboration between the Human Research Authority and [the ISRCTN registry](https://www.isrctn.com/) which is detailed by Bruckner [13].
+
+---
+
+# Registration to "Reduce waste"
+
+For unexplainable reasons there is a lot written about registration of trials "reducing research waste" as it helps reduce duplication of studies.
+
+While there are elements of truth to this, the big takeaway is pre-registration helps prevent Questionable Research Practices.
+
+&gt; In fact it's the reason why GSK reached a $2.5million settlement in 2004
+
+---
+
+# GlaxoSmithKline &amp; Clinical Trial Registration
+
+GSK chose to settle a civil case instead of engaging in an expensive legal battle over "repeated and persistent fraud" concerning the use of paroxetine in treating depression in adolescents.
+
+As detailed by Dyer [14]:
+
+- Two studies showed no benefit to using paroxetine when compared with placebo.
+
+- Three studies found evidence for an increase in suicidal thoughts and behaviour.
+
+Internal company documents confirmed the suppression of these results:
+
+&gt; “it would be commercially unacceptable to include a statement that efficacy had not been demonstrated, as this would undermine the profile of paroxetine.”
+&gt;
+&gt; Spurgeon [15]
+
+---
+
+# Pre-registration for all studies
+
+There's a growing body of researchers both actually doing pre-registration and calling for it in all disciplines - particularly those that intersect with healthcare.
+
+- Simmons, et al. [7] have been running [aspredicted.org](https://aspredicted.org/) since 2015 to help authors to create pre-registration reports.
+
+- The [Centre for Open Science](https://www.cos.io) encourages pre-registration on OSF and has in the past run a [Preregistration Challenge with a monetary prize](https://osf.io/x5w7h/wiki/06%20LeaderBoard/?hsCtaTracking=2f25be73-35de-4b95-93e8-4f08acc42332%7Cf2024186-54bb-4626-baab-1785d2f9d71a).
+
+- I highly recommend reading Nosek, Ebersole, DeHaven, and Mellor [16] which gives a great overview of pre-registration and walk through multiple example of how it works in practice. 
+&gt; At the moment there's nothing binding you to pre-register non-clinical trials but this topic is simmering away in the background
+
+---
+
+# Prediction markets and replication studies
+
+&gt; In prediction markets, investors make predictions of future events by buying shares in the outcome of the event and the market price indicates what the crowd thinks the probability of the event is.
+&gt;
+&gt; [Harvard Press Release](https://www.seas.harvard.edu/news/2015/11/markets-science)
+
+--
+
+This was first applied to predicting replicability of research results in 2015 by Dreber, Pfeiffer, Almenberg, Isaksson, Wilson, Chen, Nosek, and Johannesson [17].
+
+There is now evidence for these markets being a reliable estimate of predictability Camerer, Dreber, Holzmeister, Ho, Huber, Johannesson, Kirchler, Nave, Nosek, Pfeiffer, Altmejd, Buttrick, Chan, Chen, Forsell, Gampa, Heikensten, Hummer, Imai, Isaksson, Manfredi, Rose, Wagenmakers, and Wu [18].
+
+&gt; Prof. Anna Dreber gives an excellent 40minute overview of replication prediction markets here - https://youtu.be/a5rFDKB1aZc?t=1036
+
+---
+
+# A final word on replicability studies
+
+Most (if not all) of studies about replicability are deeply technical and rely on statistical methods we don't have time to cover in this course.
+
+This includes the foundational paper "Why Most Published Research Findings Are False" by Ioannidis [1].
+
+&gt; Your assessment does not require you to understand or replicate any of the methodologies behind replicability studies.
+
+---
+
+# Reproducibility
+
+Let's get back to the ASA reproducibility recommendations from Broman, et al. [3].
+
+&gt; Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
+In order for reproducibility to be *possible* we need the original data to be accessible - we need **Open Data**.
+
+---
+
+class: middle, center, inverse
+
+# Open Data
+
+---
+
+# Most papers don't provide their data
+
+More often than papers simply **do not provide** the data that they:
+
+- Use to create charts and tables
+
+- Use to perform statistical tests
+
+- Use to generate their conclusions
+
+&gt; These papers are the antithesis of reproducible.
+
+---
+
+# "Data available on request"
+
+It's common to see the phrase "data available on request" but that's frequently meaningless:
+
+&gt; "Data requests to authors are successful in 27–59% of cases, whereas the request is ignored in 14–41% cases"
+&gt;
+&gt; Tedersoo, Küngas, Oras, Köster, Eenmaa, Leijen, Pedaste, Raju, Astapova, Lukner, Kogermann, and Sepp [19]
+
+Even in cases where data is returned it's often insufficient for reproducibility, Roche, Kruuk, Lanfear, and Binning [20]:
+
+- "Data" might actually be screenshots of charts stored in an Excel workbook
+
+- "Data" might be stored in other "non-machine-readable" formats like PDF or images
+
+- "Data" might only be provided in the post analysis form
+
+---
+
+# Researchers have confusing opinions
+
+In one of the earliest, biggest and most cited studies in data sharing from 2011 by Tenopir, Allard, Douglass, Aydinoglu, Wu, Read, Manoff, and Frame [21] surveyed 1,329 scientists found that
+
+&gt; "Most respondents (at least 60% across disciplines) agree that lack of access to data generated by other researchers or institutions is a major impediment to progress in science."
+
+... but
+
+&gt; "A majority of all respondents indicate they are not willing to place all of their data in central repositories with no restrictions"
+
+These findings have been replicated again, and again.
+
+---
+
+# Open Data helps everyone
+
+.pull-left[
+
+**Researchers**
+
+- Open Data helps reproduce previous studies
+
+- Open Data means researchers can do **new** studies, including meta analyses.
+
+&lt;hr&gt;
+
+- Open Data gives an additional way researchers can be cited
+
+- There is clear evidence Open Data is linked with higher citation rates, eg Colavizza, Hrynaszkiewicz, Staden, Whitaker, and McGillivray [22].
+
+
+]
+
+--
+
+.pull-right[
+
+**Society**
+
+- The coordinated global COVID-19 response benefited significantly from Open Data portals  [23].
+
+- Reducing energy consumption of buildings based in occupancy from public datasets Roth, Lim, Jain, and Grueneich [24].
+
+- Emergency planning via use of the Behavioral Risk Factor Surveillance System (BRFSS)  [25]
+
+
+]
+
+.small[
+&gt; You can find *some* healthcare specific examples on the course website [eng7218.netlify.app/resources/open-data](https://eng7218.netlify.app/resources/open-data). Please do research your own - and consider sharing them with the group.
+]
+
+---
+
+# Open Data vs Big Data
+
+Big Data is great. It's the driver behind the Internet of Things and much of modern healthcare technology. But in most circumstances it is **not** Open Data.
+
+&lt;a href='http://opendefinition.org/'&gt;&lt;img src='images/screenshot_open-definition.jpg' height='400px'/&gt;&lt;/a&gt;
+
+Screenshot of  [26]
+
+---
+
+# Open Data short definition
+
+Let's minimise these definitions:
+
+&gt; Open data must be..
+
+- Legally open. The data must be subject to an open data license
+
+- Technically open.
+
+  - Data files must be machine-readable and non-proprietary, which often means *plain text*.
+  
+  - Accessible from a public server without password protection
+
+&gt; Open data must be open to humans and computers.
+
+---
+
+# Open Data licenses
+
+In most cases the [Creative Commons' "Choose a license tool"](https://creativecommons.org/choose/) is the best and easiest choice if you have a **dataset** you want to make into Open Data.
+
+- The CC0 license is the most permissive license.
+
+There are special Open Data licenses used by Governmental/Charity organisations designed to waive liability for use, eg the [Open Government License](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) from the UK Government [27] 
+
+&gt; In general it's best to use data licenses for data and software licenses for software.
+
+---
+
+# Open Data examples
+
+There are **SO MANY** different sources (or publishers) of Open Data, for a good sample checkout the [Open Data Essentials page from the World Bank [28]](http://opendatatoolkit.worldbank.org/en/essentials.html).
+
+.center[
+&lt;img src='images/screenshot_open-data-essentials.jpg' height='450px'/&gt;
+]
+
+---
+
+# Open Data and Health Data
+
+Open Data is awesome. But if we're responsible for data that can identify individuals or groups we have a [legal] duty of care to protect that data.
+
+In the UK we have the [Data Protection Act](https://www.legislation.gov.uk/ukpga/2018/12/contents/enacted) (legislation.gov.uk [29]) which is the UK's implementation of the General Data Protection Regulation (GDPR).
+
+&gt; In week 6 we will discuss GDPR and the Data Protection Act in the context of anonmyising data. 
+&gt; 
+&gt; This isn't a course in the law school so we won't go *hard* into the definitions. But there are some things we need to discuss.
+
+---
+
+# Open Data and Health Data
+
+In the DPA (legislation.gov.uk [29]) there are 6 different types of sensitive data - I'm highlighting the ones that cover data that you might reasonably collect and consider "health data".
+
+.small[
+- (a) the processing of personal data revealing racial or ethnic origin, .de-emphasis[political opinions, religious or philosophical beliefs or trade union membership;]
+
+- (b) the processing of genetic data for the purpose of uniquely identifying an individual;
+
+- (c) the processing of biometric data for the purpose of uniquely identifying an individual;
+
+- (d) the processing of data concerning health;
+
+- (e) the processing of data concerning an individual’s sex life or sexual orientation;
+
+- .de-emphasis[(f) the processing of personal data as to [commission or alleged commission of an offence]]
+]
+
+&gt; There's some recursion, so let's pull out the definitions of "health data" from Part 7 Section 205 and list everything together
+
+---
+
+# Open Data and Health Data
+
+Part 7 Section 205 defines the following
+
+.small[
+- **“biometric data”** means personal data resulting from specific technical processing relating to the physical, physiological or behavioural characteristics of an individual, which allows or confirms the unique identification of that individual, such as facial images or dactyloscopic data;
+
+- **“data concerning health”** means personal data relating to the physical or mental health of an individual, including the provision of health care services, which reveals information about his or her health status;
+
+- **“genetic data”** means personal data relating to the inherited or acquired genetic characteristics of an individual which gives unique information about the physiology or the health of that individual and which results, in particular, from an analysis of a biological sample from the individual in question;
+]
+
+But we should also still include:
+
+.small[
+- (a) the processing of personal data revealing racial or ethnic origin,
+
+- (e) the processing of data concerning an individual’s sex life or sexual orientation;
+]
+
+---
+
+# Open Data and Health Data
+
+There's more [reader friendly documentation about health data and DPA 2018](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/right-of-access/health-data/#healthdata7) from the Information Commissioner's Office [30].
+
+&gt; We'll talk about this more later.
+
+---
+
+# Open Data mandates and UKRI
+
+UKRI is responsible for the 6 UK research councils who fund most university-based research in the UK.
+
+--
+
+Some research councils have their own "data sharing policies", but others depend on the "common principles on on research data" from UKRI [31].
+
+&gt; Publicly funded research data are a public good and produced in the public interest. They should be made openly available with as few restrictions as possible in a timely and responsible manner.
+
+---
+
+# Open Data mandates and UKRI
+
+.small[
+- .de-emphasis[Arts and Humanities Research Council (AHRC [32]): Relies on the UKRI [31] common principles].
+
+- Biotechnology and Biological Sciences Research Council (BBSRC [33]): "BBSRC expects that all data (with accompanying metadata) should be
+shared in a timely fashion as soon as it is verified".
+
+- Engineering and Physical Sciences Research Council (EPSRC [34]): Has the most explicit data policy, including a requirement for DOI.
+
+- Economic and Social Research Council (ESRC [35]): Explicit requirement that "data **will** be made available [...] as Open Data".
+
+- Medical Research Council (MRC): There's an "expectation" from MRC [36] that data must be made open, they helpfully provide [lots of advice about patient and population data](https://www.ukri.org/wp-content/uploads/2021/08/MRC-0208212-MRC-policy-and-guidance-on-sharing-of-research-data-from-population-and-patient-studies-Word-version-v01.02.pdf). 
+
+- Natural Environment Research Council (NERC [37]): Flubs it by saying all research "must include a
+statement on how the supporting data and any other relevant research materials can be accessed"
+
+- .de-emphasis[Science and Technologies Facilities Council (STFC [38])": "STFC expects that published data should be made publicly available within six months of publication unless justified otherwise"]
+]
+
+---
+
+# Understanding the whole process
+
+.pull-left[
+1. Submit a Data Management Plan (DMP) to a funder, including a data sharing plan
+
+1. Pre-register your research (often simultaneously with step 1)
+
+1. Reserve a DOI to store your research data at a data repository
+
+1. Do the research
+
+  - Keep raw data pristine. Do not modify your raw data.
+  
+  - Keep track of how you wrangle the data (much easier when you write R code!)
+  
+  - Craft an anonymised, shareable version of your datasets described in your DMP.
+]
+
+--
+
+.pull-right[
+1. Write up the study
+
+1. Choose a journal to submit to
+
+  - That's an entire process in of itself!
+  
+1. Make the data deposit public when your research is made public
+
+  - Applying an embargo can help automate this process
+  
+&lt;hr&gt;
+
+You might want to create follow up studies or new studies where you add to the existing data deposit.
+
+This works nicely thanks to DOI versioning!
+]
+
+---
+
+# Understanding the whole process (more!)
+
+.pull-left[
+
+I tweeted asking for advice about things I missed
+
+<blockquote class="twitter-tweet" data-width="550" data-lang="en" data-dnt="true" data-theme="light"><p lang="en" dir="ltr">Hey folks! What did I miss out about the journey of an Open Dataset through the entire research process?<br><br>(Note: this is customised a bit for the UK)<br><br>I&#39;m also very happy for ideas about adding complications or other notes 😀 <a href="https://t.co/Sm9nn4byZo">pic.twitter.com/Sm9nn4byZo</a></p>&mdash; Charlotte (@charliejhadley) <a href="https://twitter.com/charliejhadley/status/1560579213559619586?ref_src=twsrc%5Etfw">August 19, 2022</a></blockquote>
+
+
+]
+
+.pull-right[
+
+- Meta data records including data dictionaries are really useful tools for studies. These can be deposited into data repositories and linked to in your articles.
+
+- I haven't mentioned ethics forms and consent forms. These are very important. Refer to your Research Support teams for help in designing these documents.
+
+]
+
+---
+
+# ... what about the code?
+
+So far I've only spoken about the data element of reproducibility, we'll get onto the code in the workshop.
+
+---
+
+# Digital Object Identifiers (DOI)
+
+.pull-left[
+
+DOI are extremely important to ensure research availability into the future. Academic journal links are fragile and could change at any time:
+
+&gt; &lt;a href='https://sciencedirect.com/science/article/&lt;br&gt;pii/S2665927122000879'&gt;sciencedirect.com/science/article/&lt;br&gt;pii/S2665927122000879&lt;/a&gt;
+
+]
+
+.pull-right[
+
+DOI are **persistent and extremely long-term** identifiers that look like this:
+
+&gt; 10.1016/j.crfs.2022.05.015
+
+The is then responsible for directing you to the resource by creating a URL like this:
+
+&gt; doi.org/10.1016/j.crfs.2022.05.015
+
+]
+
+---
+
+# DOI for more than just publications
+
+Initially DOI were only issued by academic publishers to resolve journal articles.
+
+Data Repositories started issuing DOI so we could resolve links to data, code and more.
+
+.pull-left[
+
+**Specialist Data Repositories**
+
+Sometimes you **need** a repository with specialist features, eg:
+
+- Genome sequences
+
+- Protein sequences
+
+- Climate data
+
+Nature [39] [provides an excellent overview of these tools](https://www.nature.com/sdata/policies/repositories).
+
+]
+
+--
+
+.pull-right[
+
+**General Purpose Repositories**
+
+These tools all have slighty different advantages and disadvantages
+
+- Figshare
+
+- Open Science Framework
+
+- Zenodo
+
+]
+
+---
+
+# Identifiers for researchers?
+
+DOI are great for resolving our research outputs, what about uniquely identifying researchers?
+
+Researchers often share the same names or change their names throughout their career.
+
+--
+
+.pull-left[
+
+The **only** open researcher identifier is ORCID.
+
+Thankfully - it also works really well! 
+
+It keeps track of all publications and deposits on data repositories.
+
+Here's mine: https://orcid.org/0000-0002-3039-6849
+
+]
+
+.pull-right[
+&lt;img src='images/orcid-ids.png'/&gt;
+]
+&gt; I want you to register for an ORCID now so you can use it for everything - including in your CV
+
+---
+
+# Exercise: Setup a Collection on Figshare
+
+Everything we've spoken about has been very theoretical. I want you to go through the steps of creating a collection on Figshare.
+
+&gt; We're creating a Collection because it can contain multiple Figshare items. At the beginning of your research you likely don't know exactly how many data files you'll end up with.
+
+.pull-left[
+- Sign up for Figshare with your ORCID
+
+- Go to "My data" in Figshare
+
+- Go to "Collections"
+
+- Create a Collection
+
+- Reserve a DOI
+]
+
+.pull-right[
+- Go to "My data"
+
+- Add a new item
+
+- Reserve a DOI
+
+- Go to your collection and add this data item.
+]
+
+---
+
+# Figshare for talks and more
+
+Figshare is very much a general purpose repository.
+
+If you create something you want to make available for the future the best thing you can do is get a DOI.
+
+- Consider using Figshare for presentations
+
+- Consider using Figshare for posters
+
+---
+
+# We need to talk about Open Access
+
+It used to be extremely hard to access the research that UKRI funds - despite it being funded by public money. The Open Access movement began in the 90s and is ever growing.
+
+It's now a requirement of UKRI [40] funding that
+
+&gt; the final Version of Record or the Author’s Accepted Manuscript must be free to view
+and download via an online publication platform, publishers’ website, or institutional or
+subject repository within a maximum of 12 months of publication 
+
+... however, this often means that someone is paying an Article Processing Charge (APC).
+
+---
+
+# Different routes to Open Access
+
+.pull-left[
+
+**Someone pays an APC**
+
+APCs can be split between publishers and authors in different ways.
+
+UKRI is usually responsible for paying the author's portion of the bill.
+
+- Gold Open Access: All articles in a journal are Open Access.
+
+- Hyrbrid Open Access: Specific articles in a journal are made Open Access through APCs. Journals receive money through both subscriptions and APCs.
+
+]
+
+
+.pull-right[
+**No APC is paid**
+
+The most important category here is **Green Open Access**.
+
+In Green Open Access the author self-archives their article in a publicly available repository.
+
+**This gets complicated**.
+
+- Some publishers require that only pre-prints are self-archived
+
+- Some publishers allow post-print publishing.
+
+If you're interested read Gadd and Troll Covey [41].
+
+]
+
+---
+
+class: inverse, middle, center
+
+# Negative Results
+
+---
+
+# Positive Publication Bias
+
+There is a significant and very clear bias to researchers publishing "positive results" (Mlinarić, Horvat, and Šupak
+Smolčić [42]) - which you can even see in article titles.
+
+.pull-left[
+
+This poses significant issues in the literature.
+
+- It's really useful to know X doesn't work! It means others don't need to repeat the result.
+
+- Negative effects can be under reported, as per the GSK lawsuit in 2004.
+
+- A lack of negative results introduces bias to meta-analyses.
+
+]
+
+.pull-right[
+
+The MRC [36] Open Research Data policy explicitly requires both positive and negative results of studies be published within 24 months of the trial end.
+
+]
+
+---
+
+# Publishing negative results
+
+This is an open problem. 
+
+There was a push for new negative result journals in the early 2010s but several of these folded, [including the Journal of Negative Results in Biomedicine](https://jnrbm.biomedcentral.com/) The remaining journals have very low impact factors as they are published by smaller publishers.
+
+In general the journals with the highest impact factors are getting better at publishing negative results.
+
+---
+
+# Why are we learning all of this now?
+
+
+```r
+tweetrmd::tweet_embed("https://twitter.com/charliejhadley/status/1559534088838647808?s=20&amp;t=M0f0BvpbqLiKpDxBHiJy7w")
+```
+
+<blockquote class="twitter-tweet" data-width="550" data-lang="en" data-dnt="true" data-theme="light"><p lang="en" dir="ltr">When did you as a student/academic researcher first learn about reproducible research methods?<a href="https://twitter.com/hashtag/reproducibleresearch?src=hash&amp;ref_src=twsrc%5Etfw">#reproducibleresearch</a> <a href="https://twitter.com/hashtag/reproducibility?src=hash&amp;ref_src=twsrc%5Etfw">#reproducibility</a><br><br>(More polls on this below, sorry they don’t have a “show results option”)</p>&mdash; Charlotte (@charliejhadley) <a href="https://twitter.com/charliejhadley/status/1559534088838647808?ref_src=twsrc%5Etfw">August 16, 2022</a></blockquote>
+
+
+---
+
+class: split-two, with-thick-border border-black
+
+.column.bg-main1[.content[
+  .split-three[
+ .row[.content[
+ # 1. There's a reproducibility crisis
+ ]]
+  .row[.content[
+ # 2. Everything you can do to help reproducibility
+ ]]
+   .row[.content[
+ # 3. Understanding Open Access and Open Data
+ ]]
+ ]
+]]
+
+.column.bg-main1[.content.center.vmiddle[
+  # 4. Acknowledging legal and funder requirements affecting reproduciblity
+]]
+
+
+---
+
+# References Page 1
+
+.references[
+
+[1] J. P. A. Ioannidis. "Why Most Published Research Findings Are
+False". In: _PLoS Medicine_ 2.8 (Aug. 2005), p. e124. ISSN: 1549-1676.
+DOI: 10.1371/journal.pmed.0020124.
+
+[2] W. Douglas Heaven. _Hundreds of AI Tools Have Been Built to Catch
+Covid. None of Them Helped._
+https://www.technologyreview.com/2021/07/30/1030329/machine-learning-ai-failed-covid-hospital-diagnosis-pandemic/.
+Jul. 2021.
+
+[3] K. Broman et al. _Recommendations to Funding Agencies for
+Supporting Reproducible Research_. Tech. rep. American Statistial
+Association, Jan. 2017, pp. 1-4.
+
+[4] D. Fanelli. "How Many Scientists Fabricate and Falsify Research? A
+Systematic Review and Meta-Analysis of Survey Data". In: _PLOS ONE_ 4.5
+(May. 2009), p. e5738. ISSN: 1932-6203. DOI:
+10.1371/journal.pone.0005738.
+
+[5] L. K. John et al. "Measuring the Prevalence of Questionable
+Research Practices With Incentives for Truth Telling". In:
+_Psychological Science_ 23.5 (May. 2012), pp. 524-532. ISSN: 0956-7976,
+1467-9280. DOI: 10.1177/0956797611430953.
+
+[6] C. Aschwanden. "We're All 'P-Hacking' Now". In: _Wired_ (Nov.
+2019).
+
+[7] J. P. Simmons et al. "False-Positive Psychology: Undisclosed
+Flexibility in Data Collection and Analysis Allows Presenting Anything
+as Significant". In: _Psychological Science_ 22.11 (Nov. 2011), pp.
+1359-1366. ISSN: 0956-7976. DOI: 10.1177/0956797611417632.
+
+[8] Y. Hu et al. "Factors Influencing Self-Care Behaviours of Patients
+with Type 2 Diabetes in China Based on the Health Belief Model: A
+Cross-Sectional Study". In: _BMJ Open_ 12.8 (Aug. 2022), p. e044369.
+ISSN: 2044-6055, 2044-6055. DOI: 10.1136/bmjopen-2020-044369.
+
+[9] C. Clifton et al. "Eye Movements in Reading and Information
+Processing: Keith Rayner's 40year Legacy". In: _Journal of Memory and
+Language_ 86 (Jan. 2016), pp. 1-19. ISSN: 0749-596X. DOI:
+10.1016/j.jml.2015.07.004.
+
+[10] _Recommendations for the Conduct, Reporting, Editing, and
+Publication of Scholarly Work in Medical Journals (ICMJE)_.
+https://www.icmje.org/icmje-recommendations.pdf. 2022.
+
+]
+
+---
+
+# References Page 2
+
+.references[
+
+[11] World Medical Association. _Declaration of Helsinki, Ethical
+Principles for Medical Research Involving Human Subjects_.
+https://www.wma.net/policies-post/wma-declaration-of-helsinki-ethical-principles-for-medical-research-involving-human-subjects/.
+2013.
+
+[12] S. H. Bradley et al. "Automatic Registration for UK Trials". In:
+_BMJ_ 376 (Jan. 2022), p. o41. ISSN: 1756-1833. DOI: 10.1136/bmj.o41.
+
+[13] T. Bruckner. _UK Launches New System to Achieve 100% Clinical
+Trial Registration (Updated)_.
+https://www.transparimed.org/single-post/uk-clinical-trial-registration.
+Oct. 2021.
+
+[14] O. Dyer. "GlaxoSmithKline Faces US Lawsuit over Concealment of
+Trial Results". In: _BMJ : British Medical Journal_ 328.7453 (Jun.
+2004), p. 1395. ISSN: 0959-8138.
+
+[15] D. Spurgeon. "GlaxoSmithKline Staff Told Not to Publicise
+Ineffectiveness of Its Drug". In: _BMJ : British Medical Journal_
+328.7437 (Feb. 2004), p. 422. ISSN: 0959-8138.
+
+[16] B. A. Nosek et al. "The Preregistration Revolution". In:
+_Proceedings of the National Academy of Sciences_ 115.11 (Mar. 2018),
+pp. 2600-2606. DOI: 10.1073/pnas.1708274114.
+
+[17] A. Dreber et al. "Using Prediction Markets to Estimate the
+Reproducibility of Scientific Research". In: _Proceedings of the
+National Academy of Sciences_ 112.50 (Dec. 2015), pp. 15343-15347. DOI:
+10.1073/pnas.1516179112.
+
+[18] C. F. Camerer et al. "Evaluating the Replicability of Social
+Science Experiments in Nature and Science between 2010 and 2015". In:
+_Nature Human Behaviour_ 2.9 (Sep. 2018), pp. 637-644. ISSN: 2397-3374.
+DOI: 10.1038/s41562-018-0399-z.
+
+[19] L. Tedersoo et al. "Data Sharing Practices and Data Availability
+upon Request Differ across Scientific Disciplines". In: _Scientific
+Data_ 8.1 (Jul. 2021), p. 192. ISSN: 2052-4463. DOI:
+10.1038/s41597-021-00981-0.
+
+[20] D. G. Roche et al. "Public Data Archiving in Ecology and
+Evolution: How Well Are We Doing?" In: _PLOS Biology_ 13.11 (Nov.
+2015), p. e1002295. ISSN: 1545-7885. DOI: 10.1371/journal.pbio.1002295.
+
+]
+
+---
+
+# References Page 3
+
+.references[
+
+[21] C. Tenopir et al. "Data Sharing by Scientists: Practices and
+Perceptions". In: _PLOS ONE_ 6.6 (Jun. 2011), p. e21101. ISSN:
+1932-6203. DOI: 10.1371/journal.pone.0021101.
+
+[22] G. Colavizza et al. "The Citation Advantage of Linking
+Publications to Research Data". In: _PLOS ONE_ 15.4 (Apr. 2020), p.
+e0230416. ISSN: 1932-6203. DOI: 10.1371/journal.pone.0230416.
+
+[23] _DATA in the Time of COVID-19_. Nov. 2020.
+
+[24] J. Roth et al. "Examining the Feasibility of Using Open Data to
+Benchmark Building Energy Usage in Cities: A Data Science and Policy
+Perspective". In: _Energy Policy_ 139 (Apr. 2020), p. 111327. ISSN:
+0301-4215. DOI: 10.1016/j.enpol.2020.111327.
+
+[25] _CDC - BRFSS Annual Survey Data_.
+https://www.cdc.gov/brfss/annual\_ data/annual\_ data.htm. Aug. 2021.
+
+[26] _The Open Definition - Open Definition - Defining Open in Open
+Data, Open Content and Open Knowledge_. http://opendefinition.org/.
+Aug. 2022.
+
+[27] UK Government. _Open Government Licence_.
+https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/.
+2022.
+
+[28] World Bank. _Open Data Essentials | Data_.
+http://opendatatoolkit.worldbank.org/en/essentials.html. May. 2021.
+
+[29] legislation.gov.uk. _Data Protection Act 2018_.
+https://www.legislation.gov.uk/ukpga/2018/12/contents/enacted. 2022.
+
+[30] Information Commissioner's Office. _Health Data_.
+https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/right-of-access/health-data/.
+Jan. 2021.
+
+]
+
+---
+
+# References Page 4
+
+.references[
+
+[31] UKRI. _UKRI Common Principles on Research Data_.
+https://www.ukri.org/manage-your-award/publishing-your-research-findings/making-your-research-data-open/.
+Aug. 2022.
+
+[32] AHRC. _AHRC Research Funding Guide_.
+https://www.ukri.org/wp-content/uploads/2022/07/AHRC-210722-ResearchFundingGuide.pdf.
+Aug. 2022.
+
+[33] BBSRC. _BBSRC Data Sharing Policy_.
+https://www.ukri.org/wp-content/uploads/2021/07/data-sharing-policy-v1.22.pdf.
+Aug. 2022.
+
+[34] EPSRC. _ESPRC Policy Framework on Research Data_.
+https://www.ukri.org/about-us/epsrc/our-policies-and-standards/policy-framework-on-research-data/\#
+contents-list. Aug. 2022.
+
+[35] ESRC. _ESRC Research Data Policy_.
+https://www.ukri.org/wp-content/uploads/2021/07/ESRC-200721-ResearchDataPolicy.pdf.
+Aug. 2022.
+
+[36] MRC. _MRC Open Research Data Advice_.
+https://www.ukri.org/about-us/mrc/our-policies-and-standards/research/open-research-data-clinical-trials-and-public-health-interventions/.
+Aug. 2022.
+
+[37] NERC. _NERC Data Policy_.
+https://www.ukri.org/wp-content/uploads/2022/03/NERC-080322-policy-data-021219.pdf.
+Aug. 2022.
+
+[38] STFC. _STFC Open Data Policy_.
+https://www.ukri.org/councils/stfc/guidance-for-applicants/what-to-include-in-your-proposal/data-management-plan.
+Aug. 2021.
+
+[39] Nature. _Data Repository Guidance | Scientific Data_.
+https://www.nature.com/sdata/policies/repositories. 2022.
+
+[40] UKRI. _UKRI Open Access Policy_.
+https://www.ukri.org/wp-content/uploads/2022/07/UKRI-28072022-Final\_
+UKRI-Open-Access-Policy\_ Version-1.5\_ July-2022.pdf. Jul. 2022.
+
+]
+
+---
+
+# References Page 5
+
+.references[
+
+[41] E. Gadd et al. "What Does `Green' Open Access Mean? Tracking
+Twelve Years of Changes to Journal Publisher Self-Archiving Policies".
+In: _Journal of Librarianship and Information Science_ 51.1 (Mar.
+2019), pp. 106-122. ISSN: 0961-0006. DOI: 10.1177/0961000616657406.
+
+[42] A. Mlinarić et al. "Dealing with the Positive Publication Bias:
+Why You Should Really Publish Your Negative Results". In: _Biochemia
+Medica_ 27.3 (Oct. 2017), p. 030201. ISSN: 1330-0962. DOI:
+10.11613/BM.2017.030201.
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="js/macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
