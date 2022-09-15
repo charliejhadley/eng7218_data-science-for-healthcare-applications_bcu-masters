@@ -1,0 +1,503 @@
+---
+title: "Week 5: Surveys"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/lecture-styles.scss"
+    slide-number: "c/t"
+bibliography: "../bibtex-file.bib"
+csl: "../nature.csl"
+cache: true
+echo: true
+freeze: true
+---
+
+## Topics for today
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(gt)
+library(readxl)
+library(here)
+library(janitor)
+
+library(ggpomological)
+library(fontawesome)
+colours_ggplot2_components <- as.list(set_names(ggpomological:::pomological_palette[1:5], c("aesthetics", "geoms", "scales", "guides", "themes")))
+```
+
+1. Why do we use charts to tell stories?
+
+1. Evidence-based visual perception theory
+
+1. Advice on choosing charts
+
+1. Advice on using colour in charts
+
+1. Using this advice to tell stories with charts built with `{ggplot2}`
+
+# Why do we use charts?? {background-color="#23241F" .center .center-x}
+
+-----------
+
+> <strike><h1>A picture is worth a thousand words</h1></strike>
+
+-----------
+
+## Data visualisations are demonstrably useful
+
+There is considerable experimental evidence for data visualisations improving:
+
+- Comprehension of data
+
+- Decision making accuracy and confidence
+
+<br>
+
+Evidence has been collected using eye-tracking, survey filling and interviews. 
+
+For a good overview of the available research see Eberhard 2021[@eberhard_effects_2021]. 
+
+> Some of these studies consider tables to be a type of data visualisation.
+>
+> I agree with this! Tables are often awesome choices for presenting data - let's talk more about this later today.
+
+------------
+
+## Data visualisations are demonstrably useful
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+In 1973 Anscombe[@anscombe_graphs_1973] published a paper designed to demonstrate...
+
+> Graphs are essential to good statistical analysis.
+
+To do so he simulated 4 datasets sharing **many** identical statistical properties.
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src="images/week-4/anscombe's_quartet_stats.jpg"/>
+
+:::
+
+::::
+
+------------
+
+## Data visualisations are demonstrably useful
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+However, if you visualised the datasets it was obvious these datasets were **fundamentally** different to one another.
+
+These charts are now known as *Anscombe's quartet*[@anscombe_graphs_1973].
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src="images/week-4/anscombe's_quartet_3.png"/>
+
+:::
+
+::::
+
+------------
+
+## Data visualisations are demonstrably useful
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+The "Datasaurus Dozen" is a modern reimagining of the original quartet[@matejka_same_2017].
+
+<br>
+
+Datasaurus was originally created by Alberto Cairo[@cairo_download_2016].
+
+<br>
+
+... there's now an R package for building your own metamers [eliocamp.github.io/metamer/](https://eliocamp.github.io/metamer/)
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+<br>
+<br>
+<img src='images/week-4/datasaurus-dozen.gif'/>
+
+:::
+
+::::
+
+-----------
+
+## ALWAYS. {background-color="#23241F" .center .center-x}
+
+### Always visualise your datasets.
+
+------------
+
+## Data visualisations are demonstrably useful
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+<img src='images/week-4/cholera-map.jpg'/>
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+There are several historical visualisations that have fundamentally changed social policy and behaviour.
+
+<br>
+
+This is a map from John Snow in 1855[@snow_mode_1855] that ties a cholera outbreak to a specific water pump.
+
+<br>
+
+::: {.fragment}
+
+Combined with Snow's statistical analyses this was a significant step towards the development and acceptance of germ theory.
+
+:::
+
+:::
+
+::::
+
+------------
+
+## Data visualisations are demonstrably useful
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+<img src='images/week-4/nightingale-fancy-piecharts.webp'/>
+
+::: {.fragment fragment-index=2}
+
+<img src='images/week-4/nightingale-barchart.webp'/>
+
+:::
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+In exactly the same year, Florence Nightingale[@nightingale_notes_1858] was creating charts to demonstrate the importance of **basic sanitation** in military hospitals.
+
+<br>
+
+::: {.fragment fragment-index=1}
+
+This specific chart is very dramatic and quite rarely used. It's a polar area diagram or a Nightingale rose diagram
+
+:::
+
+<br>
+
+::: {.fragment fragment-index=2}
+
+But it's important to acknowledge that Nightingale used many different types of charts in her work.
+
+Her charts and analyses were central to bringing basic sanitation standards to nursing and hospitals.
+
+:::
+
+:::
+
+::::
+
+------------
+
+## Data visualisations are demonstrably useful
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+In 2006 Hans Rosling[@hans_rosling_best_2006] gave [an incredible TED talk where he introduced animated bubble charts](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen?language=en) as a tool to tell stories about global development.
+
+<br>
+
+These charts helped demonstrate the value of interactive and animated data visualisations - which is why Google bought the tool behind the charts!
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<a href='https://r-graph-gallery.com/271-ggplot2-animated-gif-chart-with-gganimate.html'><img src='images/week-3/gapminder-bubble-chart.png'/></a>
+:::
+
+::::
+
+------------
+
+## Data visualisations are demonstrably useful
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+A more recent example of a very powerful data visualisation is the spiralling global temperature GIF from 2016 by Ed Hawkins [@hawkins_spiralling_2016].
+
+<br>
+
+We can create animated GIF with `{ggplot2}` via the `{gganimate}` package. In fact, Pat Schloss[@pat_schloss_recreating_2022] has a [YouTube video](https://www.youtube.com/watch?v=AYfjdcylAio) and [GitHub repo](https://github.com/riffomonas/climate_viz/tree/95168349ece3c1993e960767a4b4d6124b4abd4a) recreating this chart with R.
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src='images/week-4/spiraling-global-temperature-change.gif'/>
+:::
+
+::::
+
+# Evidence-based visual perception theory {background-color="#23241F" .center .center-x}
+
+------------
+
+## Evidence-based visual perception theory
+
+There is a wealth of evidence-based research in **how precisely or accurately** charts are perceived by readers.
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+<center>
+<img src='images/week-4/Eyetracker1.jpg'/>
+<br>
+Source: <a href='https://commons.wikimedia.org/wiki/File:Eyetracker1.jpg'>Wikimedia.org</a>
+</center>
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+Our evidence comes from:
+
+- Eye tracking. We're really good at measuring where the eye is looking, for how long and how intently.
+
+- Asking trial participants to estimate or compare values in charts.
+
+:::
+
+::::
+
+> There are open debates<sup>1</sup> on **how our internal visual perception system works** - what the brain is doing.
+
+::: {.footnote}
+<sup>1</sup>A good example is pie charts where we're still not sure what our brains are doing, but we know they're not measuring area thanks to Robert Kosara[@kosara_judgment_2016]
+:::
+
+------------
+
+## Elementary perceptual tasks
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+Back in 1984 Cleveland & McGill[@cleveland_graphical_1984] published their seminal paper on graphical perception theory where they defined "elementary perceptual tasks".
+
+<br>
+
+This study is the backbone of much of the research in this field.
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src='images/week-4/cleveland-1984_elementary-perceptual-tasks.jpg'/>
+
+:::
+
+::::
+
+------------
+
+## Elementary perceptual tasks
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+Cleveland & McGill[@cleveland_graphical_1984] designed many experiments where participants were asked to:
+
+- Identify the largest/smallest segment
+
+- Estimate what % the smaller segment was of the larger segment
+
+The **accuracy** of subject estimates was then statistically analysed.
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+<img src='images/week-4/cleveland-1984_accuracy-comparison.jpg'/>
+
+:::
+
+::::
+
+------------
+
+### Crowd-sourced evidence for perception theory
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+<img src='images/week-4/cleveland-1984_replication-with-mechanical-turk.jpg' height='500px'/>
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%"}
+
+Heer & Bostock[@heer_crowdsourcing_2010] replicated this study using Amazon's Mechanical Turk with 3,481 participants in 2010.
+
+<br>
+
+::: {.fragment}
+
+They validated the results of Cleveland & McGill[@cleveland_graphical_1984] and provided further evidence that...
+
+> There is a hierarchy of elementary perceptual tasks - or chart elements - when **accuracy** matters.
+
+:::
+
+:::
+
+::::
+
+------------
+
+### Ordering channels of communication (by accuracy)
+
+:::: {.columns}
+
+::: {.column width="48%" .center-x}
+
+<img src='images/week-4/channel-order_magnitude.jpg' height='500px'/>
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%" .fragment .center-x}
+
+<img src='images/week-4/channel-order_category.jpg'/>
+
+:::
+
+::::
+
+Images from Beecham et al[@beecham_use_2021]
+
+-----------
+
+### ... real-world applications of visual perception theory
+
+<img src='images/week-4/encodings-in-detail_bars-and-lines.jpg'/>
+
+Images from Robert Kosara[@kosara_more_2022]
+
+-----------
+
+### ... real-world applications of visual perception theory
+
+<img src='images/week-4/encodings-in-detail_piecharts.jpg'/>
+
+Images from Robert Kosara[@kosara_more_2022]
+
+-----------
+
+## ... real-world applications of visual perception theory
+
+<center>
+<a href='https://twitter.com/irg_bio/status/1481214254351097859'><img src='images/week-4/seasonality-in-bee-colonies.jpg' height='500px'/></a>
+</center>
+
+.footnote[
+Image found on Twitter from [@iker_rivas-gonzalez_irg_bio_i_2022], code for chart available from [@rivas-gonzalez_seasonality_2022].
+]
+
+-----------
+
+## DRAGONS:
+
+- Some rules to follow:
+
+  - Don't use pies for more than a few groups (ideally 2)
+  
+  - If using bubble charts vary by area instead of radius
+  
+  - Colour schemes matter A LOT
+
+-----------
+
+### References
+
+::: {#refs}
+:::
+

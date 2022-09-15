@@ -1,909 +1,1040 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
-  <head>
-    <title>Week 4: Data Visualisation</title>
-    <meta charset="utf-8" />
-    <meta name="author" content="Charlotte Hadley" />
-    <script src="week-04_slides_data-visualisation_files/header-attrs/header-attrs.js"></script>
-    <link href="week-04_slides_data-visualisation_files/remark-css/default.css" rel="stylesheet" />
-    <link href="week-04_slides_data-visualisation_files/remark-css/ninjutsu.css" rel="stylesheet" />
-    <script src="week-04_slides_data-visualisation_files/xaringanExtra-progressBar/progress-bar.js"></script>
-    <link rel="stylesheet" href="css/lecture-styles.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" type="text/css" />
-    <link rel="stylesheet" href="assets/ninpo.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
-class: center, middle, inverse, title-slide
-
-.title[
-# Week 4: Data Visualisation
-]
-.author[
-### <large>Charlotte Hadley</large>
-]
-
----
-
-
-layout: false
-class: split-two, with-thick-border border-black
-
-
-
-
-
-
-<style>.xe__progress-bar__container {
-  top:0;
-  opacity: 1;
-  position:absolute;
-  right:0;
-  left: 0;
-}
-.xe__progress-bar {
-  height: 5px;
-  background-color: #e10020;
-  width: calc(var(--slide-current) / var(--slide-total) * 100%);
-}
-.remark-visible .xe__progress-bar {
-  animation: xe__progress-bar__wipe 200ms forwards;
-  animation-timing-function: cubic-bezier(.86,0,.07,1);
-}
-@keyframes xe__progress-bar__wipe {
-  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
-  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
-}</style>
-
-
-.column.bg-main1[.content[
-  .split-four[
- .row[.content[
- # 1. Why do we use charts to tell stories?
- ]]
-  .row[.content[
- # 2. Evidence-based visual perception theory
- ]]
-   .row[.content[
- # 3. Advice on choosing charts
- ]]
- .row[.content[
- # 3. Advice on using colour in charts
- ]]
- ]
-]]
-
-.column.bg-main1[.content.center.vmiddle[
-  # 4. Using this advice to tell stories with charts built with `{ggplot2}`
-]]
-
----
-
-class: inverse, center, middle
-
-# Why do we use charts?
-
----
-
-class: middle, center
-
-&gt; &lt;strike&gt;&lt;h1&gt;A picture is worth a thousand words&lt;/h1&gt;&lt;/strike&gt;
-
----
-
-# Data visualisations are demonstrably useful
-
-There is considerable experimental evidence for data visualisations improving:
-
-- Comprehension of data
-
-- Decision making accuracy and confidence
-
---
-
-Evidence has been collected using eye-tracking, survey filling and interviews. 
-
-For a good overview of the available research see Eberhard [1]. 
-
-&gt; Some of these studies consider tables to be a type of data visualisation.
-&gt;
-&gt; I agree with this! Tables are often awesome choices for presenting data - let's talk more about this later today.
-
----
-
-# Data visualisations are demonstrably useful
-
-.pull-left[
-In 1973 Anscombe [2] published a paper designed to demonstrate...
-
-&gt; Graphs are essential to good statistical analysis.
-
-To do so he simulated 4 datasets sharing **many** identical statistical properties.
-
-]
-
-.pull-right[
-&lt;img src="images/week-4/anscombe's_quartet_stats.jpg"/&gt;
-]
-
-
----
-
-# Data visualisations are demonstrably useful
-
-.pull-left[
-
-However, if you visualised the datasets it was obvious these datasets were **fundamentally** different to one another.
-
-These charts are now known as *Anscombe's quartet*.
-
-]
-
-.pull-right[
-&lt;img src="images/week-4/anscombe's_quartet_3.png"/&gt;
-]
-
----
-
-# Data visualisations are demonstrably useful
-
-.pull-left[
-
-The "Datasaurus Dozen" is a modern reimagining of the original quartet (Matejka, et al. [3]).
-
-Datasaurus was originally created by Alberto Cairo [4].
-
-... there's now an R package for building your own metamers [eliocamp.github.io/metamer/](https://eliocamp.github.io/metamer/)
-
-]
-
-.pull-right[
-&lt;br&gt;
-&lt;br&gt;
-&lt;img src='images/week-4/datasaurus-dozen.gif'/&gt;
-]
-
----
-
-class: middle, center, inverse
-
-# Always. 
-# ALWAYS visualise your datasets.
-
----
-
-# Data visualisations are demonstrably awesome
-
-.pull-left[
-
-&lt;img src='images/week-4/cholera-map.jpg'/&gt;
-
-]
-
-.pull-right[
-There are several historical visualisations that have fundamentally changed social policy and behaviour.
-
-This is a map from John Snow [5] in 1855 that ties a cholera outbreak to a specific water pump.
-
-]
-
----
-
-# Data visualisations are demonstrably awesome
-
-.pull-left[
-
-&lt;img src='images/week-4/cholera-map.jpg'/&gt;
-
-]
-
-.pull-right[
-There are several historical visualisations that have fundamentally changed social policy and behaviour.
-
-This is a map from John Snow [5] in 1855 that ties a cholera outbreak to a specific water pump.
-
-&lt;hr&gt;
-
-Combined with Snow's statistical analyses this was a significant step towards the development and acceptance of germ theory.
-]
-
----
-
-# Data visualisations are demonstrably awesome
-
-.pull-left[
-
-&lt;img src='images/week-4/nightingale-fancy-piecharts.webp'/&gt;
-
-]
-
-.pull-right[
-In exactly the same year, Florence Nightingale [6] was creating charts to demonstrate the importance of **basic sanitation** in military hospitals.
-]
-
----
-
-# Data visualisations are demonstrably awesome
-
-.pull-left[
-
-&lt;img src='images/week-4/nightingale-fancy-piecharts.webp'/&gt;
-
-]
-
-.pull-right[
-In exactly the same year, Florence Nightingale [6] was creating charts to demonstrate the importance of **basic sanitation** in military hospitals.
-
-This specific chart is very dramatic and quite rarely used. It's a polar area diagram or a Nightingale rose diagram
-]
-
-
----
-
-# Data visualisations are demonstrably awesome
-
-.pull-left[
-
-&lt;img src='images/week-4/nightingale-barchart.webp'/&gt;
-
-]
-
-.pull-right[
-But it's important to acknowledge that Nightingale used many different types of charts in her work.
-
-Her charts were central to bringing basic sanitation standards to nursing and hospitals.
-]
-
----
-
-# Data visualisations are demonstrably awesome
-
-.pull-left[
-In 2006 Hans Rosling [7] gave [an incredible TED talk where he introduced animated bubble charts](https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen?language=en) as a tool to tell stories about global development.
-
-These charts helped demonstrate the value of interactive and animated data visualisations - which is why Google bought the tool behind the charts!
-]
-
-.pull-right[
-&lt;a href='https://r-graph-gallery.com/271-ggplot2-animated-gif-chart-with-gganimate.html'&gt;&lt;img src='images/week-3/gapminder-bubble-chart.png'/&gt;&lt;/a&gt;
-]
-
----
-
-# Data visualisations are demonstrably awesome
-
-.pull-left[
-A more recent example of a very powerful data visualisation is the spiralling global temperature GIF from 2016 by Hawkins [8].
-
-We can create animated GIF with `{ggplot2}` via the `{gganimate}` package. In fact, Pat Schloss [9] has [YouTube video](https://www.youtube.com/watch?v=AYfjdcylAio) and [GitHub repo](https://github.com/riffomonas/climate_viz/tree/95168349ece3c1993e960767a4b4d6124b4abd4a) recreating this chart with R.
-]
-
-.pull-right[
-&lt;img src='images/week-4/spiraling-global-temperature-change.gif'/&gt;
-]
-
----
-
-class: middle, center, inverse
-
-# Evidence-based visual perception theory
-
----
-
-# Evidence-based visual perception theory
-
-There is a wealth of evidence-based research in **how precisely or accurately** charts are perceived by readers.
-
---
-
-.pull-left[
-&lt;center&gt;
-&lt;img src='images/week-4/Eyetracker1.jpg'/&gt;
-&lt;br&gt;
-Source: &lt;a href='https://commons.wikimedia.org/wiki/File:Eyetracker1.jpg'&gt;Wikimedia.org&lt;/a&gt;
-&lt;/center&gt;
-]
-
-.pull-right[
-
-Our evidence comes from:
-
-- Eye tracking. We're really good at measuring where the eye is looking, for how long and how intently.
-
-- Asking trial participants to estimate or compare values in charts.
-
-]
-
-
----
-
-# Evidence-based visual perception theory
-
-.pull-left[
-&lt;br&gt;
-&lt;br&gt;
-&lt;center&gt;
-&lt;img src='images/week-4/Eyetracker1.jpg'/&gt;
-&lt;br&gt;
-Source: &lt;a href='https://commons.wikimedia.org/wiki/File:Eyetracker1.jpg'&gt;Wikimedia.org&lt;/a&gt;
-&lt;/center&gt;
-]
-
-.pull-right[
-
-.de-emphasis[
-
-Our evidence comes from:
-
-- Eye tracking. We're really good at measuring where the eye is looking, for how long and how intently.
-
-- Asking trial participants to estimate or compare values in charts.
-]
-
-There are open debates&lt;sup&gt;1&lt;/sup&gt; on **how our internal visual perception system works** - what the brain is doing.
-
-
-]
-
-.footnote[
-[1] A good example is pie charts where we're still not sure what our brains are doing, but we know they're not measuring area thanks to Kosara, et al. [10]
-]
-
----
-
-# Elementary perceptual tasks
-
-.pull-left[
-Back in 1984 Cleveland, et al. [11] published their seminal paper on graphical perception theory where they defined "elementary perceptual tasks".
-
-This study is the backbone of much of the research in this field.
-]
-
-.pull-right[
-&lt;img src='images/week-4/cleveland-1984_elementary-perceptual-tasks.jpg'/&gt;
-]
-
----
-
-# Elementary perceptual tasks
-
-.pull-left[
-Cleveland, et al. [11] designed many experiments where participants were asked to:
-
-- Identify the largest/smallest segment
-
-- Estimate what % the smaller segment was of the larger segment
-
-The accuracy of subject estimates was then statistically analysed.
-]
-
-.pull-right[
-&lt;img src='images/week-4/cleveland-1984_accuracy-comparison.jpg'/&gt;
-]
-
----
-
-# Crowd-sourced evidence for perception theory
-
-.pull-left[
-&lt;img src='images/week-4/cleveland-1984_replication-with-mechanical-turk.jpg' height='500px'/&gt;
-]
-
-.pull-right[
-Heer, et al. [12] replicated this study using Amazon's Mechanical Turk with 3,481 participants in 2010.
-]
-
----
-
-# Crowd-sourced evidence for perception theory
-
-.pull-left[
-&lt;img src='images/week-4/cleveland-1984_replication-with-mechanical-turk.jpg' height='500px'/&gt;
-]
-
-.pull-right[
-Heer, et al. [12] replicated this study using Amazon's Mechanical Turk with 3,481 participants in 2010.
-
-They validated the results of Cleveland, et al. [11] and provided further evidence that
-
-&gt; There is a hierarchy of elementary perceptual tasks - or chart elements - when **accuracy** matters.
-]
-
----
-
-## Ordering channels of communication (by accuracy)
-
-.pull-left[
-&lt;img src='images/week-4/channel-order_magnitude.jpg' height='500px'/&gt;
-]
-
-.footnote[
-Images from Beecham, et al. [13].
-]
-
----
-
-## Ordering channels of communication (by accuracy)
-
-.pull-left[
-&lt;img src='images/week-4/channel-order_magnitude.jpg' height='500px'/&gt;
-]
-
-.pull-right[
-&lt;br&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;img src='images/week-4/channel-order_category.jpg'/&gt;
-]
-
-.footnote[
-Images from Beecham, et al. [13].
-]
-
----
-
-## ... real-world applications of visual perception theory
-
-&lt;img src='images/week-4/encodings-in-detail_bars-and-lines.jpg'/&gt;
-
-.footnote[
-Images from Kosara [14]
-]
-
----
-
-## ... real-world applications of visual perception theory
-
-&lt;img src='images/week-4/encodings-in-detail_piecharts.jpg'/&gt;
-
-.footnote[
-Images from Kosara [14]
-]
-
----
-
-## ... real-world applications of visual perception theory
-
-&lt;center&gt;
-&lt;a href='https://twitter.com/irg_bio/status/1481214254351097859'&gt;&lt;img src='images/week-4/seasonality-in-bee-colonies.jpg' height='500px'/&gt;&lt;/a&gt;
-&lt;/center&gt;
-
-.footnote[
-Image found on Twitter from Iker Rivas-González [@irg\_ bio] [15], code for chart available from Rivas-González [16].
-]
-
----
-
-class: split-33 with-thick-border
-
-.column.bg-main1[.content.vmiddle[
-# Why is someone &lt;strike&gt;reading&lt;/strike&gt; measuring your chart?
-]]
-.column[.content[
-  .split-four[
-  .row.bg-main1[.content[
-.big-note[To extract accurate values.]
-
-The **magnitude** of chart elements.
-  ]]
-  .row.bg-main2[.content[
-.big-note[To quantatively compare values.]
-
-The **part to whole** or **relative magnitude** of chart elements.
-  ]]
-  .row.bg-main3[.content[
-.big-note[To find the largest/smallest value]
-
-The **ranking** of chart elements
-  ]]
-  .row.bg-main4[.content[
-.big-note[To find *unusual* values]
-
-The **distribution**, **ranking** or **magnitude** of chart elements
-  ]]
-]]]
-
----
-
-class: split-33 with-thick-border
-
-.column.bg-main1[.content.vmiddle[
-# Why is someone reading your chart?
-]]
-.column[.content[
-  .split-three[
-  .row.bg-main1[.content[
-.big-note[You have a story you want to tell]
-
-There's lots we can do to help guide the reader to understand your chart and follow the story you're telling. We'll cover some examples during this course.
-  ]]
-  .row.bg-main2[.content[
-.big-note[The reader wants to see the data]
-
-Charts (and tables) are the best way to see the "big picture" of a dataset - a single value (eg mean) is kind of useless. Interactivity is really useful to allow readers to properly **explore** the dataset.
-  ]]
-  .row.bg-main3[.content[
-.big-note[The reader has a preconception about the data]
-
-Readers might be approaching a chart biased with a particular theory about the data. We can do our best to make our charts easy to read and avoid common pitfalls.
-  ]]
-]]]
-
-.footnote[
-I asked on [Twitter](https://twitter.com/charliejhadley/status/1565714347711762448?s=20&amp;t=t00l52NTqksKMGys14pIKQ) about preconceptions.
-]
-
----
-
-class: inverse, middle, center
-
-# How do we choose a chart?
-
----
-
-class: split-two, with-thick-border border-black
-
-.column.bg-main1[.content.vmiddle.center[
-
-# Use data columns to choose charts
-
-&lt;img src='images/week-4/screenshot-msleep.jpg'/&gt;
-
-]]
-
-.column.bg-main1[.content.center.vmiddle[
-
-# Use your story to choose charts
-
-&lt;img src='images/week-4/ft-visual-vocab_square.png' height='300px'/&gt;
-]]
-
----
-
-# [data-to-viz.com](https://www.data-to-viz.com/)
-
-.center[
-&lt;img src='images/week-4/screenshot_data-to-viz.jpg' height='400px'/&gt;
-]
-
-&gt; This site also provides simple to follow instructions for making each chart with {ggplot2}
-
----
-
-# [ft-interactive.github.io/visual-vocabulary](https://ft-interactive.github.io/visual-vocabulary/)
-
-.center[
-&lt;img src='images/week-4/ft-visual-vocab_poster.png' height='550px'/&gt;
-]
-
----
-
-&lt;center&gt;
-&lt;img src='images/week-4/ft_ggplot2-as-a-creativity-engine.jpg' height='450px'/&gt;
-&lt;/center&gt;
-
-&gt; John Burn-Murdoch [17] has shared a lot about the use of R at the Financial Times, [including on Twitter](https://twitter.com/jburnmurdoch).
-
----
-
-class: middle, center, inverse
-
-# {ggplot2} for charts
-
----
-
-# ggplot2: A Grammar of Graphics
-
-`{ggplot2}` is an incredibly powerful and flexible tool for building static dataviz.
-
-We can build (almost)&lt;sup&gt;1&lt;/sup&gt; **any** static chart we can conceive of.
- 
-&lt;img src="week-04_slides_data-visualisation_files/figure-html/unnamed-chunk-2-1.png" width="1500" /&gt;
-
-.footnote[
-[1] - Dual y-axis charts must be transformations of one another ([for good reasons](https://stackoverflow.com/a/3101876/1659890))
-]
-
----
-
-class: split-two with-border
-
-.column[.content.vmiddle[
-
-# Building blocks of a {ggplot2} chart
-
-]]
-.column[
-  .split-five[
-  .row.bg-main1[.content[
-# <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#c03728;overflow:visible;position:relative;"><path d="M0 464V48C0 21.49 21.49 0 48 0H144C170.5 0 192 21.49 192 48V96H112C103.2 96 96 103.2 96 112C96 120.8 103.2 128 112 128H192V192H112C103.2 192 96 199.2 96 208C96 216.8 103.2 224 112 224H192V288H112C103.2 288 96 295.2 96 304C96 312.8 103.2 320 112 320H192V400C192 408.8 199.2 416 208 416C216.8 416 224 408.8 224 400V320H288V400C288 408.8 295.2 416 304 416C312.8 416 320 408.8 320 400V320H384V400C384 408.8 391.2 416 400 416C408.8 416 416 408.8 416 400V320H464C490.5 320 512 341.5 512 368V464C512 490.5 490.5 512 464 512H48C23.15 512 2.706 493.1 .2477 468.9C.0838 467.3 0 465.7 0 464z"/></svg> &lt;span style='color:#c03728'&gt;Aesthetics&lt;/span&gt;
-  ]]
-  .row.bg-main2[.content[
-# <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#919c4c;overflow:visible;position:relative;"><path d="M411.4 175.5C417.4 185.4 417.5 197.7 411.8 207.8C406.2 217.8 395.5 223.1 384 223.1H192C180.5 223.1 169.8 217.8 164.2 207.8C158.5 197.7 158.6 185.4 164.6 175.5L260.6 15.54C266.3 5.897 276.8 0 288 0C299.2 0 309.7 5.898 315.4 15.54L411.4 175.5zM288 312C288 289.9 305.9 272 328 272H472C494.1 272 512 289.9 512 312V456C512 478.1 494.1 496 472 496H328C305.9 496 288 478.1 288 456V312zM0 384C0 313.3 57.31 256 128 256C198.7 256 256 313.3 256 384C256 454.7 198.7 512 128 512C57.31 512 0 454.7 0 384z"/></svg> &lt;span style='color:#919c4c'&gt;Geoms&lt;/span&gt;
-  ]]
-  .row.bg-main3[.content[
-# <svg aria-hidden="true" role="img" viewBox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#fd8f24;overflow:visible;position:relative;"><path d="M554.9 154.5c-17.62-35.25-68.12-35.38-85.87 0c-87 174.3-84.1 165.9-84.1 181.5c0 44.13 57.25 80 128 80s127.1-35.88 127.1-80C639.1 319.9 641.4 327.3 554.9 154.5zM439.1 320l71.96-144l72.17 144H439.1zM256 336c0-16.12 1.375-8.75-85.12-181.5c-17.62-35.25-68.12-35.38-85.87 0c-87 174.3-84.1 165.9-84.1 181.5c0 44.13 57.25 80 127.1 80S256 380.1 256 336zM127.9 176L200.1 320H55.96L127.9 176zM495.1 448h-143.1V153.3C375.5 143 393.1 121.8 398.4 96h113.6c17.67 0 31.1-14.33 31.1-32s-14.33-32-31.1-32h-128.4c-14.62-19.38-37.5-32-63.62-32S270.1 12.62 256.4 32H128C110.3 32 96 46.33 96 64S110.3 96 127.1 96h113.6c5.25 25.75 22.87 47 46.37 57.25V448H144c-26.51 0-48.01 21.49-48.01 48c0 8.836 7.165 16 16 16h416c8.836 0 16-7.164 16-16C544 469.5 522.5 448 495.1 448z"/></svg> &lt;span style='color:#919c4c'&gt;Scales&lt;/span&gt;
-  ]]
-  .row.bg-main4[.content[
-# <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f5c04a;overflow:visible;position:relative;"><path d="M472.8 168.4C525.1 221.4 525.1 306.6 472.8 359.6L360.8 472.9C351.5 482.3 336.3 482.4 326.9 473.1C317.4 463.8 317.4 448.6 326.7 439.1L438.6 325.9C472.5 291.6 472.5 236.4 438.6 202.1L310.9 72.87C301.5 63.44 301.6 48.25 311.1 38.93C320.5 29.61 335.7 29.7 344.1 39.13L472.8 168.4zM.0003 229.5V80C.0003 53.49 21.49 32 48 32H197.5C214.5 32 230.7 38.74 242.7 50.75L410.7 218.7C435.7 243.7 435.7 284.3 410.7 309.3L277.3 442.7C252.3 467.7 211.7 467.7 186.7 442.7L18.75 274.7C6.743 262.7 0 246.5 0 229.5L.0003 229.5zM112 112C94.33 112 80 126.3 80 144C80 161.7 94.33 176 112 176C129.7 176 144 161.7 144 144C144 126.3 129.7 112 112 112z"/></svg> &lt;span style='color:#919c4c'&gt;Guides&lt;/span&gt;
-  ]]
-  .row.bg-main5[.content[
-# <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#e68c7c;overflow:visible;position:relative;"><path d="M0 64C0 28.65 28.65 0 64 0H352C387.3 0 416 28.65 416 64V128C416 163.3 387.3 192 352 192H64C28.65 192 0 163.3 0 128V64zM160 352C160 334.3 174.3 320 192 320V304C192 259.8 227.8 224 272 224H416C433.7 224 448 209.7 448 192V69.46C485.3 82.64 512 118.2 512 160V192C512 245 469 288 416 288H272C263.2 288 256 295.2 256 304V320C273.7 320 288 334.3 288 352V480C288 497.7 273.7 512 256 512H192C174.3 512 160 497.7 160 480V352z"/></svg> &lt;span style='color:#e68c7c'&gt;Theme&lt;/span&gt;
-  ]]
-]]
-
----
-
-class: split-two with-border
-
-.column[.content.vmiddle[
-
-# <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#c03728;overflow:visible;position:relative;"><path d="M0 464V48C0 21.49 21.49 0 48 0H144C170.5 0 192 21.49 192 48V96H112C103.2 96 96 103.2 96 112C96 120.8 103.2 128 112 128H192V192H112C103.2 192 96 199.2 96 208C96 216.8 103.2 224 112 224H192V288H112C103.2 288 96 295.2 96 304C96 312.8 103.2 320 112 320H192V400C192 408.8 199.2 416 208 416C216.8 416 224 408.8 224 400V320H288V400C288 408.8 295.2 416 304 416C312.8 416 320 408.8 320 400V320H384V400C384 408.8 391.2 416 400 416C408.8 416 416 408.8 416 400V320H464C490.5 320 512 341.5 512 368V464C512 490.5 490.5 512 464 512H48C23.15 512 2.706 493.1 .2477 468.9C.0838 467.3 0 465.7 0 464z"/></svg> &lt;span style='color:#c03728'&gt;Aesthetics&lt;/span&gt;
-
-]]
-.column[
-  .content[
-Aesthetics are used to create mappings between columns in our datasets and the coordinate systems of our chart.
-
-
-```r
-msleep %&gt;% 
-  ggplot() +
-  aes(
-    x = sleep_total,
-    y = sleep_rem,
-    colour = vore
-  )
-```
-
-`{ggplot2}` uses *tidy evaluation* to allow us to use naked column names in our code.
-
-]
-]
-
----
-
-class: split-two with-border
-
-.column[.content.vmiddle[
-
-# <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#919c4c;overflow:visible;position:relative;"><path d="M411.4 175.5C417.4 185.4 417.5 197.7 411.8 207.8C406.2 217.8 395.5 223.1 384 223.1H192C180.5 223.1 169.8 217.8 164.2 207.8C158.5 197.7 158.6 185.4 164.6 175.5L260.6 15.54C266.3 5.897 276.8 0 288 0C299.2 0 309.7 5.898 315.4 15.54L411.4 175.5zM288 312C288 289.9 305.9 272 328 272H472C494.1 272 512 289.9 512 312V456C512 478.1 494.1 496 472 496H328C305.9 496 288 478.1 288 456V312zM0 384C0 313.3 57.31 256 128 256C198.7 256 256 313.3 256 384C256 454.7 198.7 512 128 512C57.31 512 0 454.7 0 384z"/></svg> &lt;span style='color:#919c4c'&gt;Geoms&lt;/span&gt;
-
-]]
-.column[
-  .content[
-Geoms use the aesthetic mappings we create to add *layers* to our chart.
-
-
-```r
-msleep %&gt;% 
-  ggplot() +
-  aes(
-    x = sleep_total,
-    y = sleep_rem,
-    colour = vore
-  ) +
-  geom_point()
-```
-
-&lt;hr&gt;
-
-Let's go into a little bit more detail about this.
-
-]
-]
-
----
-
-# XXX DRAGONS XXX
-
-- Dataviz are demonstrably awesome
-
-- Visual Perception Theory
-
-- Let's make some actual ggplot2 charts / Grammar of Graphics
-
-- Deciding on charts (FT Visual Vocabulary)
-
-- Things to avoid / Advice (does this belong in visual perception theory?)
-
-  - Starting at zero
-
-  - Lots of different types of charts
+<html lang="en"><head>
+<script src="week-04_slides_data-visualisation_files/libs/clipboard/clipboard.min.js"></script>
+<script src="week-04_slides_data-visualisation_files/libs/quarto-html/tabby.min.js"></script>
+<script src="week-04_slides_data-visualisation_files/libs/quarto-html/popper.min.js"></script>
+<script src="week-04_slides_data-visualisation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="week-04_slides_data-visualisation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="week-04_slides_data-visualisation_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="week-04_slides_data-visualisation_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.0.37">
+
+  <meta name="author" content="Charlotte Hadley">
+  <title>Week 5: Surveys</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="week-04_slides_data-visualisation_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="week-04_slides_data-visualisation_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+  <link rel="stylesheet" href="week-04_slides_data-visualisation_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="week-04_slides_data-visualisation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="week-04_slides_data-visualisation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="week-04_slides_data-visualisation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="week-04_slides_data-visualisation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">Week 5: Surveys</h1>
+  <p class="author"><large>Charlotte Hadley</large></p>
+</section>
+
+<section id="topics-for-today" class="slide level2">
+<h2>Topics for today</h2>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-1_9b24e8fec4030f5b514637e1128ae038">
+
+</div>
+<ol type="1">
+<li><p>Why do we use charts to tell stories?</p></li>
+<li><p>Evidence-based visual perception theory</p></li>
+<li><p>Advice on choosing charts</p></li>
+<li><p>Advice on using colour in charts</p></li>
+<li><p>Using this advice to tell stories with charts built with <code>{ggplot2}</code></p></li>
+</ol>
+</section>
+<section>
+<section id="why-do-we-use-charts" class="title-slide slide level1 center center-x" data-background-color="#23241F">
+<h1>Why do we use charts??</h1>
+
+</section>
+<section class="slide level2">
+
+<blockquote>
+<strike>
+<h1>
+A picture is worth a thousand words
+</h1>
+</strike><p><strike></strike></p>
+</blockquote>
+</section>
+<section id="data-visualisations-are-demonstrably-useful" class="slide level2">
+<h2>Data visualisations are demonstrably useful</h2>
+<p>There is considerable experimental evidence for data visualisations improving:</p>
+<ul>
+<li><p>Comprehension of data</p></li>
+<li><p>Decision making accuracy and confidence</p></li>
+</ul>
+<p><br></p>
+<p>Evidence has been collected using eye-tracking, survey filling and interviews.</p>
+<p>For a good overview of the available research see Eberhard 2021<span class="citation" data-cites="eberhard_effects_2021"><sup><a href="#/ref-eberhard_effects_2021" role="doc-biblioref" onclick="return false;">1</a></sup></span>.</p>
+<blockquote>
+<p>Some of these studies consider tables to be a type of data visualisation.</p>
+<p>I agree with this! Tables are often awesome choices for presenting data - let’s talk more about this later today.</p>
+</blockquote>
+</section>
+<section id="data-visualisations-are-demonstrably-useful-1" class="slide level2">
+<h2>Data visualisations are demonstrably useful</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>In 1973 Anscombe<span class="citation" data-cites="anscombe_graphs_1973"><sup><a href="#/ref-anscombe_graphs_1973" role="doc-biblioref" onclick="return false;">2</a></sup></span> published a paper designed to demonstrate…</p>
+<blockquote>
+<p>Graphs are essential to good statistical analysis.</p>
+</blockquote>
+<p>To do so he simulated 4 datasets sharing <strong>many</strong> identical statistical properties.</p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><img src="images/week-4/anscombe's_quartet_stats.jpg"></p>
+</div>
+</div>
+</section>
+<section id="data-visualisations-are-demonstrably-useful-2" class="slide level2">
+<h2>Data visualisations are demonstrably useful</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>However, if you visualised the datasets it was obvious these datasets were <strong>fundamentally</strong> different to one another.</p>
+<p>These charts are now known as <em>Anscombe’s quartet</em><span class="citation" data-cites="anscombe_graphs_1973"><sup><a href="#/ref-anscombe_graphs_1973" role="doc-biblioref" onclick="return false;">2</a></sup></span>.</p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><img src="images/week-4/anscombe's_quartet_3.png"></p>
+</div>
+</div>
+</section>
+<section id="data-visualisations-are-demonstrably-useful-3" class="slide level2">
+<h2>Data visualisations are demonstrably useful</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>The “Datasaurus Dozen” is a modern reimagining of the original quartet<span class="citation" data-cites="matejka_same_2017"><sup><a href="#/ref-matejka_same_2017" role="doc-biblioref" onclick="return false;">3</a></sup></span>.</p>
+<p><br></p>
+<p>Datasaurus was originally created by Alberto Cairo<span class="citation" data-cites="cairo_download_2016"><sup><a href="#/ref-cairo_download_2016" role="doc-biblioref" onclick="return false;">4</a></sup></span>.</p>
+<p><br></p>
+<p>… there’s now an R package for building your own metamers <a href="https://eliocamp.github.io/metamer/">eliocamp.github.io/metamer/</a></p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><br> <br> <img src="images/week-4/datasaurus-dozen.gif"></p>
+</div>
+</div>
+</section>
+<section id="always." class="slide level2 center center-x" data-background-color="#23241F">
+<h2>ALWAYS.</h2>
+<h3 id="always-visualise-your-datasets.">Always visualise your datasets.</h3>
+</section>
+<section id="data-visualisations-are-demonstrably-useful-4" class="slide level2">
+<h2>Data visualisations are demonstrably useful</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><img src="images/week-4/cholera-map.jpg"></p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p>There are several historical visualisations that have fundamentally changed social policy and behaviour.</p>
+<p><br></p>
+<p>This is a map from John Snow in 1855<span class="citation" data-cites="snow_mode_1855"><sup><a href="#/ref-snow_mode_1855" role="doc-biblioref" onclick="return false;">5</a></sup></span> that ties a cholera outbreak to a specific water pump.</p>
+<p><br></p>
+<div class="fragment">
+<p>Combined with Snow’s statistical analyses this was a significant step towards the development and acceptance of germ theory.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="data-visualisations-are-demonstrably-useful-5" class="slide level2">
+<h2>Data visualisations are demonstrably useful</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><img src="images/week-4/nightingale-fancy-piecharts.webp"></p>
+<div class="fragment" data-fragment-index="2">
+<p><img src="images/week-4/nightingale-barchart.webp"></p>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p>In exactly the same year, Florence Nightingale<span class="citation" data-cites="nightingale_notes_1858"><sup><a href="#/ref-nightingale_notes_1858" role="doc-biblioref" onclick="return false;">6</a></sup></span> was creating charts to demonstrate the importance of <strong>basic sanitation</strong> in military hospitals.</p>
+<p><br></p>
+<div class="fragment" data-fragment-index="1">
+<p>This specific chart is very dramatic and quite rarely used. It’s a polar area diagram or a Nightingale rose diagram</p>
+</div>
+<p><br></p>
+<div class="fragment" data-fragment-index="2">
+<p>But it’s important to acknowledge that Nightingale used many different types of charts in her work.</p>
+<p>Her charts and analyses were central to bringing basic sanitation standards to nursing and hospitals.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="data-visualisations-are-demonstrably-useful-6" class="slide level2">
+<h2>Data visualisations are demonstrably useful</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>In 2006 Hans Rosling<span class="citation" data-cites="hans_rosling_best_2006"><sup><a href="#/ref-hans_rosling_best_2006" role="doc-biblioref" onclick="return false;">7</a></sup></span> gave <a href="https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen?language=en">an incredible TED talk where he introduced animated bubble charts</a> as a tool to tell stories about global development.</p>
+<p><br></p>
+<p>These charts helped demonstrate the value of interactive and animated data visualisations - which is why Google bought the tool behind the charts!</p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><a href="https://r-graph-gallery.com/271-ggplot2-animated-gif-chart-with-gganimate.html"><img src="images/week-3/gapminder-bubble-chart.png"></a></p>
+</div>
+</div>
+</section>
+<section id="data-visualisations-are-demonstrably-useful-7" class="slide level2">
+<h2>Data visualisations are demonstrably useful</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>A more recent example of a very powerful data visualisation is the spiralling global temperature GIF from 2016 by Ed Hawkins<span class="citation" data-cites="hawkins_spiralling_2016"><sup><a href="#/ref-hawkins_spiralling_2016" role="doc-biblioref" onclick="return false;">8</a></sup></span>.</p>
+<p><br></p>
+<p>We can create animated GIF with <code>{ggplot2}</code> via the <code>{gganimate}</code> package. In fact, Pat Schloss<span class="citation" data-cites="pat_schloss_recreating_2022"><sup><a href="#/ref-pat_schloss_recreating_2022" role="doc-biblioref" onclick="return false;">9</a></sup></span> has a <a href="https://www.youtube.com/watch?v=AYfjdcylAio">YouTube video</a> and <a href="https://github.com/riffomonas/climate_viz/tree/95168349ece3c1993e960767a4b4d6124b4abd4a">GitHub repo</a> recreating this chart with R.</p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><img src="images/week-4/spiraling-global-temperature-change.gif"></p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="evidence-based-visual-perception-theory" class="title-slide slide level1 center center-x" data-background-color="#23241F">
+<h1>Evidence-based visual perception theory</h1>
+
+</section>
+<section id="evidence-based-visual-perception-theory-1" class="slide level2">
+<h2>Evidence-based visual perception theory</h2>
+<p>There is a wealth of evidence-based research in <strong>how precisely or accurately</strong> charts are perceived by readers.</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<center>
+<img src="images/week-4/Eyetracker1.jpg"> <br> Source: <a href="https://commons.wikimedia.org/wiki/File:Eyetracker1.jpg">Wikimedia.org</a>
+</center>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p>Our evidence comes from:</p>
+<ul>
+<li><p>Eye tracking. We’re really good at measuring where the eye is looking, for how long and how intently.</p></li>
+<li><p>Asking trial participants to estimate or compare values in charts.</p></li>
+</ul>
+</div>
+</div>
+<blockquote>
+<p>There are open debates<sup>1</sup> on <strong>how our internal visual perception system works</strong> - what the brain is doing.</p>
+</blockquote>
+<div class="footnote">
+<p><sup>1</sup>A good example is pie charts where we’re still not sure what our brains are doing, but we know they’re not measuring area thanks to Robert Kosara<span class="citation" data-cites="kosara_judgment_2016"><sup><a href="#/ref-kosara_judgment_2016" role="doc-biblioref" onclick="return false;">10</a></sup></span></p>
+</div>
+</section>
+<section id="elementary-perceptual-tasks" class="slide level2">
+<h2>Elementary perceptual tasks</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>Back in 1984 Cleveland &amp; McGill<span class="citation" data-cites="cleveland_graphical_1984"><sup><a href="#/ref-cleveland_graphical_1984" role="doc-biblioref" onclick="return false;">11</a></sup></span> published their seminal paper on graphical perception theory where they defined “elementary perceptual tasks”.</p>
+<p><br></p>
+<p>This study is the backbone of much of the research in this field.</p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><img src="images/week-4/cleveland-1984_elementary-perceptual-tasks.jpg"></p>
+</div>
+</div>
+</section>
+<section id="elementary-perceptual-tasks-1" class="slide level2">
+<h2>Elementary perceptual tasks</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>Cleveland &amp; McGill<span class="citation" data-cites="cleveland_graphical_1984"><sup><a href="#/ref-cleveland_graphical_1984" role="doc-biblioref" onclick="return false;">11</a></sup></span> designed many experiments where participants were asked to:</p>
+<ul>
+<li><p>Identify the largest/smallest segment</p></li>
+<li><p>Estimate what % the smaller segment was of the larger segment</p></li>
+</ul>
+<p>The <strong>accuracy</strong> of subject estimates was then statistically analysed.</p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><img src="images/week-4/cleveland-1984_accuracy-comparison.jpg"></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="crowd-sourced-evidence-for-perception-theory">Crowd-sourced evidence for perception theory</h3>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><img src="images/week-4/cleveland-1984_replication-with-mechanical-turk.jpg" height="500px"></p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p>Heer &amp; Bostock<span class="citation" data-cites="heer_crowdsourcing_2010"><sup><a href="#/ref-heer_crowdsourcing_2010" role="doc-biblioref" onclick="return false;">12</a></sup></span> replicated this study using Amazon’s Mechanical Turk with 3,481 participants in 2010.</p>
+<p><br></p>
+<div class="fragment">
+<p>They validated the results of Cleveland &amp; McGill<span class="citation" data-cites="cleveland_graphical_1984"><sup><a href="#/ref-cleveland_graphical_1984" role="doc-biblioref" onclick="return false;">11</a></sup></span> and provided further evidence that…</p>
+<blockquote>
+<p>There is a hierarchy of elementary perceptual tasks - or chart elements - when <strong>accuracy</strong> matters.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="ordering-channels-of-communication-by-accuracy">Ordering channels of communication (by accuracy)</h3>
+<div class="columns">
+<div class="column center-x" style="width:48%;">
+<p><img src="images/week-4/channel-order_magnitude.jpg" height="500px"></p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column fragment center-x" style="width:48%;">
+<p><img src="images/week-4/channel-order_category.jpg"></p>
+</div>
+</div>
+<p>Images from Beecham et al<span class="citation" data-cites="beecham_use_2021"><sup><a href="#/ref-beecham_use_2021" role="doc-biblioref" onclick="return false;">13</a></sup></span></p>
+</section>
+<section class="slide level2">
+
+<h3 id="real-world-applications-of-visual-perception-theory">… real-world applications of visual perception theory</h3>
+
+<img src="images/week-4/encodings-in-detail_bars-and-lines.jpg" class="r-stretch"><p>Images from Robert Kosara<span class="citation" data-cites="kosara_more_2022"><sup><a href="#/ref-kosara_more_2022" role="doc-biblioref" onclick="return false;">14</a></sup></span></p>
+</section>
+<section class="slide level2">
+
+<h3 id="real-world-applications-of-visual-perception-theory-1">… real-world applications of visual perception theory</h3>
+
+<img src="images/week-4/encodings-in-detail_piecharts.jpg" class="r-stretch"><p>Images from Robert Kosara<span class="citation" data-cites="kosara_more_2022"><sup><a href="#/ref-kosara_more_2022" role="doc-biblioref" onclick="return false;">14</a></sup></span></p>
+</section>
+<section id="real-world-applications-of-visual-perception-theory-2" class="slide level2">
+<h2>… real-world applications of visual perception theory</h2>
+<center>
+<a href="https://twitter.com/irg_bio/status/1481214254351097859"><img src="images/week-4/seasonality-in-bee-colonies.jpg" height="500px"></a>
+</center>
+<p>.footnote[ Image found on Twitter from<span class="citation" data-cites="iker_rivas-gonzalez_irg_bio_i_2022"><sup><a href="#/ref-iker_rivas-gonzalez_irg_bio_i_2022" role="doc-biblioref" onclick="return false;">15</a></sup></span>, code for chart available from<span class="citation" data-cites="rivas-gonzalez_seasonality_2022"><sup><a href="#/ref-rivas-gonzalez_seasonality_2022" role="doc-biblioref" onclick="return false;">16</a></sup></span>.]</p>
+</section>
+<section id="dragons" class="slide level2">
+<h2>DRAGONS:</h2>
+<ul>
+<li><p>Some rules to follow:</p>
+<ul>
+<li><p>Don’t use pies for more than a few groups (ideally 2)</p></li>
+<li><p>If using bubble charts vary by area instead of radius</p></li>
+<li><p>Colour schemes matter A LOT</p></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2 smaller scrollable">
+
+<h3 id="references">References</h3>
+<div id="refs" class="references csl-bib-body" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-eberhard_effects_2021" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Eberhard, K. The effects of visualization on judgment and decision-making: A systematic literature review. <em>Management Review Quarterly</em> (2021) doi:<a href="https://doi.org/10.1007/s11301-021-00235-8">10.1007/s11301-021-00235-8</a>.</div>
+</div>
+<div id="ref-anscombe_graphs_1973" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Anscombe, F. J. <a href="https://doi.org/10.1080/00031305.1973.10478966">Graphs in <span>Statistical Analysis</span></a>. <em>The American Statistician</em> <strong>27</strong>, 17–21 (1973).</div>
+</div>
+<div id="ref-matejka_same_2017" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Matejka, J. &amp; Fitzmaurice, G. Same <span>Stats</span>, <span>Different Graphs</span>: <span>Generating Datasets</span> with <span>Varied Appearance</span> and <span>Identical Statistics</span> through <span>Simulated Annealing</span>. in <em>Proceedings of the 2017 <span>CHI Conference</span> on <span>Human Factors</span> in <span>Computing Systems</span></em> 1290–1294 (<span>Association for Computing Machinery</span>, 2017). doi:<a href="https://doi.org/10.1145/3025453.3025912">10.1145/3025453.3025912</a>.</div>
+</div>
+<div id="ref-cairo_download_2016" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Cairo, A. Download the <span>Datasaurus</span>: <span>Never</span> trust summary statistics alone; always visualize your data. (2016).</div>
+</div>
+<div id="ref-snow_mode_1855" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Snow, J. <em>On the mode of communication of cholera</em>. (<span>John Churchill</span>, 1855).</div>
+</div>
+<div id="ref-nightingale_notes_1858" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Nightingale, F. <em>Notes on <span>Matters Affecting</span> the <span>Health</span>, <span>Efficiency</span> and <span>Hospital Administration</span> of the <span>British Army</span></em>. (<span>Harrison &amp; Sons</span>, 1858).</div>
+</div>
+<div id="ref-hans_rosling_best_2006" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Hans Rosling. The best stats you’ve ever seen [<span>Video</span>]. <em>The best stats you’ve ever seen</em> (2006).</div>
+</div>
+<div id="ref-hawkins_spiralling_2016" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Hawkins, E. Spiralling global temperatures | <span>Climate Lab Book</span>. (2016).</div>
+</div>
+<div id="ref-pat_schloss_recreating_2022" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Pat Schloss. Recreating animated climate temperature spirals in <span>R</span> with Ggplot2 and gganimate (<span>CC219</span>). (2022).</div>
+</div>
+<div id="ref-kosara_judgment_2016" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Kosara, R. &amp; Skau, D. Judgment <span>Error</span> in <span>Pie Chart Variations</span>. <em>EuroVis 2016 - Short Papers</em> 5 pages (2016) doi:<a href="https://doi.org/10.2312/EUROVISSHORT.20161167">10.2312/EUROVISSHORT.20161167</a>.</div>
+</div>
+<div id="ref-cleveland_graphical_1984" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">11. </div><div class="csl-right-inline">Cleveland, W. S. &amp; McGill, R. <a href="https://doi.org/10.1080/01621459.1984.10478080">Graphical <span>Perception</span>: <span>Theory</span>, <span>Experimentation</span>, and <span>Application</span> to the <span>Development</span> of <span>Graphical Methods</span></a>. <em>Journal of the American Statistical Association</em> <strong>79</strong>, 531–554 (1984).</div>
+</div>
+<div id="ref-heer_crowdsourcing_2010" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">12. </div><div class="csl-right-inline">Heer, J. &amp; Bostock, M. Crowdsourcing graphical perception: Using mechanical turk to assess visualization design. in <em>Proceedings of the 28th international conference on <span>Human</span> factors in computing systems - <span>CHI</span> ’10</em> 203 (<span>ACM Press</span>, 2010). doi:<a href="https://doi.org/10.1145/1753326.1753357">10.1145/1753326.1753357</a>.</div>
+</div>
+<div id="ref-beecham_use_2021" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">13. </div><div class="csl-right-inline">Beecham, R., Dykes, J., Hama, L. &amp; Lomax, N. <a href="https://doi.org/10.3390/ijgi10040213">On the <span>Use</span> of <span>“<span>Glyphmaps</span>”</span> for <span>Analysing</span> the <span>Scale</span> and <span>Temporal Spread</span> of <span>COVID-19 Reported Cases</span></a>. <em>ISPRS International Journal of Geo-Information</em> <strong>10</strong>, 213 (2021).</div>
+</div>
+<div id="ref-kosara_more_2022" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">14. </div><div class="csl-right-inline">Kosara, R. <a href="https://doi.org/10.1109/MCG.2021.3138608">More <span>Than Meets</span> the <span>Eye</span>: <span>A Closer Look</span> at <span>Encodings</span> in <span>Visualization</span></a>. <em>IEEE Computer Graphics and Applications</em> <strong>42</strong>, 110–114 (2022).</div>
+</div>
+<div id="ref-iker_rivas-gonzalez_irg_bio_i_2022" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">15. </div><div class="csl-right-inline">Iker Rivas-González [@irg_bio]. I am also joining the hexbin fever! 🐝 <span>For</span> this week’s #<span>TidyTuesday</span>, <span>I</span> plotted the number of bee colonies in the <span>US</span> by year and season. <span>It</span> seems like cold and warm states have different patterns of seasonal changes. <span>Code</span>: <span class="nocase">https://github.com/rivasiker/TidyTuesday/blob/main/2022/2022-01-11/analysis_2022-01-11.Rmd</span> #<span>RStats</span> #<span>DataViz</span> #ggplot2 <span class="nocase">https://t.co/OYGyg2az7M</span>. <em>Twitter</em> (2022).</div>
+</div>
+<div id="ref-rivas-gonzalez_seasonality_2022" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">16. </div><div class="csl-right-inline">Rivas-González, I. Seasonality in bee colonies with hexbin geofacets. (2022).</div>
+</div>
+</div>
+<div class="footer footer-default">
+
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
-  - Dynamite charts
 
-- Sucking quote 
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="week-04_slides_data-visualisation_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
-&gt;  “There is no way of knowing nothing about a subject to knowing something about a subject without going through a period of much frustration and suckiness.”
-“Push through. You’ll suck less.” Hadley Wickham, author of ggplot2
+  <script>
 
-- Tables
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
 
-  - Better than just text
-  - But can be overwhelming
-    - See doi.org/10.1017/S1537592707072209 for excellent examples
-  - Using sparklines can really help
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
 
-## Workshop
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
 
-Factors.
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
 
+        // Display a presentation progress bar
+        progress: true,
 
----
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
 
-# References Page 1
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
 
-.references[
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
 
-[1] K. Eberhard. "The Effects of Visualization on Judgment and Decision-Making: A Systematic Literature Review". In: _Management
-Review Quarterly_ (Aug. 2021). ISSN: 2198-1639. DOI: 10.1007/s11301-021-00235-8.
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
 
-[2] F. J. Anscombe. "Graphs in Statistical Analysis". In: _The American Statistician_ 27.1 (Feb. 1973), pp. 17-21. ISSN:
-0003-1305, 1537-2731. DOI: 10.1080/00031305.1973.10478966.
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
 
-[3] J. Matejka et al. "Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through
-Simulated Annealing". In: _Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems_. CHI '17. New York, NY,
-USA: Association for Computing Machinery, May. 2017, pp. 1290-1294. ISBN: 978-1-4503-4655-9. DOI: 10.1145/3025453.3025912.
+        // Push each slide change to the browser history
+        history: true,
 
-[4] A. Cairo. _Download the Datasaurus: Never Trust Summary Statistics Alone; Always Visualize Your Data_. Aug. 2016.
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
 
-[5] J. Snow. _On the Mode of Communication of Cholera_. Second. London: John Churchill, 1855.
+        // Enable the slide overview mode
+        overview: true,
 
-[6] F. Nightingale. _Notes on Matters Affecting the Health, Efficiency and Hospital Administration of the British Army_. London:
-Harrison &amp; Sons, Nov. 1858.
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
 
-[7] Hans Rosling. _The Best Stats You've Ever Seen [Video]_. https://www.ted.com/talks/hans\_ rosling\_ the\_ best\_ stats\_ you\_
-ve\_ ever\_ seen?language=en. Feb. 2006.
+        // Vertical centering of slides
+        center: false,
 
-[8] E. Hawkins. _Spiralling Global Temperatures | Climate Lab Book_.
-https://www.climate-lab-book.ac.uk/2016/spiralling-global-temperatures/. May. 2016.
+        // Enables touch navigation on devices with touch input
+        touch: true,
 
-[9] Pat Schloss. _Recreating Animated Climate Temperature Spirals in R with Ggplot2 and Gganimate (CC219)_. Jun. 2022.
+        // Loop the presentation
+        loop: false,
 
-[10] R. Kosara et al. "Judgment Error in Pie Chart Variations". In: _EuroVis 2016 - Short Papers_ (2016), p. 5 pages. ISSN: -.
-DOI: 10.2312/EUROVISSHORT.20161167.
+        // Change the presentation direction to be RTL
+        rtl: false,
 
-]
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
 
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
 
+        // Turns fragments on and off globally
+        fragments: true,
 
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
 
-    </textarea>
-<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="libs/remark-latest.min.js"></script>
-<script src="js/macros.js"></script>
-<script>var slideshow = remark.create({
-"ratio": "16:9",
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
-});
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
-  window.dispatchEvent(new Event('resize'));
-});
-(function(d) {
-  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
-  if (!r) return;
-  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
-  d.head.appendChild(s);
-})(document);
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
 
-(function(d) {
-  var el = d.getElementsByClassName("remark-slides-area");
-  if (!el) return;
-  var slide, slides = slideshow.getSlides(), els = el[0].children;
-  for (var i = 1; i < slides.length; i++) {
-    slide = slides[i];
-    if (slide.properties.continued === "true" || slide.properties.count === "false") {
-      els[i - 1].className += ' has-continuation';
-    }
-  }
-  var s = d.createElement("style");
-  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
-  d.head.appendChild(s);
-})(document);
-// delete the temporary CSS (for displaying all slides initially) when the user
-// starts to view slides
-(function() {
-  var deleted = false;
-  slideshow.on('beforeShowSlide', function(slide) {
-    if (deleted) return;
-    var sheets = document.styleSheets, node;
-    for (var i = 0; i < sheets.length; i++) {
-      node = sheets[i].ownerNode;
-      if (node.dataset["target"] !== "print-only") continue;
-      node.parentNode.removeChild(node);
-    }
-    deleted = true;
-  });
-})();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
-(function() {
-  "use strict"
-  // Replace <script> tags in slides area to make them executable
-  var scripts = document.querySelectorAll(
-    '.remark-slides-area .remark-slide-container script'
-  );
-  if (!scripts.length) return;
-  for (var i = 0; i < scripts.length; i++) {
-    var s = document.createElement('script');
-    var code = document.createTextNode(scripts[i].textContent);
-    s.appendChild(code);
-    var scriptAttrs = scripts[i].attributes;
-    for (var j = 0; j < scriptAttrs.length; j++) {
-      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
-    }
-    scripts[i].parentElement.replaceChild(s, scripts[i]);
-  }
-})();
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
 
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
 
-<script>
-slideshow._releaseMath = function(el) {
-  var i, text, code, codes = el.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          // dispatch for htmlwidgets
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for reveal
+        if (window.Reveal) {
+          window.Reveal.addEventListener("slidechanged", function(event) {
+            fireSlideChanged(event.previousSlide, event.currentSlide);
+          });
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
       }
-    }
-    i++;
-  }
-};
-slideshow._releaseMath(document);
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          let href = ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>
