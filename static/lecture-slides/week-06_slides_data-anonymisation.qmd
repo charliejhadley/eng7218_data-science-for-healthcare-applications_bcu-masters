@@ -24,9 +24,11 @@ library(janitor)
 
 1. What are specific risks of deanonymisation of health data?
 
+1. Anonymity measures: k-anonymity and l-diversity
+
 1. Case studies of deanonymisation
 
-1. Anonymity measures: k-anonymity and l-diversity
+    > ... and why anonymity measures are often not enough
 
 1. R packages for working with anonymouse data and sampling
 
@@ -196,13 +198,98 @@ XXX I need some evidence of this last one XXX
 
 ## Case studies of deanonymisation {background-color="#23241F" .center .center-x}
 
+# Anonymity measures: k-anonymity and l-diversity {background-color="#23241F" .center .center-x}
+
+
 -----------
 
-## Anonymity measures: k-anonymity and l-diversity {background-color="#23241F" .center .center-x}
+## Early evidence for de-anonymisation (DRAFT)
+
+In the late 90s there was a rapid conceptualisation of how easy de-anonymisation is of large, public datasets.
+
+Sweeney showed in 1997[@sweeney_weaving_1997] that the Massachusetts voting list (n=54,805) could easily be de-anonymised
+
+<img src='images/week-06/sweeney-mass-de-anonyisation.png'/>
+
+-----------
+
+## k-anonymity (DRAFT)
+
+Good slides: https://courses.cs.duke.edu/fall13/compsci590.3/slides/lec4.pdf
+
+-----------
+
+## k-anonymity and high-dimensionality (DRAFT)
+
+> "Furthermore, k-anonymization completely fails on high-dimensional datasets [2], such as the Netflix Prize dataset and most real-world datasets of individual recommendations and purchases." - Arvind Narayanan and Vitaly Shmatikov[@narayanan_robust_2008] 
+
+They reference Aggarwal [@aggarwal_k-anonymity_2005] who showed through simulations the weakness of k-anonymity in high-dimensional datasets.
+
+- The statistical modelling in the paper is fairly complex
+
+- However, the experimental analysis section is fairly accessible and makes clear how weak k-anonymity is.
+
+> When the data sets contained more than 45 dimensions, almost all the data points violated the 2-anonymity condition
+
+-----------
+
+## Modern/State-of-the-art Anonymisation (I)
+
+There isn't a one size fits all[@rodriguez_current_2022] methodology for anonymising data.
+
+<br>
+
+On going research is identifying more complex[@zhang_efficient_2017] and robust[@palanisamy_privacy-preserving_2018] methodologies for both measuring and reducing the risk of de-anonymisation.
+
+-----------
+
+## Modern/State-of-the-art Anonymisation (II)
+
+In fact, there are many "off-the-shelf" products which can be used to anonymise datasets.
+
+:::: {.columns}
+
+::: {.column width='40%'}
+<img src='images/week-06/off-the-shelf-data-anonymisation.png'/>
+:::
+
+::: {.column width='60%'}
+In 2021 Zuo et al[@zuo_data_2021] performed a systematic review of de-anonymisation tools in digital health care.
+
+<br>
+
+There were two off-the-shelf tools identified that were built with R
+
+- [`{sdcMicro}`](http://sdctools.github.io/sdcMicro/index.html)
+
+  - This package contains many tools for measuring/exploring the anonymity of datasets via a {shiny} app.
+  
+- [`{ShinyAnonymizer}](https://github.com/mariosggg/ShinyAnonymizer)
+
+  - This package provides a {shiny} app for anonymising healthcare data
+
+:::
+
+::::
 
 -----------
 
 ## R packages for working with anonymouse data and sampling {background-color="#23241F" .center .center-x}
+
+# Case Study: Netflix De-anonymisation {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Netlix Case Study: What happened?
+
+Arvind Narayanan and Vitaly Shmatikov[@narayanan_robust_2008] 
+
+
+# Case Study: Massachusettes	governor attack
+
+# Case Study: AOL Privacy Breach
+
+# Social Network attacks
 
 -----------
 

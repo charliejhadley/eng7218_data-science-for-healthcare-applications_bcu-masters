@@ -1,0 +1,10 @@
+---
+title: "Untitled"
+format: revealjs
+bibliography: "../bibtex-file.bib"
+---
+
+## Quarto
+
+Link with @ in it <a href='https://google.com'>\@charliejhadley</a>
+

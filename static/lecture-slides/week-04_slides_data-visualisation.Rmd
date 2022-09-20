@@ -28,6 +28,7 @@ knitr::opts_chunk$set(cache=TRUE, autodep = TRUE, fig.retina = 3, message = FALS
 library(tidyverse)
 library(gt)
 library(fivethirtyeight)
+library(fontawesome)
 ```
 
 ```{r ggplot2-slide-things, echo=FALSE}

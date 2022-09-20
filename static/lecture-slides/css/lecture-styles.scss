@@ -39,3 +39,17 @@ $link-color: #e10020;
   font-size: 60%;
   width: 100%;
 }
+
+.big-note{
+  font-family: 'Open Sans', sans-serif;
+	color: #535353;
+	line-height: -10px;
+	font-size: 32px
+}
+
+.v-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}

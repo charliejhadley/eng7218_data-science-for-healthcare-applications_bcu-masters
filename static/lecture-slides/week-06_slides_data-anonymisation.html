@@ -350,8 +350,11 @@
 <ol type="1">
 <li><p>Why is data anonymisation important?</p></li>
 <li><p>What are specific risks of deanonymisation of health data?</p></li>
-<li><p>Case studies of deanonymisation</p></li>
 <li><p>Anonymity measures: k-anonymity and l-diversity</p></li>
+<li><p>Case studies of deanonymisation</p>
+<blockquote>
+<p>… and why anonymity measures are often not enough</p>
+</blockquote></li>
 <li><p>R packages for working with anonymouse data and sampling</p></li>
 </ol>
 </section>
@@ -481,11 +484,90 @@
 <section id="case-studies-of-deanonymisation" class="slide level2 center center-x" data-background-color="#23241F">
 <h2>Case studies of deanonymisation</h2>
 </section>
-<section id="anonymity-measures-k-anonymity-and-l-diversity" class="slide level2 center center-x" data-background-color="#23241F">
-<h2>Anonymity measures: k-anonymity and l-diversity</h2>
+<section>
+<section id="anonymity-measures-k-anonymity-and-l-diversity" class="title-slide slide level1 center center-x" data-background-color="#23241F">
+<h1>Anonymity measures: k-anonymity and l-diversity</h1>
+
+</section>
+<section id="early-evidence-for-de-anonymisation-draft" class="slide level2">
+<h2>Early evidence for de-anonymisation (DRAFT)</h2>
+<p>In the late 90s there was a rapid conceptualisation of how easy de-anonymisation is of large, public datasets.</p>
+<p>Sweeney showed in 1997<span class="citation" data-cites="sweeney_weaving_1997"><sup><a href="#/ref-sweeney_weaving_1997" role="doc-biblioref" onclick="return false;">4</a></sup></span> that the Massachusetts voting list (n=54,805) could easily be de-anonymised</p>
+
+<img src="images/week-06/sweeney-mass-de-anonyisation.png" class="r-stretch"></section>
+<section id="k-anonymity-draft" class="slide level2">
+<h2>k-anonymity (DRAFT)</h2>
+<p>Good slides: https://courses.cs.duke.edu/fall13/compsci590.3/slides/lec4.pdf</p>
+</section>
+<section id="k-anonymity-and-high-dimensionality-draft" class="slide level2">
+<h2>k-anonymity and high-dimensionality (DRAFT)</h2>
+<blockquote>
+<p>“Furthermore, k-anonymization completely fails on high-dimensional datasets [2], such as the Netflix Prize dataset and most real-world datasets of individual recommendations and purchases.” - Arvind Narayanan and Vitaly Shmatikov<span class="citation" data-cites="narayanan_robust_2008"><sup><a href="#/ref-narayanan_robust_2008" role="doc-biblioref" onclick="return false;">5</a></sup></span></p>
+</blockquote>
+<p>They reference Aggarwal<span class="citation" data-cites="aggarwal_k-anonymity_2005"><sup><a href="#/ref-aggarwal_k-anonymity_2005" role="doc-biblioref" onclick="return false;">6</a></sup></span> who showed through simulations the weakness of k-anonymity in high-dimensional datasets.</p>
+<ul>
+<li><p>The statistical modelling in the paper is fairly complex</p></li>
+<li><p>However, the experimental analysis section is fairly accessible and makes clear how weak k-anonymity is.</p></li>
+</ul>
+<blockquote>
+<p>When the data sets contained more than 45 dimensions, almost all the data points violated the 2-anonymity condition</p>
+</blockquote>
+</section>
+<section id="modernstate-of-the-art-anonymisation-i" class="slide level2">
+<h2>Modern/State-of-the-art Anonymisation (I)</h2>
+<p>There isn’t a one size fits all<span class="citation" data-cites="rodriguez_current_2022"><sup><a href="#/ref-rodriguez_current_2022" role="doc-biblioref" onclick="return false;">7</a></sup></span> methodology for anonymising data.</p>
+<p><br></p>
+<p>On going research is identifying more complex<span class="citation" data-cites="zhang_efficient_2017"><sup><a href="#/ref-zhang_efficient_2017" role="doc-biblioref" onclick="return false;">8</a></sup></span> and robust<span class="citation" data-cites="palanisamy_privacy-preserving_2018"><sup><a href="#/ref-palanisamy_privacy-preserving_2018" role="doc-biblioref" onclick="return false;">9</a></sup></span> methodologies for both measuring and reducing the risk of de-anonymisation.</p>
+</section>
+<section id="modernstate-of-the-art-anonymisation-ii" class="slide level2">
+<h2>Modern/State-of-the-art Anonymisation (II)</h2>
+<p>In fact, there are many “off-the-shelf” products which can be used to anonymise datasets.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img src="images/week-06/off-the-shelf-data-anonymisation.png"></p>
+</div><div class="column" style="width:60%;">
+<p>In 2021 Zuo et al<span class="citation" data-cites="zuo_data_2021"><sup><a href="#/ref-zuo_data_2021" role="doc-biblioref" onclick="return false;">10</a></sup></span> performed a systematic review of de-anonymisation tools in digital health care.</p>
+<p><br></p>
+<p>There were two off-the-shelf tools identified that were built with R</p>
+<ul>
+<li><p><a href="http://sdctools.github.io/sdcMicro/index.html"><code>{sdcMicro}</code></a></p>
+<ul>
+<li>This package contains many tools for measuring/exploring the anonymity of datasets via a {shiny} app.</li>
+</ul></li>
+<li><p><a href="https://github.com/mariosggg/ShinyAnonymizer">`{ShinyAnonymizer}</a></p>
+<ul>
+<li>This package provides a {shiny} app for anonymising healthcare data</li>
+</ul></li>
+</ul>
+</div>
+</div>
 </section>
 <section id="r-packages-for-working-with-anonymouse-data-and-sampling" class="slide level2 center center-x" data-background-color="#23241F">
 <h2>R packages for working with anonymouse data and sampling</h2>
+</section></section>
+<section>
+<section id="case-study-netflix-de-anonymisation" class="title-slide slide level1 center center-x" data-background-color="#23241F">
+<h1>Case Study: Netflix De-anonymisation</h1>
+
+</section>
+<section id="netlix-case-study-what-happened" class="slide level2">
+<h2>Netlix Case Study: What happened?</h2>
+<p>Arvind Narayanan and Vitaly Shmatikov<span class="citation" data-cites="narayanan_robust_2008"><sup><a href="#/ref-narayanan_robust_2008" role="doc-biblioref" onclick="return false;">5</a></sup></span></p>
+</section></section>
+<section id="case-study-massachusettes-governor-attack" class="title-slide slide level1 center">
+<h1>Case Study: Massachusettes governor attack</h1>
+
+</section>
+
+<section id="case-study-aol-privacy-breach" class="title-slide slide level1 center">
+<h1>Case Study: AOL Privacy Breach</h1>
+
+</section>
+
+<section>
+<section id="social-network-attacks" class="title-slide slide level1 center">
+<h1>Social Network attacks</h1>
+
 </section>
 <section class="slide level2">
 
@@ -510,11 +592,32 @@
 <div id="ref-uk_government_data_2018" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">3. </div><div class="csl-right-inline">UK Government. Data <span>Protection Act</span> 2018. (2018).</div>
 </div>
+<div id="ref-sweeney_weaving_1997" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Sweeney, L. <a href="https://doi.org/10.1111/j.1748-720X.1997.tb01885.x">Weaving <span>Technology</span> and <span>Policy Together</span> to <span>Maintain Confidentiality</span></a>. <em>The Journal of Law, Medicine &amp; Ethics</em> <strong>25</strong>, 98–110 (1997).</div>
+</div>
+<div id="ref-narayanan_robust_2008" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Narayanan, A. &amp; Shmatikov, V. Robust <span class="nocase">De-anonymization</span> of <span>Large Sparse Datasets</span>. in <em>2008 <span>IEEE Symposium</span> on <span>Security</span> and <span>Privacy</span> (sp 2008)</em> 111–125 (2008). doi:<a href="https://doi.org/10.1109/SP.2008.33">10.1109/SP.2008.33</a>.</div>
+</div>
+<div id="ref-aggarwal_k-anonymity_2005" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Aggarwal, C. C. On k-anonymity and the curse of dimensionality. in <em>Proceedings of the 31st international conference on <span>Very</span> large data bases</em> 901–909 (<span>VLDB Endowment</span>, 2005).</div>
+</div>
+<div id="ref-rodriguez_current_2022" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Rodriguez, A. <em>et al.</em> <a href="https://doi.org/10.1177/17407745221087469">Current recommendations/practices for anonymising data from clinical trials in order to make it available for sharing: <span>A</span> scoping review</a>. <em>Clinical Trials</em> <strong>19</strong>, 452–463 (2022).</div>
+</div>
+<div id="ref-zhang_efficient_2017" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Zhang, J. <em>et al.</em> <a href="https://doi.org/10.1109/TDSC.2015.2483503">On <span>Efficient</span> and <span>Robust Anonymization</span> for <span>Privacy Protection</span> on <span>Massive Streaming Categorical Information</span></a>. <em>IEEE Transactions on Dependable and Secure Computing</em> <strong>14</strong>, 507–520 (2017).</div>
+</div>
+<div id="ref-palanisamy_privacy-preserving_2018" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Palanisamy, B., Liu, L., Zhou, Y. &amp; Wang, Q. <a href="https://doi.org/10.1145/3125622">Privacy-<span>Preserving Publishing</span> of <span>Multilevel Utility-Controlled Graph Datasets</span></a>. <em>ACM Transactions on Internet Technology</em> <strong>18</strong>, 1–21 (2018).</div>
+</div>
+<div id="ref-zuo_data_2021" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Zuo, Z. <em>et al.</em> <a href="https://doi.org/10.2196/29871">Data <span>Anonymization</span> for <span>Pervasive Health Care</span>: <span>Systematic Literature Mapping Study</span></a>. <em>JMIR Medical Informatics</em> <strong>9</strong>, e29871 (2021).</div>
+</div>
 </div>
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

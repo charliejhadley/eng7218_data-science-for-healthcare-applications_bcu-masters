@@ -8,6 +8,21 @@
   file = {/Users/charliejhadley/Zotero/storage/PDL5DG75/An-Evaluation-of-2016-Election-Polls-in-the-U-S.html}
 }
 
+@inproceedings{aggarwal_k-anonymity_2005,
+  title = {On K-Anonymity and the Curse of Dimensionality},
+  booktitle = {Proceedings of the 31st International Conference on {{Very}} Large Data Bases},
+  author = {Aggarwal, Charu C.},
+  year = {2005},
+  month = aug,
+  series = {{{VLDB}} '05},
+  pages = {901--909},
+  publisher = {{VLDB Endowment}},
+  address = {{Trondheim, Norway}},
+  abstract = {In recent years, the wide availability of personal data has made the problem of privacy preserving data mining an important one. A number of methods have recently been proposed for privacy preserving data mining of multidimensional data records. One of the methods for privacy preserving data mining is that of anonymization, in which a record is released only if it is indistinguishable from k other entities in the data. We note that methods such as k-anonymity are highly dependent upon spatial locality in order to effectively implement the technique in a statistically robust way. In high dimensional space the data becomes sparse, and the concept of spatial locality is no longer easy to define from an application point of view. In this paper, we view the k-anonymization problem from the perspective of inference attacks over all possible combinations of attributes. We show that when the data contains a large number of attributes which may be considered quasi-identifiers, it becomes difficult to anonymize the data without an unacceptably high amount of information loss. This is because an exponential number of combinations of dimensions can be used to make precise inference attacks, even when individual attributes are partially specified within a range. We provide an analysis of the effect of dimensionality on k-anonymity methods. We conclude that when a data set contains a large number of attributes which are open to inference attacks, we are faced with a choice of either completely suppressing most of the data or losing the desired level of anonymity. Thus, this paper shows that the curse of high dimensionality also applies to the problem of privacy preserving data mining.},
+  isbn = {978-1-59593-154-2},
+  file = {/Users/charliejhadley/Zotero/storage/MH5N749L/Aggarwal - 2005 - On k-anonymity and the curse of dimensionality.pdf}
+}
+
 @article{ahn_flavor_2011,
   title = {Flavor Network and the Principles of Food Pairing},
   author = {Ahn, Yong-Yeol and Ahnert, Sebastian E. and Bagrow, James P. and Barab{\'a}si, Albert-L{\'a}szl{\'o}},
@@ -1056,6 +1071,20 @@ Revision of the author's Internet, mail, and mixed-mode surveys. Hoboken, N.J. :
   file = {/Users/charliejhadley/Zotero/storage/EQYFSQWI/open-research-data-clinical-trials-and-public-health-interventions.html}
 }
 
+@inproceedings{narayanan_robust_2008,
+  title = {Robust {{De-anonymization}} of {{Large Sparse Datasets}}},
+  booktitle = {2008 {{IEEE Symposium}} on {{Security}} and {{Privacy}} (Sp 2008)},
+  author = {Narayanan, Arvind and Shmatikov, Vitaly},
+  year = {2008},
+  month = may,
+  pages = {111--125},
+  issn = {2375-1207},
+  doi = {10.1109/SP.2008.33},
+  abstract = {We present a new class of statistical de- anonymization attacks against high-dimensional micro-data, such as individual preferences, recommendations, transaction records and so on. Our techniques are robust to perturbation in the data and tolerate some mistakes in the adversary's background knowledge. We apply our de-anonymization methodology to the Netflix Prize dataset, which contains anonymous movie ratings of 500,000 subscribers of Netflix, the world's largest online movie rental service. We demonstrate that an adversary who knows only a little bit about an individual subscriber can easily identify this subscriber's record in the dataset. Using the Internet Movie Database as the source of background knowledge, we successfully identified the Netflix records of known users, uncovering their apparent political preferences and other potentially sensitive information.},
+  keywords = {Anonymity,Attack,Data mining,Data privacy,Data security,DVD,Internet,Motion pictures,Privacy,Probability,Robustness,Tail,Transaction databases},
+  file = {/Users/charliejhadley/Zotero/storage/7ZJ8AXWJ/Narayanan and Shmatikov - 2008 - Robust De-anonymization of Large Sparse Datasets.pdf;/Users/charliejhadley/Zotero/storage/8I7LIUGZ/4531148.html}
+}
+
 @misc{nature_data_2022,
   title = {Data {{Repository Guidance}} | {{Scientific Data}}},
   author = {{Nature}},
@@ -1193,6 +1222,38 @@ Revision of the author's Internet, mail, and mixed-mode surveys. Hoboken, N.J. :
   doi = {10.1126/science.aac4716},
   keywords = {reproducibility crisis},
   file = {/Users/charliejhadley/Zotero/storage/IQKE26JW/OPEN SCIENCE COLLABORATION - 2015 - Estimating the reproducibility of psychological sc.pdf}
+}
+
+@article{palanisamy_privacy-preserving_2018,
+  title = {Privacy-{{Preserving Publishing}} of {{Multilevel Utility-Controlled Graph Datasets}}},
+  author = {Palanisamy, Balaji and Liu, Ling and Zhou, Yang and Wang, Qingyang},
+  year = {2018},
+  month = mar,
+  journal = {ACM Transactions on Internet Technology},
+  volume = {18},
+  number = {2},
+  pages = {1--21},
+  issn = {1533-5399, 1557-6051},
+  doi = {10.1145/3125622},
+  abstract = {Conventional private data publication schemes are targeted at publication of sensitive datasets either after the               k               -anonymization process or through differential privacy constraints. Typically these schemes are designed with the objective of retaining as much utility as possible for the aggregate queries while ensuring the privacy of the individual records. Such an approach, though suitable for publishing aggregate information as public datasets, is inapplicable when users have different levels of access to the same data. We argue that existing schemes either result in increased disclosure of private information or lead to reduced utility when some users have more access privileges than the others. In this article, we present an anonymization framework for publishing large datasets with the goals of providing different levels of utility to the users based on their access privilege levels. We design and implement our proposed multilevel utility-controlled anonymization schemes in the context of large association graphs considering three levels of user utility, namely, (1) users having access to only the graph structure, (2) users having access to the graph structure and aggregate query results, and (3) users having access to the graph structure, aggregate query results, and individual associations. Our experiments on real large association graphs show that the proposed techniques are effective and scalable and yield the required level of privacy and utility for each user privacy and access privilege level.},
+  langid = {english},
+  file = {/Users/charliejhadley/Zotero/storage/ISBSLM22/Palanisamy et al. - 2018 - Privacy-Preserving Publishing of Multilevel Utilit.pdf}
+}
+
+@article{palanisamy_privacy-preserving_2018-1,
+  title = {Privacy-{{Preserving Publishing}} of {{Multilevel Utility-Controlled Graph Datasets}}},
+  author = {Palanisamy, Balaji and Liu, Ling and Zhou, Yang and Wang, Qingyang},
+  year = {2018},
+  month = mar,
+  journal = {ACM Transactions on Internet Technology},
+  volume = {18},
+  number = {2},
+  pages = {1--21},
+  issn = {1533-5399, 1557-6051},
+  doi = {10.1145/3125622},
+  abstract = {Conventional private data publication schemes are targeted at publication of sensitive datasets either after the               k               -anonymization process or through differential privacy constraints. Typically these schemes are designed with the objective of retaining as much utility as possible for the aggregate queries while ensuring the privacy of the individual records. Such an approach, though suitable for publishing aggregate information as public datasets, is inapplicable when users have different levels of access to the same data. We argue that existing schemes either result in increased disclosure of private information or lead to reduced utility when some users have more access privileges than the others. In this article, we present an anonymization framework for publishing large datasets with the goals of providing different levels of utility to the users based on their access privilege levels. We design and implement our proposed multilevel utility-controlled anonymization schemes in the context of large association graphs considering three levels of user utility, namely, (1) users having access to only the graph structure, (2) users having access to the graph structure and aggregate query results, and (3) users having access to the graph structure, aggregate query results, and individual associations. Our experiments on real large association graphs show that the proposed techniques are effective and scalable and yield the required level of privacy and utility for each user privacy and access privilege level.},
+  langid = {english},
+  file = {/Users/charliejhadley/Zotero/storage/RA5VW7XR/Palanisamy et al. - 2018 - Privacy-Preserving Publishing of Multilevel Utilit.pdf}
 }
 
 @misc{pat_schloss_recreating_2022,
@@ -1359,6 +1420,24 @@ Revision of the author's Internet, mail, and mixed-mode surveys. Hoboken, N.J. :
   file = {/Users/charliejhadley/Zotero/storage/IJARP6DI/Roche et al. - 2015 - Public Data Archiving in Ecology and Evolution Ho.pdf;/Users/charliejhadley/Zotero/storage/QBSKTI7E/article.html}
 }
 
+@article{rodriguez_current_2022,
+  title = {Current Recommendations/Practices for Anonymising Data from Clinical Trials in Order to Make It Available for Sharing: {{A}} Scoping Review},
+  shorttitle = {Current Recommendations/Practices for Anonymising Data from Clinical Trials in Order to Make It Available for Sharing},
+  author = {Rodriguez, Aryelly and Tuck, Christopher and Dozier, Marshall F and Lewis, Stephanie C and Eldridge, Sandra and Jackson, Tracy and Murray, Alastair and Weir, Christopher J},
+  year = {2022},
+  month = aug,
+  journal = {Clinical Trials},
+  volume = {19},
+  number = {4},
+  pages = {452--463},
+  publisher = {{SAGE Publications}},
+  issn = {1740-7745},
+  doi = {10.1177/17407745221087469},
+  abstract = {Background/AimsThere are increasing pressures for anonymised datasets from clinical trials to be shared across the scientific community, and differing recommendations exist on how to perform anonymisation prior to sharing. We aimed to systematically identify, describe and synthesise existing recommendations for anonymising clinical trial datasets to prepare for data sharing.MethodsWe systematically searched MEDLINE?, EMBASE and Web of Science from inception to 8 February 2021. We also searched other resources to ensure the comprehensiveness of our search. Any publication reporting recommendations on anonymisation to enable data sharing from clinical trials was included. Two reviewers independently screened titles, abstracts and full text for eligibility. One reviewer extracted data from included papers using thematic synthesis, which then was sense-checked by a second reviewer. Results were summarised by narrative analysis.ResultsFifty-nine articles (from 43 studies) were eligible for inclusion. Three distinct themes are emerging: anonymisation, de-identification and pseudonymisation. The most commonly used anonymisation techniques are: removal of direct patient identifiers; and careful evaluation and modification of indirect identifiers to minimise the risk of identification. Anonymised datasets joined with controlled access was the preferred method for data sharing.ConclusionsThere is no single standardised set of recommendations on how to anonymise clinical trial datasets for sharing. However, this systematic review shows a developing consensus on techniques used to achieve anonymisation. Researchers in clinical trials still consider that anonymisation techniques by themselves are insufficient to protect patient privacy, and they need to be paired with controlled access.},
+  langid = {english},
+  file = {/Users/charliejhadley/Zotero/storage/GUZBCT36/Rodriguez et al. - 2022 - Current recommendationspractices for anonymising .pdf}
+}
+
 @article{roth_examining_2020,
   title = {Examining the Feasibility of Using Open Data to Benchmark Building Energy Usage in Cities: {{A}} Data Science and Policy Perspective},
   shorttitle = {Examining the Feasibility of Using Open Data to Benchmark Building Energy Usage in Cities},
@@ -1509,6 +1588,29 @@ Revision of the author's Internet, mail, and mixed-mode surveys. Hoboken, N.J. :
   howpublished = {https://www.surveymonkey.co.uk/curiosity/survey\_questions\_and\_completion\_rates/},
   langid = {british},
   file = {/Users/charliejhadley/Zotero/storage/IYGXX8I7/survey_questions_and_completion_rates.html}
+}
+
+@article{sweeney_weaving_1997,
+  title = {Weaving {{Technology}} and {{Policy Together}} to {{Maintain Confidentiality}}},
+  author = {Sweeney, Latanya},
+  year = {1997},
+  journal = {The Journal of Law, Medicine \& Ethics},
+  volume = {25},
+  number = {2-3},
+  pages = {98--110},
+  issn = {1748-720X},
+  doi = {10.1111/j.1748-720X.1997.tb01885.x},
+  langid = {english},
+  annotation = {\_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1748-720X.1997.tb01885.x},
+  file = {/Users/charliejhadley/Zotero/storage/GQ8WYGVY/21kanon (1).ppt;/Users/charliejhadley/Zotero/storage/4546YN4X/j.1748-720X.1997.tb01885.html}
+}
+
+@article{sweeney_weaving_nodate,
+  title = {Weaving {{Technology}} and {{Poliq}}\^ {{Together}} to {{Maintain Confidentiality}}},
+  author = {Sweeney, Latanya},
+  pages = {14},
+  langid = {english},
+  file = {/Users/charliejhadley/Zotero/storage/VN5D88CN/Sweeney - Weaving Technology and Poliq^ Together to Maintain.pdf}
 }
 
 @article{tedersoo_data_2021,
@@ -1732,6 +1834,57 @@ Revision of the author's Internet, mail, and mixed-mode surveys. Hoboken, N.J. :
   doi = {10.1186/s13059-020-02133-w},
   keywords = {data with secrets},
   file = {/Users/charliejhadley/Zotero/storage/5NGJBVKP/Yanai and Lercher - 2020 - A hypothesis is a liability.pdf;/Users/charliejhadley/Zotero/storage/9JGIEB7N/s13059-020-02133-w.html}
+}
+
+@article{zhang_efficient_2017,
+  title = {On {{Efficient}} and {{Robust Anonymization}} for {{Privacy Protection}} on {{Massive Streaming Categorical Information}}},
+  author = {Zhang, Ji and Li, Hongzhou and Liu, Xuemei and Luo, Yonglong and Chen, Fulong and Wang, Hua and Chang, Liang},
+  year = {2017},
+  month = sep,
+  journal = {IEEE Transactions on Dependable and Secure Computing},
+  volume = {14},
+  number = {5},
+  pages = {507--520},
+  issn = {1941-0018},
+  doi = {10.1109/TDSC.2015.2483503},
+  abstract = {Protecting users' privacy when transmitting a large amount of data over the Internet is becoming increasingly important nowadays. In this paper, we focus on the streaming categorical information and propose a novel anonymization technique for providing a strong privacy protection to safeguard against privacy disclosure and information tampering. Our technique utilizes an innovative two-phase anonymization approach which is very easy to implement, highly efficient in terms of speed and communication and is robust against possible tampering from adversaries. Extensive experimental evaluation that is conducted demonstrates that our technique is very efficient and more robust than the existing method.},
+  keywords = {anonymization,categorical information,Data privacy,Decoding,Distortion,Encoding,Privacy,Privacy protection,Real-time systems,Robustness},
+  file = {/Users/charliejhadley/Zotero/storage/56E4IUKU/Zhang et al. - 2017 - On Efficient and Robust Anonymization for Privacy .pdf}
+}
+
+@article{zuo_data_2021,
+  title = {Data {{Anonymization}} for {{Pervasive Health Care}}: {{Systematic Literature Mapping Study}}},
+  shorttitle = {Data {{Anonymization}} for {{Pervasive Health Care}}},
+  author = {Zuo, Zheming and Watson, Matthew and Budgen, David and Hall, Robert and Kennelly, Chris and Moubayed, Noura Al},
+  year = {2021},
+  month = oct,
+  journal = {JMIR Medical Informatics},
+  volume = {9},
+  number = {10},
+  pages = {e29871},
+  publisher = {{JMIR Publications Inc., Toronto, Canada}},
+  doi = {10.2196/29871},
+  abstract = {Background: Data science offers an unparalleled opportunity to identify new insights into many aspects of human life with recent advances in health care. Using data science in digital health raises significant challenges regarding data privacy, transparency, and trustworthiness. Recent regulations enforce the need for a clear legal basis for collecting, processing, and sharing data, for example, the European Union's General Data Protection Regulation (2016) and the United Kingdom's Data Protection Act (2018). For health care providers, legal use of the electronic health record (EHR) is permitted only in clinical care cases. Any other use of the data requires thoughtful considerations of the legal context and direct patient consent. Identifiable personal and sensitive information must be sufficiently anonymized. Raw data are commonly anonymized to be used for research purposes, with risk assessment for reidentification and utility. Although health care organizations have internal policies defined for information governance, there is a significant lack of practical tools and intuitive guidance about the use of data for research and modeling. Off-the-shelf data anonymization tools are developed frequently, but privacy-related functionalities are often incomparable with regard to use in different problem domains. In addition, tools to support measuring the risk of the anonymized data with regard to reidentification against the usefulness of the data exist, but there are question marks over their efficacy. Objective: In this systematic literature mapping study, we aim to alleviate the aforementioned issues by reviewing the landscape of data anonymization for digital health care. Methods: We used Google Scholar, Web of Science, Elsevier Scopus, and PubMed to retrieve academic studies published in English up to June 2020. Noteworthy gray literature was also used to initialize the search. We focused on review questions covering 5 bottom-up aspects: basic anonymization operations, privacy models, reidentification risk and usability metrics, off-the-shelf anonymization tools, and the lawful basis for EHR data anonymization. Results: We identified 239 eligible studies, of which 60 were chosen for general background information; 16 were selected for 7 basic anonymization operations; 104 covered 72 conventional and machine learning\textendash based privacy models; four and 19 papers included seven and 15 metrics, respectively, for measuring the reidentification risk and degree of usability; and 36 explored 20 data anonymization software tools. In addition, we also evaluated the practical feasibility of performing anonymization on EHR data with reference to their usability in medical decision-making. Furthermore, we summarized the lawful basis for delivering guidance on practical EHR data anonymization. Conclusions: This systematic literature mapping study indicates that anonymization of EHR data is theoretically achievable; yet, it requires more research efforts in practical implementations to balance privacy preservation and usability to ensure more reliable health care applications.},
+  copyright = {This is an open-access article distributed under the terms of the Creative Commons Attribution License (https://creativecommons.org/licenses/by/4.0/), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work, first published JMIR Medical Informatics, is properly cited. The complete bibliographic information, a link to the original publication on https://medinform.jmir.org/, as well as this copyright and license information must be included.},
+  langid = {english},
+  file = {/Users/charliejhadley/Zotero/storage/ND8PTWZ9/Zuo et al. - 2021 - Data Anonymization for Pervasive Health Care Syst.pdf;/Users/charliejhadley/Zotero/storage/967F6JKW/e29871.html}
+}
+
+@article{zuo_data_2021-1,
+  title = {Data {{Anonymization}} for {{Pervasive Health Care}}: {{Systematic Literature Mapping Study}}},
+  shorttitle = {Data {{Anonymization}} for {{Pervasive Health Care}}},
+  author = {Zuo, Zheming and Watson, Matthew and Budgen, David and Hall, Robert and Kennelly, Chris and Al Moubayed, Noura},
+  year = {2021},
+  month = oct,
+  journal = {JMIR Medical Informatics},
+  volume = {9},
+  number = {10},
+  pages = {e29871},
+  issn = {2291-9694},
+  doi = {10.2196/29871},
+  abstract = {Background: Data science offers an unparalleled opportunity to identify new insights into many aspects of human life with recent advances in health care. Using data science in digital health raises significant challenges regarding data privacy, transparency, and trustworthiness. Recent regulations enforce the need for a clear legal basis for collecting, processing, and sharing data, for example, the European Union's General Data Protection Regulation (2016) and the United Kingdom's Data Protection Act (2018). For health care providers, legal use of the electronic health record (EHR) is permitted only in clinical care cases. Any other use of the data requires thoughtful considerations of the legal context and direct patient consent. Identifiable personal and sensitive information must be sufficiently anonymized. Raw data are commonly anonymized to be used for research purposes, with risk assessment for reidentification and utility. Although health care organizations have internal policies defined for information governance, there is a significant lack of practical tools and intuitive guidance about the use of data for research and modeling. Off-the-shelf data anonymization tools are developed frequently, but privacy-related functionalities are often incomparable with regard to use in different problem domains. In addition, tools to support measuring the risk of the anonymized data with regard to reidentification against the usefulness of the data exist, but there are question marks over their efficacy. Objective: In this systematic literature mapping study, we aim to alleviate the aforementioned issues by reviewing the landscape of data anonymization for digital health care. Methods: We used Google Scholar, Web of Science, Elsevier Scopus, and PubMed to retrieve academic studies published in English up to June 2020. Noteworthy gray literature was also used to initialize the search. We focused on review questions covering 5 bottom-up aspects: basic anonymization operations, privacy models, reidentification risk and usability metrics, off-the-shelf anonymization tools, and the lawful basis for EHR data anonymization. Results: We identified 239 eligible studies, of which 60 were chosen for general background information; 16 were selected for 7 basic anonymization operations; 104 covered 72 conventional and machine learning\textendash based privacy models; four and 19 papers included seven and 15 metrics, respectively, for measuring the reidentification risk and degree of usability; and 36 explored 20 data anonymization software tools. In addition, we also evaluated the practical feasibility of performing anonymization on EHR data with reference to their usability in medical decision-making. Furthermore, we summarized the lawful basis for delivering guidance on practical EHR data anonymization. Conclusions: This systematic literature mapping study indicates that anonymization of EHR data is theoretically achievable; yet, it requires more research efforts in practical implementations to balance privacy preservation and usability to ensure more reliable health care applications.},
+  langid = {english},
+  file = {/Users/charliejhadley/Zotero/storage/FUX7YCW5/Zuo et al. - 2021 - Data Anonymization for Pervasive Health Care Syst.pdf}
 }
 
 @preamble{ "\providecommand{\noopsort}[1]{} " }

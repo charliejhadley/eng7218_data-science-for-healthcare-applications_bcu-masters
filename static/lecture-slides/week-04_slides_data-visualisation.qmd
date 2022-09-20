@@ -22,7 +22,6 @@ library(gt)
 library(readxl)
 library(here)
 library(janitor)
-
 library(ggpomological)
 library(fontawesome)
 colours_ggplot2_components <- as.list(set_names(ggpomological:::pomological_palette[1:5], c("aesthetics", "geoms", "scales", "guides", "themes")))
@@ -456,7 +455,7 @@ Images from Beecham et al[@beecham_use_2021]
 
 -----------
 
-### ... real-world applications of visual perception theory
+#### ... real-world applications of visual perception theory (I)
 
 <img src='images/week-4/encodings-in-detail_bars-and-lines.jpg'/>
 
@@ -464,7 +463,7 @@ Images from Robert Kosara[@kosara_more_2022]
 
 -----------
 
-### ... real-world applications of visual perception theory
+#### ... real-world applications of visual perception theory (II)
 
 <img src='images/week-4/encodings-in-detail_piecharts.jpg'/>
 
@@ -472,15 +471,389 @@ Images from Robert Kosara[@kosara_more_2022]
 
 -----------
 
-## ... real-world applications of visual perception theory
+#### ... real-world applications of visual perception theory (III)
 
 <center>
 <a href='https://twitter.com/irg_bio/status/1481214254351097859'><img src='images/week-4/seasonality-in-bee-colonies.jpg' height='500px'/></a>
 </center>
 
-.footnote[
-Image found on Twitter from [@iker_rivas-gonzalez_irg_bio_i_2022], code for chart available from [@rivas-gonzalez_seasonality_2022].
-]
+
+> Image found on Twitter from <a href='https://twitter.com/irg_bio/status/1481214254351097859'>\@irg_bio</a>[@iker_rivas-gonzalez_irg_bio_i_2022] - code for chart available from [GitHub](https://github.com/rivasiker/TidyTuesday/blob/41f6e460b3024b70f5d87ed09cb7cec226a03fcc/2022/2022-01-11/analysis_2022-01-11.Rmd)[@rivas-gonzalez_seasonality_2022].
+
+# Why is someone <strike>reading</strike> measuring your chart?  {background-color="#23241F" .center .center-x}
+
+-----------
+
+### Why is someone <strike>reading</strike> measuring your chart?
+
+::: {.fragment .fade-in-then-semi-out}
+
+<span class="big-note">To extract accurate values</span>
+
+> The **magnitude** of chart elements.
+
+:::
+
+<hr>
+
+::: {.fragment .fade-in-then-semi-out style="text-align:right"}
+
+<span class="big-note">To quantatively compare values.</span>
+
+> The **part to whole** or **relative magnitude** of chart elements.
+
+:::
+
+<hr>
+
+::: {.fragment .fade-in-then-semi-out}
+
+<span class="big-note">To find the largest/smallest value.</span>
+
+> The **ranking** of chart elements
+
+:::
+
+<hr>
+
+::: {.fragment .fade-in-then-semi-out style="text-align:right"}
+
+<span class="big-note">To find *unusual* values.</span>
+
+> The **distribution**, **ranking** or **magnitude** of chart elements
+
+:::
+
+-----------
+
+### Why is someone reading your chart?
+
+::: {.fragment .fade-in-then-semi-out}
+
+<span class="big-note">You have a story you want to tell</span>
+
+> There's lots we can do to help guide the reader to understand your chart and follow the story you're telling. We'll cover some examples during this course.
+
+
+:::
+
+<hr>
+
+::: {.fragment .fade-in-then-semi-out style="text-align:right"}
+
+<span class="big-note">The reader wants to see the data</span>
+
+> Charts (and tables) are the best way to see the "big picture" of a dataset - a single value (eg mean) is kind of useless. Interactivity is really useful to allow readers to properly **explore** the dataset.
+
+:::
+
+<hr>
+
+::: {.fragment .fade-in-then-semi-out}
+
+<span class="big-note">The reader has a preconception about the data</span>
+
+> Readers might be approaching a chart biased with a particular theory about the data. We can do our best to make our charts easy to read and avoid common pitfalls.
+
+:::
+
+# How do we choose a chart? {background-color="#23241F" .center .center-x}
+
+-----------
+
+:::: {.columns .center}
+
+::: {.column width='48%' .center-x}
+### Use data columns to choose charts
+
+<img src='images/week-4/screenshot-msleep.jpg'/>
+:::
+
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .center-x}
+### Use your story to choose charts
+
+<img src='images/week-4/ft-visual-vocab_square.png' height='300px'/>
+:::
+
+::::
+
+-----------
+
+## [data-to-viz.com](https://www.data-to-viz.com/)
+
+::: {.center-x}
+<a href='https://www.data-to-viz.com/'/><img src='images/week-4/screenshot_data-to-viz.jpg' height='400px'/></a>
+:::
+
+> This site also provides simple to follow instructions for using {ggplot2} to build every single chart type you can find on the website.
+
+-----------
+
+## [ft-interactive.github.io/visual-vocabulary](https://ft-interactive.github.io/visual-vocabulary/)
+
+:::: {.columns}
+
+::: {.column width='60%'}
+<a href='https://ft-interactive.github.io/visual-vocabulary/'/><img src='images/week-4/ft-visual-vocab_poster.png' height='450px'/></a>
+:::
+
+::: {.column width='40%'}
+<img src='images/week-4/ft_ggplot2-as-a-creativity-engine.jpg' height='450px'/>
+:::
+
+::::
+
+> The Visual Vocabulary is a really useful tool for thinking about how to tell your story with a chart.
+>
+> Lots of the dataviz at the FT is done with R. John Burn-Murdoch[@burn-murdoch_ggplot2_2016] is a great source to follow.
+
+# {ggplot2} for charts {background-color="#23241F" .center .center-x}
+
+-----------
+
+## ggplot2: A Grammar of Graphics
+
+`{ggplot2}` is an incredibly powerful and flexible tool for building static dataviz.
+
+We can build (almost)<sup>1</sup> **any** static chart we can conceive of.
+
+ 
+```{r, echo=FALSE, fig.height=3.8, fig.width=10, message=FALSE, warning=FALSE, dpi=150, cache=TRUE}
+#| echo: false
+#| fig.height: 3.8
+#| fig.width: 10
+#| message: false
+#| warning: false
+#| dpi: 150
+library("tidyverse")
+library("lubridate")
+library("patchwork")
+library("fivethirtyeight")
+
+gg_iris_scatter <- iris %>%
+  ggplot(aes(x = Petal.Length,
+             y = Sepal.Length)) +
+  geom_point() +
+  labs(x = "", y = "") +
+  theme_bw()
+
+gg_economics_line <- economics_long %>%
+  ggplot() +
+  geom_line(aes(date, value01, colour = variable), show.legend = FALSE) +
+  labs(x = "", y = "") +
+  theme_bw()
+
+
+gg_marital_bar <- gss_cat %>%
+  count(marital) %>%
+  mutate(
+    marital = fct_anon(marital, prefix = "type "),
+    marital = fct_reorder(marital, n)) %>%
+  ggplot() +
+  geom_col(aes(x = marital, y = n)) +
+  coord_flip() +
+  labs(x = "", y = "") +
+  theme_bw()
+
+mtlong <- reshape2::melt(mtcars)
+
+
+gg_quakes_histogram <- ggplot(quakes) +
+  geom_histogram(aes(x = mag)) +
+  labs(x = "", y = "") +
+  theme_bw()
+
+gg_bechden_violin <- bechdel %>%
+  filter(domgross_2013 < 1e9) %>%
+  # filter(domgross_2013 >= 1e6) %>%
+  ggplot() +
+  geom_violin(aes(x = clean_test,
+                  y = domgross_2013),
+              fill = "orange") +
+  coord_flip() +
+  labs(x = "", y = "") +
+  theme_bw()
+
+gg_diamonds_histogram <- ggplot(mtlong, aes(value)) + facet_wrap(~variable, scales = 'free_x') +
+  geom_histogram(binwidth = function(x) 2 * IQR(x) / (length(x)^(1/3))) +
+  labs(x = "", y = "") +
+  theme_bw()
+# ggsave("gg-saves/gg-iris-scatter.png",
+#        gg_iris_scatter)
+# ggsave("gg-saves/gg-economics-line.png",
+#        gg_economics_line)
+
+bump_data <- tribble(
+  ~response, ~year, ~within_year_rank,
+  "Yes", 2019, 1,
+  "Maybe", 2019, 2,
+  "No", 2019, 3,
+  "Unsure", 2019, 4,
+  "Unsure", 2016, 1,
+  "No", 2016, 2,
+  "Maybe", 2016, 3,
+  "Yes", 2016, 4,
+  "Yes", 2017, 3,
+  "No", 2017, 2,
+  "Unsure", 2017, 1,
+  "Maybe", 2017, 4,
+  "No", 2018, 1,
+  "Yes", 2018, 2,
+  "Maybe", 2018, 4,
+  "Unsure", 2018, 3
+)
+gg_bump <- bump_data %>%
+  ggplot(aes(x = year, y = within_year_rank, group = response)) +
+    geom_line(aes(color = response), size = 2) +
+    geom_point(aes(color = response), size = 4) +
+    geom_point(color = "#FFFFFF", size = 1) +
+    scale_y_reverse(breaks = 1:nrow(bump_data)) +
+    scale_x_continuous(breaks = unique(bump_data$year), minor_breaks = unique(bump_data$year)) +
+  coord_cartesian(ylim = c(1, length(unique(bump_data$response)))) +
+  theme_bw() +
+  theme(axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()) +
+  labs(x = "", y = "") 
+
+
+gg_iris_scatter + gg_economics_line + gg_marital_bar + plot_layout(ncol = 3) + 
+  gg_quakes_histogram + gg_bechden_violin + gg_bump
+
+```
+
+> [1] - Dual y-axis charts must be transformations of one another ([for good reasons](https://stackoverflow.com/a/3101876/1659890))
+
+-----------
+
+:::: {.columns .v-center-container}
+
+::: {.column width="48%"}
+
+### Building blocks of a {ggplot2} chart
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="48%" style="padding-top:60px"}
+
+<div style="border-left:1px black solid;border-bottom:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" layout-valign="bottom">
+
+`r fontawesome::fa(name = "ruler-combined", fill = colours_ggplot2_components$aesthetics)` <span style='color:`r colours_ggplot2_components$aesthetics`'>Aesthetics</span>
+
+</div>
+
+<div style="border-left:1px black solid;border-bottom:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" layout-valign="bottom">
+
+`r fontawesome::fa(name = "shapes", fill = colours_ggplot2_components$geoms)` <span style='color:`r colours_ggplot2_components$geoms`'>Geoms</span>
+
+</div>
+
+<div style="border-left:1px black solid;border-bottom:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" layout-valign="bottom">
+
+`r fontawesome::fa(name = "scale-balanced", fill = colours_ggplot2_components$scales)` <span style='color:`r colours_ggplot2_components$scales`'>Scales</span>
+
+</div>
+
+<div style="border-left:1px black solid;border-bottom:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" layout-valign="bottom">
+
+`r fontawesome::fa(name = "tags", fill = colours_ggplot2_components$guides)` <span style='color:`r colours_ggplot2_components$guides`'>Guides</span>
+
+</div>
+
+<div style="border-left:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" layout-valign="bottom">
+
+`r fontawesome::fa(name = "paint-roller", fill = colours_ggplot2_components$themes)` <span style='color:`r colours_ggplot2_components$themes`'>Theme</span>
+
+</div>
+
+:::
+
+::::
+
+-----------
+
+:::: {.columns .v-center-container}
+
+::: {.column width="40%"}
+
+### `r fontawesome::fa(name = "ruler-combined", fill = colours_ggplot2_components$aesthetics)` <span style='color:`r colours_ggplot2_components$aesthetics`'>Aesthetics</span>
+
+:::
+
+::: {.column width="60%"}
+
+Aesthetics are used to create **mappings** between <ins>columns in our datasets</ins> and the <ins>coordinate systems</ins> of our chart:
+
+<br>
+
+```{r}
+#| eval: false
+msleep %>% 
+  ggplot() +
+  aes(
+    x = sleep_total,
+    y = sleep_rem,
+    colour = vore
+  )
+```
+
+<br>
+
+::: {.fragment}
+
+`{ggplot2}` uses *tidy evaluation* to allow us to use naked column names in our code.
+
+:::
+
+:::
+
+::::
+
+-----------
+
+:::: {.columns .v-center-container}
+
+::: {.column width="40%"}
+
+### `r fontawesome::fa(name = "ruler-combined", fill = colours_ggplot2_components$aesthetics)` <span style='color:`r colours_ggplot2_components$aesthetics`'>Aesthetics</span>
+
+:::
+
+::: {.column width="60%"}
+
+
+
+<br>
+
+```{r}
+#| eval: false
+msleep %>% 
+  ggplot() +
+  aes(
+    x = sleep_total,
+    y = sleep_rem,
+    colour = vore
+  )
+```
+
+<br>
+
+::: {.fragment}
+
+`{ggplot2}` uses *tidy evaluation* to allow us to use naked column names in our code.
+
+:::
+
+:::
+
+::::
 
 -----------
 

@@ -23,6 +23,70 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
@@ -344,7 +408,7 @@
 
 <section id="topics-for-today" class="slide level2">
 <h2>Topics for today</h2>
-<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-1_9b24e8fec4030f5b514637e1128ae038">
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-1_dd53341e015185b0d5bacf9c70a2131b">
 
 </div>
 <ol type="1">
@@ -601,22 +665,214 @@ A picture is worth a thousand words
 </section>
 <section class="slide level2">
 
-<h3 id="real-world-applications-of-visual-perception-theory">… real-world applications of visual perception theory</h3>
+<h4 id="real-world-applications-of-visual-perception-theory-i">… real-world applications of visual perception theory (I)</h4>
 
 <img src="images/week-4/encodings-in-detail_bars-and-lines.jpg" class="r-stretch"><p>Images from Robert Kosara<span class="citation" data-cites="kosara_more_2022"><sup><a href="#/ref-kosara_more_2022" role="doc-biblioref" onclick="return false;">14</a></sup></span></p>
 </section>
 <section class="slide level2">
 
-<h3 id="real-world-applications-of-visual-perception-theory-1">… real-world applications of visual perception theory</h3>
+<h4 id="real-world-applications-of-visual-perception-theory-ii">… real-world applications of visual perception theory (II)</h4>
 
 <img src="images/week-4/encodings-in-detail_piecharts.jpg" class="r-stretch"><p>Images from Robert Kosara<span class="citation" data-cites="kosara_more_2022"><sup><a href="#/ref-kosara_more_2022" role="doc-biblioref" onclick="return false;">14</a></sup></span></p>
 </section>
-<section id="real-world-applications-of-visual-perception-theory-2" class="slide level2">
-<h2>… real-world applications of visual perception theory</h2>
+<section class="slide level2">
+
+<h4 id="real-world-applications-of-visual-perception-theory-iii">… real-world applications of visual perception theory (III)</h4>
 <center>
 <a href="https://twitter.com/irg_bio/status/1481214254351097859"><img src="images/week-4/seasonality-in-bee-colonies.jpg" height="500px"></a>
 </center>
-<p>.footnote[ Image found on Twitter from<span class="citation" data-cites="iker_rivas-gonzalez_irg_bio_i_2022"><sup><a href="#/ref-iker_rivas-gonzalez_irg_bio_i_2022" role="doc-biblioref" onclick="return false;">15</a></sup></span>, code for chart available from<span class="citation" data-cites="rivas-gonzalez_seasonality_2022"><sup><a href="#/ref-rivas-gonzalez_seasonality_2022" role="doc-biblioref" onclick="return false;">16</a></sup></span>.]</p>
+<blockquote>
+<p>Image found on Twitter from <a href="https://twitter.com/irg_bio/status/1481214254351097859">@irg_bio</a><span class="citation" data-cites="iker_rivas-gonzalez_irg_bio_i_2022"><sup><a href="#/ref-iker_rivas-gonzalez_irg_bio_i_2022" role="doc-biblioref" onclick="return false;">15</a></sup></span> - code for chart available from <a href="https://github.com/rivasiker/TidyTuesday/blob/41f6e460b3024b70f5d87ed09cb7cec226a03fcc/2022/2022-01-11/analysis_2022-01-11.Rmd">GitHub</a><span class="citation" data-cites="rivas-gonzalez_seasonality_2022"><sup><a href="#/ref-rivas-gonzalez_seasonality_2022" role="doc-biblioref" onclick="return false;">16</a></sup></span>.</p>
+</blockquote>
+</section></section>
+<section>
+<section id="why-is-someone-reading-measuring-your-chart" class="title-slide slide level1 center center-x" data-background-color="#23241F">
+<h1>Why is someone <strike>reading</strike> measuring your chart?</h1>
+
+</section>
+<section class="slide level2">
+
+<h3 id="why-is-someone-reading-measuring-your-chart-1">Why is someone <strike>reading</strike> measuring your chart?</h3>
+<div class="fragment fade-in-then-semi-out">
+<p><span class="big-note">To extract accurate values</span></p>
+<blockquote>
+<p>The <strong>magnitude</strong> of chart elements.</p>
+</blockquote>
+</div>
+<hr>
+<div class="fragment fade-in-then-semi-out" style="text-align:right">
+<p><span class="big-note">To quantatively compare values.</span></p>
+<blockquote>
+<p>The <strong>part to whole</strong> or <strong>relative magnitude</strong> of chart elements.</p>
+</blockquote>
+</div>
+<hr>
+<div class="fragment fade-in-then-semi-out">
+<p><span class="big-note">To find the largest/smallest value.</span></p>
+<blockquote>
+<p>The <strong>ranking</strong> of chart elements</p>
+</blockquote>
+</div>
+<hr>
+<div class="fragment fade-in-then-semi-out" style="text-align:right">
+<p><span class="big-note">To find <em>unusual</em> values.</span></p>
+<blockquote>
+<p>The <strong>distribution</strong>, <strong>ranking</strong> or <strong>magnitude</strong> of chart elements</p>
+</blockquote>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="why-is-someone-reading-your-chart">Why is someone reading your chart?</h3>
+<div class="fragment fade-in-then-semi-out">
+<p><span class="big-note">You have a story you want to tell</span></p>
+<blockquote>
+<p>There’s lots we can do to help guide the reader to understand your chart and follow the story you’re telling. We’ll cover some examples during this course.</p>
+</blockquote>
+</div>
+<hr>
+<div class="fragment fade-in-then-semi-out" style="text-align:right">
+<p><span class="big-note">The reader wants to see the data</span></p>
+<blockquote>
+<p>Charts (and tables) are the best way to see the “big picture” of a dataset - a single value (eg mean) is kind of useless. Interactivity is really useful to allow readers to properly <strong>explore</strong> the dataset.</p>
+</blockquote>
+</div>
+<hr>
+<div class="fragment fade-in-then-semi-out">
+<p><span class="big-note">The reader has a preconception about the data</span></p>
+<blockquote>
+<p>Readers might be approaching a chart biased with a particular theory about the data. We can do our best to make our charts easy to read and avoid common pitfalls.</p>
+</blockquote>
+</div>
+</section></section>
+<section>
+<section id="how-do-we-choose-a-chart" class="title-slide slide level1 center center-x" data-background-color="#23241F">
+<h1>How do we choose a chart?</h1>
+
+</section>
+<section class="slide level2">
+
+<div class="columns center">
+<div class="column center-x" style="width:48%;">
+<h3 id="use-data-columns-to-choose-charts">Use data columns to choose charts</h3>
+<p><img src="images/week-4/screenshot-msleep.jpg"></p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column center-x" style="width:48%;">
+<h3 id="use-your-story-to-choose-charts">Use your story to choose charts</h3>
+<p><img src="images/week-4/ft-visual-vocab_square.png" height="300px"></p>
+</div>
+</div>
+</section>
+<section id="data-to-viz.com" class="slide level2">
+<h2><a href="https://www.data-to-viz.com/">data-to-viz.com</a></h2>
+<div class="center-x">
+<p><a href="https://www.data-to-viz.com/"><img src="images/week-4/screenshot_data-to-viz.jpg" height="400px"></a></p>
+</div>
+<blockquote>
+<p>This site also provides simple to follow instructions for using {ggplot2} to build every single chart type you can find on the website.</p>
+</blockquote>
+</section>
+<section id="ft-interactive.github.iovisual-vocabulary" class="slide level2">
+<h2><a href="https://ft-interactive.github.io/visual-vocabulary/">ft-interactive.github.io/visual-vocabulary</a></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><a href="https://ft-interactive.github.io/visual-vocabulary/"><img src="images/week-4/ft-visual-vocab_poster.png" height="450px"></a></p>
+</div><div class="column" style="width:40%;">
+<p><img src="images/week-4/ft_ggplot2-as-a-creativity-engine.jpg" height="450px"></p>
+</div>
+</div>
+<blockquote>
+<p>The Visual Vocabulary is a really useful tool for thinking about how to tell your story with a chart.</p>
+<p>Lots of the dataviz at the FT is done with R. John Burn-Murdoch<span class="citation" data-cites="burn-murdoch_ggplot2_2016"><sup><a href="#/ref-burn-murdoch_ggplot2_2016" role="doc-biblioref" onclick="return false;">17</a></sup></span> is a great source to follow.</p>
+</blockquote>
+</section></section>
+<section>
+<section id="ggplot2-for-charts" class="title-slide slide level1 center center-x" data-background-color="#23241F">
+<h1>{ggplot2} for charts</h1>
+
+</section>
+<section id="ggplot2-a-grammar-of-graphics" class="slide level2">
+<h2>ggplot2: A Grammar of Graphics</h2>
+<p><code>{ggplot2}</code> is an incredibly powerful and flexible tool for building static dataviz.</p>
+<p>We can build (almost)<sup>1</sup> <strong>any</strong> static chart we can conceive of.</p>
+
+<img data-src="week-04_slides_data-visualisation_files/figure-revealjs/unnamed-chunk-2-1.png" width="1500" class="r-stretch"><blockquote>
+<p>[1] - Dual y-axis charts must be transformations of one another (<a href="https://stackoverflow.com/a/3101876/1659890">for good reasons</a>)</p>
+</blockquote>
+</section>
+<section class="slide level2">
+
+<div class="columns v-center-container">
+<div class="column" style="width:48%;">
+<h3 id="building-blocks-of-a-ggplot2-chart">Building blocks of a {ggplot2} chart</h3>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="padding-top:60px">
+<div style="border-left:1px black solid;border-bottom:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" data-layout-valign="bottom">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#c03728;overflow:visible;position:relative;"><path d="M0 464V48C0 21.49 21.49 0 48 0H144C170.5 0 192 21.49 192 48V96H112C103.2 96 96 103.2 96 112C96 120.8 103.2 128 112 128H192V192H112C103.2 192 96 199.2 96 208C96 216.8 103.2 224 112 224H192V288H112C103.2 288 96 295.2 96 304C96 312.8 103.2 320 112 320H192V400C192 408.8 199.2 416 208 416C216.8 416 224 408.8 224 400V320H288V400C288 408.8 295.2 416 304 416C312.8 416 320 408.8 320 400V320H384V400C384 408.8 391.2 416 400 416C408.8 416 416 408.8 416 400V320H464C490.5 320 512 341.5 512 368V464C512 490.5 490.5 512 464 512H48C23.15 512 2.706 493.1 .2477 468.9C.0838 467.3 0 465.7 0 464z"></path></svg> <span style="color:#c03728">Aesthetics</span></p>
+</div>
+<div style="border-left:1px black solid;border-bottom:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" data-layout-valign="bottom">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#919c4c;overflow:visible;position:relative;"><path d="M411.4 175.5C417.4 185.4 417.5 197.7 411.8 207.8C406.2 217.8 395.5 223.1 384 223.1H192C180.5 223.1 169.8 217.8 164.2 207.8C158.5 197.7 158.6 185.4 164.6 175.5L260.6 15.54C266.3 5.897 276.8 0 288 0C299.2 0 309.7 5.898 315.4 15.54L411.4 175.5zM288 312C288 289.9 305.9 272 328 272H472C494.1 272 512 289.9 512 312V456C512 478.1 494.1 496 472 496H328C305.9 496 288 478.1 288 456V312zM0 384C0 313.3 57.31 256 128 256C198.7 256 256 313.3 256 384C256 454.7 198.7 512 128 512C57.31 512 0 454.7 0 384z"></path></svg> <span style="color:#919c4c">Geoms</span></p>
+</div>
+<div style="border-left:1px black solid;border-bottom:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" data-layout-valign="bottom">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#fd8f24;overflow:visible;position:relative;"><path d="M554.9 154.5c-17.62-35.25-68.12-35.38-85.87 0c-87 174.3-84.1 165.9-84.1 181.5c0 44.13 57.25 80 128 80s127.1-35.88 127.1-80C639.1 319.9 641.4 327.3 554.9 154.5zM439.1 320l71.96-144l72.17 144H439.1zM256 336c0-16.12 1.375-8.75-85.12-181.5c-17.62-35.25-68.12-35.38-85.87 0c-87 174.3-84.1 165.9-84.1 181.5c0 44.13 57.25 80 127.1 80S256 380.1 256 336zM127.9 176L200.1 320H55.96L127.9 176zM495.1 448h-143.1V153.3C375.5 143 393.1 121.8 398.4 96h113.6c17.67 0 31.1-14.33 31.1-32s-14.33-32-31.1-32h-128.4c-14.62-19.38-37.5-32-63.62-32S270.1 12.62 256.4 32H128C110.3 32 96 46.33 96 64S110.3 96 127.1 96h113.6c5.25 25.75 22.87 47 46.37 57.25V448H144c-26.51 0-48.01 21.49-48.01 48c0 8.836 7.165 16 16 16h416c8.836 0 16-7.164 16-16C544 469.5 522.5 448 495.1 448z"></path></svg> <span style="color:#fd8f24">Scales</span></p>
+</div>
+<div style="border-left:1px black solid;border-bottom:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" data-layout-valign="bottom">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#f5c04a;overflow:visible;position:relative;"><path d="M472.8 168.4C525.1 221.4 525.1 306.6 472.8 359.6L360.8 472.9C351.5 482.3 336.3 482.4 326.9 473.1C317.4 463.8 317.4 448.6 326.7 439.1L438.6 325.9C472.5 291.6 472.5 236.4 438.6 202.1L310.9 72.87C301.5 63.44 301.6 48.25 311.1 38.93C320.5 29.61 335.7 29.7 344.1 39.13L472.8 168.4zM.0003 229.5V80C.0003 53.49 21.49 32 48 32H197.5C214.5 32 230.7 38.74 242.7 50.75L410.7 218.7C435.7 243.7 435.7 284.3 410.7 309.3L277.3 442.7C252.3 467.7 211.7 467.7 186.7 442.7L18.75 274.7C6.743 262.7 0 246.5 0 229.5L.0003 229.5zM112 112C94.33 112 80 126.3 80 144C80 161.7 94.33 176 112 176C129.7 176 144 161.7 144 144C144 126.3 129.7 112 112 112z"></path></svg> <span style="color:#f5c04a">Guides</span></p>
+</div>
+<div style="border-left:1px black solid;padding-bottom:35px;padding-top:35px;padding-left:20px;font-size:35px" data-layout-valign="bottom">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#e68c7c;overflow:visible;position:relative;"><path d="M0 64C0 28.65 28.65 0 64 0H352C387.3 0 416 28.65 416 64V128C416 163.3 387.3 192 352 192H64C28.65 192 0 163.3 0 128V64zM160 352C160 334.3 174.3 320 192 320V304C192 259.8 227.8 224 272 224H416C433.7 224 448 209.7 448 192V69.46C485.3 82.64 512 118.2 512 160V192C512 245 469 288 416 288H272C263.2 288 256 295.2 256 304V320C273.7 320 288 334.3 288 352V480C288 497.7 273.7 512 256 512H192C174.3 512 160 497.7 160 480V352z"></path></svg> <span style="color:#e68c7c">Theme</span></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="columns v-center-container">
+<div class="column" style="width:40%;">
+<h3 id="aesthetics"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#c03728;overflow:visible;position:relative;"><path d="M0 464V48C0 21.49 21.49 0 48 0H144C170.5 0 192 21.49 192 48V96H112C103.2 96 96 103.2 96 112C96 120.8 103.2 128 112 128H192V192H112C103.2 192 96 199.2 96 208C96 216.8 103.2 224 112 224H192V288H112C103.2 288 96 295.2 96 304C96 312.8 103.2 320 112 320H192V400C192 408.8 199.2 416 208 416C216.8 416 224 408.8 224 400V320H288V400C288 408.8 295.2 416 304 416C312.8 416 320 408.8 320 400V320H384V400C384 408.8 391.2 416 400 416C408.8 416 416 408.8 416 400V320H464C490.5 320 512 341.5 512 368V464C512 490.5 490.5 512 464 512H48C23.15 512 2.706 493.1 .2477 468.9C.0838 467.3 0 465.7 0 464z"></path></svg> <span style="color:#c03728">Aesthetics</span></h3>
+</div><div class="column" style="width:60%;">
+<p>Aesthetics are used to create <strong>mappings</strong> between <ins>columns in our datasets</ins> and the <ins>coordinate systems</ins> of our chart:</p>
+<p><br></p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-3_16004a0e0c319b20a40e3dcd8b8968e5">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">aes</span>(</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="at">x =</span> sleep_total,</span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="at">y =</span> sleep_rem,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="at">colour =</span> vore</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p><code>{ggplot2}</code> uses <em>tidy evaluation</em> to allow us to use naked column names in our code.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="columns v-center-container">
+<div class="column" style="width:40%;">
+<h3 id="aesthetics-1"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#c03728;overflow:visible;position:relative;"><path d="M0 464V48C0 21.49 21.49 0 48 0H144C170.5 0 192 21.49 192 48V96H112C103.2 96 96 103.2 96 112C96 120.8 103.2 128 112 128H192V192H112C103.2 192 96 199.2 96 208C96 216.8 103.2 224 112 224H192V288H112C103.2 288 96 295.2 96 304C96 312.8 103.2 320 112 320H192V400C192 408.8 199.2 416 208 416C216.8 416 224 408.8 224 400V320H288V400C288 408.8 295.2 416 304 416C312.8 416 320 408.8 320 400V320H384V400C384 408.8 391.2 416 400 416C408.8 416 416 408.8 416 400V320H464C490.5 320 512 341.5 512 368V464C512 490.5 490.5 512 464 512H48C23.15 512 2.706 493.1 .2477 468.9C.0838 467.3 0 465.7 0 464z"></path></svg> <span style="color:#c03728">Aesthetics</span></h3>
+</div><div class="column" style="width:60%;">
+<p><br></p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-4_d4d76747ee755ce4f2919de4cf77fa80">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">aes</span>(</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">x =</span> sleep_total,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">y =</span> sleep_rem,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">colour =</span> vore</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p><code>{ggplot2}</code> uses <em>tidy evaluation</em> to allow us to use naked column names in our code.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="dragons" class="slide level2">
 <h2>DRAGONS:</h2>
@@ -680,6 +936,9 @@ A picture is worth a thousand words
 </div>
 <div id="ref-rivas-gonzalez_seasonality_2022" class="csl-entry" role="doc-biblioentry">
 <div class="csl-left-margin">16. </div><div class="csl-right-inline">Rivas-González, I. Seasonality in bee colonies with hexbin geofacets. (2022).</div>
+</div>
+<div id="ref-burn-murdoch_ggplot2_2016" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">17. </div><div class="csl-right-inline">Burn-Murdoch, J. Ggplot2 as a <span>Creativity Engine</span>. in <em><span>EARL</span> 2016</em> (2016).</div>
 </div>
 </div>
 <div class="footer footer-default">
