@@ -69,7 +69,7 @@ finalfit::colon_s %>%
 doi.org/10.1186/s13059-020-02133-w
 
 ```{r}
-read_table(here::here("static", "datasets", "GorillaExperiment/data9b_m.txt"))
+read_table(here::here("static", "datasets", "hypothesis-dataset/data9b_m.txt"))
 ```
 
 # Survey datasets
