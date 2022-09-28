@@ -857,6 +857,7 @@ A picture is worth a thousand words
 <div class="column" style="width:40%;">
 <h3 id="aesthetics-1"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#c03728;overflow:visible;position:relative;"><path d="M0 464V48C0 21.49 21.49 0 48 0H144C170.5 0 192 21.49 192 48V96H112C103.2 96 96 103.2 96 112C96 120.8 103.2 128 112 128H192V192H112C103.2 192 96 199.2 96 208C96 216.8 103.2 224 112 224H192V288H112C103.2 288 96 295.2 96 304C96 312.8 103.2 320 112 320H192V400C192 408.8 199.2 416 208 416C216.8 416 224 408.8 224 400V320H288V400C288 408.8 295.2 416 304 416C312.8 416 320 408.8 320 400V320H384V400C384 408.8 391.2 416 400 416C408.8 416 416 408.8 416 400V320H464C490.5 320 512 341.5 512 368V464C512 490.5 490.5 512 464 512H48C23.15 512 2.706 493.1 .2477 468.9C.0838 467.3 0 465.7 0 464z"></path></svg> <span style="color:#c03728">Aesthetics</span></h3>
 </div><div class="column" style="width:60%;">
+<p>Aesthetics can be set at the <code>ggplot()</code> level - meaning they’re applied to all geoms in the chart.</p>
 <p><br></p>
 <div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-4_d4d76747ee755ce4f2919de4cf77fa80">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>msleep <span class="sc">%&gt;%</span> </span>
@@ -868,9 +869,29 @@ A picture is worth a thousand words
 <span id="cb2-7"><a href="#cb2-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
-<div class="fragment">
-<p><code>{ggplot2}</code> uses <em>tidy evaluation</em> to allow us to use naked column names in our code.</p>
+<p>We might also want to set aesthetics for individual <strong>geom layers</strong>.</p>
 </div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="columns v-center-container">
+<div class="column" style="width:40%;">
+<h3 id="geoms"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#919c4c;overflow:visible;position:relative;"><path d="M411.4 175.5C417.4 185.4 417.5 197.7 411.8 207.8C406.2 217.8 395.5 223.1 384 223.1H192C180.5 223.1 169.8 217.8 164.2 207.8C158.5 197.7 158.6 185.4 164.6 175.5L260.6 15.54C266.3 5.897 276.8 0 288 0C299.2 0 309.7 5.898 315.4 15.54L411.4 175.5zM288 312C288 289.9 305.9 272 328 272H472C494.1 272 512 289.9 512 312V456C512 478.1 494.1 496 472 496H328C305.9 496 288 478.1 288 456V312zM0 384C0 313.3 57.31 256 128 256C198.7 256 256 313.3 256 384C256 454.7 198.7 512 128 512C57.31 512 0 454.7 0 384z"></path></svg> <span style="color:#919c4c">Geoms</span></h3>
+</div><div class="column" style="width:60%;">
+<p>Geoms use the aesthetics to add layers to our charts.</p>
+<p><br></p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-5_b780e91b29bbc13d1690c9a7f751da0a">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">aes</span>(</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">x =</span> sleep_total,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="at">y =</span> sleep_rem,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="at">colour =</span> vore</span>
+<span id="cb3-7"><a href="#cb3-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<p>TODO: Finish this!!!</p>
 </div>
 </div>
 </section>
@@ -884,6 +905,41 @@ A picture is worth a thousand words
 <li><p>Colour schemes matter A LOT</p></li>
 </ul></li>
 </ul>
+</section></section>
+<section>
+<section id="xxx-dragons-xxx" class="title-slide slide level1 center">
+<h1>XXX DRAGONS XXX</h1>
+<ul>
+<li><p>Dataviz are demonstrably awesome</p></li>
+<li><p>Visual Perception Theory</p></li>
+<li><p>Let’s make some actual ggplot2 charts / Grammar of Graphics</p></li>
+<li><p>Deciding on charts (FT Visual Vocabulary)</p></li>
+<li><p>Things to avoid / Advice (does this belong in visual perception theory?)</p>
+<ul>
+<li><p>Starting at zero</p></li>
+<li><p>Lots of different types of charts</p></li>
+<li><p>Dynamite charts</p></li>
+</ul></li>
+<li><p>Sucking quote</p></li>
+</ul>
+<blockquote>
+<p>“There is no way of knowing nothing about a subject to knowing something about a subject without going through a period of much frustration and suckiness.” “Push through. You’ll suck less.” Hadley Wickham, author of ggplot2</p>
+</blockquote>
+<ul>
+<li><p>Tables</p>
+<ul>
+<li>Better than just text</li>
+<li>But can be overwhelming
+<ul>
+<li>See doi.org/10.1017/S1537592707072209 for excellent examples</li>
+</ul></li>
+<li>Using sparklines can really help</li>
+</ul></li>
+</ul>
+</section>
+<section id="workshop" class="slide level2">
+<h2>Workshop</h2>
+<p>Factors.</p>
 </section>
 <section class="slide level2 smaller scrollable">
 

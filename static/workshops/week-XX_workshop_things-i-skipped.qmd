@@ -1,0 +1,44 @@
+---
+title: "Week XX Workshop: Things I missed"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/workshop-styles.scss"
+    slide-number: "c/t"
+bibliography: "../bibtex-file.bib"
+csl: "../nature.csl"
+cache: true
+---
+
+# Week 1: Intro to RMarkdown
+
+-----------
+
+## Things I intended to cover
+
+This is a list of things I intended to cover but did not have enough time.
+
+- Add some code chunks to the document
+
+- Add some text to the document
+
+- Add some inline code chunks to the document 
+
+- Add a very basic chart and a table ({gt}) ()
+
+- Add an image
+
+- Some things to know now:
+
+  - Code chunk names
+  
+  - It's sometimes easier to create a pixel perfect ggplot2 as an image and inset that into the document
+  
+  - Table solutions for different output formats
+
+- Switch to the assessment project
+
+  - Explain what's different in there
+
+

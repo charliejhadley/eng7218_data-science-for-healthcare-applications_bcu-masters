@@ -1,0 +1,1193 @@
+---
+title: "Week 2: Healthcare Data: Open Data & Reproducibility"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/lecture-styles.scss"
+    slide-number: "c/t"
+bibliography: "../bibtex-file.bib"
+csl: "../nature.csl"
+cache: true
+echo: true
+freeze: true
+---
+
+## Topics for today
+
+```{r}
+#|  echo: false
+library(tidyverse)
+library(gt)
+library(readxl)
+library(here)
+library(janitor)
+library(haven)
+```
+
+These are the goals for today's lecture
+
+1. Demonstrate to you that there's a reproducibility crisis
+
+2. Explain steps you can take to improve the reproducibility of your research
+
+3. Identify the meanings of Open Access and Open Data
+
+> We're going to spill into the workshop time a little bit today.
+
+# "There's a reproducibility crisis in academia" {background-color="#23241F" .center .center-x}
+
+Have you ever heard this phrase before?
+
+-----------
+
+## There is a reproduciblity crisis in academia
+
+Back in 2005 a ground breaking paper by John Ioannidis[@ioannidis_why_2005] exposed an unsettling truth
+
+<center>
+<img src='images/week-02/ioannidis-2005_most-published-research-findings-are-false.jpg' height='500px'/>
+</center>
+
+-----------
+
+### There's still a crisis almost two decades later
+
+Despite lots being written about the crisis... it's still here. And with the rise of 
+
+> *"machine learning can solve anything!"* 
+
+... the crisis is evolving and getting more complicated, as reported by Douglas Heaven[@douglas_heaven_hundreds_2021]
+
+<a href='https://www.technologyreview.com/2021/07/30/1030329/machine-learning-ai-failed-covid-hospital-diagnosis-pandemic/'><img src='images/hundreds-of-covid-ai-tools.jpg' height='300px'/></a>
+
+-----------
+
+## Reproducibility vs Replicability
+
+Quite a lot of the time you'll see these two words used interchangeably - but they have specific meanings. The American Statistical Association (ASA) provides useful advice from Broman et al[@broman_recommendations_2017].
+
+> Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
+- Your module assessment must be reproducible - I must be able to run the code after it's submitted. 
+
+-----------
+
+## Reproducibility
+
+> Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
+Reproducibility is something to think about from the start of a research project:
+
+- Plan to record and document all *processes* in data collection, wrangling and analysis
+
+- While performing the research keep track of all the things you do - particularly with data!
+
+- When writing up your research ensure that all necessary materials to reproduce your findings are made available.
+
+> Later in this lecture and the workshop we'll look at specific advice for achieving this.
+
+-----------
+
+## Replicability
+
+> Replicability: This is the act of repeating an entire study, **independently of the original investigator** without the use of original data (but generally using the same methods)
+
+::: {.fragment}
+
+This is a slightly harder topic to conceptualise and much of the lack of replicability comes from what we call "questionable research practices" (QRPs)
+
+> ... these misbehaviours lie somewhere on a continuum between scientific fraud, bias, and simple carelessness, so their direct inclusion in the “falsification” category is debatable, although their negative impact on research can be dramatic
+>
+> Fanelli, 2009[@fanelli_how_2009]
+
+:::
+
+-----------
+
+## Questionable Research Practices
+
+There are lots of different ways to summarise common QRPs but I quite like this table from 2012 by John et al[@john_measuring_2012].
+
+```{r, echo=FALSE}
+tibble::tribble(
+                                                                                                                                            ~qrp, ~`self_admission_rate`,
+                                                                             "In a paper, failing to report all of a study’s dependent measures",                   63.4,
+                                               "Deciding whether to collect more data after looking to see whether the results were significant",                   55.9,
+                                                                                     "In a paper, failing to report all of a study’s conditions",                   27.7,
+                                      "Stopping collecting data earlier than planned because one found the result that one had been looking for",                   15.6,
+                                                "In a paper, “rounding off” a p value (e.g., reporting that a p value of .054 is less than .05)",                     22,
+                                                                                       "In a paper, selectively reporting studies that “worked”",                   45.8,
+                                                       "Deciding whether to exclude data after looking at the impact of doing so on the results",                   38.2,
+                                                           "In a paper, reporting an unexpected finding as having been predicted from the start",                     27,
+  "In a paper, claiming that results are unaffected by demographic variables (e.g., gender) when one is actually unsure (or knows that they do)",                      3,
+                                                                                                                               "Falsifying data",                    0.6
+  ) %>% 
+  arrange(desc(self_admission_rate)) %>% 
+  gt() %>% 
+  cols_label(qrp = "Questionable Research Practice",
+                 self_admission_rate = "Self-admission rate\n(Amongst 2,000 pysychologists)") %>% 
+  fmt_percent(columns = self_admission_rate,
+              scale_values = FALSE,
+              decimals = 1)
+
+```
+
+-----------
+
+### Questionable Research Practices and P-hacking
+
+The majority of these QRPs can be categorised as "P-hacking" or more fully - hacking the P-value.
+
+```{r, echo=FALSE}
+tibble::tribble(
+                                                                                                                                            ~qrp, ~`self_admission_rate`, ~p_hacking,
+                                                                             "In a paper, failing to report all of a study’s dependent measures",                   63.4,         NA,
+                                               "Deciding whether to collect more data after looking to see whether the results were significant",                   55.9,       TRUE,
+                                                                                     "In a paper, failing to report all of a study’s conditions",                   27.7,         NA,
+                                      "Stopping collecting data earlier than planned because one found the result that one had been looking for",                   15.6,       TRUE,
+                                                "In a paper, “rounding off” a p value (e.g., reporting that a p value of .054 is less than .05)",                     22,       TRUE,
+                                                                                       "In a paper, selectively reporting studies that “worked”",                   45.8,       TRUE,
+                                                       "Deciding whether to exclude data after looking at the impact of doing so on the results",                   38.2,       TRUE,
+                                                           "In a paper, reporting an unexpected finding as having been predicted from the start",                     27,       TRUE,
+  "In a paper, claiming that results are unaffected by demographic variables (e.g., gender) when one is actually unsure (or knows that they do)",                      3,         NA,
+                                                                                                                               "Falsifying data",                    0.6,         NA
+  ) %>% 
+  arrange(desc(self_admission_rate)) %>%
+  gt() %>%
+  cols_label(qrp = "Questionable Research Practice",
+             self_admission_rate = "Self-admission rate (Amongst 2,000 pysychologists)") %>%
+  fmt_percent(columns = self_admission_rate,
+              scale_values = FALSE,
+              decimals = 1) %>%
+  tab_style(style = cell_text(color = "red"),
+            locations = list(cells_body(
+              columns = everything(),
+              rows = p_hacking  == TRUE
+            ))) %>% 
+  cols_hide(p_hacking)
+```
+
+-----------
+
+## What is the p-value?
+
+We're going to talk about p-values **A LOT** in week 10. For now I wanted to borrow a slide from [Lucy D'Agostino McGowan](https://orcid.org/0000-0001-7297-9359)'s talk which is [well explained in this Twitter thread](https://twitter.com/LucyStats/status/1519314859258789890?s=20&t=nXMSyN2NWsEj5Ns5a4Gd2Q).
+
+<center>
+<img src='images/week-02/p-values_lucy-mcgowan-slide.jpeg' height='500px'/>
+<center>
+
+-----------
+
+## How folks treat the p-value
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+::: {.fragment fragment-index=1} 
+In some situations "p-values" are considered infallible evidence of an effect or the conclusion of a study.
+:::
+
+<br>
+
+::: {.fragment fragment-index=2}
+There are lots of different p-value thresholds, but the most common in healthcare data science is 0.05
+:::
+
+<br>
+
+::: {.fragment fragment-index=3}
+Researchers who find their study results in values *just above* 0.05 will explore ways to get the value below 0.05
+
+<br>
+
+> That's p-value hacking.
+
+:::
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment  fragment-index=4}
+<img src='images/week-02/p-values_xkcd_p-value-scale.png' height='500px'/>
+<a href='https://xkcd.com/1478/'>https://xkcd.com/1478/</a>
+:::
+
+::::
+
+-----------
+
+## P-hacking
+
+In 2019 Aschwanden[@aschwanden_were_2019] published an article in Wired.com titled ["We're All 'P-Hacking' Now"](https://www.wired.com/story/were-all-p-hacking-now/) which I highly recommend reading.
+
+<br>
+
+It highlights an excellent study by Simmons et al[@simmons_false-positive_2011] that was able to use p-value hacking to make two increasingly absurd conclusions:
+
+> Study 1: Listening to a children's song ("Hot Potato" by *The Wiggles*) makes people **feel** older.
+>
+> Study 2: Listening to a song about old age ("When I'm Sixty-Four" by *The Beatles*) makes people **actually** younger.
+
+... I recommend this paper because it makes very clear recommendations to researchers and reviewers.
+
+# Have you ever read an academic paper? {background-color="#23241F" .center .center-x}
+
+[doi.org/10.1177/0956797611417632](https://doi.org/10.1177/0956797611417632)
+
+
+-----------
+
+## Reading papers is a skill (I)
+
+Always expect to read a paper **multiple** times and make notes.
+
+We can kind of neatly split papers into two different types:
+
+:::: {.columns}
+
+::: {.column width='48%'}
+[Clinical trials like](https://doi.org/:10.1136/bmjopen-2020-044369) this one from Hu et al[@hu_factors_2022].
+
+<img src='images/week-02/screenshot_medical-study.jpg'/>
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+In some clinical trials the abstract includes **a lot of structured information** - it depends on the publisher.
+
+Some journals like BMJ Open even include study strengths and weaknesses.
+
+Read these papers in this order:
+
+- Abstract
+
+- Tables and/or figures
+
+- Conclusions
+
+- Introduction
+:::
+
+::::
+
+-----------
+
+## Reading papers is a skill (II)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+But **most** papers [look this one](https://doi.org/10.1177/0956797611417632) from Simmons et al[@simmons_false].
+
+<img src='images/week-02/screenshot_non-medical-study.jpg'/>
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+Unlike in some medical journals, the abstract is unstructured and might not contain much quantitative information.
+
+But the reading order for the paper is the same:
+
+- Abstract
+
+- Tables and/or figures
+
+- Conclusions
+
+- Introduction
+
+:::
+
+::::
+
+-----------
+
+## Reading papers is a skill (III)
+
+::: {.incremental}
+
+- On your first pass of a paper you are trying to understand if the paper is relevant and provides substantial information and/or evidence for your needs.
+
+- Often it will take another 1 or 2 passes to understand the **results** of the paper.
+
+- It usually takes even more effort to understand the **methods** of the paper
+
+   - Methodology information is often provided in "supplementary materials"
+   
+   - But unfortunately a good portion of the time you won't find sufficient information to fully understand the methodology because of **poor reproducibility**.
+   
+:::
+
+::: {.fragment}
+
+> Learning about replicability and reproducibility now will help you in understanding the existing literature **and** prepare you to succeed in a research career later on.
+
+:::
+
+-----------
+
+## Reading papers is a skill (IV)
+
+If you decide to go into a research career you'll likely be reading 10+ papers a week.
+
+<br>
+
+I'd highly recommend investing in learning speed reading early in your career. 
+
+<br>
+
+There's lots of [very interesting] eye tracking and neurological research into how we read and evidenced methodologies for speed reading that are nicely summarised by Clifton et al[@clifton_eye_2016].
+
+<hr>
+
+:::: {.columns .fragment}
+
+::: {.column width='48%'}
+BCU gives you free access to LinkedIn Learning.
+
+Go to [linkedin.com/learning-login/](https://www.linkedin.com/learning-login/) and login with your BCU email address.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<img src='images/week-02/li-course_speed-reading.jpg' width='100%'/>
+:::
+
+::::
+ 
+# ... let's get back to p-hacking {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Fighting p-hacking with pre-registration
+
+So far I've been speaking about the academic literature at large.
+
+But let's look specifically at clinical trials.
+
+> All clinical trials began after July 1st 2005 are explicitly required to be **registered**<sup>1</sup> in order to be published in [**all biomedical journals**](https://www.icmje.org/about-icmje/) overseen by the International Committee of Medical Journal Editors (ICMJE)[@noauthor_recommendations_2022].
+>
+> This is independent of the country in which the trial took place. 
+
+<br>
+<br>
+
+::: {.footnote}
+[1] Frustratingly in the clinical trials community we use the phrase "registration" but everyone else says "pre-registration".
+:::
+
+-----------
+
+### National Institutes of Health (NIH) and registration
+
+From a cursory search for clinical trial registration information you might come to the conclusion that the advice is only appropriate for studies in the US.
+
+> That is not true.
+
+<br>
+
+::: {.fragment}
+
+In 2008 the World Medical Association[@world_medical_association_declaration_2013] updated the *Declaration of Helsinki – Ethical Principles for Medical Research Involving Human Subjects* to include a paragraph about registration.
+
+> 19\. Every clinical trial must be registered in a publicly accessible database before
+recruitment of the first subject.
+
+:::
+
+-----------
+
+## International advice on clinical trials
+
+The NIH provides a really useful tool for comparing the clinical research regulations from several countries:
+
+::: {.center-x}
+[clinregs.niaid.nih.gov/country/united-kingdom](https://clinregs.niaid.nih.gov/country/united-kingdom)
+:::
+
+-----------
+
+## UK trial registration
+
+Despite these "requirements"... violations are still common as detailed in Bradley et al[@bradley_automatic_2022].
+
+<br>
+
+However, the UK has announced new infrastructure requiring 100% clinical trial registration via a collaboration between the Human Research Authority and [the ISRCTN registry](https://www.isrctn.com/). See Bruckner[@bruckner_uk_2021] for a thorough overview of what's changing.
+
+-----------
+
+## Registration to "Reduce waste"
+
+For unexplainable reasons there is a lot written about registration of trials "reducing research waste" as it helps reduce duplication of studies.
+
+While elements of this are true... the big takeaway is pre-registration helps prevent Questionable Research Practices.
+
+> In fact it's the reason why GSK reached a $2.5million settlement in 2004
+
+-----------
+
+## GlaxoSmithKline & Clinical Trial Registration
+
+GSK chose to settle a civil case instead of engaging in an expensive legal battle over "repeated and persistent fraud" concerning the use of paroxetine in treating depression in adolescents.
+
+<br>
+
+::: {.fragment}
+
+As detailed in 2004 by Dyer[@dyer_glaxosmithkline_2004]:
+
+- Two studies showed no benefit to using paroxetine when compared with placebo.
+
+- Three studies found evidence for an increase in suicidal thoughts and behaviour.
+
+Internal company documents confirmed the suppression of these results:
+
+> “it would be commercially unacceptable to include a statement that efficacy had not been demonstrated, as this would undermine the profile of paroxetine.”
+>
+> Spurgeon 2004[@spurgeon_glaxosmithkline_2004]
+
+:::
+
+-----------
+
+## Pre-registration for all studies
+
+There's a growing body of researchers both actually doing pre-registration and calling for it in all disciplines - particularly those that intersect with healthcare.
+
+- Simmons et al[@simmons_false-positive_2011] have been running [aspredicted.org](https://aspredicted.org/) since 2015 to help authors to create pre-registration reports.
+
+- The [Centre for Open Science](https://www.cos.io) encourages pre-registration on OSF and has in the past run a [Preregistration Challenge with a monetary prize](https://osf.io/x5w7h/wiki/06%20LeaderBoard/?hsCtaTracking=2f25be73-35de-4b95-93e8-4f08acc42332%7Cf2024186-54bb-4626-baab-1785d2f9d71a).
+
+- I highly recommend reading Nosek et al[@nosek_preregistration_2018] which gives a great overview of pre-registration and walk through multiple examples of how it works in practice. 
+
+> At the moment there's nothing binding you to pre-register non-clinical trials but this topic is simmering away in the background
+
+
+# Prediction markets and replication studies {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Prediction markets and replication studies
+
+> In prediction markets, investors make predictions of future events by buying shares in the outcome of the event and the market price indicates what the crowd thinks the probability of the event is.
+>
+> [Harvard Press Release](https://www.seas.harvard.edu/news/2015/11/markets-science)
+
+::: {.fragment}
+
+This was first applied to predicting replicability of research results in 2015 by Dreber et al[@dreber_using_2015].
+
+<br>
+
+There is now evidence for these markets being a reliable estimate of predictability[@camerer_evaluating_2018].
+
+> Prof. Anna Dreber gives an excellent 40minute overview of replication prediction markets here - https://youtu.be/a5rFDKB1aZc?t=1036
+
+:::
+
+-----------
+
+## A final word on replicability studies
+
+Most (if not all) of studies about replicability are deeply technical and rely on statistical methods we don't have time to cover in this course.
+
+This includes the foundational paper "Why Most Published Research Findings Are False" by Ioannidis[@ioannidis_why_2005].
+
+> Your assessment does not require you to understand or replicate any of the methodologies behind replicability studies.
+
+
+# Reproducibility {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Reproducibility 
+
+Let's get back to the ASA reproducibility recommendations from Broman et al[@broman_recommendations_2017].
+
+> Reproducibility: A study is reproducible if you can take the **original data and the computer code** used to analyze the data and reproduce all of the numerical findings from the study.
+
+<br>
+
+In order for reproducibility to be *possible* we need the original data to be accessible 
+
+<br>
+
+> We need **Open Data**.
+
+# Open Data {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Most papers don't provide their data
+
+More often than papers simply **do not provide** the data that they:
+
+- Use to create charts and tables
+
+- Use to perform statistical tests
+
+- Use to generate their conclusions
+
+> These papers are the antithesis of reproducible.
+
+-----------
+
+## "Data available on request"
+
+It's common to see the phrase "data available on request" but that's frequently meaningless:
+
+> "Data requests to authors are successful in 27–59% of cases, whereas the request is ignored in 14–41% cases"
+>
+> Tedersoo et al 2021[@tedersoo_data_2021]
+
+<br>
+
+Even in cases where data is returned it's often insufficient for reproducibility, Roche et al[@roche_public_2015]:
+
+- "Data" might actually be screenshots of charts stored in an Excel workbook
+
+- "Data" might be stored in other "non-machine-readable" formats like PDF or images
+
+- "Data" might only be provided in the post analysis form
+
+-----------
+
+## Researchers have confusing opinions
+
+In one of the earliest and most cited studies in data sharing in 2011 by Tenopir et al[@tenopir_data_2011] surveyed 1,329 scientists and found:
+
+> "Most respondents (at least 60% across disciplines) agree that lack of access to data generated by other researchers or institutions is a major impediment to progress in science."
+
+... but
+
+> "A majority of all respondents indicate they are not willing to place all of their data in central repositories with no restrictions"
+
+These findings have been replicated again, and again.
+
+-----------
+
+## Open Data helps everyone
+
+<div class="columns">
+
+<div class="column fragment" width='48%'>
+
+**Researchers**
+
+- Open Data helps reproduce previous studies
+
+- Open Data means researchers can do **new** studies, including meta analyses.
+
+<br>
+
+- Open Data gives an additional way researchers can be cited
+
+- There is clear evidence Open Data is linked with higher citation rates, eg Colavizza et al 2020[@colavizza_citation_2020].
+
+</div>
+
+<div class="column" width='4%'>
+</div>
+
+<div class="column fragment" width='48%'>
+**Society**
+
+- The coordinated global COVID-19 response benefited significantly from Open Data portals[@noauthor_data_2020].
+
+- Reducing energy consumption of buildings based in occupancy from public datasets[@roth_examining_2020].
+
+- Emergency planning via use of the Behavioral Risk Factor Surveillance System (BRFSS)[@noauthor_cdc_2021]
+
+</div>
+
+</div>
+
+
+::: {.footnote .fragment}
+> You can find *some* healthcare specific examples on the course website [eng7218.netlify.app/resources/open-data](https://eng7218.netlify.app/resources/open-data). Please do research your own - and consider sharing them with the group.
+:::
+
+-----------
+
+## Open Data vs Big Data
+
+Big Data is great. It's the driver behind the Internet of Things and much of modern healthcare technology. 
+
+But in most circumstances it is **not** Open Data.
+
+<a href='http://opendefinition.org/'><img src='images/week-02/screenshot_open-definition.jpg' height='400px'/></a>
+
+Screenshot of [opendefinition.org](https://opendefinition.org)[@noauthor_open_2022]
+
+-----------
+
+## Open Data short definition
+
+Let's minimise these definitions:
+
+::: {.fragment}
+
+> Open data must be..
+
+- Legally open. The data must be subject to an open data license
+
+- Technically open.
+
+  - Data files must be machine-readable and non-proprietary, which often means *plain text*.
+  
+  - Accessible from a public server without password protection
+  
+:::
+
+::: {.fragment}
+
+Or even more succinctly:
+
+> Open data must be open to humans and computers.
+
+:::
+
+<br>
+<br>
+
+::: {.footnote}
+Please note this definition of open data for your assessment.
+:::
+
+-----------
+
+## Open Data licenses
+
+In most cases the [Creative Commons' "Choose a license tool"](https://creativecommons.org/choose/) is the best and easiest choice if you have a **dataset** you want to make into Open Data.
+
+<br>
+
+- The CC0 license is the most permissive license.
+
+<br>
+
+There are special Open Data licenses used by Governmental/Charity organisations designed to waive liability for use, eg the [Open Government License](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) from the UK Government[@uk_government_open_2022] 
+
+<hr>
+
+> In general it's best to use data licenses for data and software licenses for software.
+
+-----------
+
+## Open Data examples
+
+There are **SO MANY** different sources (or publishers) of Open Data, for a good sample checkout the [Open Data Essentials page from the World Bank](http://opendatatoolkit.worldbank.org/en/essentials.html)[@world_bank_open_2021].
+
+::: {.center-x}
+<img src='images/week-02/screenshot_open-data-essentials.jpg' height='450px'/>
+:::
+
+-----------
+
+## Open Data and Health Data
+
+Open Data is awesome. But if we're responsible for data that can identify individuals or groups we have a [legal] duty of care to protect that data.
+
+<br>
+
+In the UK we have the [Data Protection Act](https://www.legislation.gov.uk/ukpga/2018/12/contents/enacted)[@uk_government_data_2018] which is the UK's implementation of the General Data Protection Regulation (GDPR).
+
+> In week 6 we will discuss GDPR and the Data Protection Act in the context of anonymising data. 
+> 
+> This isn't a course in the law school so we won't go *hard* into the definitions. But there are some things we need to discuss.
+
+-----------
+
+## Open Data and Health Data
+
+In the DPA[@uk_government_data_2018] there are 6 different types of sensitive data defined in section 86
+
+> I'm highlighting the ones that cover data that you might reasonably collect and consider "health data".
+
+::: {.small}
+- (a\) the processing of personal data revealing racial or ethnic origin, <span style='opacity:0.5;'>political opinions, religious or philosophical beliefs or trade union membership;</span>
+
+- (b\) the processing of genetic data for the purpose of uniquely identifying an individual;
+
+- (c\) the processing of biometric data for the purpose of uniquely identifying an individual;
+
+- (d\) the processing of data concerning health;
+
+- (e\) the processing of data concerning an individual’s sex life or sexual orientation;
+
+- <span style='opacity:0.5;'>(f) the processing of personal data as to [commission or alleged commission of an offence]</span>
+:::
+
+> There's some recursion, so let's pull out the definitions of "health data" from Part 7 Section 205 and list everything together
+
+-----------
+
+## Open Data and Health Data
+
+Part 7 Section 205 defines the following
+
+::: {.small}
+- **“biometric data”** means personal data resulting from specific technical processing relating to the physical, physiological or behavioural characteristics of an individual, which allows or confirms the unique identification of that individual, such as facial images or dactyloscopic data;
+
+- **“data concerning health”** means personal data relating to the physical or mental health of an individual, including the provision of health care services, which reveals information about his or her health status;
+
+- **“genetic data”** means personal data relating to the inherited or acquired genetic characteristics of an individual which gives unique information about the physiology or the health of that individual and which results, in particular, from an analysis of a biological sample from the individual in question;
+:::
+
+But we should also still include these sections from section 86:
+
+::: {.small}
+- (a\) the processing of personal data revealing racial or ethnic origin,
+
+- (e\) the processing of data concerning an individual’s sex life or sexual orientation;
+:::
+
+-----------
+
+## Open Data and Health Data
+
+There's more [reader friendly documentation about health data and DPA 2018](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/right-of-access/health-data/#healthdata7) from the Information Commissioner's Office[@information_commissioners_office_health_2021].
+
+> We'll talk about this more later.
+
+
+# Open Data mandates and UKRI {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Open Data mandates and UKRI
+
+UKRI is responsible for the 6 UK research councils who fund most university-based research in the UK.
+
+<br>
+
+Some research councils have their own "data sharing policies", but others depend on the "common principles on on research data"[@ukri_ukri_2022]:
+
+> Publicly funded research data are a public good and produced in the public interest. They should be made openly available with as few restrictions as possible in a timely and responsible manner.
+
+-----------
+
+## Open Data mandates and UKRI
+
+::: {.small}
+- <span style='opacity:0.5;'>Arts and Humanities Research Council (AHRC[@ahrc_ahrc_2022]: Relies on the UKRI common principles</span>.
+
+- Biotechnology and Biological Sciences Research Council (BBSRC[@bbsrc_bbsrc_2022]): "BBSRC expects that all data (with accompanying metadata) should be
+shared in a timely fashion as soon as it is verified".
+
+- Engineering and Physical Sciences Research Council (EPSRC[@epsrc_esprc_2022]): Has the most explicit data policy, including a requirement for DOI.
+
+- Economic and Social Research Council (ESRC[@esrc_esrc_2022]): Explicit requirement that "data **will** be made available [...] as Open Data".
+
+- Medical Research Council (MRC): There's an "expectation" from MRC[@mrc_mrc_2022] that data must be made open, they helpfully provide [lots of advice about patient and population data](https://www.ukri.org/wp-content/uploads/2021/08/MRC-0208212-MRC-policy-and-guidance-on-sharing-of-research-data-from-population-and-patient-studies-Word-version-v01.02.pdf). 
+
+- Natural Environment Research Council (NERC[@nerc_nerc_2022]): Flubs it by saying all research "must include a
+statement on how the supporting data and any other relevant research materials can be accessed"
+
+- <span style='opacity:0.5;'>Science and Technologies Facilities Council (STFC[@stfc_stfc_2021])": "STFC expects that published data should be made publicly available within six months of publication unless justified otherwise"</span>
+:::
+
+-----------
+
+## Understanding the whole process
+
+:::: {.columns}
+
+::: {.column width='48%' .fragment .incremental}
+1. Submit a Data Management Plan (DMP) to a funder, including a data sharing plan
+
+1. Pre-register your research (often simultaneously with step 1)
+
+1. Reserve a DOI to store your research data at a data repository
+
+1. Do the research
+
+  - Keep raw data pristine. Do not modify your raw data.
+  
+  - Keep track of how you wrangle the data (much easier when you write R code!)
+  
+  - Craft an anonymised, shareable version of your datasets described in your DMP.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment .incremental}
+5\. Write up the study
+
+6\. Choose a journal to submit to
+
+> That's an entire process in of itself!
+  
+7\. Make the data deposit public when your research is made public
+
+  - Applying an embargo can help automate this process
+  
+<br>
+
+::: {.fragment}
+
+You might want to create follow up studies or new studies where you add to the existing data deposit.
+
+This works nicely thanks to DOI versioning!
+:::
+:::
+
+::::
+
+-----------
+
+### Understanding the whole process (more!)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+I tweeted asking for advice about things I missed
+
+```{r, echo=FALSE}
+tweetrmd::tweet_embed("https://twitter.com/charliejhadley/status/1560579213559619586?s=20&t=cAGJy0MsQfRLdDrP0QE20w")
+```
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+- Meta data records including data dictionaries are really useful tools for studies. These can be deposited into data repositories and linked to in your articles.
+
+- I haven't mentioned ethics forms and consent forms. These are very important. Refer to your Research Support teams for help in designing these documents.
+
+:::
+
+::::
+
+------------
+
+## ... what about code?
+
+> So far I've only spoken about the data element of reproducibility, we'll get onto the code in the workshop.
+
+-----------
+
+## Digital Object Identifiers (DOI)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+DOI are extremely important to ensure research availability into the future. 
+
+Academic journal links are fragile and could change at any time:
+
+> <a href='https://sciencedirect.com/science/article/<br>pii/S2665927122000879'>sciencedirect.com/science/article/<br>pii/S2665927122000879</a>
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+
+DOI are **persistent and extremely long-term** identifiers that look like this:
+
+> 10.1016/j.crfs.2022.05.015
+
+The publisher and the DOI Foundation are then responsible for directing you to the resource by constructing a URL like this:
+
+> doi.org/10.1016/j.crfs.2022.05.015
+
+:::
+
+::::
+
+-----------
+
+## DOI for more than just publications
+
+Initially DOI were only issued by academic publishers to resolve journal articles.
+
+Data Repositories started issuing DOI so we could resolve links to data, code and more.
+
+:::: {.columns}
+
+::: {.column width='48%' .fragment}
+**Specialist Data Repositories**
+
+Sometimes you **need** a repository with specialist features, eg:
+
+- Genome sequences
+
+- Protein sequences
+
+- Climate data
+
+Nature Publishing Group[@nature_data_2022] [provides an excellent overview of these tools](https://www.nature.com/sdata/policies/repositories).
+
+:::
+
+::: {.column width='4%'}
+
+:::
+
+::: {.column width='48%' .fragment}
+**General Purpose Repositories**
+
+These tools all have slighty different advantages and disadvantages
+
+- Figshare
+
+- Zenodo
+
+- Open Science Framework
+:::
+
+::::
+
+-----------
+
+## Identifiers for researchers?
+
+DOI are great for resolving our research outputs, what about uniquely identifying researchers?
+
+Researchers often share the same names or change their names throughout their career.
+
+:::: {.columns .fragment}
+
+::: {.column width='48%'}
+
+The **only** open researcher identifier is ORCID.
+
+Thankfully - it also works really well! 
+
+It keeps track of all publications and deposits on data repositories.
+
+Here's mine: [orcid.org/0000-0002-3039-6849](https://orcid.org/0000-0002-3039-6849).
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<img src='images/week-02/orcid-ids.png'/>
+:::
+
+::::
+
+::: {.fragment}
+
+> I want you to register for an ORCID now so you can use it for everything - including in your CV
+
+:::
+
+-----------
+
+## General purpose repositories
+
+- Figshare.org
+
+  - This is my favourite repository.
+  
+  - It has a unique DOI versioning system
+  
+    - We can always get the most recent version of an object: [doi.org/10.6084/m9.figshare.3761562](https://doi.org/10.6084/m9.figshare.3761562)
+    
+    - Or a specific version: [doi.org/10.6084/m9.figshare.3761562.**v202**](https://doi.org/10.6084/m9.figshare.3761562.v202)
+
+- Zenodo.org
+
+  - This infrastructure hangs off the back of CERN. If we were being pessimistic, this is the most reliable option - the others might fail.
+  
+  - DOI versioning is semantically linked - it takes a little bit more effort to obtain the most recent version of an object
+  
+  
+- Open Science Framework - osf.io
+
+  - The OSF tries to solve many problems at once, instead of just being a data repository.
+  
+  - OSF **does not** support DOI versioning.
+  
+  - The OSF interface is quite complex.
+
+-----------
+
+## `r emo::ji("memo")` Task: Setup a Collection on Figshare {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 1</p>
+
+Everything we've spoken about has been very theoretical. I want you to go through the steps of creating a collection on Figshare.
+
+> We're creating a Collection because it can contain multiple Figshare items. At the beginning of your research you likely don't know exactly how many data files you'll end up with.
+
+:::: {.columns}
+
+::: {.column width='48%'}
+- Sign up for Figshare with your ORCID
+
+- Go to "My data" in Figshare
+
+- Go to "Collections"
+
+- Create a Collection
+
+- Reserve a DOI
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+- Go to "My data"
+
+- Add a new item
+
+- Reserve a DOI
+
+- Go to your collection and add this data item.
+:::
+
+::::
+
+-----------
+
+## Figshare for talks and more
+
+Figshare is very much a general purpose repository.
+
+<br>
+
+If you create something you want to make available for the future the best thing you can do is get a DOI.
+
+- Consider using Figshare for presentations
+
+- Consider using Figshare for posters
+
+
+# We need to talk about Open Access {background-color="#23241F" .center .center-x}
+
+-----------
+
+## We need to talk about Open Access
+
+It used to be extremely hard to access the research that UKRI funds - despite it being funded by public money. 
+
+<br>
+
+The Open Access movement began in the 90s and is ever growing.
+
+<br>
+
+It's now a requirement of UKRI[@ukri_ukri_2022] funding that
+
+> the final Version of Record or the Author’s Accepted Manuscript must be free to view
+and download via an online publication platform, publishers’ website, or institutional or
+subject repository within a maximum of 12 months of publication 
+
+... however, this often means that **someone** is paying an Article Processing Charge (APC).
+
+-----------
+
+## Different routes to Open Access
+
+:::: {.columns}
+
+::: {.column width='48%'}
+APCs can be split between publishers and authors in different ways.
+
+UKRI is usually responsible for paying the author's portion of the bill.
+
+- Gold Open Access: All articles in a journal are Open Access.
+
+- Hyrbrid Open Access: Specific articles in a journal are made Open Access through APCs. Journals receive money through both subscriptions and APCs.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+**No APC is paid**
+
+The most important category here is **Green Open Access**.
+
+In Green Open Access the author self-archives their article in a publicly available repository.
+
+**This gets complicated**.
+
+- Some publishers require that only pre-prints are self-archived
+
+- Some publishers allow post-print publishing.
+
+If you're interested read Gadd and Troll Covey[@gadd_what_2019].
+:::
+
+::::
+
+
+# Negative Results {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Positive Publication Bias
+
+There is a significant and very clear bias to researchers publishing "positive results"[@mlinaric_dealing_2017] - which you can even see in article titles.
+
+:::: {.columns}
+
+::: {.column width='48%'}
+This poses significant issues in the literature.
+
+- It's really useful to know X doesn't work! It means others don't need to repeat the result.
+
+- Negative effects can be under reported, as per the GSK lawsuit in 2004.
+
+- A lack of negative results introduces bias to meta-analyses.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+The MRC Open Research Data policy[@mrc_mrc_2022] explicitly requires both positive and negative results of studies be published within 24 months of the trial end.
+
+
+:::
+
+::::
+
+
+-----------
+
+## Publishing negative results
+
+This is an open problem. 
+
+There was a push for new negative result journals in the early 2010s but several of these folded, [including the Journal of Negative Results in Biomedicine](https://jnrbm.biomedcentral.com/) The remaining journals have very low impact factors as they are published by smaller publishers.
+
+In general the journals with the highest impact factors are getting better at publishing negative results.
+
+------------
+
+## Why are we learning all of this now?
+
+```{r}
+tweetrmd::tweet_embed("https://twitter.com/charliejhadley/status/1559534088838647808?s=20&t=M0f0BvpbqLiKpDxBHiJy7w")
+```
+
+-----------
+
+### References
+
+::: {#refs}
+:::

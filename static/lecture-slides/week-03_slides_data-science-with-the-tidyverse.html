@@ -23,6 +23,70 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
@@ -344,8 +408,12 @@
 
 <section id="topics-for-today" class="slide level2">
 <h2>Topics for today</h2>
-<div class="cell" data-hash="week-03_slides_data-science-with-the-tidyverse_cache/revealjs/unnamed-chunk-1_64194828ffe20cd3fd5eafb639d6e31f">
-
+<div class="cell" data-hash="week-03_slides_data-science-with-the-tidyverse_cache/revealjs/unnamed-chunk-1_fd3da4ce125e3a826cb6e0ab6907a4df">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li><p>Understanding <code>data.frame</code> and <code>tibble</code></p></li>
@@ -360,49 +428,337 @@
 <section id="the-tidyverse-is-two-things" class="slide level2">
 <h2>The tidyverse is two things</h2>
 <div class="columns">
-<div class="column" style="width:48%;">
+<div class="column fragment fade-in-then-semi-out" data-fragment-index="1" style="width:48%;">
 <ul>
 <li><p>A collection of packages that are designed to work together really well.</p></li>
 <li><p>A collection of packages for all stages of the data science workflow.</p></li>
 </ul>
 <center>
-<img src="images/r4ds_data-science-workflow.png">
+<img src="images/r4ds_data-science-workflow.png"> Source: <a href="https://r4ds.had.co.nz/">R for Data Science</a><span class="citation" data-cites="wickham_r_2016"><sup><a href="#/ref-wickham_r_2016" role="doc-biblioref" onclick="return false;">1</a></sup></span>
 </center>
 </div><div class="column" style="width:4%;">
 
-</div><div class="column" style="width:48%;">
+</div><div class="column fragment" data-fragment-index="2" style="width:48%;">
 <ul>
 <li>An opinionated framework for how to work with data.</li>
 </ul>
-<p>Some people<span class="citation" data-cites="matloff_teaching_2022"><sup><a href="#/ref-matloff_teaching_2022" role="doc-biblioref" onclick="return false;">1</a></sup></span> would describe the tidyverse as being an alternative to using base R.</p>
+<p>Some people<span class="citation" data-cites="matloff_teaching_2022"><sup><a href="#/ref-matloff_teaching_2022" role="doc-biblioref" onclick="return false;">2</a></sup></span> would describe the tidyverse as being an alternative to using base R.</p>
 <p>It’s not.</p>
 <p>The tidyverse is a useful approach to working with data that has a large ecosystem of tools. We’ll use it to move quickly.</p>
 </div>
 </div>
+<div class="fragment" data-fragment-index="2">
 <blockquote>
 <p>After we’ve been using the tidyverse for a while I’ll come back to this subject and provide further context.</p>
 </blockquote>
+</div>
 </section>
-<section class="slide level2">
-
-<p>background-color: #def3f7</p>
-</section>
-<section>
-<section id="task-create-a-week-3-project" class="title-slide slide level1 center">
-<h1>📝 Task: Create a week-3 project</h1>
-<p style="color:purple;margin-top:10px">
+<section id="task-create-a-week-3-project" class="slide level2" data-background-color="#def3f7">
+<h2>📝 Task: Create a week-3 project</h2>
+<p class="task-slide-count">
 SLIDE 1 OF 1
 </p>
 <ol type="1">
 <li>Create a new RStudio project called something like <code>week-3</code>.</li>
 </ol>
 </section>
+<section id="installing-and-working-with-the-tidyverse" class="slide level2">
+<h2>Installing and working with the tidyverse</h2>
+<p>To install the tidyverse collection of packages you need to run this code in the console.</p>
+<div class="cell" data-hash="week-03_slides_data-science-with-the-tidyverse_cache/revealjs/unnamed-chunk-2_520d7bc32f793e44ac7b3266666c4808">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<p>The tidyverse packages are split into two groups:</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<ul>
+<li>Core tidyverse packages which are loaded with this code</li>
+</ul>
+<div class="cell" data-hash="week-03_slides_data-science-with-the-tidyverse_cache/revealjs/unnamed-chunk-3_dea3f28b0e2e67473034c53d8f1c5bb5">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column fragment" style="width:48%;">
+<ul>
+<li>“Specialised” packages that need to be explicitly loaded, like <code>{readxl}</code> for importing data from Excel files.</li>
+</ul>
+<div class="cell" data-hash="week-03_slides_data-science-with-the-tidyverse_cache/revealjs/unnamed-chunk-4_e1e9b1a6e2f30c0be44970d10c98338e">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="updating-the-tidyverse-i" class="slide level2">
+<h2>Updating the tidyverse (I)</h2>
+<p>In terms of real-world usage, keeping the tidyverse up to date is identical to keeping any R package up to date.</p>
+<p>Thee</p>
+<ul>
+<li>When installing a <em>new</em> package the console might prompt you to update to new versions of packages</li>
+</ul>
+<center>
+<img src="images/week-3/pkg-install-needs-updates.jpg" width="600px">
+<center>
+</center></center></section>
+<section id="updating-the-tidyverse-ii" class="slide level2">
+<h2>Updating the tidyverse (II)</h2>
+<p>In terms of real-world usage, keeping the tidyverse up to date is identical to keeping any R package up to date.</p>
+<p>There are 3 different ways you might discover you should update a package.</p>
+<ul>
+<li>When installing a <em>new</em> package the console might prompt you to update to new versions of packages.</li>
+</ul>
+<div>
+<ul>
+<li class="fragment"><p>When installing a <em>new</em> package the install fails due to an old package.</p></li>
+<li class="fragment"><p>You hear about an exciting new update to a package.</p></li>
+</ul>
+</div>
+<div class="fragment">
+<blockquote>
+<p>There is a <code>tidyverse::tidyverse_update()</code> function but in practice I think it’s very rarely used.</p>
+</blockquote>
+</div>
+</section>
+<section id="datasets-well-be-using-today-i" class="slide level2">
+<h2>Datasets we’ll be using today (I)</h2>
+<p>We’re going to be using at least 3 different datasets today:</p>
+<ul>
+<li>The Global Burden of Disease study from the <a href="https://vizhub.healthdata.org/gbd-results">Global Health Data Exchange</a><span class="citation" data-cites="global_health_data_exchange_global_2022"><sup><a href="#/ref-global_health_data_exchange_global_2022" role="doc-biblioref" onclick="return false;">3</a></sup></span>.</li>
+</ul>
+<p>The Global Burden of Disease study is an extremely useful and rich dataset for understanding global (and comparative) health challenges.</p>
+<p>There’s an <a href="https://vizhub.healthdata.org/gbd-results/">excellent interactive tool for downloading data from the survey</a> - but you do need to register for a free account to use it.</p>
+</section>
+<section id="datasets-well-be-using-today-ii" class="slide level2">
+<h2>Datasets we’ll be using today (II)</h2>
+<p>We’re going to be using at least 3 different datasets today:</p>
+<div class="de-emphasis">
+<ul>
+<li>The Global Burden of Disease study from the <a href="https://vizhub.healthdata.org/gbd-results">Global Health Data Exchange</a><span class="citation" data-cites="global_health_data_exchange_global_2022"><sup><a href="#/ref-global_health_data_exchange_global_2022" role="doc-biblioref" onclick="return false;">3</a></sup></span>.</li>
+</ul>
+</div>
+<ul>
+<li>The <code>msleep</code> dataset from within the <code>{ggplot2}</code> package</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>Lots (and lots) of R packages have datasets built into them, usually to demonstrate how to use functions inside the package.</p>
+<p>The <code>msleep</code> dataset has data about mammalian sleep cycles from Savage and West<span class="citation" data-cites="savage_quantitative_2007"><sup><a href="#/ref-savage_quantitative_2007" role="doc-biblioref" onclick="return false;">4</a></sup></span></p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="cell" data-hash="week-03_slides_data-science-with-the-tidyverse_cache/revealjs/unnamed-chunk-5_1fc863e67d5b63b379328eba18bd51f6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">glimpse</span>(msleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 83
+Columns: 11
+$ name         &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Greater shor…
+$ genus        &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bos", "Bra…
+$ vore         &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi", "carn…
+$ order        &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorpha", "Art…
+$ conservation &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", NA, "dome…
+$ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, 3.0, 5…
+$ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6, 0.8, …
+$ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833333, N…
+$ awake        &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 21.0, 1…
+$ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07000, 0…
+$ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490, 0.04…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="datasets-well-be-using-today-iii" class="slide level2">
+<h2>Datasets we’ll be using today (III)</h2>
+<p>We’re going to be using at least 3 different datasets today:</p>
+<div class="de-emphasis">
+<ul>
+<li><p>The Global Burden of Disease study from the <a href="https://vizhub.healthdata.org/gbd-results">Global Health Data Exchange</a><span class="citation" data-cites="global_health_data_exchange_global_2022"><sup><a href="#/ref-global_health_data_exchange_global_2022" role="doc-biblioref" onclick="return false;">3</a></sup></span>.</p></li>
+<li><p>The <code>msleep</code> dataset from within the <code>{ggplot2}</code> package</p></li>
+</ul>
+</div>
+<ul>
+<li>The <code>gapminder</code> dataset from the <code>{gapminder}</code> package</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p>In 2006 Hans Rosling<span class="citation" data-cites="hans_rosling_best_2006"><sup><a href="#/ref-hans_rosling_best_2006" role="doc-biblioref" onclick="return false;">5</a></sup></span> gave <a href="https://www.ted.com/talks/hans_rosling_the_best_stats_you_ve_ever_seen?language=en">an incredible TED talk where he introduced animated bubble charts</a> as a tool to tell stories about global development.</p>
+<p>Hans Rosling also founded the Gapminder Foundation to promote sustainable global development.</p>
+<p>The <code>{gapminder}</code> package contains a subset of their data.</p>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><a href="https://r-graph-gallery.com/271-ggplot2-animated-gif-chart-with-gganimate.html"><img src="images/week-3/gapminder-bubble-chart.png"></a></p>
+</div>
+</div>
+</section>
+<section id="task-get-the-gbd-dataset" class="slide level2" data-background-color="#def3f7">
+<h2>📝 Task: Get the GBD dataset</h2>
+<p class="task-slide-count">
+SLIDE 1 OF 2
+</p>
+<ol type="1">
+<li><p>Add a sub-folder to your project called <code>data</code></p></li>
+<li><p>Inside of the <code>data</code> folder add a script called <code>obtain-data.R</code></p></li>
+<li><p>Add this code</p></li>
+</ol>
+<div class="cell" data-hash="week-03_slides_data-science-with-the-tidyverse_cache/revealjs/unnamed-chunk-6_5cecf0e93e5b37d705aead99ededcaed">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">download.file</span>(<span class="st">"https://raw.githubusercontent.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/main/static/datasets/data-example_global-burden-of-disease/data-example_global-burden-of-disease.csv"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>              <span class="at">destfile =</span> <span class="st">"data/global-burden-of-disease-data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>5. Run the code</p>
+</section>
+<section id="task-get-the-gbd-dataset-1" class="slide level2" data-background-color="#def3f7">
+<h2>📝 Task: Get the GBD dataset</h2>
+<p class="task-slide-count">
+SLIDE 2 OF 2
+</p>
+<ol type="1">
+<li><p>Add a new <code>.Rmd</code> document called something like <code>intro-to-tidyverse.Rmd</code></p></li>
+<li><p>Use this document to follow along with examples, make notes and run code.</p></li>
+</ol>
+<blockquote>
+<p>We’re going to move between topics quite a bit today. This won’t be a very neat document, and that’s okay.</p>
+</blockquote>
+</section>
+<section id="reading-data-into-r" class="slide level2">
+<h2>Reading data into R</h2>
+<p>The <code>{readr}</code> package provides excellent tools for reading <em>rectangular</em> data from <em>plain-text</em> files like <code>.csv</code> and <code>.tsv</code> files.</p>
+<p><br></p>
+<p>We need to think about creating reproducible file paths. The easiest way to do so is as follows:</p>
+<p><br></p>
+<div>
+<ol type="1">
+<li class="fragment"><p>Add a code chunk to your <code>.Rmd</code></p></li>
+<li class="fragment"><p>Choose a name for the dataset you’re importing, it’s recommended to use <code>raw</code> or something similar to denote this is your data pre-wrangling.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1"></a>disease_burden_raw &lt;- </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li class="fragment"><p>Call the appropriate function from <code>{readr}</code> for your data, add <code>""</code> in the 1st argument</p>
+<div class="cell" data-hash="week-03_slides_data-science-with-the-tidyverse_cache/revealjs/unnamed-chunk-8_80b8ff8e9f93cc1b4188381ec9d4644e">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>disease_burden_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li class="fragment"><p>Press <code>TAB</code> with your cursor inside the quotation marks to bring up an interactive file tree and select your file.</p></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+
+</section>
+<section class="slide level2">
+
+<p>XXX !!!!!! DRAGONS!!!!!! XXXX</p>
+</section>
+<section>
+<section id="things-need-to-do" class="title-slide slide level1 center">
+<h1>Things need to do</h1>
+
+</section>
+<section id="data-wrangling" class="slide level2">
+<h2>Data Wrangling</h2>
+<ul>
+<li><p>Read in datafiles</p></li>
+<li><p>Understand difference between data.frame and tibble</p></li>
+<li><p>Use count(msleep, vore)</p>
+<ul>
+<li>Use this to introduce %&gt;% and |&gt;</li>
+</ul></li>
+<li><p>Introduce filter() and select()</p>
+<ul>
+<li>Tidy select functions</li>
+</ul></li>
+<li><p>Introduce group_by()</p>
+<ul>
+<li><p>In msleep calculate mean sleep by vore</p></li>
+<li><p>In {gapminder} calculate mean life expectancy per continent</p></li>
+<li><p>In GDB calculate total injury deaths per year when selecting by “World Bank” region</p>
+<ul>
+<li><p>This is quite involved! There are 3 metrics.</p></li>
+<li><p>Requires str_detect() for world bank</p></li>
+</ul></li>
+</ul></li>
+<li><p>Use tibble() and tribble() to make fake datasets</p>
+<ul>
+<li>Used to create a survey dataset for rowwise(starts_with(“pain_level”), ~mean(.x)))</li>
+</ul></li>
+<li><p>Talk about mutate() usually working with columns</p>
+<ul>
+<li><p>across() allows us to work across multiple columns</p></li>
+<li><p>rowwise() allows us to perform row-wise calculations</p>
+<p>(using the tribble dataset)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="data-visualisation-for-understanding-data" class="slide level2">
+<h2>Data visualisation for understanding data</h2>
+<ul>
+<li><p>Show datasaurus and gapminder again</p></li>
+<li><p>Make a scatter plot</p>
+<ul>
+<li><p>msleep dataset</p></li>
+<li></li>
+</ul></li>
+<li><p>Make a bar chart</p>
+<ul>
+<li><p>msleep dataset, explain we will cover FACTORS</p></li>
+<li><p>geom_bar() vs geom_col()</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="exercises" class="slide level2">
+<h2>Exercises</h2>
+<p>Offer 3 different exercises:</p>
+<ul>
+<li><p>“Hypothesis test dataset” https://raw.githubusercontent.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/main/static/datasets/hypothesis-dataset/hypothesis-data.txt</p></li>
+<li><p>Tidy tuesday</p></li>
+<li><p>Timeline chart: with GBD data</p>
+<ul>
+<li>This takes a bunch of wrangling AND data visualisation code</li>
+</ul></li>
+</ul>
+<div class="cell" data-hash="week-03_slides_data-science-with-the-tidyverse_cache/revealjs/unnamed-chunk-9_474114dae7d708dec9ae7bb4a5e8ac78">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>gbd_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(location_name, <span class="st">"Region"</span>),</span>
+<span id="cb10-3"><a href="#cb10-3"></a>         metric_name <span class="sc">==</span> <span class="st">"Percent"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4"></a>         cause_name <span class="sc">!=</span> <span class="st">"All causes"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>         measure_name <span class="sc">==</span> <span class="st">"Deaths"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="fu">arrange</span>(year,</span>
+<span id="cb10-7"><a href="#cb10-7"></a>          location_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">select</span>(year,</span>
+<span id="cb10-9"><a href="#cb10-9"></a>         location_name,</span>
+<span id="cb10-10"><a href="#cb10-10"></a>         cause_name,</span>
+<span id="cb10-11"><a href="#cb10-11"></a>         val,</span>
+<span id="cb10-12"><a href="#cb10-12"></a>         <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-13"><a href="#cb10-13"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>  <span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb10-15"><a href="#cb10-15"></a>      <span class="at">y =</span> val,</span>
+<span id="cb10-16"><a href="#cb10-16"></a>      <span class="at">color =</span> cause_name) <span class="sc">+</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>location_name) <span class="sc">+</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">str_wrap</span>(x, <span class="at">width =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb10-21"><a href="#cb10-21"></a>                     <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a>  <span class="fu">theme</span>(<span class="at">strip.text.y =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section class="slide level2 smaller scrollable">
 
 <h3 id="references">References</h3>
 <div id="refs" class="references csl-bib-body" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-wickham_r_2016" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Wickham, H. &amp; Grolemund, G. <em>R for data science: Import, tidy, transform, visualize, and model data</em>. (<span>O’Reilly</span>, 2016).</div>
+</div>
 <div id="ref-matloff_teaching_2022" class="csl-entry" role="doc-biblioentry">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">Matloff, N. Teaching <span>R</span> in a <span>Kinder</span>, <span>Gentler</span>, <span>More Effective Manner</span>: (2022).</div>
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Matloff, N. Teaching <span>R</span> in a <span>Kinder</span>, <span>Gentler</span>, <span>More Effective Manner</span>: (2022).</div>
+</div>
+<div id="ref-global_health_data_exchange_global_2022" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Global Health Data Exchange. Global <span>Burden</span> of <span>Disease Dataset Explorer</span>. <em>Institute for Health Metrics and Evaluation</em> (2022).</div>
+</div>
+<div id="ref-savage_quantitative_2007" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Savage, V. M. &amp; West, G. B. <a href="https://doi.org/10.1073/pnas.0610080104">A quantitative, theoretical framework for understanding mammalian sleep</a>. <em>Proceedings of the National Academy of Sciences</em> <strong>104</strong>, 1051–1056 (2007).</div>
+</div>
+<div id="ref-hans_rosling_best_2006" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Hans Rosling. The best stats you’ve ever seen [<span>Video</span>]. <em>The best stats you’ve ever seen</em> (2006).</div>
 </div>
 </div>
 <div class="footer footer-default">

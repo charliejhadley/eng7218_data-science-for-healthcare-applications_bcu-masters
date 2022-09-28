@@ -1,0 +1,13 @@
+zip_partial,age_group,Condition
+276,<= 30,Heart Disease
+276,<= 30,Heart Disease
+267,<= 40,Cancer
+267,<= 40,Heart Disease
+276,<= 30,Viral Infection
+267,<= 40,Viral Infection
+276,<= 30,Viral Infection
+276,3*,Cancer
+276,3*,Cancer
+267,<= 40,Viral Infection
+276,3*,Cancer
+276,3*,Cancer

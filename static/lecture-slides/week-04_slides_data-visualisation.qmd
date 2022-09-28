@@ -828,7 +828,7 @@ msleep %>%
 
 ::: {.column width="60%"}
 
-
+Aesthetics can be set at the `ggplot()` level - meaning they're applied to all geoms in the chart.
 
 <br>
 
@@ -845,15 +845,47 @@ msleep %>%
 
 <br>
 
-::: {.fragment}
-
-`{ggplot2}` uses *tidy evaluation* to allow us to use naked column names in our code.
-
-:::
+We might also want to set aesthetics for individual **geom layers**.
 
 :::
 
 ::::
+
+-----------
+
+:::: {.columns .v-center-container}
+
+::: {.column width="40%"}
+
+### `r fontawesome::fa(name = "shapes", fill = colours_ggplot2_components$geoms)` <span style='color:`r colours_ggplot2_components$geoms`'>Geoms</span>
+
+:::
+
+::: {.column width="60%"}
+
+Geoms use the aesthetics to add layers to our charts.
+
+<br>
+
+```{r}
+#| eval: false
+msleep %>% 
+  ggplot() +
+  aes(
+    x = sleep_total,
+    y = sleep_rem,
+    colour = vore
+  )
+```
+
+<br>
+
+TODO: Finish this!!!
+
+:::
+
+::::
+
 
 -----------
 
@@ -866,6 +898,42 @@ msleep %>%
   - If using bubble charts vary by area instead of radius
   
   - Colour schemes matter A LOT
+
+
+# XXX DRAGONS XXX
+
+- Dataviz are demonstrably awesome
+
+- Visual Perception Theory
+
+- Let's make some actual ggplot2 charts / Grammar of Graphics
+
+- Deciding on charts (FT Visual Vocabulary)
+
+- Things to avoid / Advice (does this belong in visual perception theory?)
+
+  - Starting at zero
+
+  - Lots of different types of charts
+  
+  - Dynamite charts
+
+- Sucking quote 
+
+>  “There is no way of knowing nothing about a subject to knowing something about a subject without going through a period of much frustration and suckiness.”
+“Push through. You’ll suck less.” Hadley Wickham, author of ggplot2
+
+- Tables
+
+  - Better than just text
+  - But can be overwhelming
+    - See doi.org/10.1017/S1537592707072209 for excellent examples
+  - Using sparklines can really help
+
+## Workshop
+
+Factors.
+
 
 -----------
 

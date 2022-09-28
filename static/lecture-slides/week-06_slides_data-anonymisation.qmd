@@ -18,6 +18,8 @@ library(tidyverse)
 library(gt)
 library(readxl)
 library(janitor)
+library(wakefield)
+library(sdcMicro)
 ```
 
 1. Why is data anonymisation important?
@@ -32,9 +34,7 @@ library(janitor)
 
 1. R packages for working with anonymouse data and sampling
 
------------
-
-## Why is data anonymisation important? {background-color="#23241F" .center .center-x}
+# Why is data anonymisation important? {background-color="#23241F" .center .center-x}
 
 -----------
 
@@ -54,45 +54,261 @@ But that's often not the case.
 
 ## Data tracking across websites
 
-XXX Tracking cookies. They bad. They identify individuals.
+:::: {.columns}
+
+::: {.column width='48%'}
+Cookies [and similar technologies] are ever present in the modern web. 
+
+<br>
+
+They allow websites to track both the websites that we visit **and** how we engage with websites.
+
+<br>
+
+> ... but what about all those cookie popups?!
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<img src='images/week-06/cookie-illustration.png'/>
+:::
+
+::::
+
 
 -----------
 
-## Data tracking across credit cards
+## GDPR and Cookies
 
-XXX Bad
+:::: {.columns}
+
+::: {.column width='48%' .fragment .fade-in-then-semi-out fragment-index=0}
+The GDPR Policy[@european_union_regulation_2016] included mention of "cookie identifiers" which ultimately led to the cookie consent popups you see everywhere. 
+
+<br>
+
+For a common sense description of what the policy requires see [gdpr.eu/cookies/](https://gdpr.eu/cookies/)[@noauthor_cookies_2019]
+
+<br>
+
+The policy came into effect in 2018 - and the cookie avalanche started.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+The policy was well meaning, and necessary.
+
+<br>
+
+In 2016 it was demonstrated that 70% of the top million websites used some form of tracking[@englehardt_online_2016].
+
+<br>
+
+However, there's clear evidence that the policy hasn't materially improved our privacy[@kretschmer_cookie_2021].
+
+:::
+
+::::
+
+-----------
+
+### Cookies: Fingerprinting, nudging and dark patterns
+
+These are the primary ways websites circumvent the GDPR cookie policy:
+
+::: {.incremental}
+
+- The biggest issue with targeting cookies is they're difficult to define and more modern tools like fingerprinting are harder to track.
+
+- User's are *nudged* to accept cookies by auto selecting "Accept"
+
+- [Dark patterns](https://cookieinformation.com/resources/blog/what-are-dark-patterns-in-cookie-banners/) are employed to prevent users from refusing to accept cookies[@habib_okay_2022].
+
+:::
+
+::: {.fragment}
+
+Overall, the policy has probably made things worse.
+
+> GDPR impacted smaller advertisement companies considerably more than large brands, such as Google and Facebook, leading to a higher market concentration for these companies, which, in turn, may increase the privacy threat, rather than decrease it
+> Source: Kretschmer et al 2021[@kretschmer_cookie_2021]
+
+:::
+
+-----------
+
+### Why do websites want to track us?
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+::: {.fragment .fade-in-then-semi-out}
+
+There are simple uninteresting answers to this:
+
+- Selling tracking data to advertising networks
+
+- Using tracking data to target products at users
+
+:::
+
+::: {.fragment .fade-in-then-semi-out}
+
+But there are interesting answers!
+
+- Anticipatory shipping predicts future purchases
+
+  - Amazon first patented this process in 2013[@spiegel_method_2013], thoroughly explained by Eva-Maria Nyckel[@nyckel_ahead_2021]
+  
+  - Used in the agro-food supply chains[@viet_data-driven_2020]
+
+:::
+
+:::
+
+::: {.column width='4%'}
+:::
+::: {.column width='48%' .fragment}
+
+> Can we get some examples of what they track?
+
+:::
+
+::::
+
+-----------
+
+#### Wired: Madhumita Venkataramanan: My identity for sale
+
+
+I strongly recommend reading all of this article - [wired.co.uk/article/my-identity-for-sale](https://www.wired.co.uk/article/my-identity-for-sale)[@venkataramanan_madhumita_2014].
+
+::: {.incremental}
+
+- The article is from 2014, but as we've discussed the GDPR cookie policy has if anything made this situation worse.
+
+- The article also provides a wealth of other examples of data tracking beyond cookies. **These would be good examples for your assignment**.
+
+- The quote below is from the article and summarises descriptions of Madhumita's life tracked without consent.
+
+:::
+
+:::: {.columns}
+
+::: {.column width='70%'}
+> I'm a 26-year-old British Asian woman, working in media and living in an SW postcode in London.
+>I've previously lived at two addresses in Sussex and two others in north-east London. While I was growing up, my family lived in a detached house, took holidays to India every year, donated to medical charities, did most of the weekly shopping online at Ocado and read the Financial Times. Now, I rent a recently converted flat owned by a private landlord and have a housemate. I'm interested in movies and startups, have taken five holidays (mostly to visit friends abroad) in the last 12 months and I'm going to buy flights within 14 days. My annual income is probably between £30,000 and £39,999. I don't have a TV or like watching scheduled television...
+:::
+
+::: {.column width='30%'}
+<img src='images/week-06/madhumita-venkataramanan.png'/>
+:::
+
+::::
 
 -----------
 
 ## Data tracking during hospital visits
 
+:::: {.columns}
+
+::: {.column width='48%' .fragment .fade-in-then-semi-out}
 There's an A&E waiting time survey that's sent to folks that attend A&E.
 
 This survey is sent without patients opting into it.
 
 > The Section 251 of the NHS Act 2006 [@uk_government_national_2006] provides for the use of confidential patient data without consent for a specific purpose by the HRA or the Secretary of State for Health and Social Care.
 
+That's an exception to the Data Protection Act[@uk_government_data_2018]!
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment .fade-in-then-semi-out}
+
 This means that there are people looking at this data and deciding who to target.
+
+<br>
+
+This exception was also used during the COVID-19 pandemic, it's not just used for surveying hospital wait times!
+
+<br>
+
+<hr/>
 
 Note that the NHS makes sure there's an opt out [once you've been invited]
 
 > However, as has always been the case, patients/service users must be given the opportunity to opt-out.
+:::
+
+::::
 
 -----------
 
-> ## Data anonymisation is important because data is everywhere
+> ## Data anonymisation is important because data is collected everywhere all of the time
 
-We as individuals need to think about how our data is collected. how we use data in our day-to-day lives and in our careers.
-
-XXX Whistleblowing is important
+... how does that match up with GDPR and the Data Protection Act?
 
 -----------
 
-## Specific risks of deanonymisation of health data {background-color="#23241F" .center .center-x}
+## Individual rights from the DPA
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+The DPA[@uk_government_data_2018] provides 8 rights for individuals:
+
+- The right to be informed
+
+- The right of access
+
+- The right to rectification
+
+- The right to erasure
+
+- The right to restrict processing
+
+- The right to data portability
+
+- The right to object
+
+- Rights in relation to automated decision making and profiling.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+If we don't know that data is being collected - or by which organisations - our individual rights are not being protected.
+
+<br>
+
+This opens up lots of ethical questions. We'll discuss these in the next lecture about data ethics.
+
+<br>
+
+In this lecture we're going to focus on the specific risks to deanonymisation
+
+:::
+
+::::
+
+# What are the risks of de-anonymisation? {background-color="#23241F" .center .center-x}
 
 -----------
 
-## Who can be at risk of deanonymisation?
+## Who can be at risk of de-anonymisation?
 
 :::: {.columns}
 
@@ -120,21 +336,133 @@ There are significant risks to individual liberty, livelihood and life from dean
 Organisations 
 :::
 
-However, organisations also suffer from deanonymisation.
+However, organisations also suffer if data they store/process is deanonymised.
 
 <br>
 
 - Organisations might suffer reputational damage
 
-- Organisations might suffer legal difficulties
-
-- XXX Fines? XXX
+- Organisations might suffer legal difficulties, including fines
 
 :::
 
 :::: 
 
 > Let's focus on the individual for now. The ICO provides a useful guide to managing data protection risk designed for organisations[@information_commissioners_office_anonymisation_2012]
+
+
+-----------
+
+### Specific risks of de-anonymisation (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+First and foremost, there is a risk of:
+
+- Information about someone’s private life ending up in the public domain.
+:::
+
+::: {.column width='4%'}
+:::
+
+
+::: {.column width='48%'}
+This in and of itself should be of concern, but more specifically
+
+-	Individuals might suffer distress, embarrassment, or anxiety due to sensitive information being in the public domain
+
+<br>
+
+There is also a significant risk from sensitive information being in the public domain that:
+
+- Individuals might suffer harassment, attack and/or injury 
+
+- Individuals might suffer persecution
+:::
+
+::::
+
+-----------
+
+### Specific risks of deanonymised health data (II)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+Sensitive information might be sold to third-party organisations resulting in a change in service options, costs or other loss.
+:::
+
+::: {.column width='4%'}
+:::
+
+
+::: {.column width='48%'}
+
+- Private healthcare data might be used by insurers to increase product fees or terminate existing products.
+
+- Employers could potentially use this information in employment decisions.
+
+:::
+
+::::
+
+> Remember that the DPA (and GDPR) provides specific rights (or protections) for individual's data. If data is sold without knowledge these rights cannot be guaranteed.
+
+-----------
+
+### Specific risks of deanonymised health data (III)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+These are the "protected characteristics" defined in the Equality Act 2010[@uk_government_equality_2010]
+
+- Age
+
+- Disability
+
+- Gender reassignment
+
+- Marriage and Civil Partnership
+
+- Pregnancy and Maternity
+
+- Race
+
+- Religion
+
+- Sex
+
+- Sexual Orientation.
+
+
+:::
+
+::: {.column width='4%'}
+:::
+
+
+::: {.column width='48%'}
+
+Frustratingly, and inhumanely there is prejudice against individuals in all of these groups.
+
+<br>
+
+This prejudice can be found in individual actions, from hate groups, as well as institutional policies and practices.
+
+<br>
+
+De-anonymisation of health data can realistically [and often easily] expose individual's protected characteristics.
+
+<br>
+
+All individual data should be considered private, but there are significant risks to the de-anonymisation of sensitive healthcare data.
+
+:::
+
+::::
 
 -----------
 
@@ -148,104 +476,1687 @@ Recall how the Data Protection Act[@uk_government_data_2018] identifies three ty
 
 - **“genetic data”** means personal data relating to the inherited or acquired genetic characteristics of an individual which gives unique information about the physiology or the health of that individual and which results, in particular, from an analysis of a biological sample from the individual in question;
 
------------
-
-### Specific risks of deanonymised health data (I)
-
-First and foremost, there is a risk of:
-
-- Information about someone’s private life ending up in the public domain.
-
-<br>
-
-This in and of itself should be of concern, but more specifically
-
--	Individuals might suffer distress, embarrassment, or anxiety due to sensitive information being in the public domain
-
-<br>
-
-There is also a significant risk from sensitive information being in the public domain that:
-
-- Individuals might suffer harassment, attack and/or injury 
-
-- Individuals might suffer persecution
+# A potted history of de-anonymisation {background-color="#23241F" .center .center-x}
 
 -----------
 
-### Specific risks of deanonymised health data (II)
+## Early evidence for de-anonymisation (I)
 
-- Sensitive information might be sold to third-party organisations resulting in targeted advertising.
+In the late 90s there was a rapid conceptualisation of how easy it is to de-anonymisation large, public datasets.
 
------------
+:::: {.columns}
 
-## XXX Case study XXX
+::: {.column width='48%'}
+Latanya Sweeney showed in 1997[@sweeney_weaving_1997] that using public data and the Massachusetts voting list (n=54,805) it was extremely easy to **uniquely** identify individuals from only 2 pieces of information.
+:::
 
-Sending baby leaflets to a woman who ordered a pregnancy test?
+::: {.column width='4%'}
 
-Is that okay?!
+:::
 
------------
+::: {.column width='48%'}
+<img src='images/week-06/sweeney-mass-de-anonyisation.png'/>
+Source: Latanya Sweeney in 1997[@sweeney_weaving_1997]
+:::
 
-### Specific risks of deanonymised health data (III)
-
-- Sensitive information might be sold to third-party organisations results in a change in service options or costs
-
-XXX Generally financial loss? XXX
-
-XXX I need some evidence of this last one XXX
-
------------
-
-## Case studies of deanonymisation {background-color="#23241F" .center .center-x}
-
-# Anonymity measures: k-anonymity and l-diversity {background-color="#23241F" .center .center-x}
-
+::::
 
 -----------
 
-## Early evidence for de-anonymisation (DRAFT)
+## Early evidence for de-anonymisation (II)
 
 In the late 90s there was a rapid conceptualisation of how easy de-anonymisation is of large, public datasets.
 
-Sweeney showed in 1997[@sweeney_weaving_1997] that the Massachusetts voting list (n=54,805) could easily be de-anonymised
+:::: {.columns}
 
-<img src='images/week-06/sweeney-mass-de-anonyisation.png'/>
+::: {.column width='48%'}
 
------------
+Three years later in 2000 Latanya Sweeney[@sweeney_simple_2000-1] demonstrated 
 
-## k-anonymity (DRAFT)
+> 87% of the US population can be uniquely identified from only ZIP, gender and date of birth.
 
-Good slides: https://courses.cs.duke.edu/fall13/compsci590.3/slides/lec4.pdf
+:::
 
------------
+::: {.column width='4%'}
 
-## k-anonymity and high-dimensionality (DRAFT)
+:::
 
-> "Furthermore, k-anonymization completely fails on high-dimensional datasets [2], such as the Netflix Prize dataset and most real-world datasets of individual recommendations and purchases." - Arvind Narayanan and Vitaly Shmatikov[@narayanan_robust_2008] 
+::: {.column width='48%'}
+<img src='images/week-06/sweeney-2000.png'/>
+Source: Latanya Sweeney in 2000[@sweeney_simple_2000-1]
+:::
 
-They reference Aggarwal [@aggarwal_k-anonymity_2005] who showed through simulations the weakness of k-anonymity in high-dimensional datasets.
-
-- The statistical modelling in the paper is fairly complex
-
-- However, the experimental analysis section is fairly accessible and makes clear how weak k-anonymity is.
-
-> When the data sets contained more than 45 dimensions, almost all the data points violated the 2-anonymity condition
+::::
 
 -----------
 
-## Modern/State-of-the-art Anonymisation (I)
+## k-anonymity: A Model for Protecting Privacy
 
-There isn't a one size fits all[@rodriguez_current_2022] methodology for anonymising data.
+:::: {.columns}
+
+::: {.column width='40%'}
+
+Two years later in 2002<sup>1</sup> a statistical technique called k-anonymity was introduced to measure the risk of re-identification.
+
+... by Latanya Sweeney[@sweeney_k-anonymity_2002]!
+
+:::
+
+::: {.column width='2%'}
+
+:::
+
+::: {.column width='58%'}
+
+::: {.center-x}
+
+<img src='images/week-06/latanya-sweeney.jpg' style='border-radius:50%;' height='200px'/>
+ 
+[Prof. Latanya Sweeney<br>Harvard Kennedy School](https://www.hks.harvard.edu/faculty/latanya-sweeney)
+
+:::
+
+Originally her research into de-anonymisation was poorly received.
+
+::: {.small}
+
+> "Even my Weld example[@sweeney_weaving_1997] and related demographic analyses, despite making significant contributions to privacy regulations worldwide, were refused publication by more than 20 academic publications at the time."
+>
+> Only You, Your Doctor, and Many Others May Know[@sweeney_only_2015]
+
+:::
+
+:::
+
+::::
+
+::: {.footnote}
+
+[1] Technically, the 2002 paper expands on the initial concept introduced in 1998 by Samarati and Sweeney[@samarati_protecting_1998]
+
+:::
+
+-----------
+
+## k-anonymity: A definition (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+k-anonymity is a property of a dataset that has been subject to anonymisation.
 
 <br>
 
-On going research is identifying more complex[@zhang_efficient_2017] and robust[@palanisamy_privacy-preserving_2018] methodologies for both measuring and reducing the risk of de-anonymisation.
+k-anonymity is an **integer value** that guarantees *internal* uniqueness of individuals amongst `k - 1` individuals.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+Unfortunately, **a lot** of the material written about k-anonymity is confusing because people don't declare their assumptions in calculating k values.
+
+:::
+
+::::
 
 -----------
 
-## Modern/State-of-the-art Anonymisation (II)
+## k-anonymity: A definition (II)
 
-In fact, there are many "off-the-shelf" products which can be used to anonymise datasets.
+:::: {.columns}
+
+::: {.column width='48%'}
+
+Let's consider a simple pretend dataset.
+
+<br>
+
+We consider each column in the data to be an *attribute*.
+
+<br>
+
+These attributes can be categorised into two types of identifer:
+
+- Unique identifiers
+
+  - These are attributes that uniquely identify individuals. These **have** to be removed for anonymisation.
+  
+- Quasi-indentifiers
+
+  - These attributes could be used used to identify individuals, even after anonymisation.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+```{r}
+tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+            "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) %>% 
+  gt()
+```
+
+:::
+
+::::
+
+-----------
+
+## k-anonymity: A definition (III)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+Now we've thrown away the unique identifiers we need to decide which attributes are **sensitive**.
+
+<br>
+
+Sensitive attributes are medical/healthcare data that we need to protect from in the anonymisation process.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+```{r}
+tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+            "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) %>% 
+  select(-name) %>% 
+  gt() %>% 
+  tab_spanner(
+    label = "Non-sensitive",
+    columns = c(
+      region,
+      age_range
+    )
+  ) %>% 
+  tab_spanner(
+    label = "Sensitive",
+    columns = c(
+      disease
+    )
+  ) %>% 
+  tab_style(
+    style = cell_borders(
+      sides = c("left"),
+      color = "red",
+      weight = px(1.5),
+      style = "solid"
+    ),
+    locations = list(cells_body(
+      columns = disease,
+      rows = everything()
+    ),
+    cells_column_spanners(spanners = "Sensitive"),
+    cells_column_labels(columns = "disease"))
+  ) 
+```
+
+:::
+
+::::
+
+-----------
+
+## k-anonymity: A definition (IV)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+There are now 3 different choices about how we calculate k-anonymity for our data.
+
+- Combining together all non-sensitive attributes compared to **each** sensitive attributes.
+
+- Combining together all attributes
+
+- For each individual attributes
+
+Let's go through each of these in turn.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+```{r}
+tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+            "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) %>% 
+  select(-name) %>% 
+  gt() %>% 
+  tab_spanner(
+    label = "Non-sensitive",
+    columns = c(
+      region,
+      age_range
+    )
+  ) %>% 
+  tab_spanner(
+    label = "Sensitive",
+    columns = c(
+      disease
+    )
+  ) %>% 
+  tab_style(
+    style = cell_borders(
+      sides = c("left"),
+      color = "red",
+      weight = px(1.5),
+      style = "solid"
+    ),
+    locations = list(cells_body(
+      columns = disease,
+      rows = everything()
+    ),
+    cells_column_spanners(spanners = "Sensitive"),
+    cells_column_labels(columns = "disease"))
+  ) 
+```
+
+:::
+
+::::
+
+-----------
+
+## k-anonymity: A definition (V)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+> Combining together all non-sensitive attributes compared to **each** sensitive attributes.
+
+In toy example like this we can go through manually any count how many individuals belong to each group.
+
+<br>
+
+Using this measure the dataset is 4-anonymous as all individuals are guaranteed anonymity amongst 3 others (ie `k-1`).
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+```{r}
+tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+           "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) %>% 
+  select(disease, region, age_range) %>% 
+  mutate(n_in_group = c(rep(6, 6), rep(4, 4))) %>% 
+  gt() %>% 
+  tab_style(
+    style = cell_fill(
+      color = "red",
+      alpha = 0.4
+    ),
+    locations = list(cells_body(
+      columns = c(region, age_range, n_in_group),
+      rows = 1:6
+    ))
+  ) %>% 
+  tab_style(
+    style = cell_fill(
+      color = "gray",
+      alpha = 0.4
+    ),
+    locations = list(cells_body(
+      columns = c(region, age_range, n_in_group),
+      rows = 7:10
+    ))
+  ) 
+```
+
+:::
+
+::::
+
+-----------
+
+## k-anonymity: A definition (VI)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+> Combining together all attributes
+
+When we measure across **all** attributes the k-anonymity of the dataset is reduced.
+
+<br>
+
+Using this metric, the data has 3-anonymity.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+```{r}
+tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+           "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) %>% 
+  select(disease, region, age_range) %>% 
+  mutate(n_in_group = c(rep(3, 3), rep(3, 3), rep(4, 4))) %>% 
+  gt() %>% 
+  tab_style(
+    style = cell_fill(
+      color = "red",
+      alpha = 0.4
+    ),
+    locations = list(cells_body(
+      rows = 1:3
+    ))
+  ) %>% 
+  tab_style(
+    style = cell_fill(
+      color = "gray",
+      alpha = 0.4
+    ),
+    locations = list(cells_body(
+      rows = 4:6
+    ))
+  ) %>% 
+  tab_style(
+    style = cell_fill(
+      color = "green",
+      alpha = 0.4
+    ),
+    locations = list(cells_body(
+      rows = 7:10
+    ))
+  ) 
+```
+
+:::
+
+::::
+
+-----------
+
+
+## k-anonymity: A definition (VII)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+> For each individual attribute
+
+When we measure the anonymity of each individual variable the dataset has 2-anonymity
+
+<br>
+
+We always use the **smallest** value of `k` for our specific measure.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+```{r}
+tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+           "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) %>% 
+  select(disease, region, age_range) %>% 
+  gt() %>% 
+  tab_style(
+    style = cell_fill(
+      color = "red",
+      alpha = 0.8
+    ),
+    locations = list(cells_body(
+      columns = disease,
+      rows = 1:3
+    ))
+  ) %>% 
+  tab_style(
+    style = cell_fill(
+      color = "red",
+      alpha = 0.4
+    ),
+    locations = list(cells_body(
+      columns = disease,
+      rows = 4:6
+    ))
+  ) %>% 
+  tab_style(
+    style = cell_fill(
+      color = "red",
+      alpha = 0.1
+    ),
+    locations = list(cells_body(
+      columns = disease,
+      rows = 7:10
+    ))
+  ) %>% tab_style(
+    style = cell_fill(
+      color = "green",
+      alpha = 0.7
+    ),
+    locations = list(cells_body(
+      columns = region,
+      rows = 1:6
+    ))
+  ) %>% 
+  tab_style(
+    style = cell_fill(
+      color = "green",
+      alpha = 0.1
+    ),
+    locations = list(cells_body(
+      columns = region,
+      rows = 7:10
+    ))
+  ) %>% 
+  tab_style(
+  style = cell_fill(
+    color = "gray",
+    alpha = 0.7
+  ),
+  locations = list(cells_body(
+    columns = age_range,
+    rows = 1:7
+  ))
+) %>% 
+  tab_style(
+    style = cell_fill(
+      color = "gray",
+      alpha = 0.1
+    ),
+    locations = list(cells_body(
+      columns = age_range,
+      rows = 7:10
+    ))
+  ) 
+```
+
+:::
+
+::::
+
+-----------
+
+## k-anonymity: A definition (VIII)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+As we've seen, each of these methods gives a different measure of the anonymity of the data.
+
+1. Combining together all non-sensitive attributes compared to **each** sensitive attributes.
+
+1. Combining together all attributes
+
+1. For each individual attributes
+
+> **Frustratingly** it's quite rare for authors to explicitly state which combination of attributes they use. 
+>
+> The methods are listed roughly in terms of the frequency that I've seen them in the literature.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+```{r}
+tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+            "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) %>% 
+  select(-name) %>% 
+  gt() %>% 
+  tab_spanner(
+    label = "Non-sensitive",
+    columns = c(
+      region,
+      age_range
+    )
+  ) %>% 
+  tab_spanner(
+    label = "Sensitive",
+    columns = c(
+      disease
+    )
+  ) %>% 
+  tab_style(
+    style = cell_borders(
+      sides = c("left"),
+      color = "red",
+      weight = px(1.5),
+      style = "solid"
+    ),
+    locations = list(cells_body(
+      columns = disease,
+      rows = everything()
+    ),
+    cells_column_spanners(spanners = "Sensitive"),
+    cells_column_labels(columns = "disease"))
+  ) 
+```
+
+:::
+
+::::
+
+-----------
+
+## k-anonymity: A definition (IX)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+The definition I've given you is sufficient and precise.
+
+<br>
+
+But be aware that you'll often[@sweeney_k-anonymity_2002] see a more technical definition that uses set theory notation.
+
+<br>
+
+**Ignore it**. If a dataset is described as having "k-anonymity 10" that means for any row in the dataset there are at least 9 other rows identical to it.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .small}
+<img src='images/week-06/k-anonymity-lemma.png'/>
+
+Source: Formal definition for k-anonymity from Sweeney 2002[@sweeney_k-anonymity_2002]
+:::
+
+::::
+
+-----------
+
+## k-anonymity: How is it achieved?
+
+We are responsible for manipulating our dataset to achieve a desirable k-anonymity level.
+
+> Even though a minimum k value of 3 is often suggested, a common recommendation in practice is to ensure that there are at least five similar observations (k = 5) [@el_emam_protecting_2008]
+
+::: {.fragment}
+
+We have two tools available to us:
+
+:::: {.columns}
+
+::: {.column width='48%'}
+<span class="big-note">Generalisation</span>
+
+::: {.fragment .fade-in-then-semi-out}
+
+We generalise a dataset through coarsening.
+
+- Convert exact ages to age ranges
+
+- Convert DOB to year of birth
+
+- Trimming data, eg BS16 instead of BS16 6AB
+
+- Creating new groups
+
+  - Combine "Married", "Divorced", "Widowed" to "Been Married" and all others to "Never Married"
+
+:::
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<span class="big-note">Suppression</span>
+
+::: {.fragment .fade-in-then-semi-out}
+
+Suppression removes data from a dataset.
+
+We might suppress an attribute or set some specific values to "missing".
+
+Care must be taken to not suppress variables that are required for analysis.
+
+:::
+
+:::
+
+::::
+
+:::
+
+-----------
+
+## `r emo::ji("memo")` Task: Setup our project {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 1</p>
+
+1. Create a new project for `week-6`
+
+1. Create a new RMarkdown document called `data-anonymisation.Rmd`
+
+1. Install the `{wakefield}` and `{faux}` package
+
+-----------
+
+## {wakefield}
+
+The `{wakefield}` package is very useful for creating random datasets of categorical variables.
+
+The package has 49 different built-in variables with pre-defined distributions:
+
+```{r}
+tibble::tribble(
+              ~a,              ~b,                   ~c,          ~d,                ~e,
+           "age",          "dice",               "hair",  "military", "sex_inclusive",
+        "animal",           "dna",             "height",     "month",          "smokes",
+        "answer",           "dob",             "income",      "name",           "speed",
+          "area",         "dummy", "internet_browser",    "normal",           "state",
+           "car",     "education",                 "iq", "political",          "string",
+      "children",    "employment",           "language",      "race",           "upper",
+          "coin",           "eye",              "level",  "religion",           "valid",
+         "color",         "grade",             "likert",       "sat",            "year",
+  "date_stamp", "grade_level",      "lorem_ipsum",  "sentence",      "zip_code",
+         "death",         "group",            "marital",       "sex",                ""
+  ) %>% 
+  gt() %>% 
+  tab_options(column_labels.hidden = TRUE)
+
+```
+
+-----------
+
+## wakefield::r_data_frame()
+
+We generate datasets with the `r_data_frame()` function:
+
+```{r}
+#| echo: true
+r_data_frame(10,
+             id,
+             name,
+             dob,
+             income,
+             smokes,
+             death)
+```
+
+> Can you explain why you see different data on your machine?
+
+-----------
+
+## Pseudorandomness
+
+When programming we use pseudorandom number generators to generate random numbers.
+
+These are algorithms that **deterministically** give random numbers when given an input. We can therefore always get the **same** random numbers by setting the *seed* of the algorithm.
+
+```{r}
+#| echo: true
+set.seed(1)
+r_data_frame(10,
+             id,
+             name,
+             income,
+             dna,
+             smokes,
+             death)
+```
+
+-----------
+
+## k-anonymity for our data (I)
+
+Let's pretend our dataset is from a study on the effect of income on smoking morbidity<sup>1</sup>.
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+When thinking about making this anonymous...
+
+- Are there any variables we should **suppress**?
+
+- How could we generalise the remaining variables?
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+```{r}
+#| echo: false
+set.seed(1)
+r_data_frame(10,
+             id,
+             name,
+             dob,
+             income,
+             smokes,
+             death) %>% 
+  gt()
+```
+:::
+
+::::
+
+<br>
+<br>
+
+::: {.footnote}
+
+[1] I'm limited by the options given by {wakefield}. There is NO correlation implied here. You can tell because I don't have a citation.
+
+:::
+
+-----------
+
+## `r emo::ji("memo")` Task: k-anonymity calculation {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 2</p>
+
+1\. Use this code to create a dataset:
+
+```{r}
+#| echo: true
+library(wakefield)
+library(tidyverse)
+library(lubridate)
+
+set.seed(1)
+smoke_data <- r_data_frame(
+  50000,
+  id,
+  name,
+  dob(start = ymd("1950-01-01"),
+      k = abs(as.integer(days(ymd("1950-01-01") - Sys.Date()) - 365*18))),
+  income,
+  smokes,
+  death)
+```
+
+2\. Suppress inappropriate columns from the dataset.
+
+-----------
+
+## `r emo::ji("memo")` Task: k-anonymity calculation {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 2</p>
+
+1\. Generalise the remaining variables as follows:
+
+  - Extract year of birth
+  
+  - Split income into 4 categories
+
+    - "< £30,000"
+  
+    - "£30,000 - £70,000"
+  
+    - "£70,000 - £100,000"
+  
+    - "£100,000+"
+
+2\. Calculate the k-anonymity of the dataset
+
+-----------
+
+## How to attack k-anonymised datasets (I)
+
+There are 3 known attacks for attempt to de-anonymise datasets with k-anonymity:
+
+::: {.incremental}
+
+- Unsorted matching attack
+
+  - If an anonymised dataset is ordered in the same order that observations were recorded this is a potential attack vector. Dependent on the attack this might provide either an additional quant-identifier or (worst case) a unique identifer.
+  
+  - It's a good practice to randomise the order of observations in anonymised data releases.
+
+:::
+
+-----------
+
+## How to attack k-anonymised datasets (II)
+
+There are 3 known attacks for attempt to de-anonymise datasets with k-anonymity:
+
+::: {.de-emphasis}
+
+- Unsorted matching attack
+
+:::
+
+- Subsequent release attacks
+
+  - Large healthcare datasets might be used in multuple studies and be subject to multiple k-anonymised releases.
+  
+  - Temporal attacks are possible by analysing the modification of rows (eg health intervention) or the removal of data (eg morbidity).
+  
+  - Protecting against these attacks requires care and consideration. It is wise to consider the k-anonymity of combined releases.
+
+-----------
+
+## How to attack k-anonymised datasets (III)
+
+There are 3 known attacks for attempt to de-anonymise datasets with k-anonymity:
+
+::: {.de-emphasis}
+
+- Unsorted matching attack
+
+- Subsequent release attacks
+
+:::
+
+:::: {.columns}
+
+::: {.column width='48%'}
+- Background knowledge
+
+  - This is the most common attack vector and the Achilles' heel of k-anonymity.
+  
+  - In these attacks background knowledge of relationships between quanti-identifiers is used to reduce anonymity.
+  
+  - High dimensionality means lots of quasi-identifiers.
+  
+> ... so where do we go next?
+  
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<img src='images/week-06/k-anonymisation-background-knowledge.png'/>
+Source: Narayanan and Shmatikov 2008[@narayanan_robust_2008]
+:::
+
+::::
+
+# l-diversity {background-color="#23241F" .center .center-x}
+
+-----------
+
+## l-diversity (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+l-diversity is a more sophisticated measure of the anonymity of sensitive variables in an anonymised dataset - introduced by Machanavajjhala et al in 2006[@machanavajjhala_l-diversity_2006]
+
+<br>
+
+This method depends on a Bayesian model of background knowledge.
+
+<br>
+
+We are **not** going to cover Bayesian statistics. Read [statswithr.github.io/book/](https://statswithr.github.io/book/index.html) if you're interested.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<img src='images/week-06/l-diversity-equations.png'/>
+:::
+
+::::
+
+-----------
+
+## l-diversity (II)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+In order to estimate l-diversity we need to once again consider the structure of our dataset.
+
+<br>
+
+We split our data into:
+
+- Sensitive variables - the medical variables.
+
+- Keys - the non-sensitive variables.
+
+<br>
+
+A dataset is l-diverse if for each unique combination of key attributes there are at least *l* "well-represented" values for each sensitive variable.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+```{r}
+tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+            "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) %>% 
+  select(-name) %>% 
+  gt() %>% 
+  tab_spanner(
+    label = html("Non-sensitive attributes <br>Keys"),
+    columns = c(
+      region,
+      age_range
+    )
+  ) %>% 
+  tab_spanner(
+    label = "Sensitive",
+    columns = c(
+      disease
+    )
+  ) %>% 
+  tab_style(
+    style = cell_borders(
+      sides = c("left"),
+      color = "red",
+      weight = px(1.5),
+      style = "solid"
+    ),
+    locations = list(cells_body(
+      columns = disease,
+      rows = everything()
+    ),
+    cells_column_spanners(spanners = "Sensitive"),
+    cells_column_labels(columns = "disease"))
+  ) 
+```
+
+:::
+
+::::
+
+-----------
+
+## l-diversity (III)
+
+:::: {.columns}
+
+::: {.column width='68%'}
+
+> A dataset is l-diverse if for each unique combination of key attributes there are at least *l* "well-represented" values for each sensitive variable.
+
+For very simple datasets we can calculate l-diversity by hand.
+
+<br>
+
+::: {.fragment .incremental}
+
+However, for real-world applications there are 3 different methods for estimating "representative" values:
+
+
+- Distinct l-diversity. This is the most commn and simplest method, it's what we've just used. It requires there are l distinct values.
+
+- Entropy l-diversity. This is a more sophisticated measure and goes beyond the scope of this lecture.
+
+- Recursive l-diversity. This is a compromise between the two methods.
+
+:::
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='28%'}
+```{r}
+tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+           "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) %>% 
+  select(region, age_range, disease) %>% 
+  mutate(l_diversity = c(rep(2, 6), rep(1, 4))) %>% 
+  gt() %>% 
+  tab_style(
+    style = cell_fill(
+      color = "red",
+      alpha = 0.4
+    ),
+    locations = list(cells_body(
+      columns = c(region, age_range, disease),
+      rows = 1:6
+    ))
+  ) %>% 
+  tab_style(
+    style = cell_fill(
+      color = "gray",
+      alpha = 0.4
+    ),
+    locations = list(cells_body(
+      columns = c(region, age_range, disease),
+      rows = 7:10
+    ))
+  ) 
+```
+
+:::
+
+::::
+
+-----------
+
+## `r emo::ji("memo")` Task: Calculate l-diversity {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 2</p>
+
+1. Install the `{sdcMicro}` package
+
+1. Add this dataset to your `.Rmd`
+
+```{r}
+#| echo: true
+data_diseases <- tibble(
+  name = c("Saindhavi", "Enio", "Daury", "Alphus", "Balian", 
+           "Kenyea", "Gracielynn", "Aliye", "Kadince", "Asaph"),
+  region = c(rep("England", 6), rep("Wales", 4)),
+  age_range = c(rep("20-30", 6), rep("40-50", 4)),
+  disease = c(rep("Heart", 3), rep("Pancreatic", 3), rep("Liver", 4))
+) 
+data_diseases
+```
+
+-----------
+
+## `r emo::ji("memo")` Task: Calculate l-diversity {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 2 OF 2</p>
+
+1. Compute the `ldiversity()` of the `disease` attribute
+
+```{r}
+#| echo: true
+ld_diseases <- data_diseases %>% 
+  mutate(disease = as_factor(disease)) %>%
+  createSdcObj(keyVars = c("region", "age_range")) %>% 
+  ldiversity(ldiv_index = "disease")
+```
+
+1. Extract the l-diversity value
+
+```{r}
+#| echo: true
+ld_diseases@risk$ldiversity
+```
+
+# Summarising k-anonymity and l-diversity {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Summarising k-anonymity and l-diversity
+
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+k-anonymity has well known vulnerabilities for high-dimensional datasets.
+
+However. It is still worthwhile establishing at least 5-anonymity[@narayanan_robust_2008] in released datasets containing sensitive attributes.
+
+<hr/>
+
+::: {.fragment fragment-index=1}
+
+l-diversity is a much more sophisticated tool that provides stronger privacy protections. It's verifiable NP-hard to re-identify individuals in l-diverse datasets.
+
+<br>
+
+However, l-diversity does not guarantee against re-identification. The coarsening of data might also degrade the usability of released data.
+
+:::
+
+:::
+
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<img src='images/week-06/k-anonymisation-background-knowledge.png'/>
+Source: Narayanan and Shmatikov 2008[]
+
+> Even though a minimum k value of 3 is often suggested, a common recommendation in practice is to ensure that there are at least five similar observations (k = 5) [@el_emam_protecting_2008]
+
+:::
+
+::::
+
+
+# Case Study: Netflix Prize Dataset {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Netflix Prize Dataset: What was it? (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+In October 2006 Netflix created a competition with the intention of improving their recommendation engine[@bennet_netflix_2007].
+
+Netflix sought an algorithm/methodology that would improve their recommendation algorithm.
+
+> Let's get into this a little bit more.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .small}
+> Netflix provided over 100 million ratings (and their dates) from over 480 thousand randomly-chosen, anonymous subscribers on nearly 18 thousand movie titles. The data were collected between October, 1998 and December, 2005 and reflect the distribution of all ratings received by Netflix during this period. The ratings are on a scale from 1 to 5 (integral) stars. 
+
+```{r}
+tribble(
+  ~user, ~movie, ~date_of_grade, ~grade,
+  132, "Alien", "2006-01-01", 5,
+  132, "Aliens", "2006-01-02", 4
+) %>% 
+  gt()
+```
+
+
+> It withheld over 3 million most-recent ratings from those same subscribers over the same set of movies as a competition qualifying set.
+:::
+
+::::
+
+-----------
+
+## Netflix Prize Dataset: What was it? (II)
+
+:::: {.columns}
+
+::: {.column width='48%' .fragment .fade-in-then-semi-out}
+
+Netflix had an algorithm called **Cinematch** which attempted to predict a user's rating of film **X** based on the user's existing movie ratings.
+
+<br>
+
+The intention was for **Cinematch** to provide more personalised recommendations than simply using the average rating for movie **X** across all users. 
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+Netflix chose to use the root mean squared error (RMSE) of the **Cinematch** and **all other user ratings** compared to a user's actual rating as a measure of accuracy.
+
+<br>
+
+The **Cinematch** algorithm was roughly 10% more accurate than the **all other user rating**
+
+<br>
+
+The competition challenged participants to further improve this accuracy by at least an addition 10%.
+
+:::
+
+::::
+
+-----------
+
+## Netflix Prize Dataset: What was it? (III)
+
+:::: {.columns}
+
+::: {.column width='48%' .fragment .fade-in-then-semi-out}
+
+The competition was extremely popular and it wasn't won until 2009.
+
+<br>
+
+In fact, it's quite a dramatic story with two winning entries submitted within a day of one another in 2009.
+
+<br>
+
+I'd recommend reading this [thrillist.com article by Dan Jackson](https://www.thrillist.com/entertainment/nation/the-netflix-prize)[@jackson_netflix_2017].
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+However. 
+
+<br>
+
+**16 days later** Arvind Narayanan and Vitaly Shmatikov demonstrated their ability to re-identify users from the dataset[@narayanan_how_2006]. 
+
+<br>
+
+This draft paper was finally published in 2008[@narayanan_robust_2008] and we'll look into how the re-identification was possible.
+
+:::
+
+::::
+
+-----------
+
+## Netflix Prize Dataset: Privacy Breach (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+With the announcement of a 2nd competition in 2009 a class-action suit was filed.
+
+<br>
+
+The suit described the Netlix Prize dataset as the biggest "voluntary privacy breach to date". The Federal Trade Commission (FTC) also got involved.
+
+<br>
+
+Unfortunately, the case was settled privately so we don't know the damages. The best I can get is this quote from a deleted blogpost[@waxman_whoops_2010]:
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+> "To some, renting a movie such as Brokeback Mountain or even The Passion of the Christ can be a personal issue that they would not want published to the world."
+>
+> Jane Doe, a lesbian, who does not want her sexuality nor interests in gay and lesbian themed films broadcast to the world, seeks anonymity in this action
+
+:::
+
+::::
+
+::: {.small}
+
+>In the past few months, the Federal Trade Commission (FTC) asked us how a Netflix Prize sequel might affect Netflix members’ privacy, and a lawsuit was filed by KamberLaw LLC pertaining to the sequel. With both the FTC and the plaintiffs’ lawyers, we’ve had very productive discussions centered on our commitment to protecting our members’ privacy. We have reached an understanding with the FTC and have settled the lawsuit with plaintiffs. The resolution to both matters involves certain parameters for how we use Netflix data in any future research programs.
+>
+> In light of all this, we have decided to not pursue the Netflix Prize sequel that we announced on August 6, 2009." - Neil Hunt, Chief Product Officer @ Netflix
+
+:::
+
+
+-----------
+
+## Netflix Prize Dataset: Re-identification (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+The exact mechanics of the algorithm behind Arvind Narayanan and Vitaly Shmatikov[@narayanan_robust_2008] re-identification attack are beyond the scope of this course.
+
+<br>
+
+We're going to walk through the mechanics of the attack.
+
+<br>
+
+It's important to identify this paper introduces **a robust statistical de-anonymisation of large sparse datasets** that is not unique to the Netflix dataset.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+
+::: {.column width='48%'}
+> With 8 movie ratings (of which we allow 2 to be completely wrong) and dates that may have a 3-day error, 96% of Netflix subscribers whose records have been released can be uniquely identified in the dataset.
+> 
+> Source: arXiv pre-print 2006 [@narayanan_how_2006]
+:::
+
+::::
+
+-----------
+
+## Netflix Prize Dataset: Re-identification (II)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+The de-anonymisation attack is powered by two data sources:
+
+- IMDB Ratings
+
+::: {.de-emphasis}
+
+- Date of movie review
+
+:::
+
+The authors have written an [extremely useful FAQ](https://www.cs.utexas.edu/~shmat/netflix-faq.html)[@narayanan_how_2007-1].
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+IMDB provides a large, public database of movie ratings.
+
+<br>
+
+An assumed similarity between Netflix and IMDB ratings provides a re-identification attack vector.
+
+<br>
+
+The paper provides a proof of concept attack using **only 50 IMDB** users.
+
+Despite this, the authors are confident of positively cross-matching at least 2 users between the datasets.
+
+:::
+
+::::
+
+
+-----------
+
+## Netflix Prize Dataset: Re-identification (II)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+The de-anonymisation attack is powered by two data sources:
+
+- IMDB Ratings
+
+::: {.de-emphasis}
+
+- Date of movie review
+
+:::
+
+The authors have written an [extremely useful FAQ](https://www.cs.utexas.edu/~shmat/netflix-faq.html)[@narayanan_how_2007-1].
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+Users **do not** need to have account on both IMDB and Netflix.
+
+> Q: Your algorithm only works if the person has accounts on both IMDb and Netflix and rates the same movies on both.
+
+> First, our algorithm is not specific to IMDb. You can run our algorithm for any person if they were a Netflix subscriber back in 2005 and you know a little bit about their movie viewing history.
+>
+> Second, the IMDb record does not have to be the same as the Netflix record. Even a small intersection between the two records is sufficient for our algorithm to succeed with high statistical confidence.
+
+:::
+
+::::
+
+-----------
+
+## Netflix Prize Dataset: Re-identification (II)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+The de-anonymisation attack is powered by two data sources:
+
+::: {.de-emphasis}
+
+- IMDB Ratings
+
+:::
+
+- Date of movie review
+
+The authors have written an [extremely useful FAQ](https://www.cs.utexas.edu/~shmat/netflix-faq.html)[@narayanan_how_2007-1].
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+Date of movie rating provides an additional attack vector.
+
+<br>
+
+Background knowledge might include account creation date, providing an attack vector for that user.
+
+<img src='images/week-06/netflix-date-attack-vector.png' height='400px'/>
+
+:::
+
+::::
+
+# Selected other case studies
+
+-----------
+
+## Selected other case studies
+
+We're going to look at a few additional case studies.
+
+<br>
+
+Please note that for most of these examples we are not explicitly talking about re-identification of users from de-anonymised datasets. Instead these case studies often breach privacy - sometimes publicly.
+
+<br>
+
+All of these case studies can be used in the data anonymisation section of your assessment. And please do share additional case studies with the group.
+
+<br>
+
+Remember I mentioned [https://www.wired.co.uk/article/my-identity-for-sale](https://www.wired.co.uk/article/my-identity-for-sale) as being a good source of additional case studies.
+
+-----------
+
+## Case Study: Facebook beacon
+
+:::: {.columns}
+
+::: {.column width='48%'}
+Facebook has a long and awful history of privacy breaches and questionable activity.
+
+<br>
+
+Facebook Beacon is one of the oldest examples, all the way back from 2007.
+
+<br>
+
+It's a rare example where Mark Zuckerberg open talks about it as a mistake[@zuckerberg_our_2011].
+
+> Discuss why Facebook Beacon breaches user privacy
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+Beacon was designed to automatically post purchases to your friend's Facebook feeds.
+
+<br>
+
+The company originally claimed the service was "opt-in", but there was clear evidence this was not true.
+
+<br>
+
+However, after criticism Facebook provided an opt-out. Users were required to turn off the service.
+
+<br>
+
+A class action suit in 2009 was settled for $9.5million.
+
+:::
+
+::::
+
+-----------
+
+## Case Study: Google Buzz
+
+:::: {.columns}
+
+::: {.column width='48%' .fragment .fade-in-then-semi-out}
+
+Google Buzz was a very short lived social networking tool:
+
+- Launched: February 9, 2010[@ho_google_2010]
+
+- Discontinued: December 15, 2011 [@google_blog_fall_2011]
+
+It shut down explicitly due to privacy violations and Google settled for $8.5million[@buzzclassactioncom_google_2010] **within one month** of the service launching.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment .fade-in-then-semi-out}
+
+Google automatically created **public** Google Profile pages using the Buzz service.
+
+<br>
+
+These **public** pages disclosed who the user most frequently communicated with via email or chat within GMail.
+
+<br>
+
+This was as designed. It wasn't a mistake. Google designed this product like this!
+
+:::
+
+::::
+
+::: {.small .fragment}
+
+> When you first enter Google Buzz, to make the startup experience easier, we may automatically select people for you to follow based on the people you email and chat with most. Similarly, we may also suggest to others that they automatically follow you. You can review and edit the list of people you follow and block people from following you.
+>
+> **Your name, photo, and the list of people you follow and people following you will be displayed on your Google profile, which is publicly searchable on the Web**. You may opt out of displaying the list of people following you and who you're following on your profile.
+>
+> Google Buzz, Privacy Policy
+
+::: 
+
+------------
+
+## Case Study: In-store screens
+
+:::: {.columns}
+
+::: {.column width='48%'}
+> Do you know what these machines are for in Tesco?
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<img src='images/week-06/tesco-amscreen.png'/>
+:::
+
+::::
+
+------------
+
+## Case Study: In-store screens
+
+:::: {.columns}
+
+::: {.column width='48%'}
+These devices have embedded cameras that can track customer gaze - a proxy for the their attention.
+
+<br>
+
+The video feed from these devices is processed by software by Quividi that can estimate[@quividi_consumer_2022]:
+
+- Gender
+
+- Age
+
+- Mood
+
+[Their privacy page](https://quividi.com/privacy/) makes for interesting reading.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<img src='images/week-06/tesco-amscreen.png'/>
+
+> "Quividi’s software employs advanced facial detection software, not facial recognition technologies."
+> Quividi marketing
+:::
+
+::::
+
+
+# Anonymisation software?
+
+-----------
+
+## Anonymisation software? (I)
 
 :::: {.columns}
 
@@ -274,31 +2185,126 @@ There were two off-the-shelf tools identified that were built with R
 
 -----------
 
-## R packages for working with anonymouse data and sampling {background-color="#23241F" .center .center-x}
+## Anonymisation software? (II)
 
-# Case Study: Netflix De-anonymisation {background-color="#23241F" .center .center-x}
+:::: {.columns}
+
+::: {.column width='48%'}
+However. There isn't a one-size fits all methodology or guarantee of privacy through anonymisation.
+
+k-anonymity and l-diversity are useful metrics and provide some assurance of privacy. But background knowledge attacks might undermine these.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+We need to be vigilant and careful when:
+
+- Preparing data for release
+
+- Designing services
+
+:::
+
+::::
+
+# Simulating fake datasets
 
 -----------
 
-## Netlix Case Study: What happened?
+## Simulating fake datasets
 
-Arvind Narayanan and Vitaly Shmatikov[@narayanan_robust_2008] 
+:::: {.columns}
 
+::: {.column width='40%'}
+<img src='images/week-06/faux-hex-sticker.png'/>
+:::
 
-# Case Study: Massachusettes	governor attack
+::: {.column width='60%'}
 
-# Case Study: AOL Privacy Breach
+We've used the `{wakefield}` package to create fake datasets.
 
-# Social Network attacks
+The `{faux}` package is a more sophisticated package for simulating datasets designed by [Lise DeBruine](https://orcid.org/0000-0002-7523-5539).
+
+:::
+
+::::
+
+# Useful resources
 
 -----------
 
-XXX DRAGONS XXXX
+## Useful resources (I)
 
-## USEFUL RESOURCES:
+:::: {.columns}
 
-- https://course.ece.cmu.edu/~ece734/fall2019/lectures/9-deanonymization.pdf - Database Privacy: k-anonymity and
-de-anonymization attacks... gets nice and technical!
+::: {.column width='60%'}
+<img src='images/week-06/ece-module.png'/>
+:::
+
+::: {.column width='40%'}
+This is an **excellent** module on privacy from Carnegie Mellon University.
+
+<br>
+
+You can find all lecture materials and even exercises here: [https://course.ece.cmu.edu/~ece734/fall2019/syllabus.html](https://course.ece.cmu.edu/~ece734/fall2019/syllabus.html)
+
+<br>
+
+This quickly becomes very technical.
+
+:::
+
+::::
+
+-----------
+
+## Useful resources (I)
+
+:::: {.columns}
+
+::: {.column width='60%'}
+<img src='images/week-06/privacy-in-a-mobile-world.png'/>
+:::
+
+::: {.column width='40%'}
+[Ashwin Machanavajjhala](https://www.linkedin.com/in/mvnak/) has an excellent course about privacy in a mobile world - [https://courses.cs.duke.edu/fall13/compsci590.3/](https://courses.cs.duke.edu/fall13/compsci590.3/)
+
+<br>
+
+This quickly becomes very technical.
+
+:::
+
+::::
+
+# Assessment
+
+-----------
+
+## Assessment 
+
+In this section you must explain:
+
+-	What is an open dataset?
+
+-	What is “health data”? 
+
+-	Why is it important to government, industry and academia that health datasets are made available?
+
+-	What are some of the benefits to individuals and groups in making health datasets open?
+
+
+-	What is data anonymisation and why is it important?
+
+-	What are the dangers to individuals and groups in health data being data deanonymised?
+
+-	What are some steps that can be taken to reduce the danger of deanonymisation?
+
+
+> In answering these questions, you must include details of at least two case studies about data deanonymisation. Include as much technical information as possible about how the data was deanonymized.
 
 
 -----------
