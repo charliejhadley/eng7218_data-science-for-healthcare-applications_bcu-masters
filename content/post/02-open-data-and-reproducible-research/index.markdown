@@ -6,24 +6,6 @@ featured: false
 draft: false
 # Order the posts
 weight: 2
-
-# Featured image
-# To use, add an image named `featured.jpg/png` to your page's folder.
-# Placement options: 1 = Full column width, 2 = Out-set, 3 = Screen-width
-# Focal point options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
-image:
-  placement: 2
-  caption: 'Image credit: [**Beyond Meat on Unsplash**](https://unsplash.com/photos/ib5iJHRD5PY)'
-  focal_point: ""
-  preview_only: true
-
-# Projects (optional).
-#   Associate this post with one or more of your projects.
-#   Simply enter your project's folder or file name without extension.
-#   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
-#   Otherwise, set `projects = []`.
-projects: []
-
 links:
 - icon: chalkboard-teacher
   icon_pack: fas
@@ -43,4 +25,4 @@ links:
   url: /end-of-week-materials/week-02_end-of-week-materials.html
 ---
 
-Open data and reproducibility
+This lecture was intended to be delivered on 2022-09-26. However, due to the National Mourning on 2022-09-19 the week 1 lectures were cancelled. We began this material on 2022-09-26 and will finish the material on 2022-10-03.
