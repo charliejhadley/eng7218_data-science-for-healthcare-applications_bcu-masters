@@ -1,5 +1,5 @@
 ---
-title: "Week 5: Surveys"
+title: "Week 4: Data visualisation"
 subtitle: ""
 author: "<large>Charlotte Hadley</large>"
 format: 
@@ -808,7 +808,7 @@ msleep %>%
 
 ::: {.fragment}
 
-`{ggplot2}` uses *tidy evaluation* to allow us to use naked column names in our code.
+`{ggplot2}` uses *tidy evaluation* to allow us to use bare column names in our code.
 
 :::
 
@@ -828,24 +828,11 @@ msleep %>%
 
 ::: {.column width="60%"}
 
-Aesthetics can be set at the `ggplot()` level - meaning they're applied to all geoms in the chart.
+| Where is aes() placed? | What it does |
+| :-- | :-- | 
+| Inside `ggplot()` or on its own | Sets the aesthetics for the entire {ggplot2} object.<br><br> These could be considered the *coordinate system aes()* |
+| Inside `geom_*()` | Sets aesthetics for a specific geom *within* the existing coordinate system aes() for the {ggplot2} object.<br><br> These should be considered *geom specific aes()* |
 
-<br>
-
-```{r}
-#| eval: false
-msleep %>% 
-  ggplot() +
-  aes(
-    x = sleep_total,
-    y = sleep_rem,
-    colour = vore
-  )
-```
-
-<br>
-
-We might also want to set aesthetics for individual **geom layers**.
 
 :::
 
@@ -865,6 +852,308 @@ We might also want to set aesthetics for individual **geom layers**.
 
 Geoms use the aesthetics to add layers to our charts.
 
+```{r}
+#| eval: false
+msleep %>% 
+  ggplot() +
+  aes(
+    x = sleep_total,
+    y = sleep_rem,
+    colour = vore
+  ) +
+  geom_point()
+```
+
+<br>
+
+There are 50+ geoms baked into the `{ggplot2}` package.
+
+::: {.small style='font-size:50%'}
+`geom_abline()`, `geom_area()`, `geom_bar()`, `geom_bin2d()`, `geom_blank()`, `geom_boxplot()`, `geom_col()`, `geom_contour()`, `geom_contour_filled()`, `geom_count()`, `geom_crossbar()`, `geom_curve()`, `geom_density()`,  `geom_density_2d()`, `geom_density_2d_filled()`, `geom_density2d()`, `geom_density2d_filled()`, `geom_dotplot()`, `geom_errorbar()`, `geom_errorbarh()`, `geom_freqpoly()`, `geom_function()`, `geom_hex()`, `geom_histogram()`, `geom_hline()`, `geom_jitter()`, `geom_label()`, `geom_line()`, `geom_linerange()`, `geom_map()`, `geom_path()`, `geom_point()`, `geom_pointrange()`, `geom_polygon()`, `geom_qq()`, `geom_qq_line()`, `geom_quantile()`, `geom_raster()`, `geom_rect()`, `geom_ribbon()`, `geom_rug()`, `geom_segment()`, `geom_sf()`, `geom_sf_label()`, `geom_sf_text()`, `geom_smooth()`, `geom_spoke()`, `geom_step()`, `geom_text()`, `geom_tile()`, `geom_violin()`, `geom_vline()`
+
+:::
+
+<br>
+
+As we'll see later, there are *many* `{ggplot2}` extension packages that add **even more** geoms to the mix.
+
+:::
+
+::::
+
+-----------
+
+## Some geoms are built from others (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+`geom_histogram()` has clever tricks to make useful histograms
+
+
+```{r, eval=FALSE}
+ggplot(quakes, aes(mag)) +
+  geom_histogram()
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, out.width='300px'}
+ggplot(quakes, aes(mag)) +
+  geom_histogram() +
+  theme_gray(base_size = 25)
+```
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+It's built by calling `geom_bar()`
+
+```{r, eval=FALSE}
+ggplot(quakes, aes(mag)) +
+  geom_bar() +
+  scale_x_binned()
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, out.width='350px'}
+ggplot(quakes, aes(mag)) +
+  geom_bar() +
+  scale_x_binned() +
+  theme_gray(base_size = 25)
+```
+
+:::
+
+::::
+
+-----------
+
+## Some geoms are built from others (II)
+
+But `geom_bar()` itself is built from `geom_rect()`.
+
+```{r, echo=TRUE}
+#| output-location: column
+rect_data <- tribble(
+  ~x_min, ~x_max, ~y_min, ~y_max,
+  4, 4.48, 0, 60,
+  4.5, 5.48, 0, 100,
+  5.5, 5.98, 0, 10
+)
+rect_data %>% 
+  ggplot() +
+  geom_rect(aes(xmin = x_min, 
+                xmax = x_max, 
+                ymin = y_min, 
+                ymax = y_max)) +
+    theme_gray(base_size = 25)
+```
+<br>
+
+> There are **8 primitives** from which all other geoms are built: 
+
+`geom_blank()`, `geom_path()`, `geom_point()`, `geom_polygon()`, `geom_rect()`, `geom_ribbon()`, `geom_segment()`, `geom_text()`
+
+-----------
+
+## All geoms have `x` and `y` aesthetics
+
+These tell the geom where it needs to be drawn:
+
+```{r}
+#| output-location: column
+starwars %>% 
+  ggplot() +
+  aes(x = height,
+      y = mass) +
+  geom_point()
+```
+
+-----------
+
+## Some geoms need more than just `x` and `y`
+
+Let's `geom_segment()` to visualise some of the eras of the dinosaurs:
+
+```{r}
+dinosaurs <- tribble(
+  ~period, ~start, ~end,
+  "Triassic Period", -251e6, -225e6,
+  "Late Triassic Period", -225e6, -200e6,
+  "Jurassic Period", -200e6, -150e6,
+  "Late Jurassic Period", -150e6, -145e6
+)
+```
+
+To build this chart we need to specify **all** of the following: x, xend, y and yend.
+
+-----------
+
+### Use `size` to affect geom size
+
+In many charts we want geoms to be **thicker**, **bigger** or *just be more prominent*. 
+
+Timeline (or Gantt charts) are good examples of this. We want the segments to be thicker to improve the readability of the chart - this comes down to the `size` aesthetic.
+
+```{r plot-dinosaur-timeline}
+dinosaurs %>% 
+  ggplot() +
+  aes(x = start, xend = end,
+      y = period, yend = period) +
+  geom_segment(size = 30)
+```
+
+-----------
+
+## Out of order dinosaurs
+
+```{r}
+#| echo: false
+dinosaurs %>% 
+  ggplot() +
+  aes(x = start, xend = end,
+      y = period, yend = period) +
+  geom_segment(size = 30)
+```
+
+This is still a **bad chart**.
+
+The eras are not ordered in geological time, instead they're ordered (reverse) alphabetically.
+
+To control the order of things in `{ggplot2}` charts we must use **factors** - which are picked up by the **scales**.
+
+-----------
+
+## Some geoms are designed to save time
+
+:::: {.columns}
+
+::: {.column width='48%'}
+`geom_bar()` defaults to counting instances of a variable.
+
+```{r plot-geom-bar}
+mpg %>% 
+  count(manufacturer) %>% 
+  ggplot() +
+  geom_bar(aes(manufacturer))
+```
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+`geom_col()` uses a column to dictate the length of bars.
+
+```{r plot-geom-col}
+mpg %>% 
+  count(manufacturer) %>% 
+  ggplot() +
+  geom_col(aes(x = manufacturer, y = n))
+```
+:::
+
+::::
+
+-----------
+
+## Some geoms depend on `stat` functions
+
+The `geom_bar()` function has a `stat` argument with the default value of `"count"`.
+
+We can force the geom to behave like `geom_col()` by changing the stat:
+
+```{r}
+#| output-location: column
+mpg %>% 
+  count(manufacturer) %>% 
+  ggplot() +
+  geom_bar(aes(x = manufacturer,
+               y = n),
+           stat = "identity")
+```
+
+<br>
+
+All of the goodness from the `stat` argument comes from the `stat_identity()` and `stat_count()` functions. 
+
+If you're building a complex chart it might be useful to directly call a [stat_() function](https://ggplot2.tidyverse.org/reference/#section-stats).
+
+-----------
+
+## Position things to resolve overlapping (I)
+
+Box and whisker diagrams hide a lot of detail
+
+```{r}
+#| output-location: column
+bechdel %>% 
+  filter(complete.cases(.),
+         domgross_2013 < 0.5e9) %>% 
+  ggplot(aes(clean_test, 
+             domgross_2013)) +
+  geom_boxplot() +
+  theme_gray(base_size = 25)
+```
+
+
+Let's add the data points to this chart with `geom_point()` and look at the position argument.
+
+-----------
+
+## Position things to resolve overlapping (II)
+
+The position argument can also be used to create three different types of bar chart:
+
+- "stack" creates a stacked bar chart
+
+- "fill" creates a proportional bar chart
+
+- "dodge" creates a grouped bar chart
+
+Let's create all 3 of these for the following dataset:
+
+```{r}
+gss_cat %>% 
+  count(relig, marital)
+```
+
+-----------
+
+## Geom layers are placed on top of one another
+
+```{r plot-mpg-spline-fit}
+#| output-location: column
+ggplot(mpg, 
+       aes(displ, hwy)) +
+  geom_point() +
+  geom_smooth(method = lm, 
+              formula = y ~ splines::bs(x, 3),
+              size = 5)
+```
+
+The `geom_smooth()` line is hiding data points.
+
+We could either swap the order of these geoms or change the `alpha` aesthetic.
+
+-----------
+
+:::: {.columns .v-center-container}
+
+::: {.column width="40%"}
+
+### `r fontawesome::fa(name = "scale-balanced", fill = colours_ggplot2_components$scales)` <span style='color:`r colours_ggplot2_components$scales`'>Scales</span>
+
+:::
+
+::: {.column width="60%"}
+
+Scales determine the appearance of an aesthetic within the chart, including:
+
+- Which colours are used for each value
+
+- Which order the values appear in the chart and **guides**
+
 <br>
 
 ```{r}
@@ -875,17 +1164,28 @@ msleep %>%
     x = sleep_total,
     y = sleep_rem,
     colour = vore
+  ) +
+  geom_point() +
+  scale_colour_manual(
+    values = c("carni" = "#c03728", 
+               "omni" = "#fd8f24", 
+               "insecti" = "#f5c04a", 
+               "herbi" = "#919c4c", 
+               "NA" = "#e68c7c")
   )
 ```
 
 <br>
 
-TODO: Finish this!!!
+::: {.fragment}
+
+`{ggplot2}` uses *tidy evaluation* to allow us to use bare column names in our code.
+
+:::
 
 :::
 
 ::::
-
 
 -----------
 

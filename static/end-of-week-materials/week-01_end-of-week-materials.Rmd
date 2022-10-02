@@ -1,9 +1,14 @@
 ---
 title: "Week 1: End of week materials"
+output: html_document
 view: 2
 ---
 
-This page will contain the end state of the etherpads and any follow up material that was promised
+In this week's materials we made our first RMarkdown document.
 
-# Etherpad: Lecture Slides
+As always you can find the materials I wrote during the course in this folder:
+
+[https://github.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/tree/main/static/end-of-week-materials/bcu-week-1](https://github.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/tree/main/static/end-of-week-materials/bcu-week-1)
+
+The folder also contains the Etherpad notes from the session.
 

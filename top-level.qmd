@@ -1,0 +1,1241 @@
+---
+title: "Week 7: Ethics in Algorithms"
+subtitle: ""
+author: "<large>Charlotte Hadley</large>"
+format: 
+  revealjs:
+    theme: "css/lecture-styles.scss"
+    slide-number: "c/t"
+bibliography: "bibtex-file.bib"
+csl: "nature.csl"
+cache: true
+echo: true
+freeze: true
+---
+
+# Ethics in algorithms... what does it mean? {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Ethics in algorithms... what does it mean?
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(gt)
+library(readxl)
+library(janitor)
+```
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+"Ethics in algorithms" paints a picture that we only need to consider ethics when writing algorithms. FOOP
+
+<br>
+
+Last week we discussed data anonymisation (and re-identification) and a lot of our conversation was about the ethics of *data collection*.
+
+<br>
+
+> Is it ethical for data about us to be collected without our knowledge?
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+Data ethics is a **might** be a better term for what we're discussing. 
+
+<br>
+
+Data ethics includes, but isn't limited to:
+
+- How data is collected 
+
+- How data is processed (by algorithms)
+
+- How data is consumed to build products and services
+
+- How data is released
+
+<br>
+
+Companies are hiring data ethicists in droves.
+
+:::
+
+::::
+
+-----------
+
+#### Data ethics... you mean machine learning, big data and AI!
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+Machine learning, big data and AI are all tremendously exciting and definitely always require *some* data[@sucholutsky_less_2021].
+
+<br>
+
+But data ethics is important every time we're dealing with sensitive and/or private data.
+
+Even if we've got survey data about attitudes to green spaces during the pandemic.
+
+<br>
+
+In this course when we talk about data ethics we're also talking about the ethics of algorithms.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+```{r}
+#| echo: false
+tweetrmd::tweet_embed("https://twitter.com/BigDataBorat/status/306596352991830016")
+```
+
+:::
+
+::::
+
+# Ethics & Moral Philosophy {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Ethics & Moral Philosophy
+
+:::: {.columns}
+
+::: {.column width='48%'}
+Moral philosophy and the history of ethics is fascinating.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+> We're just going to completely ignore it.
+:::
+
+::::
+
+# Right to privacy {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Right to privacy
+
+:::: {.columns}
+
+::: {.column width='40%'}
+The Universal Declaration of Human Rights[@united_nations_general_assembly_universal_1948] provides universal right to privacy.
+
+<br>
+
+We're going to extend this to include right to privacy in data collection and sharing of data.
+
+:::
+
+::: {.column width='60%'}
+<span style='color:cornflowerblue;font-weight:bold'>Article 12</span>
+
+> No one shall be subjected to arbitrary interference with his privacy, family, home or correspondence, nor to attacks upon his honour and reputation. Everyone has the right to the protection of the law against such interference or attacks.
+:::
+
+::::
+
+<br>
+
+<br>
+
+<br>
+
+> But let's look at algorithms a little bit more first.
+
+
+# Self-driving cars {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Self-driving cars (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+There's a continuum of "self-driving car" techology. For discussion purposes, let's define the tech as follows:
+
+> A car on public roads under the control of an automated driving system that controls acceleration, breaking and driving direction. The driver does not have active control of the car, but can disengage the automated driving system and resume control.
+
+What ethical questions does the addition of self-driving cars to **existing** road networks raise?
+
+:::
+
+::: {.column width='4%'}
+:::
+
+
+::: {.column width='48%' .fragment}
+
+- Who is responsible for a road traffic collision?
+
+- How does the automated driving system respond to trolley problem situations?
+
+  - Does the car prioritise reducing risk to the driver or a pedestrian
+  
+  - Does the car prioritise reducing risk to other vehicles or pedestrians?
+
+:::
+
+::::
+
+
+-----------
+
+## Self-driving cars (II)
+
+:::: {.columns}
+
+::: {.column width='40%'}
+
+Awad et al[@awad_moral_2018] surveyed 2.3million people in 2018 to explore attitudes to moral dilemmas faced by autonomous vehicles.
+
+<br>
+
+Attitudes vary by geographic region of participants and the demographics of potential *accident victims*.
+
+<br>
+
+> Should the ethical decision making of autonomous vehicles vary dependent on location?!
+
+:::
+
+::: {.column width='2%'}
+:::
+
+::: {.column width='58%'}
+<img src='images/week-07/self-driving-cars_moral-compass.png'/>
+:::
+
+::::
+
+::: {.footnote}
+This data visualisation is derived from Awad et al[@awad_moral_2018] but appears in Maxmen 2018[@maxmen_self-driving_2018]
+:::
+
+-----------
+
+## Self-driving cars (III)
+
+:::: {.columns}
+
+::: {.column width='58%'}
+Reliable and unbiased estimations of autonomous vehicle safety are difficult to find - and interpret.
+
+<br>
+
+As more autonomous vehicles are used by untrained drivers in real-world circumstances we'll collect more information about their safety.
+
+<br>
+
+But it's important we try and understand *how* autonomous vehicles make their decisions.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='38%'}
+
+This statistic is repeated **everywhere** even in 2022
+
+> Self-driving cars also have an accident rate of 9.1 crashes per million miles driven – which is more than double that of regular vehicles.
+> 
+
+It's derived from a 2015 report[@schoettle_preliminary_2015]... and a total of 11 collisions.
+
+:::
+
+::::
+
+-----------
+
+## Self-driving cars (IV)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+Self-driving vehicles use **many** different tools for sensing and measuring their environment.
+
+<br>
+
+There's considerable debate [and patent dispute] about two competing technologies: LiDAR and Computer Vision.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+- Computer vision uses "regular cameras" and categorises what it sees.
+
+<img src='images/week-07/machine-vision.gif'/>
+
+- LiDAR continuously pulses UV light, measures reflection times and builds a 3D visual map. This data is then clustered and classified to identify things around the car.
+
+:::
+
+::::
+
+-----------
+
+## Self-driving cars (IV)
+
+:::: {.columns}
+
+::: {.column width='50%'}
+
+As we question the ethical considerations of autonomous vehicles it's crucial to understand **how** vehicles make decisions - particularly during accidents.
+
+<br>
+
+Does the vehicle make Fair, Accountable and Transparent (FAT) decisions?
+
+::: {.fragment fragment-index=1}
+
+<br>
+
+Thankfully, both LiDAR and computer vision provide surprisingly high **transparency**.
+
+<br>
+
+This table comes from a fatal collision report[@national_transport_safety_board_collision_2018] between an autonomous vehicle and a pedestrian.
+
+<br>
+
+We can see the autonomous vehicle repeatedly, and inconsistently misidentified a pedestrian.
+
+:::
+
+:::
+
+::: {.column width='2%'}
+:::
+
+::: {.column width='48%' .fragment fragment-index=1}
+
+<img src='images/week-07/self-driving-car_collision-table.png'>
+
+:::
+
+::::
+
+# Fairness, Accountability and Transparency
+
+-----------
+
+## Fairness, Accountability and Transparency
+
+:::: {.columns}
+
+::: {.column width='48%' .fragment .fade-in-then-semi-out}
+Since 2013[@hardt_occupy_2013] we've used "Fairness, Accountability and Transparency" (FAT) to discuss the ethical development and application of algorithms.
+
+<br>
+
+The [FAT/ML conference series](https://www.fatml.org/) ran from 2014 to 2018 and is a tremendously useful resource for examples of FAT concepts for your assessment.
+
+<br>
+
+The definitions for these terms are slightly loose. When explaining them please use your own words and examples.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+::: {.fragment}
+
+> **Fairness**. Does an algorithm have bias or does it discriminate against individuals or a specific group?
+>
+> This is usually a consequence of bias in the underlying dataset.
+
+:::
+
+::: {.fragment}
+
+> **Accountability** is concerned with the responsibility for results of decisions made that are powered or otherwise influenced by an algorithm
+
+:::
+
+::: {.fragment}
+
+> **Transparency** is concerned with how algorithms fit into a decision making process.
+
+:::
+
+:::
+
+::::
+
+
+# Fairness  {background-color="#23241F" .center .center-x}
+
+-----------
+
+## Fairness: 5 (or 6) Sources of Bias
+
+:::: {.columns}
+
+::: {.column width='48%'}
+> Frustratingly, I can't find the source for this! But this list has been around since at least 2014[@barocas_big_2016].
+
+Broadly in the literature (and in essays on the subject) there are 5 common sources of bias in training datasets.
+
+<hr/>
+
+These biases result in unfair treatment of individuals/groups by an algorithm. Examples of unfair treatment include
+
+- Refusal of service
+
+- More expensive services
+
+- Reduced range of services
+
+When these services include healthcare the ramifications can be life threatening.
+
+::: {.fragment fragment-index=1}
+
+:::
+
+:::
+
+::: {.column width='4%'}
+:::
+
+
+::: {.column width='48%'}
+-	Proxies
+
+-	Limited features
+
+-	Skewed sample
+
+-	Tainted examples
+
+-	Sample size disparities
+
+<hr/>
+
+::: {.fragment fragment-index=1}
+The assessment limits itself to these 5 sources.
+
+It's worthwhile mentioning that sometimes these bias is knowingly, and deliberately left (or added) to a training dataset.
+
+This is called **masking**[@barocas_big_2016].
+
+:::
+
+:::
+
+
+::::
+
+::: {.footnote}
+
+I'm relying quite a bit on [Alexandre's article for dataiku.com](https://blog.dataiku.com/explaining-bias-in-your-data)[@landeau_explaining_2020] and a [Medium post from Cristina Goldfain](https://towardsdatascience.com/sources-of-unintended-bias-in-training-data-be5b7f3347d0)[@goldfain_sources_2020].
+
+:::
+
+-----------
+
+## Fairness: Proxies
+
+> Proxies are the easiest to identify and describe of these sources of bias.
+
+When training our algorithms we want to remove potentially biasing attributes like race, gender, age or religious belief - because we don't want an algorithm to discriminate, disadvantage or advantage a specific group.
+
+<br>
+
+However, there are **many** other variables in a dataset that are **proxies** for these attributes. Can you think of any?
+
+::: {.fragment}
+
+- Systemic racism means that income, neighborhood and similiar variables are strong proxies for race.
+
+> “Redlining is the practice of arbitrarily denying or limiting financial services to specific neighborhoods, generally because its residents are people of color or are poor.”
+
+- Facebook friendships can be a strong proxy for sexual orientation[@jernigan_gaydar_2009]
+
+:::
+
+-----------
+
+## Fairness: Limited Features
+
+> This is a harder bias to describe (and to verify). It's also [**extremely frustrating** to pin down examples](https://twitter.com/charliejhadley/status/1574814439815221251?s=20&t=81SYBivy0JoYEglUyWWW-A).
+
+<br>
+
+Limited features is a consequence of having smaller datasets for minority groups, or specific combinations of sensitive attributes.
+
+<br>
+
+Individuals in these groups will be subject to less accurate classifications (or predictions) than other groups.
+
+<br>
+
+This article gives a theoretical example: https://towardsdatascience.com/sources-of-unintended-bias-in-training-data-be5b7f3347d0
+
+<br>
+
+> Limited features is a pre-requisite for skewed samples, our next topic.
+
+-----------
+
+## Fairness: Skewed sample (I)
+
+> It's kind of unfair this is collected together with proxies, limited features, tainted examples, sample size disparities
+
+<br>
+
+Skewed samples is a bias in your algorithm when existing skewness due to limited features results in an algorithm that **becomes more skewed over time** - creating a biased feedback loop[@ensign_runaway_2017]. Please do read the Ensign et al's[@ensign_runaway_2017] paper from 2017 as it explains this really well.
+
+> Given historical crime incident data for a collection of regions, decide how to allocate patrol officers to areas to detect crime
+>
+> ...
+>
+> Since such discovered incidents only occur in neighborhoods that police have been sent to by the predictive policing algorithm itself, there is the potential for this sampling bias to be compounded, causing a runaway feedback loop.
+
+-----------
+
+## Fairness: Skewed sample Google Flu (I)
+
+> Another really great example with an easy to follow about the skewed samples behind issues with Google Flu's predictive power, [LAzer et al 2014](https://www.davidlazer.com/sites/default/files/The%20Parable%20of%20Google%20Flu_FinalFinal.pdf)[@lazer_parable_2014]
+
+In 2009 Google published details about their Google Flu Trends (GFT) prediction engine[@ginsberg_detecting_2009] that used search results to predict flu outbreaks.
+
+<br>
+
+The theory being that ill people search for symptoms before they would be otherwise detected.
+
+<br>
+
+However, the whole thing is somewhat questionable as
+
+> GFT has never documented the 45 search terms used, and the examples that have been released appear misleading[@cook_assessing_2011]
+>
+> Source: [LAzer et al 2014](https://www.davidlazer.com/sites/default/files/The%20Parable%20of%20Google%20Flu_FinalFinal.pdf)[@lazer_parable_2014]
+
+
+-----------
+
+## Fairness: Skewed sample Google Flu (II)
+
+:::: {.columns}
+
+::: {.column width='56%%'}
+Coincidentally, the first big failure of the service was the 2009 A–H1N1 outbreak[@cook_assessing_2011].
+
+<br>
+
+The GFT didn't detect the non-seasonal wave of H1N1 during the summer of 2009.
+
+<br>
+
+Google quickly updated the GFT algorithm later in 2009 and the improved algorithm did a better job of predicting the outbreak.
+
+:::
+
+::: {.column width='1%'}
+:::
+
+::: {.column width='45%'}
+<img src='images/week-07/skewed_google-flu-2009.png'/>
+:::
+
+::::
+
+-----------
+
+## Fairness: Skewed sample Google Flu (III)
+
+:::: {.columns}
+
+::: {.column width='56%%'}
+
+However, from 2011 onwards the GFT consistently overestimated flu outbreaks[@lazer_parable_2014] and became increasingly unreliable.
+
+Lazer et al[@lazer_parable_2014] posit two reasons for this:
+
+- Big data hubris
+
+Was the algorithm a glorified winter detector?!
+
+
+
+:::
+
+::: {.column width='1%'}
+:::
+
+::: {.column width='45%'}
+<img src='images/week-07/skewed-samples_google-flu.png'/>
+Source: Lazer et al[@lazer_parable_2014]
+:::
+
+::::
+
+- Algorithm dynamic
+
+Google has many competing algorithms at play. The service has a recommendation engine that shows potentially interesting (or useful?) search terms. Developments in the recommendation algorithm can negatively effect the GFT as "flu search terms" could be shown to healthy people.
+
+-----------
+
+## Fairness: Tainted examples (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+::: {.fragment .fade-in-then-semi-out}
+
+We need to talk about supervised learning.
+
+<br>
+
+Do you know the difference between supervised and unsupervised learning?
+
+<br>
+
+:::
+
+::: {.fragment .fade-in-then-semi-out}
+
+In supervised learning we create categories and assign training data to these categories. 
+
+The algorithm will classify all future inputs as belonging to one of these categories.
+
+:::
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+::: {.fragment .fade-in-then-semi-out}
+
+That's all well and good if we're doing something like classifying the [titanic survival dataset](https://www.wolfram.com/mathematica/new-in-10/highly-automated-machine-learning/predict-the-survival-of-titanic-passengers.html).
+
+... but often our categories aren't absolute, eg
+
+- Google user has the flu!
+
+- Rating a driver's likelihood of an accident
+
+- Rating a "good job candidate"
+
+> Let's look into the job candidate example more
+
+:::
+
+:::
+
+::::
+
+-----------
+
+### Fairness: Tainted examples in Recruitment (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+Algorithms are used ubiquitously and sometimes aggressively in HR and recruitment. Fraij and László published a literature review on the topic in 2021[@fraij_literature_2021].
+
+<br>
+
+These algorithms are often baked into software to automatically filter through CVs.
+
+<br>
+
+The algorithms are celebrated for being fast, efficient and allowing recruiters to focus on more interesting and human required tasks.
+
+> This couldn't possibly create issues
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+This is an example of potential tainted example bias because there isn't a universal truth to who is a good job candidate.
+
+<br>
+
+There are at least two different methods for categorising "good" candidates:
+
+- Who gets hired. And we know there are ["shocking levels of discrimination in hiring"](https://www.theguardian.com/world/2019/jan/17/minority-ethnic-britons-face-shocking-job-discrimination)[@siddique_minority_2019]
+
+- Work evaluation scores of recruited people. There's strong evidence of discrimination in these scores[@stauffer_existence_2005].
+
+:::
+
+::::
+
+-----------
+
+### Fairness: Sample Size Disparity (I)
+
+> Unfortunately, even perfectly balanced [untainted and unskewed] training data with untainted categories can have bias. Sample size disparity is a common example of this.
+
+:::: {.columns}
+
+::: {.column width='48%'}
+Sample size disparity exists when completely balanced datasets have disparity in the size of subgroups.
+
+<br>
+
+This disparity results in unfair behaviour of the algorithm when applied to real-world datasets.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+The most widely cited (and easy to follow) example of this is the Nymwars of 2011 - [https://en.wikipedia.org/wiki/Nymwars](https://en.wikipedia.org/wiki/Nymwars).
+
+:::
+
+::::
+
+-----------
+
+### Fairness: Sample Size Disparity (II)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+In 2011 Google implemented a real name policy for Google+.
+
+<br>
+
+There are significant privacy issues with this policy.
+
+<br>
+
+But users also found their names rejected as "not real".
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+Folks with names outside of the first and last name pattern - eg Charlie Hadley - found their names rejected.
+
+<br>
+
+This is widely blamed on the training datasets having sample size disparity - there were fewer instances of other name forms.
+
+<br>
+
+I recommend reading this article [Falsehoods Programmers Believe About Names – With Examples](https://shinesolutions.com/2018/01/08/falsehoods-programmers-believe-about-names-with-examples/)[@rogers_falsehoods_2018].
+
+:::
+
+::::
+
+# ... some more case studies {background-color="#23241F" .center .center-x}
+
+-----------
+
+#### "Man is to computer programmer as woman is to homemaker" (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+In 2016 Bolukbasi et al[@bolukbasi_man_2016] demonstrated how the extremely common **word2vec** algorithm shows significant gender-bias.
+
+<br>
+
+**word2vec** is a patented algorithm[@mikolov_computing_2015] that - when trained on a given text corpus - will find similar/synonymous words for a given input.
+
+[Google provides a useful introduction](https://code.google.com/archive/p/word2vec/) to how the system works.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+> For example, if you enter 'france', distance will display the most similar words and their distances to 'france', which should look like:
+
+```{r}
+#| echo: false
+tibble::tribble(
+          ~word, ~cosine.distance,
+        "spain",         0.678515,
+      "belgium",         0.665923,
+  "netherlands",         0.652428,
+        "italy",          0.63313,
+  "switzerland",         0.622323,
+   "luxembourg",         0.610033,
+     "portugal",         0.577154,
+       "russia",         0.571507,
+      "germany",         0.563291,
+    "catalonia",         0.534176
+  ) %>% 
+  gt()
+
+```
+
+:::
+
+::::
+
+
+-----------
+
+#### "Man is to computer programmer as woman is to homemaker" (II)
+
+:::: {.columns}
+
+::: {.column width='38%'}
+**word2vec** is pre-trained on ~100 billion words from Google News articles.
+
+<br>
+
+Some users of the alogirthm will use the pre-trained corpus, others will use their own.
+
+<br>
+
+Bolukbasi et al[@bolukbasi_man_2016] investigated how the algorithm behaved with the pre-trained corpus, with the assumption:
+
+> [the data would] exhibit little gender bias because many of its authors are professional journalists
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='58%' .fragment}
+<img src='images/week-07/word-2-vec_gender-extremes.png'/>
+:::
+
+::::
+
+----------
+
+#### "Man is to computer programmer as woman is to homemaker" (III)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+What sources of bias are included in this example?
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+-	Proxies
+
+-	Limited features
+
+-	Skewed sample
+
+-	Tainted examples
+
+-	Sample size disparities
+
+:::
+
+::::
+
+
+----------
+
+## Racial bias in photography (I)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+Smartphone manufacturers have recently started advertising how their devices [accurately photograph the beauty of all skin tones](https://store.google.com/intl/en/discover/realtone/)[@google_real_2022].
+
+<br>
+
+This has been a [known issue in photography for decades](https://www.youtube.com/watch?v=d16LNHIEJzs), in many different situations.
+
+::: {.fragment fragment-index=1}
+
+<br>
+
+In pre-digital photography days, Kodak issued "Shirley cards" for colour-balancing images. These cards exclusively contained Caucasian models until the 1990s.
+
+:::
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .center-x .fragment fragment-index=1}
+<img src='images/week-07/shirley-card_polaroid.png'/>
+
+Source: Lorna Roth 2009[@roth_looking_2009-1]
+
+:::
+
+::::
+
+----------
+
+## Racial bias in photography (II)
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+This issue has also been pervasive in digital photography.
+
+<br>
+
+The continued use of the Fitzpatrick skin tone scale is largely to blame.
+
+<br>
+
+Dr. Ellis Monk's research[@monk_unceasing_2021] has culminated in the Monk Skin Tone Scale with [evidence improvements in processing of images compared to the Fitzpatrick scale](https://skintone.google/the-scale).
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .center-x}
+<img src='images/week-07/fitzpatrick-skin-types.png'/>
+
+Source: Ward et al [@ward_table_2017]
+
+:::
+
+::::
+
+----------
+
+## Racial bias in photography (III)
+
+I'd like to recommend some additional resources to learn about this:
+
+- Vox Media's video essay [Color film was built for white people. Here's what it did to dark skin.](https://www.youtube.com/watch?v=d16LNHIEJzs)[@vox_color_2015].
+
+- [The Racial Bias Built Into Photography by the NY Times](https://www.nytimes.com/2019/04/25/lens/sarah-lewis-racial-bias-photography.html)[@lewis_racial_2019]
+
+- Lorna Roth's research paper [Looking at Shirley, the Ultimate Norm: Colour Balance, Image Technologies, and Cognitive Equity](https://cjc.utpjournals.press/doi/full/10.22230/cjc.2009v34n1a2196)[@roth_looking_2009-1]
+
+- Google's [Skin Tone Research](https://skintone.google/) with Dr. Ellis Monk.
+
+----------
+
+## Racial bias in face analysis (I)
+
+:::: {.columns}
+
+::: {.column width='40%'}
+This is a fundamental problem in all face analysis and face detection software.
+
+<br>
+
+[Joy Buolamwini](https://twitter.com/jovialjoy?lang=en) does a much better job of explaining this in 5 minutes than I can.
+
+:::
+
+::: {.column width='60%' .center-x}
+<a href='https://youtu.be/TWWsW1w-BVo'><img src='images/week-07/joy-buolamwini.png'/></a>
+
+Source: [gendershades.org](https://gendershades.org)[@mit_media_lab_gender_2018]
+
+:::
+
+::::
+
+----------
+
+## Racial bias in face analysis & photography
+
+:::: {.columns}
+
+::: {.column width='48%'}
+What sources of bias are included in this example?
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+-	Proxies
+
+-	Limited features
+
+-	Skewed sample
+
+-	Tainted examples
+
+-	Sample size disparities
+
+:::
+
+::::
+
+# Accountability & Transparency
+
+-----------
+
+## Accountability & Transparency
+
+These two terms are used interchangeably and confusingly. That's okay. In the assessment discuss how these two concepts relate to one another and you'll be fine.
+
+<br>
+
+There's a really useful definition given by the *EU "governance framework for algorithmic accountability and transparency"* [@european_parliament_directorate_general_for_parliamentary_research_services_governance_2019]
+
+> The primary role of transparency is identified as a tool to enable accountability. If it is not known what an organisation is doing, it cannot be held accountable and cannot be regulated.
+>
+> ...
+>
+> An important difference between transparency and accountability is that accountability is primarily a legal and ethical obligation on an individual or organisation to account for its activities, accept responsibility for them, and to disclose the results in a transparent manner.
+
+... but the rest of the document is very heavy reading.
+
+-----------
+
+## Accountability
+
+For a more thorough exploration of accountability I recommend reading Caplan et al[@caplan_algorithmic_2018].
+
+-----------
+
+## Transparency and gaming the system
+
+It's worthwhile mentioning that transparency can result in "gaming the system" in which an algorithm is applied:
+
+> Also, in some cases, transparency may lead to groups and individuals “gaming the system.” For example, even the minimal openness surrounding how the trending feature on Twitter surfaces topics has allowed it to be manipulated into covering certain topics by bots and coordinated groups of individuals. Therefore, different contexts may call for different levels of transparency.
+>
+> Source: Caplan et al 2018[@caplan_algorithmic_2018]
+
+- How else could we game algorithms?
+
+
+# Other sources of unfairness
+
+-----------
+
+## Other sources of unfairness
+
+:::: {.columns}
+
+::: {.column width='48%'}
+Earlier we tried to categorise sources of bias:
+
+-Proxies
+
+-Limited features
+
+-Skewed sample
+
+-Tainted examples
+
+-Sample size disparities
+
+These are almost always concerned with the training data behind algorithms.
+
+<br>
+
+There's a whole universe of ways we can bias an algorithm by *how it's applied*.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+Let's look at some of these!
+:::
+
+::::
+
+-----------
+
+### Fairness and Abstraction in Sociotechnical Systems
+
+:::: {.columns}
+
+::: {.column width='48%'}
+Selbst et al published an excellent paper in 2019[@selbst_fairness_2019] on "abstraction traps".
+
+<br>
+
+These traps are designed to help us account for the interactions between the technical systems behind our algorithms and the social world in which they're applied.
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+I think they're really useful and give us further context for our discussion of fairness.
+
+The next several slides explores these traps.
+:::
+
+::::
+
+-----------
+
+## Selbst Abstraction: The Framing Trap
+
+> Failure to model the entire system over which a social criterion, such as fairness, will be enforced
+
+Example: 
+
+In the US criminal justice pipeline algorithmically trained risk assessment tools are used to predict the "risk" of a defendant and determine of parole is awarded.
+
+<br
+
+However - usually this is the risk the defendant fails to appear at court hearings. Reoffending is only occassionally considered in these models.
+
+<br>
+
+These risk assessment tools are presented only as recommendations to judges. They do not account for consistently (see[@selbst_fairness_2019]) different consideration between judges.
+
+> The intended appliction of the algorithmally trained risk assessment does **not** take into account their use by judges and therefore the apparent fairness cannot be measured
+
+-----------
+
+## Selbst Abstraction: The Portability Trap
+
+> Failure to understand how repurposing algorithmic solutions designed for one social context may be misleading, inaccurate, or otherwise do harm when applied to a different context
+
+Here's a really nice quote 
+
+> Within computer science, it is considered good practice to design a system that can be used for different tasks in different contexts. “But what that does is ignore a lot of social context,” says Selbst. “You can’t have a system designed in Utah and then applied in Kentucky directly because different communities have different versions of fairness. Or you can’t have a system that you apply for ‘fair’ criminal justice results then applied to employment. How we think about fairness in those contexts is just totally different.”
+> 
+> Source: Karen Hao[@hao_this_2019]
+
+-----------
+
+## Selbst Abstraction: The Formalism Trap
+
+> Failure to account for the full meaning of social concepts such as fairness, which can be procedural, contextual, and contestable, and cannot be resolved through mathematical formalisms
+
+:::: {.columns}
+
+::: {.column width='48%'}
+I did promise we would ignore moral philosophy, but it's important for a moment.
+
+> Fairness and discrimination are complex concepts that philosophers, sociologists, and lawyers have long debated. They are at times procedural, contextual, and politically contestable, and each of those properties is a core part of the concepts themselves[@selbst_fairness_2019]
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%' .fragment}
+
+In algorithmic recruitment practices we don't particularly mind about false positives (candidates who aren't a good fit) because there's an interview to filter them out.
+
+<br>
+
+However, the justicial risk assessments mentioned earlier might require the opposite treatment. False positives will result in parole being refused. 
+:::
+
+::::
+
+-----------
+
+## Selbst Abstraction: The Ripple Effect Trap
+
+> Failure to understand how the insertion of technology into an existing social system changes the behaviors and embedded values of the pre-existing system
+
+Selbst et al[@selbst_fairness_2019] depend entirely on the justicial risk assessments example for this. Their increased use focuses the intent of the justice review system to incapacitation.
+
+-----------
+
+## Selbst Abstraction: The Solutionism Trap
+
+> Failure to recognize the possibility that the best solution to a problem may not involve technology
+
+> Modeling requires pinning down definitions. Code calcifies. When fairness is a politically contested, movable issue, a model may not be able to capture the facets of how it moves 
+
+# COMPAS: Algorithmic risk assessments
+
+## COMPAS: Algorithmic risk assessments
+
+:::: {.columns}
+
+::: {.column width='48%'}
+The algorithmic risk assessment algorithm we've discussed is called COMPAS.
+
+<br>
+
+It's been subject to **intensive** study.
+
+<br>
+
+ProPublica's study in 2016[@mattu_machine_2016] was one of the first investigations. A technical breakdown of this is provided by the same authors[@mattu_how_2016].
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+<center>
+<img src='images/week-07/COMPAS-accuracy.png' height="300px"/>
+</center>
+
+The algorithm performs worse than 400 random Mechanical Turk users[@dressel_accuracy_2018].
+
+I'd like to show you [Hany Farid's TED tak on this topic](https://www.youtube.com/watch?v=p-82YeUPQh0)[@tedx_talks_danger_2018].
+:::
+
+::::
+
+# Inequality vs Justice
+
+-----------
+
+## Inequality vs Justice
+
+I thought it was important to not skip over the continuum beyond inequality and justice. These cartoons are from [John Maeda's](https://twitter.com/johnmaeda) presentation on [Design in Tech Report 2019](https://design.co/design-in-tech-report-2019-no-track/#1)[@maeda_presentation_2019] and designed by [Tony Ruth](https://twitter.com/lunchbreath).
+
+<img src='images/week-07/inequality-through-justice.png'/>
+
+# We have to stop somewhere {background-color="#23241F" .center .center-x}
+
+-----------
+
+## We have to stop somewhere
+
+We've covered more than enough for your assessment and to get a feel for the complexities of ethics in algorithms.
+
+We didn't really discuss data privacy very much. I'd recommend reading about the OECD Fair Information Practices.
+
+-----------
+
+### References
+
+::: {#refs}
+:::
+

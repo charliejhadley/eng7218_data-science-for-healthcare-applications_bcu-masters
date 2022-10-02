@@ -21,17 +21,58 @@ library(janitor)
 library(haven)
 ```
 
-NEEDS WRITING, HUH?!
+For today's workshop I'm going to ask you to experiment and explore what you can do with the tidyverse and {ggplot2} with a few different challenges.
+
+<br>
+
+I'll be available to help and advise. I might demonstrate some things to the class that individuals ask about.
+
+<br>
+
+Feel free to complete more than one challenge.
+
+-----------
+
+## Challenges
+
+- Explore this dataset: [https://raw.githubusercontent.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/main/static/datasets/hypothesis-dataset/hypothesis-data.txt](https://raw.githubusercontent.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/main/static/datasets/hypothesis-dataset/hypothesis-data.txt)
+
+- Choose a [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) dataset that interests you and make some charts of it.
+
+- Make this visualisation of the Global Disease Burden dataset
+
+```{r}
+#| echo: false
+disease_burden_raw <- read_csv(here::here("static", "datasets", "data-example_global-burden-of-disease", "data-example_global-burden-of-disease.csv"))
+
+disease_burden_raw %>% 
+  filter(str_detect(location_name, "Region"),
+         metric_name == "Percent",
+         cause_name != "All causes",
+         measure_name == "Deaths") %>% 
+  arrange(year,
+          location_name) %>% 
+  select(year,
+         location_name,
+         cause_name,
+         val,
+         everything()) %>% 
+  ggplot() +
+  aes(x = year,
+      y = val,
+      color = cause_name) +
+  geom_line() +
+  facet_wrap(~location_name) +
+  scale_color_viridis_d(labels = function(x) str_wrap(x, width = 20)) +
+  scale_y_continuous(limits = c(0, 1),
+                     labels = scales::label_percent()) +
+  theme_bw(base_size = 14) +
+  theme(strip.text.y = element_text(angle = 0))
+```
 
 -----------
 
 ### References
 
 ::: {#refs}
-:::
-
-::: {.footnote}
-
-Please note that this blogpost includes code for solving these workshop challenges. I'd **strongly** reccommend that you don't look at the post before trying to solve the problems yourself.
-
 :::

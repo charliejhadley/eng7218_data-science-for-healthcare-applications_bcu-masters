@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.0.37">
 
   <meta name="author" content="Charlotte Hadley">
-  <title>Week 5: Surveys</title>
+  <title>Week 4: Data visualisation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -402,7 +402,7 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Week 5: Surveys</h1>
+  <h1 class="title">Week 4: Data visualisation</h1>
   <p class="author"><large>Charlotte Hadley</large></p>
 </section>
 
@@ -846,7 +846,7 @@ A picture is worth a thousand words
 </div>
 <p><br></p>
 <div class="fragment">
-<p><code>{ggplot2}</code> uses <em>tidy evaluation</em> to allow us to use naked column names in our code.</p>
+<p><code>{ggplot2}</code> uses <em>tidy evaluation</em> to allow us to use bare column names in our code.</p>
 </div>
 </div>
 </div>
@@ -857,19 +857,28 @@ A picture is worth a thousand words
 <div class="column" style="width:40%;">
 <h3 id="aesthetics-1"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#c03728;overflow:visible;position:relative;"><path d="M0 464V48C0 21.49 21.49 0 48 0H144C170.5 0 192 21.49 192 48V96H112C103.2 96 96 103.2 96 112C96 120.8 103.2 128 112 128H192V192H112C103.2 192 96 199.2 96 208C96 216.8 103.2 224 112 224H192V288H112C103.2 288 96 295.2 96 304C96 312.8 103.2 320 112 320H192V400C192 408.8 199.2 416 208 416C216.8 416 224 408.8 224 400V320H288V400C288 408.8 295.2 416 304 416C312.8 416 320 408.8 320 400V320H384V400C384 408.8 391.2 416 400 416C408.8 416 416 408.8 416 400V320H464C490.5 320 512 341.5 512 368V464C512 490.5 490.5 512 464 512H48C23.15 512 2.706 493.1 .2477 468.9C.0838 467.3 0 465.7 0 464z"></path></svg> <span style="color:#c03728">Aesthetics</span></h3>
 </div><div class="column" style="width:60%;">
-<p>Aesthetics can be set at the <code>ggplot()</code> level - meaning they’re applied to all geoms in the chart.</p>
-<p><br></p>
-<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-4_d4d76747ee755ce4f2919de4cf77fa80">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>msleep <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">aes</span>(</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">x =</span> sleep_total,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">y =</span> sleep_rem,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">colour =</span> vore</span>
-<span id="cb2-7"><a href="#cb2-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-<p>We might also want to set aesthetics for individual <strong>geom layers</strong>.</p>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Where is aes() placed?</th>
+<th style="text-align: left;">What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Inside <code>ggplot()</code> or on its own</td>
+<td style="text-align: left;">Sets the aesthetics for the entire {ggplot2} object.<br><br> These could be considered the <em>coordinate system aes()</em></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Inside <code>geom_*()</code></td>
+<td style="text-align: left;">Sets aesthetics for a specific geom <em>within</em> the existing coordinate system aes() for the {ggplot2} object.<br><br> These should be considered <em>geom specific aes()</em></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
@@ -880,18 +889,293 @@ A picture is worth a thousand words
 <h3 id="geoms"><svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#919c4c;overflow:visible;position:relative;"><path d="M411.4 175.5C417.4 185.4 417.5 197.7 411.8 207.8C406.2 217.8 395.5 223.1 384 223.1H192C180.5 223.1 169.8 217.8 164.2 207.8C158.5 197.7 158.6 185.4 164.6 175.5L260.6 15.54C266.3 5.897 276.8 0 288 0C299.2 0 309.7 5.898 315.4 15.54L411.4 175.5zM288 312C288 289.9 305.9 272 328 272H472C494.1 272 512 289.9 512 312V456C512 478.1 494.1 496 472 496H328C305.9 496 288 478.1 288 456V312zM0 384C0 313.3 57.31 256 128 256C198.7 256 256 313.3 256 384C256 454.7 198.7 512 128 512C57.31 512 0 454.7 0 384z"></path></svg> <span style="color:#919c4c">Geoms</span></h3>
 </div><div class="column" style="width:60%;">
 <p>Geoms use the aesthetics to add layers to our charts.</p>
-<p><br></p>
-<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-5_b780e91b29bbc13d1690c9a7f751da0a">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>msleep <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">aes</span>(</span>
-<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">x =</span> sleep_total,</span>
-<span id="cb3-5"><a href="#cb3-5"></a>    <span class="at">y =</span> sleep_rem,</span>
-<span id="cb3-6"><a href="#cb3-6"></a>    <span class="at">colour =</span> vore</span>
-<span id="cb3-7"><a href="#cb3-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-4_a90bb1d505510385b1b0413f5b8c4d18">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">aes</span>(</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="at">x =</span> sleep_total,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">y =</span> sleep_rem,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="at">colour =</span> vore</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
-<p>TODO: Finish this!!!</p>
+<p>There are 50+ geoms baked into the <code>{ggplot2}</code> package.</p>
+<div class="small" style="font-size:50%">
+<p><code>geom_abline()</code>, <code>geom_area()</code>, <code>geom_bar()</code>, <code>geom_bin2d()</code>, <code>geom_blank()</code>, <code>geom_boxplot()</code>, <code>geom_col()</code>, <code>geom_contour()</code>, <code>geom_contour_filled()</code>, <code>geom_count()</code>, <code>geom_crossbar()</code>, <code>geom_curve()</code>, <code>geom_density()</code>, <code>geom_density_2d()</code>, <code>geom_density_2d_filled()</code>, <code>geom_density2d()</code>, <code>geom_density2d_filled()</code>, <code>geom_dotplot()</code>, <code>geom_errorbar()</code>, <code>geom_errorbarh()</code>, <code>geom_freqpoly()</code>, <code>geom_function()</code>, <code>geom_hex()</code>, <code>geom_histogram()</code>, <code>geom_hline()</code>, <code>geom_jitter()</code>, <code>geom_label()</code>, <code>geom_line()</code>, <code>geom_linerange()</code>, <code>geom_map()</code>, <code>geom_path()</code>, <code>geom_point()</code>, <code>geom_pointrange()</code>, <code>geom_polygon()</code>, <code>geom_qq()</code>, <code>geom_qq_line()</code>, <code>geom_quantile()</code>, <code>geom_raster()</code>, <code>geom_rect()</code>, <code>geom_ribbon()</code>, <code>geom_rug()</code>, <code>geom_segment()</code>, <code>geom_sf()</code>, <code>geom_sf_label()</code>, <code>geom_sf_text()</code>, <code>geom_smooth()</code>, <code>geom_spoke()</code>, <code>geom_step()</code>, <code>geom_text()</code>, <code>geom_tile()</code>, <code>geom_violin()</code>, <code>geom_vline()</code></p>
+</div>
+<p><br></p>
+<p>As we’ll see later, there are <em>many</em> <code>{ggplot2}</code> extension packages that add <strong>even more</strong> geoms to the mix.</p>
+</div>
+</div>
+</section>
+<section id="some-geoms-are-built-from-others-i" class="slide level2">
+<h2>Some geoms are built from others (I)</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><code>geom_histogram()</code> has clever tricks to make useful histograms</p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-5_f043c33b37df7028cc6c69d8665fe65b">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(quakes, <span class="fu">aes</span>(mag)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-6_c15a49aadcaa647bdc713a2b09e0b67a">
+<div class="cell-output-display">
+<p><img data-src="week-04_slides_data-visualisation_files/figure-revealjs/unnamed-chunk-6-1.png" width="300"></p>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p>It’s built by calling <code>geom_bar()</code></p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-7_cf6fed3c7f474626c72d596b423a5ffb">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(quakes, <span class="fu">aes</span>(mag)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">scale_x_binned</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-8_c4accf2756636f5d33f944da3355cf10">
+<div class="cell-output-display">
+<p><img data-src="week-04_slides_data-visualisation_files/figure-revealjs/unnamed-chunk-8-1.png" width="350"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="some-geoms-are-built-from-others-ii" class="slide level2">
+<h2>Some geoms are built from others (II)</h2>
+<p>But <code>geom_bar()</code> itself is built from <code>geom_rect()</code>.</p>
+<div class="cell columns column-output-location" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-9_ee6c982df4280c195a10e099227765d2">
+<div class="column">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>rect_data <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="sc">~</span>x_min, <span class="sc">~</span>x_max, <span class="sc">~</span>y_min, <span class="sc">~</span>y_max,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="dv">4</span>, <span class="fl">4.48</span>, <span class="dv">0</span>, <span class="dv">60</span>,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fl">4.5</span>, <span class="fl">5.48</span>, <span class="dv">0</span>, <span class="dv">100</span>,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fl">5.5</span>, <span class="fl">5.98</span>, <span class="dv">0</span>, <span class="dv">10</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a>rect_data <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="#cb5-8"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">geom_rect</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> x_min, </span>
+<span id="cb5-10"><a href="#cb5-10"></a>                <span class="at">xmax =</span> x_max, </span>
+<span id="cb5-11"><a href="#cb5-11"></a>                <span class="at">ymin =</span> y_min, </span>
+<span id="cb5-12"><a href="#cb5-12"></a>                <span class="at">ymax =</span> y_max)) <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>    <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="week-04_slides_data-visualisation_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<p><br></p>
+<blockquote>
+<p>There are <strong>8 primitives</strong> from which all other geoms are built:</p>
+</blockquote>
+<p><code>geom_blank()</code>, <code>geom_path()</code>, <code>geom_point()</code>, <code>geom_polygon()</code>, <code>geom_rect()</code>, <code>geom_ribbon()</code>, <code>geom_segment()</code>, <code>geom_text()</code></p>
+</section>
+<section id="all-geoms-have-x-and-y-aesthetics" class="slide level2">
+<h2>All geoms have <code>x</code> and <code>y</code> aesthetics</h2>
+<p>These tell the geom where it needs to be drawn:</p>
+<div class="cell columns column-output-location" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-10_7b254dff93a3f103cb9784faa60c0f4e">
+<div class="column">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> height,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>      <span class="at">y =</span> mass) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="week-04_slides_data-visualisation_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="some-geoms-need-more-than-just-x-and-y" class="slide level2">
+<h2>Some geoms need more than just <code>x</code> and <code>y</code></h2>
+<p>Let’s <code>geom_segment()</code> to visualise some of the eras of the dinosaurs:</p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-11_4c55bf02225a68a116abfd1f758f2faf">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>dinosaurs <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="sc">~</span>period, <span class="sc">~</span>start, <span class="sc">~</span>end,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="st">"Triassic Period"</span>, <span class="sc">-</span><span class="fl">251e6</span>, <span class="sc">-</span><span class="fl">225e6</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="st">"Late Triassic Period"</span>, <span class="sc">-</span><span class="fl">225e6</span>, <span class="sc">-</span><span class="fl">200e6</span>,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="st">"Jurassic Period"</span>, <span class="sc">-</span><span class="fl">200e6</span>, <span class="sc">-</span><span class="fl">150e6</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="st">"Late Jurassic Period"</span>, <span class="sc">-</span><span class="fl">150e6</span>, <span class="sc">-</span><span class="fl">145e6</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To build this chart we need to specify <strong>all</strong> of the following: x, xend, y and yend.</p>
+</section>
+<section class="slide level2">
+
+<h3 id="use-size-to-affect-geom-size">Use <code>size</code> to affect geom size</h3>
+<p>In many charts we want geoms to be <strong>thicker</strong>, <strong>bigger</strong> or <em>just be more prominent</em>.</p>
+<p>Timeline (or Gantt charts) are good examples of this. We want the segments to be thicker to improve the readability of the chart - this comes down to the <code>size</code> aesthetic.</p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/plot-dinosaur-timeline_1114aeba32345a2c37784a5747f691a1">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>dinosaurs <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">aes</span>(<span class="at">x =</span> start, <span class="at">xend =</span> end,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>      <span class="at">y =</span> period, <span class="at">yend =</span> period) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">geom_segment</span>(<span class="at">size =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="week-04_slides_data-visualisation_files/figure-revealjs/plot-dinosaur-timeline-1.png" width="960" class="r-stretch"></section>
+<section id="out-of-order-dinosaurs" class="slide level2">
+<h2>Out of order dinosaurs</h2>
+
+<img data-src="week-04_slides_data-visualisation_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"><p>This is still a <strong>bad chart</strong>.</p>
+<p>The eras are not ordered in geological time, instead they’re ordered (reverse) alphabetically.</p>
+<p>To control the order of things in <code>{ggplot2}</code> charts we must use <strong>factors</strong> - which are picked up by the <strong>scales</strong>.</p>
+</section>
+<section id="some-geoms-are-designed-to-save-time" class="slide level2">
+<h2>Some geoms are designed to save time</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><code>geom_bar()</code> defaults to counting instances of a variable.</p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/plot-geom-bar_a949c47f4e2661c12137858e4163c069">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">count</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(manufacturer))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="week-04_slides_data-visualisation_files/figure-revealjs/plot-geom-bar-1.png" width="960"></p>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><code>geom_col()</code> uses a column to dictate the length of bars.</p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/plot-geom-col_c371a6ea9ac68fdfb00a89f401940fa9">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">count</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> manufacturer, <span class="at">y =</span> n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="week-04_slides_data-visualisation_files/figure-revealjs/plot-geom-col-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="some-geoms-depend-on-stat-functions" class="slide level2">
+<h2>Some geoms depend on <code>stat</code> functions</h2>
+<p>The <code>geom_bar()</code> function has a <code>stat</code> argument with the default value of <code>"count"</code>.</p>
+<p>We can force the geom to behave like <code>geom_col()</code> by changing the stat:</p>
+<div class="cell columns column-output-location" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-13_35d02383d9e8bd799dca3d3411bb0082">
+<div class="column">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">count</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> manufacturer,</span>
+<span id="cb11-5"><a href="#cb11-5"></a>               <span class="at">y =</span> n),</span>
+<span id="cb11-6"><a href="#cb11-6"></a>           <span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="week-04_slides_data-visualisation_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<p><br></p>
+<p>All of the goodness from the <code>stat</code> argument comes from the <code>stat_identity()</code> and <code>stat_count()</code> functions.</p>
+<p>If you’re building a complex chart it might be useful to directly call a <a href="https://ggplot2.tidyverse.org/reference/#section-stats">stat_() function</a>.</p>
+</section>
+<section id="position-things-to-resolve-overlapping-i" class="slide level2">
+<h2>Position things to resolve overlapping (I)</h2>
+<p>Box and whisker diagrams hide a lot of detail</p>
+<div class="cell columns column-output-location" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-14_4bf783ee24fda4b91133545109b2c7c9">
+<div class="column">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>bechdel <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">filter</span>(<span class="fu">complete.cases</span>(.),</span>
+<span id="cb12-3"><a href="#cb12-3"></a>         domgross_2013 <span class="sc">&lt;</span> <span class="fl">0.5e9</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(clean_test, </span>
+<span id="cb12-5"><a href="#cb12-5"></a>             domgross_2013)) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="week-04_slides_data-visualisation_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<p>Let’s add the data points to this chart with <code>geom_point()</code> and look at the position argument.</p>
+</section>
+<section id="position-things-to-resolve-overlapping-ii" class="slide level2">
+<h2>Position things to resolve overlapping (II)</h2>
+<p>The position argument can also be used to create three different types of bar chart:</p>
+<ul>
+<li><p>“stack” creates a stacked bar chart</p></li>
+<li><p>“fill” creates a proportional bar chart</p></li>
+<li><p>“dodge” creates a grouped bar chart</p></li>
+</ul>
+<p>Let’s create all 3 of these for the following dataset:</p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-15_d2965e58a73741967f75d926fa873c29">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>gss_cat <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">count</span>(relig, marital)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 78 × 3
+   relig      marital           n
+   &lt;fct&gt;      &lt;fct&gt;         &lt;int&gt;
+ 1 No answer  No answer         4
+ 2 No answer  Never married    22
+ 3 No answer  Separated         3
+ 4 No answer  Divorced         13
+ 5 No answer  Widowed           7
+ 6 No answer  Married          44
+ 7 Don't know Never married     6
+ 8 Don't know Separated         3
+ 9 Don't know Divorced          1
+10 Don't know Married           5
+# … with 68 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="geom-layers-are-placed-on-top-of-one-another" class="slide level2">
+<h2>Geom layers are placed on top of one another</h2>
+<div class="cell columns column-output-location" data-hash="week-04_slides_data-visualisation_cache/revealjs/plot-mpg-spline-fit_a1964b24b3216c810a5623cd2d339117">
+<div class="column">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(mpg, </span>
+<span id="cb15-2"><a href="#cb15-2"></a>       <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, </span>
+<span id="cb15-5"><a href="#cb15-5"></a>              <span class="at">formula =</span> y <span class="sc">~</span> splines<span class="sc">::</span><span class="fu">bs</span>(x, <span class="dv">3</span>),</span>
+<span id="cb15-6"><a href="#cb15-6"></a>              <span class="at">size =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="week-04_slides_data-visualisation_files/figure-revealjs/plot-mpg-spline-fit-1.png" width="960"></p>
+</div>
+</div>
+</div>
+<p>The <code>geom_smooth()</code> line is hiding data points.</p>
+<p>We could either swap the order of these geoms or change the <code>alpha</code> aesthetic.</p>
+</section>
+<section class="slide level2">
+
+<div class="columns v-center-container">
+<div class="column" style="width:40%;">
+<h3 id="scales"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#fd8f24;overflow:visible;position:relative;"><path d="M554.9 154.5c-17.62-35.25-68.12-35.38-85.87 0c-87 174.3-84.1 165.9-84.1 181.5c0 44.13 57.25 80 128 80s127.1-35.88 127.1-80C639.1 319.9 641.4 327.3 554.9 154.5zM439.1 320l71.96-144l72.17 144H439.1zM256 336c0-16.12 1.375-8.75-85.12-181.5c-17.62-35.25-68.12-35.38-85.87 0c-87 174.3-84.1 165.9-84.1 181.5c0 44.13 57.25 80 127.1 80S256 380.1 256 336zM127.9 176L200.1 320H55.96L127.9 176zM495.1 448h-143.1V153.3C375.5 143 393.1 121.8 398.4 96h113.6c17.67 0 31.1-14.33 31.1-32s-14.33-32-31.1-32h-128.4c-14.62-19.38-37.5-32-63.62-32S270.1 12.62 256.4 32H128C110.3 32 96 46.33 96 64S110.3 96 127.1 96h113.6c5.25 25.75 22.87 47 46.37 57.25V448H144c-26.51 0-48.01 21.49-48.01 48c0 8.836 7.165 16 16 16h416c8.836 0 16-7.164 16-16C544 469.5 522.5 448 495.1 448z"></path></svg> <span style="color:#fd8f24">Scales</span></h3>
+</div><div class="column" style="width:60%;">
+<p>Scales determine the appearance of an aesthetic within the chart, including:</p>
+<ul>
+<li><p>Which colours are used for each value</p></li>
+<li><p>Which order the values appear in the chart and <strong>guides</strong></p></li>
+</ul>
+<p><br></p>
+<div class="cell" data-hash="week-04_slides_data-visualisation_cache/revealjs/unnamed-chunk-16_f017a890062233ea246f9ae5f7bd3a06">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>msleep <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">aes</span>(</span>
+<span id="cb16-4"><a href="#cb16-4"></a>    <span class="at">x =</span> sleep_total,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    <span class="at">y =</span> sleep_rem,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="at">colour =</span> vore</span>
+<span id="cb16-7"><a href="#cb16-7"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>  <span class="fu">scale_colour_manual</span>(</span>
+<span id="cb16-10"><a href="#cb16-10"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"carni"</span> <span class="ot">=</span> <span class="st">"#c03728"</span>, </span>
+<span id="cb16-11"><a href="#cb16-11"></a>               <span class="st">"omni"</span> <span class="ot">=</span> <span class="st">"#fd8f24"</span>, </span>
+<span id="cb16-12"><a href="#cb16-12"></a>               <span class="st">"insecti"</span> <span class="ot">=</span> <span class="st">"#f5c04a"</span>, </span>
+<span id="cb16-13"><a href="#cb16-13"></a>               <span class="st">"herbi"</span> <span class="ot">=</span> <span class="st">"#919c4c"</span>, </span>
+<span id="cb16-14"><a href="#cb16-14"></a>               <span class="st">"NA"</span> <span class="ot">=</span> <span class="st">"#e68c7c"</span>)</span>
+<span id="cb16-15"><a href="#cb16-15"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p><code>{ggplot2}</code> uses <em>tidy evaluation</em> to allow us to use bare column names in our code.</p>
+</div>
 </div>
 </div>
 </section>

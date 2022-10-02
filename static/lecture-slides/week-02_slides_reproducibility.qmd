@@ -16,7 +16,7 @@ freeze: true
 ## Topics for today
 
 ```{r}
-#|  echo: false
+#| echo: false
 library(tidyverse)
 library(gt)
 library(readxl)
