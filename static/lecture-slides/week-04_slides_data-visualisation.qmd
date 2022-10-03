@@ -11,6 +11,7 @@ csl: "../nature.csl"
 cache: true
 echo: true
 freeze: true
+self-contained: true
 ---
 
 ## Topics for today

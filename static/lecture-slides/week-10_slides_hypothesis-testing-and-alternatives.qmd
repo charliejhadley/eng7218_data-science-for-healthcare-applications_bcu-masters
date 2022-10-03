@@ -9,6 +9,7 @@ format:
 bibliography: "../bibtex-file.bib"
 csl: "../nature.csl"
 cache: true
+self-contained: true
 ---
 
 ## Topics for today

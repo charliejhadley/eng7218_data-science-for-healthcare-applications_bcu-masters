@@ -11,6 +11,7 @@ csl: "../nature.csl"
 cache: true
 echo: true
 freeze: true
+self-contained: true
 ---
 
 # Ethics in algorithms... what does it mean? {background-color="#23241F" .center .center-x}
