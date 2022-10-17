@@ -17,3 +17,7 @@ fontawesome
 lubridate
 patchwork
 fivethirtyeight
+scales
+rnaturalearthdata
+sf
+gapminder

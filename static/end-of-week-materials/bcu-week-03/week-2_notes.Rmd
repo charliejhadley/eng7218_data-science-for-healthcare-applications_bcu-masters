@@ -1,0 +1,222 @@
+---
+title: "Untitled"
+output: html_document
+date: "2022-10-03"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(naniar)
+library(gapminder)
+```
+
+## Notes about p-hacking
+
+## Introducing the tidyverse
+
+We always load our package at the top of the Rmd document.
+
+### msleep
+
+```{r}
+msleep
+```
+
+Let's look at a data.frame
+
+```{r}
+class(quakes)
+```
+
+Let's use select to get some columns from msleep
+
+```{r}
+select(msleep, name, sleep_total)
+```
+
+We can use "tidy selection" functions to help us select columns
+
+```{r}
+select(msleep, name, starts_with("sleep"))
+```
+
+If we want to **pull** out a column as a vector we use pull()
+
+```{r}
+pull(msleep, name)
+```
+
+#### count()
+
+```{r}
+count(msleep, vore)
+```
+
+Let's write this with the pipe:
+
+```{r}
+msleep %>% 
+  count(vore)
+```
+
+A simpler pipe
+
+```{r}
+"cats" %>% 
+  rep(5)
+```
+
+... without the pipe
+
+```{r}
+rep("cats", 5)
+```
+
+Can you tell me what this will make (without running it!)
+
+```{r}
+"cats" %>% 
+  paste("are great")
+```
+
+... but sometimes we see more complicated pipes with a .
+
+```{r}
+"cats" %>% 
+  paste(., "are great but one can have too many", .)
+```
+
+... count() can do hierarchical counting!
+
+```{r}
+msleep %>% 
+  count(conservation, vore, sort = TRUE)
+```
+
+#### filter()
+
+```{r}
+msleep %>% 
+  filter(vore == "carni") %>% 
+  select(name)
+```
+
+We negate a condition with a !
+
+```{r}
+msleep %>% 
+  filter(vore != "carni") %>% 
+  select(name)
+```
+
+How about missing values? In R they are called NA. We CANNOT use a condition to filter them, we need to use is.na()
+
+```{r}
+msleep %>% 
+  filter(is.na(sleep_rem))
+```
+
+REMEMBER TO LOAD {naniar} AT THE TOP OF THE RMD!
+
+```{r}
+msleep %>% 
+  gg_miss_upset()
+```
+
+#### ggplot2!
+
+Let's start our chart
+
+```{r}
+msleep %>% 
+  ggplot() + 
+  aes(x = sleep_rem,
+      y = sleep_total) +
+  geom_point()
+```
+
+Copy the chart above so we build it up slowly!!
+
+```{r}
+msleep %>% 
+  ggplot() + 
+  aes(x = sleep_rem,
+      y = sleep_total,
+      colour = vore) +
+  geom_point() + 
+  labs(x = "Hours in REM",
+       y = "Total hours slept",
+       title = "REM cycles in mammals")
+```
+
+### msleep mean sleep
+
+Calculate mean sleep time per diet. Need group_by()
+
+```{r}
+mean_sleep_by_vore <- msleep %>%
+  group_by(vore) %>% 
+  summarise(mean_sleep_total = mean(sleep_total)) %>% 
+  ungroup()
+```
+
+```{r}
+mean_sleep_by_vore %>% 
+  ggplot() + 
+  aes(y = vore,
+      x = mean_sleep_total) +
+  geom_col()
+```
+
+### mutating multiple columns at once
+
+```{r}
+msleep %>% 
+  mutate(across(starts_with("sleep"),
+                ~ . / 24))
+```
+
+# Gapminder!
+
+Remember - load packages AT THE TOP.
+
+```{r}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  ggplot() +
+  aes(x = lifeExp,
+      y = gdpPercap,
+      colour = continent) +
+  geom_point()
+```
+
+# Global Burden of Disease
+
+```{r}
+gbd_data <- read_csv("data/global-burden-of-disease-data.csv")
+```
+
+```{r}
+wb_death_causes_2019 <- gbd_data %>% 
+  filter(str_starts(location_name, "World Bank")) %>% 
+  filter(year == max(year)) %>% 
+  filter(metric_name == "Percent") %>% 
+  filter(cause_name != "All causes") %>% 
+  select(location_name, cause_name, val)
+```
+
+```{r}
+wb_death_causes_2019 %>% 
+  ggplot() +
+  aes(x = val,
+      y = location_name,
+      fill = cause_name) +
+  geom_col() +
+  theme(legend.position = "top")
+```
+
+
+

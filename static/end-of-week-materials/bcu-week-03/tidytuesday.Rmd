@@ -1,0 +1,114 @@
+---
+title: "Untitled"
+output: html_document
+date: "2022-10-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(janitor)
+```
+
+# Eurovision
+
+```{r}
+eurovision <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-05-17/eurovision.csv')
+```
+
+
+```{r}
+eurovision %>% 
+  select(artist_country, year, rank) %>% 
+  ggplot() +
+  aes(x = year,
+      y = rank,
+      colour = artist_country) +
+  geom_point() + 
+  geom_line() +
+  theme(legend.position = "top")
+```
+
+
+
+
+```{r}
+eurovision %>% 
+  select(artist_country, year, rank) %>% 
+  filter(artist_country == "Turkey") %>% 
+  ggplot() +
+  aes(x = year,
+      y = rank,
+      colour = artist_country) +
+  geom_point() + 
+  geom_line() +
+  theme(legend.position = "top")
+```
+
+## Faceting charts
+
+Small multiples are a really good dataviz trick.
+
+```{r}
+eurovision %>% 
+  select(artist_country, year, rank) %>% 
+  filter(artist_country %in% c("Turkey" ,"United Kingdom", "Portugal")) %>% 
+  ggplot() +
+  aes(x = year,
+      y = rank,
+      colour = artist_country) +
+  geom_point() + 
+  geom_line() +
+  scale_colour_manual(values = c("Portugal" = "cornflowerblue",
+                                 "United Kingdom" = "brown",
+                                 "Turkey" = "gold")) +
+  scale_y_reverse() +
+  facet_grid(artist_country ~ .) +
+  theme(legend.position = "top") 
+```
+
+```{r}
+eurovision %>% 
+  select(contains("rank"))
+```
+
+## Who wins most?
+
+```{r}
+eurovision %>% 
+  filter(rank == 1,
+         year == 2022) %>% 
+  select(artist_country, rank, rank_ordinal, total_points)
+```
+
+```{r}
+eurovision %>% 
+  group_by(year) %>% 
+  filter(total_points == min(total_points)) %>% 
+  ungroup() %>% 
+  select(year, artist_country, rank, rank_ordinal, total_points) %>% 
+  count(artist_country, sort = TRUE)
+```
+
+
+
+
+# Indoor Pollution
+
+```{r}
+indoor_pollution <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-04-12/indoor_pollution.csv') %>% 
+  clean_names()
+```
+
+```{r}
+colnames(indoor_pollution)
+```
+
+```{r}
+indoor_pollution %>% 
+  select(deaths_cause_all_causes_risk_household_air_pollution_from_solid_fuels_sex_both_age_age_standardized_percent)
+```
+
+
+
+

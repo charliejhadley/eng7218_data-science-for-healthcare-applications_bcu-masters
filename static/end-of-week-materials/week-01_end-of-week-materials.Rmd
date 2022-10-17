@@ -4,11 +4,13 @@ output: html_document
 view: 2
 ---
 
+Due to the Queen's funeral, the material for "week 1" was delivered on Monday 26th September.
+
 In this week's materials we made our first RMarkdown document.
 
 As always you can find the materials I wrote during the course in this folder:
 
-[https://github.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/tree/main/static/end-of-week-materials/bcu-week-1](https://github.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/tree/main/static/end-of-week-materials/bcu-week-1)
+[https://github.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/tree/main/static/end-of-week-materials/bcu-week-01](https://github.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/tree/main/static/end-of-week-materials/bcu-week-01)
 
 The folder also contains the Etherpad notes from the session.
 

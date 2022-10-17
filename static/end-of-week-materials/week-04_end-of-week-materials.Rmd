@@ -1,0 +1,14 @@
+---
+title: "Week 4: End of week materials"
+output: html_document
+view: 2
+---
+
+Due to the Queen's funeral, the material for "week 3" was delivered on Monday 17th October.
+
+In this week we talked about the theory of data visualisations and the mechanics of using {ggplot2}.
+
+As always you can find the materials I wrote during the course in this folder:
+
+[https://github.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/tree/main/static/end-of-week-materials/bcu-week-04](https://github.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/tree/main/static/end-of-week-materials/bcu-week-04)
+

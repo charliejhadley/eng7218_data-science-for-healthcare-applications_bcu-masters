@@ -1,0 +1,1 @@
+download.file("https://raw.githubusercontent.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/main/static/datasets/data-example_global-burden-of-disease/data-example_global-burden-of-disease.csv",               destfile = "data/global-burden-of-disease-data.csv")

@@ -1,0 +1,190 @@
+---
+title: "Untitled"
+output: html_document
+date: "2022-10-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(fivethirtyeight)
+```
+
+# Bechdel
+
+```{r}
+bechdel %>% 
+  count(test)
+```
+
+```{r}
+bechdel %>% 
+  select(title, contains("test"), binary)
+```
+
+Profitability scatter plot:
+
+```{r}
+bechdel %>% 
+  drop_na(domgross_2013) %>% 
+  ggplot()
+```
+
+```{r}
+ggplot(bechdel) +
+  aes(x = budget_2013,
+      y = domgross_2013) +
+  geom_point()
+```
+
+```{r}
+bechdel %>% 
+  drop_na(domgross_2013) %>% 
+  ggplot() +
+  aes(x = budget_2013,
+      y = domgross_2013,
+      colour = binary) +
+  geom_point() + 
+  scale_x_continuous(labels = scales::label_dollar(scale = 1E-6,
+                                                   suffix = " Million")) +
+  scale_colour_brewer(palette = "Dark2")
+```
+
+Let's use our own colours!!!
+
+```{r}
+bechdel %>% 
+  drop_na(domgross_2013) %>% 
+  ggplot() +
+  aes(x = budget_2013,
+      y = domgross_2013,
+      colour = binary) +
+  geom_point() + 
+  scale_x_continuous(labels = scales::label_dollar(scale = 1E-6,
+                                                   suffix = " Million")) +
+  scale_colour_manual(values = c("PASS" = "gold",
+                                 "FAIL" = "cornflowerblue"))
+```
+
+## Bechdel distributions
+
+```{r}
+bechdel %>% 
+  ggplot() +
+  aes(x = budget_2013) +
+  geom_histogram()
+```
+
+
+
+```{r}
+bechdel %>% 
+  ggplot() +
+  aes(x = budget_2013) +
+  geom_boxplot()
+```
+
+Violins are better!
+
+```{r}
+bechdel %>% 
+  ggplot() +
+  aes(x = budget_2013) +
+  geom_violin(aes(y = "All movies"))
+```
+
+```{r}
+bechdel %>% 
+  ggplot() +
+  aes(x = budget_2013) +
+  geom_violin(aes(y = binary))
+```
+
+## Segment chart
+
+```{r}
+dinosaurs <- tribble(
+  ~period, ~start, ~end,  
+  "Triassic Period", -251e6, -225e6,  
+  "Late Triassic Period", -225e6, -200e6,  
+  "Jurassic Period", -200e6, -150e6,  
+  "Late Jurassic Period", -150e6, -145e6)
+dinosaurs
+```
+
+```{r}
+dinosaurs %>% 
+  ggplot() +
+  aes(y = period,
+      yend = period,
+      x = start,
+      xend = end) +
+  geom_segment(size = 5,
+               colour = "darkolivegreen")
+```
+
+# msleep
+
+Change "Some meat" to red and "No meat" to green
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = ifelse(vore == "herbi", "No Meat", "Some meat"))) +
+  scale_fill_manual(values = c("Some meat" = "red", "No Meat" = "darkolivegreen"),
+                    name = "")
+```
+
+```{r}
+gss_cat %>% 
+  head() %>% 
+  pull(rincome)
+```
+
+```{r}
+gss_cat %>% 
+  count(rincome) %>% 
+  ggplot() +
+  aes(x = n,
+      y = rincome) +
+  geom_col()
+```
+
+### count order
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_reorder(vore, n),
+         vore = fct_explicit_na(vore, "Unknown diet")) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = ifelse(vore == "herbi", "No Meat", "Some meat"))) +
+  scale_fill_manual(values = c("Some meat" = "red", "No Meat" = "darkolivegreen"),
+                    name = "")
+```
+
+### canonical order
+
+```{r}
+order_vore <- c("carni", "omni", "insecti", "herbi")
+
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_relevel(vore, order_vore),
+         vore = fct_explicit_na(vore, "Unknown diet"),
+         vore = fct_relevel(vore, "Unknown diet", after = 0)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = ifelse(vore == "herbi", "No Meat", "Some meat"))) +
+  scale_fill_manual(values = c("Some meat" = "red", "No Meat" = "darkolivegreen"),
+                    name = "")
+```
+
+
+

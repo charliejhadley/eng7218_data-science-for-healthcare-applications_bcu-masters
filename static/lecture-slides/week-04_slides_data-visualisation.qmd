@@ -25,6 +25,11 @@ library(here)
 library(janitor)
 library(ggpomological)
 library(fontawesome)
+library(scales)
+library(rnaturalearthdata)
+library(sf)
+library(gapminder)
+gbd_data <- read_csv(here::here("static", "datasets", "data-example_global-burden-of-disease", "data-example_global-burden-of-disease.csv"))
 colours_ggplot2_components <- as.list(set_names(ggpomological:::pomological_palette[1:5], c("aesthetics", "geoms", "scales", "guides", "themes")))
 ```
 
@@ -616,6 +621,17 @@ Images from Robert Kosara[@kosara_more_2022]
 
 -----------
 
+## `r emo::ji("memo")` Task: Setup a new project {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 3</p>
+
+1. Create a new project called something like `week-4_dataviz.Rproj`
+
+1. Add a new RMarkdown document called `ggplot2-notes.Rmd`
+
+> We're going to do some structured and unstructured code during today. During the workshop I'll be asking to you to create your own charts.
+
+-----------
+
 ## ggplot2: A Grammar of Graphics
 
 `{ggplot2}` is an incredibly powerful and flexible tool for building static dataviz.
@@ -972,7 +988,7 @@ starwars %>%
 
 -----------
 
-## Some geoms need more than just `x` and `y`
+### Some geoms need more than just `x` and `y`
 
 Let's `geom_segment()` to visualise some of the eras of the dinosaurs:
 
@@ -1151,11 +1167,9 @@ We could either swap the order of these geoms or change the `alpha` aesthetic.
 
 Scales determine the appearance of an aesthetic within the chart, including:
 
-- Which colours are used for each value
+- Axes labels and breaks
 
-- Which order the values appear in the chart and **guides**
-
-<br>
+- Colours used for `colour` and `fill` aesthetics
 
 ```{r}
 #| eval: false
@@ -1178,9 +1192,359 @@ msleep %>%
 
 <br>
 
+Scales also determine the **order** in which elements are shown in a chart.
+
+To change the order of discrete/categorical columns we need to use **factors**.
+
+:::
+
+::::
+
+-----------
+
+## Scales and {scales}
+
+{ggplot2} uses the {scales} package under the hood to build all of the scales that we see - including continuous and discrete scales.
+
+<br>
+
+The `{scales}` package also contains many utility functions that are useful for us to format our axes and other scales.
+
+<br>
+
+We can either load the `{scales}` package itself or call functions specifically with `scales::label_percent()`
+
+-----------
+
+## {scales} and deprecation (I)
+
+Until recently the way we'd use `{scales}` would be as follows
+
+:::: {.columns}
+
+::: {.column width='48%'}
+```{r, include=TRUE}
+percent(c(0.3, 0.5, 0.6))
+```
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+```{r}
+msleep %>% 
+  mutate(sleep_perc = sleep_total / 24,
+         sleep_rem_perc = sleep_rem / 24) %>% 
+  ggplot() +
+  aes(x = sleep_perc,
+      y = sleep_rem_perc) +
+  geom_point() +
+  scale_x_continuous(label = percent_format()) +
+  theme_gray(base_size = 24)
+```
+
+:::
+
+::::
+
+There was a function called `percent(x)` for formatting a vector of values `x` and `percent_format()` for modifying the appearance of percentages in a {ggplot2} chart.
+
+-----------
+
+## {scales} and deprecation (II)
+
+These functions have now been deprecated. This means there are new alternatives to these functions.
+
+<br>
+
+Deprecation is a fact of life in software development. But the details of how things are deprecated are variable.
+
+<br>
+
+Sometimes things are deprecated with the intention of removing them in the future. Other times, the deprecated functions will continue to exist far into the future.
+
+<br>
+
+It seems like the intention is for these functions to continue to work into the future. But they might be removed in several years time.
+
+> Let's use the new approach for formatting scales so that you can read modern documentation and so you're not learning deprecated functions.
+
+-----------
+
+## {scales} and deprecation (III)
+
+We now use `label_percent()` for both types of operation.
+
+:::: {.columns}
+
+::: {.column width='48%'}
+```{r, include=TRUE}
+label_percent()(c(0.3, 0.5, 0.6))
+```
+
 ::: {.fragment}
 
-`{ggplot2}` uses *tidy evaluation* to allow us to use bare column names in our code.
+> This is known as a function factory.
+>
+> Function factories are cool. But I wish you didn't have to learn this syntax.
+
+:::
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+```{r}
+msleep %>% 
+  mutate(sleep_perc = sleep_total / 24,
+         sleep_rem_perc = sleep_rem / 24) %>% 
+  ggplot() +
+  aes(x = sleep_perc,
+      y = sleep_rem_perc) +
+  geom_point() +
+  scale_x_continuous(label = label_percent()) +
+  theme_gray(base_size = 24)
+```
+
+:::
+
+::::
+
+-----------
+
+## {scales} and colours (I)
+
+There are many built-in colour palettes in {scales} - let me introduce two families of palettes.
+
+:::: {.columns}
+
+::: {.column width='48%'}
+The website [colorbrewer2.org](https://colorbrewer2.org) contains several palettes differentiated into sequential, diverging and qualitative.
+
+```{r}
+msleep %>% 
+  count(conservation) %>% 
+  ggplot() +
+  aes(x = n,
+      y = conservation,
+      fill = conservation) +
+  geom_col() +
+  scale_fill_brewer(palette = "Set2")
+```
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+:::
+
+::::
+
+-----------
+
+## {scales} and colours (II)
+
+There are many built-in colour palettes in {scales} - let me introduce two families of palettes.
+
+:::: {.columns}
+
+::: {.column width='48%'}
+
+```{r, echo=FALSE}
+msleep %>% 
+  count(conservation) %>% 
+  ggplot() +
+  aes(x = n,
+      y = conservation,
+      fill = conservation) +
+  geom_col() +
+  scale_fill_brewer(palette = "Set2")
+```
+
+There are some pretty good palettes for discrete/categorical variables in this family of palettes.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+:::
+
+::::
+
+-----------
+
+## {scales} and colours (III)
+
+There are many built-in colour palettes in {scales} - let me introduce two families of palettes.
+
+:::: {.columns}
+
+::: {.column width='48%' .de-emphasis}
+
+```{r, echo=FALSE}
+msleep %>% 
+  count(conservation) %>% 
+  ggplot() +
+  aes(x = n,
+      y = conservation,
+      fill = conservation) +
+  geom_col() +
+  scale_fill_brewer(palette = "Set2")
+```
+
+There are some pretty good palettes for discrete/categorical variables in this family of palettes.
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+
+But for continuous variables I strongly recommend using the [viridis family of palettes](https://ggplot2.tidyverse.org/reference/scale_viridis.html).
+
+These are designed to be both perceptually uniform and to work for folks with colour blindness.
+
+```{r}
+countries110 %>% 
+  st_as_sf() %>% 
+  left_join(filter(gapminder, year == 2007),
+            by = c("name" = "country")) %>% 
+  ggplot() +
+  geom_sf(aes(fill = lifeExp)) +
+  scale_fill_viridis_c()
+
+```
+
+
+:::
+
+::::
+
+-----------
+
+## Setting custom colours (I)
+
+One of the first frustrations people find with {ggplot2} is setting our own custom colours, eg in this chart:
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore,
+      fill = ifelse(vore == "herbi", "No meat", "Some meat")) +
+  geom_col()
+```
+
+-----------
+
+## Setting custom colours (II)
+
+We need to use `scale_fill_manual()`
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore,
+      fill = ifelse(vore == "herbi", "No meat", "Some meat")) +
+  geom_col() +
+  scale_fill_manual(values = c("Some meat" = "red",
+                               "No meat" = "darkgreen"))
+```
+
+We'll come back to this chart in the section on guides().
+
+-----------
+
+## {scales} and factors (I)
+
+Factors are R's categorical data type. They allow us to create a variable with fixed values (`levels`) and to set the *order* of those levels.
+
+Let's look at a pre-existing dataset with factors:
+
+```{r}
+gss_cat %>% 
+  head() %>% 
+  pull(rincome)
+```
+
+<br>
+
+```{r}
+#| output-location: column-fragment
+gss_cat %>% 
+  count(rincome) %>% 
+  ggplot() +
+  aes(x = n,
+      y = rincome) +
+  geom_col() +
+  theme_gray(base_size = 24)
+```
+
+-----------
+
+## {scales} and factors (II)
+
+The base R tools for creating and manipulating factors are messy and frustrating to use.
+
+We're going to use the {forcats} package which is loaded when we run `library(tidyverse)`.
+
+Almost all of the functions begin with `fct_*()` to let you know we're dealing with factors.
+
+-----------
+
+## factors and msleep
+
+Let's think of the different ways we could order this dataset:
+
+```{r}
+msleep %>% 
+  count(vore)
+```
+
+:::: {.columns}
+
+::: {.column width='48%'}
+**Count order**
+
+::: {.fragment fragment-index=1 .fade-in-then-semi-out}
+
+In this ordering we will arrange the `vore` column according to values in the `n` column.
+
+<br>
+
+This is usually what we want in count bar charts.
+
+:::
+
+:::
+
+::: {.column width='4%'}
+:::
+
+::: {.column width='48%'}
+**Canonical order**
+
+::: {.fragment fragment-index=2}
+
+In this ordering we'll arrange the `vore` column from the diet with the most meat to the least meat.
+
+<br>
+
+This is usually what we want in visualising survey datasets, 
+
+- eg Strong disagree, Disagree, Neither agree or disagree, Agree, Strong Agree
 
 :::
 
@@ -1190,7 +1554,375 @@ msleep %>%
 
 -----------
 
-## DRAGONS:
+## msleep factor: count order (I)
+
+We use `fct_reorder()` to order a factor by another column.
+
+```{r}
+#| output-location: column
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_reorder(vore, n)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col() +
+  theme_gray(base_size = 24)
+```
+
+But what about the `NA` values? What should we do?
+
+-----------
+
+## msleep factor: count order (II)
+
+We can replace NA values nicely with `fct_explicit_na()`
+
+```{r}
+#| output-location: column
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_reorder(vore, n),
+         vore = fct_explicit_na(vore, "Unknown diet")) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col() +
+  theme_gray(base_size = 24)
+```
+
+> Let's come back to moving the position of the NA level.
+
+-----------
+
+## msleep factor: canonical order (I)
+
+To set our own canonical order we use `fct_relevel()` and provide a vector with our preferred order.
+
+```{r}
+#| output-location: column
+order_vore <- c("carni", "omni", "insecti", "herbi")
+
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_relevel(vore, order_vore),
+         vore = fct_rev(vore)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col() +
+  theme_gray(base_size = 24)
+```
+
+-----------
+
+## msleep factor: canonical order (II)
+
+We can also use `fct_relevel()` to modify the position of a specific 
+
+```{r}
+#| output-location: column
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_relevel(vore, order_vore),
+         vore = fct_rev(vore),
+         vore = fct_explicit_na(vore, "Unknown diet"),
+         vore = fct_relevel(vore, "Unknown diet", after = 0)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col() +
+  theme_gray(base_size = 24)
+```
+
+
+-----------
+
+### `r emo::ji("memo")` Task: Global Burden of Disease factors {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 1 OF 3</p>
+
+> These are the same steps you've repeated before
+
+1. Add a sub-folder to your project called `data`
+
+1. Inside of the `data` folder add a script called `obtain-data.R`
+
+1. Add this code
+
+```{r, eval=FALSE}
+download.file("https://raw.githubusercontent.com/charliejhadley/eng7218_data-science-for-healthcare-applications_bcu-masters/main/static/datasets/data-example_global-burden-of-disease/data-example_global-burden-of-disease.csv",
+              destfile = "data/global-burden-of-disease-data.csv")
+```
+
+5\. Run the code
+
+-----------
+
+### `r emo::ji("memo")` Task: Global Burden of Disease factors {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 2 OF 3</p>
+
+1\. Add a new heading for the GBD Dataset to your .Rmd
+
+2\. Filter the dataset as follows:
+
+- Most recent year
+  
+- `location_name` starts with "World Bank"
+  
+- `metric_name` is "Number"
+  
+- `cause_name` is "Injuries"
+
+3\. Select only these columns
+
+  - `location_name`, `cause_name`, `val`
+
+-----------
+
+### `r emo::ji("memo")` Task: Global Burden of Disease factors {background-color="#def3f7"}
+<p class='task-slide-count'>SLIDE 2 OF 3</p>
+
+```{r}
+#| include: false
+gdb_injuries <- gbd_data %>% 
+  filter(str_starts(location_name, "World Bank"),
+         year == max(year),
+         measure_name == "Deaths",
+         metric_name == "Number",
+         cause_name == "Injuries") %>% 
+  select(location_name, cause_name, val)
+```
+
+Create two versions of this chart:
+
+- Bars are ordered by their size
+
+- Bars are ordered from "World Bank High Income" to "World Bank Low Income"
+
+```{r}
+#| output-location: column
+gdb_injuries %>% 
+  ggplot() +
+  aes(x = val,
+      y = location_name) +
+  geom_col() +
+  theme_gray(base_size = 24)
+```
+
+-----------
+
+:::: {.columns .v-center-container}
+
+::: {.column width="40%"}
+
+### `r fontawesome::fa(name = "tags", fill = colours_ggplot2_components$guides)` <span style='color:`r colours_ggplot2_components$guides`'>Guides</span>
+
+:::
+
+::: {.column width="60%"}
+
+We (kind of) use "guides" and "legends" interchangeably in `{ggplot2}`.
+
+```{r}
+#| eval: false
+ggplot() +
+  geom_line(show.legend = FALSE) +
+  guides(alpha = guide_legend()) +
+  theme(legend.position = "bottom")
+```
+
+Guides can **only** be created through a corresponding aesthetic and scale.
+
+```{r}
+#| echo: false
+msleep %>% 
+  count(vore) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore,
+      fill = ifelse(vore == "herbi", "No meat", "Some meat")) +
+  geom_col() +
+  scale_fill_manual(values = c("Some meat" = "red",
+                               "No meat" = "darkgreen"),
+                    name = "")
+```
+
+
+:::
+
+::::
+
+-----------
+
+## "Manual legends" (I)
+
+Sometimes we want to add additional legend items - usually for NA values, and particularly for maps.
+
+Let's continue with this chart from before:
+
+```{r}
+#| output-location: column
+msleep %>% 
+  count(vore) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore,
+      fill = ifelse(vore == "herbi", 
+                    "No meat", 
+                    "Some meat")) +
+  geom_col() +
+  scale_fill_manual(values = c("Some meat" = "red",
+                               "No meat" = "darkgreen"),
+                    name = "")
+```
+
+-----------
+
+## "Manual legends" (II)
+
+We need to choose an aesthetic that works for `geom_col()` but we're not using elsewhere in the chart.
+
+This will change depending on your chart. In this instance we can use `size`
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore,
+      fill = ifelse(vore == "herbi", "No meat", "Some meat")) +
+  geom_col(aes(size = "Unknown diet")) +
+  scale_fill_manual(values = c("Some meat" = "red",
+                               "No meat" = "darkgreen"),
+                    name = "")
+```
+
+-----------
+
+## "Manual legends" (III)
+
+We now set the `na.value` colour for the original `scale_fill_manual()` scale
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore,
+      fill = ifelse(vore == "herbi", "No meat", "Some meat")) +
+  geom_col(aes(size = "Unknown diet")) +
+  scale_fill_manual(values = c("Some meat" = "red",
+                               "No meat" = "darkgreen"),
+                    name = "",
+                    na.value = "blue")
+```
+
+-----------
+
+## "Manual legends" (IV)
+
+Next we use the `guides()` function to override the values for the `size` legend
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore,
+      fill = ifelse(vore == "herbi", "No meat", "Some meat")) +
+  geom_col(aes(size = "Unknown diet")) +
+  scale_fill_manual(values = c("Some meat" = "red",
+                               "No meat" = "darkgreen"),
+                    name = "",
+                    na.value = "blue") +
+  guides(size = guide_legend(title = "",
+                             override.aes = list(fill = "blue")))
+```
+
+-----------
+
+## More about guides()
+
+If we want to modify the size of legend items we have two choices:
+
+- `guides(fill = guide_colourbar(barwidth = 0.5, barheight = 10))`
+
+- ... or to set the sizes in the `theme()`.
+
+-----------
+
+:::: {.columns .v-center-container}
+
+::: {.column width="40%"}
+
+### `r fontawesome::fa(name = "paint-roller", fill = colours_ggplot2_components$theme)` <span style='color:`r colours_ggplot2_components$theme`'>Theme</span>
+
+:::
+
+::: {.column width="60%"}
+
+There are over 92 arguments to the theme() function for controlling chart appearance.
+
+<br>
+
+Remembering them all is challenging - I usually google them! Or use guides like this one:
+
+<img src='images/week-4/ggplot2-theme-elements.png'/>
+<span class="small">Source: https://bookdown.org/alapo/learnr/data-visualisation.html</span>
+
+:::
+
+::::
+
+-----------
+
+## What themes are there? (I)
+
+{ggplot2} has several built-in themes. They have several arguments for quickly customising them.
+
+I've been using the default `theme_gray()` to change text size in charts.
+
+```{r}
+msleep %>% 
+  mutate(sleep_perc = sleep_total / 24,
+         sleep_rem_perc = sleep_rem / 24) %>% 
+  ggplot() +
+  aes(x = sleep_perc,
+      y = sleep_rem_perc) +
+  geom_point() +
+  scale_x_continuous(label = label_percent()) +
+  theme_gray(base_size = 24)
+```
+
+-----------
+
+## What themes are there? (II)
+
+The {ggthemes} package contains lots of really useful - and beautiful - themes.
+
+It's recommended that you choose a theme close to what to want and then customise it.
+
+```{r}
+#| eval: false
+theme_fivethirtyeight() +
+  theme(panel.grid.major = element_line(colour = "red"))
+```
+
+-----------
+
+## element_*() functions in legends
+
+Most of the legend arguments expect one of these functions:
+
+- element_line()
+
+- element_text()
+
+- element_rect()
+
+Or `element_black()` if you want to remove a theme element.
+
+::: {.notes}
 
 - Some rules to follow:
 
@@ -1199,9 +1931,6 @@ msleep %>%
   - If using bubble charts vary by area instead of radius
   
   - Colour schemes matter A LOT
-
-
-# XXX DRAGONS XXX
 
 - Dataviz are demonstrably awesome
 
@@ -1231,10 +1960,7 @@ msleep %>%
     - See doi.org/10.1017/S1537592707072209 for excellent examples
   - Using sparklines can really help
 
-## Workshop
-
-Factors.
-
+:::
 
 -----------
 
