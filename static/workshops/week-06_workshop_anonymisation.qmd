@@ -15,7 +15,7 @@ self-contained: true
 ## Topics for today
 
 ```{r}
-library(tidyverse)
+library(tidyverse) 
 library(gt)
 library(readxl)
 library(janitor)
