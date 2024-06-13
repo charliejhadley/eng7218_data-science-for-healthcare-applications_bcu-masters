@@ -1,0 +1,207 @@
+---
+title: "Untitled"
+output: bookdown::html_document2
+date: "2022-11-28"
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(gt)
+library(ggtext)
+```
+
+Let's reference that paper @ahn_flavor_2011-1 AND ANOTHER GOOD PAPER @viet_data-driven_2020
+
+# Another chart
+
+I need to
+
+- change colours!
+- use fct_relevel()
+- position of NA
+
+## Change all colours
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_reorder(vore, n)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(fill = "forestgreen")
+```
+
+If you want a "darker" version of a colour we can use the {colorspace} package
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_reorder(vore, n)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(fill = colorspace::darken("forestgreen"))
+```
+
+## Change colours manually
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_reorder(vore, n)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = vore),
+           show.legend = FALSE) +
+  scale_fill_manual(values = c("herbi" = "forestgreen",
+                               "carni" = "red"))
+```
+
+## using a custom order with fct_relevel
+
+```{r}
+order_vore_by_meat <- c("carni", "omni", "insecti", "herbi")
+
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_relevel(vore, order_vore_by_meat),
+         vore = fct_rev(vore)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = vore),
+           show.legend = FALSE)
+```
+
+## Moving around NA
+
+We need to stop and think.
+
+To put NA into an ordered position, easiest way is with fct_explicit_na()
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_explicit_na(vore, "Unknown diet"),
+         vore = fct_reorder(vore, n)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = vore),
+           show.legend = FALSE)
+```
+
+Moving NA to a specific position
+
+```{r}
+order_vore_by_meat <- c("carni", "omni", "insecti", "herbi")
+
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_relevel(vore, order_vore_by_meat),
+         vore = fct_rev(vore),
+         vore = fct_explicit_na(vore, "Unknown diet"),
+         vore = fct_relevel(vore, "Unknown diet", after = 0)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = vore),
+           show.legend = FALSE)
+```
+
+# Tables
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  arrange(desc(n)) %>% 
+  gt() %>% 
+  cols_label(vore = "Diet",
+             n = "Count")
+```
+
+## ggtext!
+
+1. Load the {ggtext} package!
+2. We need to make our title, let's write it outside of a code chunk first
+
+Most animals are <span>herbivores</span>
+
+Most animals are <span style='color:#228B22'>herbivores</span>
+
+3. Tell the theme you're using HTML with element_markdown()
+
+```{r}
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_reorder(vore, n)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = vore),
+           show.legend = FALSE) +
+  scale_fill_manual(values = c("herbi" = "forestgreen",
+                               "carni" = "red",
+                               "omni" = "yellow",
+                               "insecti" = "blue")) +
+  labs(title = "Most animals are <span style='color:#228B22'>herbivores</span>",
+       caption = "By Charlotte @charliejhadley") +
+  theme(plot.title = element_markdown(),
+        plot.title.position = "plot")
+```
+
+# Captions...
+
+Do we want the caption in the chart or "in the report"?
+
+```{r, fig.cap="This chart demonstrates things"}
+msleep %>% 
+  count(vore) %>% 
+  mutate(vore = fct_reorder(vore, n)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = vore),
+           show.legend = FALSE) +
+  scale_fill_manual(values = c("herbi" = "forestgreen",
+                               "carni" = "red",
+                               "omni" = "yellow",
+                               "insecti" = "blue")) +
+  labs(title = "Most animals are <span style='color:#228B22'>herbivores</span>") +
+  theme(plot.title = element_markdown(),
+        plot.title.position = "plot")
+```
+
+## 2nd assessment chart question
+
+```{r}
+msleep %>% 
+  count(conservation, vore) %>% 
+  mutate(vore = fct_reorder(vore, n)) %>% 
+  ggplot() +
+  aes(x = n,
+      y = vore) +
+  geom_col(aes(fill = vore),
+           show.legend = FALSE) +
+  scale_fill_manual(values = c("herbi" = "forestgreen",
+                               "carni" = "red",
+                               "omni" = "yellow",
+                               "insecti" = "blue")) +
+  facet_wrap(~ conservation)
+```
+
+
+
+```{r}
+ggplot() +
+  aes(x = c(1,2,4),
+      y = 4) +
+  geom_point()
+```
+
+
+

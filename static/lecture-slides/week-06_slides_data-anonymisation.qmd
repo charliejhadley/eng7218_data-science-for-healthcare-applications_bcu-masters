@@ -23,6 +23,8 @@ library(wakefield)
 library(sdcMicro)
 ```
 
+this is an edit for Rin3 2022
+
 1. Why is data anonymisation important?
 
 1. What are specific risks of deanonymisation of health data?
@@ -484,7 +486,7 @@ Recall how the Data Protection Act[@uk_government_data_2018] identifies three ty
 
 ## Early evidence for de-anonymisation (I)
 
-In the late 90s there was a rapid conceptualisation of how easy it is to de-anonymisation large, public datasets.
+In the late 90s there was a dawning realisation that it was fairly easy to de-anonymisation large, public datasets.
 
 :::: {.columns}
 
@@ -1321,7 +1323,7 @@ smoke_data <- r_data_frame(
   id,
   name,
   dob(start = ymd("1950-01-01"),
-      k = abs(as.integer(days(ymd("1950-01-01") - Sys.Date()) - 365*18))),
+      k = time_length(Sys.Date() - ymd("1950-01-01"),unit="days")),
   income,
   smokes,
   death)
