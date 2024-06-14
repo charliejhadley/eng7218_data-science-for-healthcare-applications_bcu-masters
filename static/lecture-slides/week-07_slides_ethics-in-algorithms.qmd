@@ -1113,7 +1113,7 @@ Example:
 
 In the US criminal justice pipeline algorithmically trained risk assessment tools are used to predict the "risk" of a defendant and determine of parole is awarded.
 
-<br
+<br>
 
 However - usually this is the risk the defendant fails to appear at court hearings. Reoffending is only occassionally considered in these models.
 
